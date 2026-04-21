@@ -1,0 +1,71 @@
+{
+  "_file": "sections.json",
+  "_summary": "Master index of all platform sections. The homepage category cards and the top navigation bar are both built from this file. To add a new section, add an entry here — no other config changes needed.",
+
+  "sections": [
+    {
+      "id": "intro",
+      "title": "Intro to Data Science",
+      "description": "What DS is, how it connects to AI and ML, the workflow, and the landscape of roles and tools.",
+      "color": "blue",
+      "conceptCount": 6,
+      "order": 1
+    },
+    {
+      "id": "statistics",
+      "title": "Statistics",
+      "description": "The mathematical foundation everything else is built on — distributions, probability, hypothesis testing.",
+      "color": "green",
+      "conceptCount": 12,
+      "order": 2
+    },
+    {
+      "id": "advanced-statistics",
+      "title": "Advanced Statistics",
+      "description": "Bayesian thinking, experimental design, statistical power and the deeper reasoning behind inference.",
+      "color": "green",
+      "conceptCount": 8,
+      "order": 3
+    },
+    {
+      "id": "machine-learning",
+      "title": "Machine Learning",
+      "description": "How models learn, the core algorithms, evaluation metrics and the bias-variance tradeoff.",
+      "color": "purple",
+      "conceptCount": 18,
+      "order": 4
+    },
+    {
+      "id": "advanced-ml",
+      "title": "Advanced ML",
+      "description": "Ensembles, boosting, clustering, dimensionality reduction, time series and neural network basics.",
+      "color": "purple",
+      "conceptCount": 10,
+      "order": 5
+    },
+    {
+      "id": "data-mining",
+      "title": "Data Mining",
+      "description": "Finding patterns in large datasets — association rules, anomaly detection, text mining.",
+      "color": "yellow",
+      "conceptCount": 8,
+      "order": 6
+    },
+    {
+      "id": "big-data",
+      "title": "Big Data",
+      "description": "What happens when data outgrows one machine — distributed computing, Spark, streaming.",
+      "color": "yellow",
+      "conceptCount": 7,
+      "order": 7
+    },
+    {
+      "id": "dbms",
+      "title": "DBMS & Data Warehousing",
+      "description": "Databases, SQL, normalization, data warehouses, schemas and the ETL pipeline.",
+      "color": "gray",
+      "conceptCount": 9,
+      "order": 8
+    }
+  ]
+}
