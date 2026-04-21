@@ -43,13 +43,21 @@
       "conceptCount": 10,
       "order": 5
     },
+        {
+  "id": "data-warehousing",
+  "title": "Data Warehousing",
+  "description": "Data warehouses, schemas, ETL pipelines and the architecture behind analytical systems.",
+  "color": "gray",
+  "conceptCount": 0,
+  "order": 6
+},
     {
       "id": "data-mining",
       "title": "Data Mining",
       "description": "Finding patterns in large datasets — association rules, anomaly detection, text mining.",
       "color": "yellow",
       "conceptCount": 8,
-      "order": 6
+      "order": 7
     },
     {
       "id": "big-data",
@@ -57,7 +65,7 @@
       "description": "What happens when data outgrows one machine — distributed computing, Spark, streaming.",
       "color": "yellow",
       "conceptCount": 7,
-      "order": 7
+      "order": 8
     },
     {
       "id": "dbms",
@@ -65,7 +73,7 @@
       "description": "Databases, SQL, normalization, data warehouses, schemas and the ETL pipeline.",
       "color": "gray",
       "conceptCount": 9,
-      "order": 8
+      "order": 9
     }
   ]
 }
