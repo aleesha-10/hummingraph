@@ -13,6 +13,8 @@ pnpm dev
 # or
 bun dev
 ```
+to push git push origin feat/types-and-lib ( for now since its not the main branch)
+
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
