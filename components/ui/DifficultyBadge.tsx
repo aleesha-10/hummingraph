@@ -4,41 +4,53 @@
 // The component takes a 'difficulty' prop and uses it to look up the appropriate styles and render the badge accordingly.
 // path : components/ui/DifficultyBadge.tsx
 
-import { Difficulty } from '@/types/concept'
+// path: components/ui/DifficultyBadge.tsx
 
-const styles: Record<Difficulty, { bg: string; text: string; label: string }> = {
-  beginner: {
-    bg: '#F0FDF4',
-    text: '#166534',
-    label: 'Beginner',
-  },
-  intermediate: {
-    bg: '#FEFCE8',
-    text: '#854D0E',
-    label: 'Intermediate',
-  },
-  advanced: {
-    bg: '#FAF5FF',
-    text: '#6B21A8',
-    label: 'Advanced',
-  },
+interface DifficultyBadgeProps {
+  difficulty: string
 }
 
-export default function DifficultyBadge({ difficulty }: { difficulty: Difficulty }) {
-  const style = styles[difficulty]
+// Pastel difficulty colors
+const difficultyColors: { [key: string]: { bg: string; text: string } } = {
+  easy: {
+    bg: '#E9F7EF',    // Pastel Mint
+    text: '#1E8449',  // Deep Green
+  },
+  medium: {
+    bg: '#FEF9E7',    // Pastel Cream/Yellow
+    text: '#B7950B',  // Dark Gold
+  },
+  hard: {
+    bg: '#FADBD8',    // Pastel Pink/Red
+    text: '#922B21',  // Deep Red
+  },
+  // Fallback for unknown levels
+  default: {
+    bg: '#F4F6F7',
+    text: '#566573',
+  }
+}
+
+export default function DifficultyBadge({ difficulty }: DifficultyBadgeProps) {
+  const level = difficulty.toLowerCase()
+  const theme = difficultyColors[level] || difficultyColors.default
+
   return (
     <span
       style={{
-        backgroundColor: style.bg,
-        color: style.text,
-        padding: '2px 10px',
-        borderRadius: '999px',
+        backgroundColor: theme.bg,
+        color: theme.text,
         fontSize: '0.75rem',
-        fontWeight: 600,
-        letterSpacing: '0.02em',
+        fontWeight: 700,
+        textTransform: 'uppercase',
+        letterSpacing: '0.05em',
+        padding: '4px 12px',
+        borderRadius: '50px', // Pill shape
+        border: '1px solid rgba(0,0,0,0.05)',
+        fontFamily: 'var(--font-nunito), sans-serif',
       }}
     >
-      {style.label}
+      {difficulty}
     </span>
   )
 }

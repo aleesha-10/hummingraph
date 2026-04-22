@@ -5,6 +5,8 @@
 // When clicked, the card navigates to the concept's page using Next.js's Link component.
 // e.g links to mean section page when clicked on mean concept card
 
+// path: components/ConceptCard.tsx
+"use client"
 
 import Link from 'next/link'
 import { Concept } from '@/types/concept'
@@ -15,19 +17,19 @@ export default function ConceptCard({ concept }: { concept: Concept }) {
   const color = colorMap[concept.color]
 
   return (
-    <Link href={`/${concept.section}/${concept.id}`}>
+    <Link href={`/${concept.section}/${concept.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
       <div
         style={{
           backgroundColor: color.bg,
-          border: `1.5px solid ${color.border}`,
-          borderRadius: '12px',
-          padding: '20px 24px',
+          border: `1px solid ${color.border}`,
+          borderRadius: '20px', // Soft roundness
+          padding: '24px',
           cursor: 'pointer',
-          transition: 'transform 0.15s ease, box-shadow 0.15s ease',
+          transition: 'transform 0.3s ease, box-shadow 0.3s ease',
         }}
         onMouseEnter={e => {
-          (e.currentTarget as HTMLDivElement).style.transform = 'translateY(-2px)'
-          ;(e.currentTarget as HTMLDivElement).style.boxShadow = '0 4px 12px rgba(0,0,0,0.08)'
+          (e.currentTarget as HTMLDivElement).style.transform = 'translateY(-4px)'
+          ;(e.currentTarget as HTMLDivElement).style.boxShadow = '0 8px 24px rgba(0,0,0,0.06)'
         }}
         onMouseLeave={e => {
           (e.currentTarget as HTMLDivElement).style.transform = 'translateY(0)'
@@ -39,13 +41,14 @@ export default function ConceptCard({ concept }: { concept: Concept }) {
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'flex-start',
-            marginBottom: '8px',
+            marginBottom: '12px',
           }}
         >
           <h3
             style={{
+              fontFamily: 'var(--font-nunito), sans-serif',
               color: color.text,
-              fontSize: '1rem',
+              fontSize: '1.25rem',
               fontWeight: 700,
             }}
           >
@@ -55,9 +58,9 @@ export default function ConceptCard({ concept }: { concept: Concept }) {
         </div>
         <p
           style={{
-            color: '#6B7280',
-            fontSize: '0.875rem',
-            lineHeight: '1.5',
+            color: '#555555',
+            fontSize: '0.95rem',
+            lineHeight: '1.6',
           }}
         >
           {concept.tagline}

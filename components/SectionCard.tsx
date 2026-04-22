@@ -5,58 +5,72 @@
 // When clicked, the card navigates to the section's page using Next.js's Link component.
 // e.g links to statistics section page when clicked on statistics section card.
 
+"use client"
+
 import Link from 'next/link'
 import { Section } from '@/types/concept'
 import { colorMap } from '@/lib/colors'
+
 
 export default function SectionCard({ section }: { section: Section }) {
   const color = colorMap[section.color]
 
   return (
-    <Link href={`/${section.id}`}>
+    <Link href={`/${section.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
       <div
         style={{
           backgroundColor: color.bg,
-          border: `1.5px solid ${color.border}`,
-          borderRadius: '12px',
-          padding: '24px',
+          border: `1px solid ${color.border}`,
+          borderRadius: '24px', // Increased roundness for pastel feel
+          padding: '32px',
           cursor: 'pointer',
-          transition: 'transform 0.15s ease, box-shadow 0.15s ease',
+          transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between'
         }}
         onMouseEnter={e => {
-          (e.currentTarget as HTMLDivElement).style.transform = 'translateY(-2px)'
-          ;(e.currentTarget as HTMLDivElement).style.boxShadow = '0 4px 12px rgba(0,0,0,0.08)'
+          (e.currentTarget as HTMLDivElement).style.transform = 'translateY(-5px)'
+          ;(e.currentTarget as HTMLDivElement).style.boxShadow = '0 10px 30px rgba(0,0,0,0.06)'
         }}
         onMouseLeave={e => {
           (e.currentTarget as HTMLDivElement).style.transform = 'translateY(0)'
           ;(e.currentTarget as HTMLDivElement).style.boxShadow = 'none'
         }}
       >
-        <h3
-          style={{
-            color: color.text,
-            fontSize: '1.1rem',
-            fontWeight: 700,
-            marginBottom: '8px',
-          }}
-        >
-          {section.title}
-        </h3>
-        <p
-          style={{
-            color: '#6B7280',
-            fontSize: '0.875rem',
-            lineHeight: '1.5',
-            marginBottom: '16px',
-          }}
-        >
-          {section.description}
-        </p>
+        <div>
+          <h3
+            style={{
+              fontFamily: 'var(--font-nunito), sans-serif',
+              color: color.text,
+              fontSize: '1.5rem',
+              fontWeight: 700,
+              marginBottom: '12px',
+            }}
+          >
+            {section.title}
+          </h3>
+          <p
+            style={{
+              color: '#555555',
+              fontSize: '1rem',
+              lineHeight: '1.6',
+              marginBottom: '24px',
+            }}
+          >
+            {section.description}
+          </p>
+        </div>
+        
         <span
           style={{
             color: color.text,
-            fontSize: '0.8rem',
-            fontWeight: 600,
+            fontSize: '0.875rem',
+            fontWeight: 700,
+            textTransform: 'uppercase',
+            letterSpacing: '0.05em',
+            opacity: 0.8
           }}
         >
           {section.conceptCount} concepts

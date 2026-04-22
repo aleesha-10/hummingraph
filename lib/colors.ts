@@ -4,31 +4,32 @@
 // The colors are used to visually differentiate between different sections and concepts in the application. 
 // The ColorKey type is defined to ensure that only valid color keys can be used when referencing colors in the application.
 
+// path: lib/colors.ts
 export const colorMap = {
   blue: {
-    bg: '#EFF6FF',
-    border: '#BFDBFE',
-    text: '#1E40AF',
+    bg: '#EBF5FB',      // Very pale blue
+    border: '#D6EAF8',  // Soft blue border
+    text: '#2874A6',    // Muted deep blue text
   },
   green: {
-    bg: '#F0FDF4',
-    border: '#BBF7D0',
-    text: '#166534',
+    bg: '#E9F7EF',      // Pastel mint
+    border: '#D4EFDF',  // Soft green border
+    text: '#1E8449',    // Deep forest green text
   },
   purple: {
-    bg: '#FAF5FF',
-    border: '#E9D5FF',
-    text: '#6B21A8',
+    bg: '#F4ECF7',      // Pastel lavender
+    border: '#E8DAEF',  // Soft purple border
+    text: '#7D3C98',    // Deep plum text
   },
   yellow: {
-    bg: '#FEFCE8',
-    border: '#FDE68A',
-    text: '#854D0E',
+    bg: '#FEF9E7',      // Pastel cream/yellow
+    border: '#FCF3CF',  // Soft yellow border
+    text: '#B7950B',    // Mustard text
   },
   gray: {
-    bg: '#F9FAFB',
-    border: '#E5E7EB',
-    text: '#374151',
+    bg: '#F8F9F9',      // Off-white gray
+    border: '#EAEDED',  // Soft gray border
+    text: '#566573',    // Slate text
   },
 }
 

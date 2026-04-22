@@ -13,12 +13,13 @@ export async function generateStaticParams() {
   return sections.map(s => ({ section: s.id }))
 }
 
-export default function SectionPage({ params }: { params: { section: string } }) {
-  const concepts = getConceptsBySection(params.section)
+export default async function SectionPage({ params }: { params: Promise<{ section: string }> }) {
+  const { section } = await params
+  const concepts = getConceptsBySection(section)
   const sections = getAllSections()
-  const section = sections.find(s => s.id === params.section)
+  const sectionData = sections.find(s => s.id === section)
 
-  if (!section) return <div>Section not found</div>
+  if (!sectionData) return <div>Section not found</div>
 
   return (
     <main style={{ maxWidth: '1100px', margin: '0 auto', padding: '60px 24px' }}>
@@ -31,10 +32,10 @@ export default function SectionPage({ params }: { params: { section: string } })
             marginBottom: '12px',
           }}
         >
-          {section.title}
+          {sectionData.title}
         </h1>
         <p style={{ fontSize: '1rem', color: '#6B7280', maxWidth: '560px' }}>
-          {section.description}
+          {sectionData.description}
         </p>
       </div>
 

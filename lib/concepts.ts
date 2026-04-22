@@ -1,33 +1,57 @@
-// path : lib/concepts.ts
-// This file contains helper functions for working with concepts and sections in the application. 
-// It provides functions to retrieve all sections, visible sections, concepts by section, and a specific concept by its ID. 
-// These functions read data from the filesystem, from JSON files that store the concepts and sections data.
-
+// src/lib/concepts.ts
 import fs from 'fs'
 import path from 'path'
 import { Concept, Section } from '@/types/concept'
-import sectionsData from '@/data/sections.json'
+
+const DATA_DIR = path.join(process.cwd(), 'data/concepts')
+const SECTIONS_FILE = path.join(process.cwd(), 'data/sections.json')
+
+// ─── Sections ─────────────────────────────────────────────────────────────────
+
+function readSections(): Section[] {
+  if (!fs.existsSync(SECTIONS_FILE)) return []
+  const raw = JSON.parse(fs.readFileSync(SECTIONS_FILE, 'utf-8'))
+  // sections.json wraps the array under a "sections" key
+  return (raw.sections ?? raw) as Section[]
+}
 
 export function getAllSections(): Section[] {
-  return sectionsData.sections as Section[]
+  return readSections().sort((a, b) => a.order - b.order)
 }
 
 export function getVisibleSections(): Section[] {
-  return sectionsData.sections.filter(s => !s.hidden) as Section[]
+  return getAllSections().filter(s => !s.hidden)
 }
 
-export function getConceptsBySection(sectionId: string): Concept[] {
-  const dir = path.join(process.cwd(), 'data', 'concepts', sectionId)
-  if (!fs.existsSync(dir)) return []
-  return fs.readdirSync(dir)
+// ─── Concepts ─────────────────────────────────────────────────────────────────
+
+export function getAllConcepts(): Concept[] {
+  const concepts: Concept[] = []
+  if (!fs.existsSync(DATA_DIR)) return concepts
+
+  const sections = fs.readdirSync(DATA_DIR)
+  for (const section of sections) {
+    const sectionPath = path.join(DATA_DIR, section)
+    if (!fs.statSync(sectionPath).isDirectory()) continue
+    const files = fs.readdirSync(sectionPath).filter(f => f.endsWith('.json'))
+    for (const file of files) {
+      const raw = fs.readFileSync(path.join(sectionPath, file), 'utf-8')
+      concepts.push(JSON.parse(raw) as Concept)
+    }
+  }
+  return concepts
+}
+
+export function getConcept(section: string, id: string): Concept | null {
+  const filePath = path.join(DATA_DIR, section, `${id}.json`)
+  if (!fs.existsSync(filePath)) return null
+  return JSON.parse(fs.readFileSync(filePath, 'utf-8')) as Concept
+}
+
+export function getConceptsBySection(section: string): Concept[] {
+  const sectionPath = path.join(DATA_DIR, section)
+  if (!fs.existsSync(sectionPath)) return []
+  return fs.readdirSync(sectionPath)
     .filter(f => f.endsWith('.json'))
-    .map(f => JSON.parse(
-      fs.readFileSync(path.join(dir, f), 'utf-8')
-    ) as Concept)
-}
-
-export function getConcept(sectionId: string, conceptId: string): Concept | null {
-  const file = path.join(process.cwd(), 'data', 'concepts', sectionId, `${conceptId}.json`)
-  if (!fs.existsSync(file)) return null
-  return JSON.parse(fs.readFileSync(file, 'utf-8')) as Concept
+    .map(f => JSON.parse(fs.readFileSync(path.join(sectionPath, f), 'utf-8')) as Concept)
 }
