@@ -1,18 +1,22 @@
 {
-  "_file": "concept.schema.json",
+  "_file": "concept_schema.json",
   "_summary": "Master schema definition for all concept JSON files. Every concept page on the platform must follow this exact structure. This is the contract between the content and the React component that renders it.",
 
   "_instructions": {
     "note": "This file is documentation only — it is never imported by the app.",
-    "rule_1": "Every field marked required: true must be present in every concept file.",
-    "rule_2": "Arrays marked required: true must have at least one item.",
-    "rule_3": "Fields marked required: false can be omitted if not applicable to the concept.",
-    "rule_4": "The 'id' must match the filename exactly, e.g. file mean-median-mode.json → id: mean-median-mode",
+    "rule_1": "Fields marked required: true must be present in every concept file. There are only 7 of them.",
+    "rule_2": "All other fields are optional — include them when you have something genuine to say, omit them when you don't. The React component renders what exists and skips what doesn't.",
+    "rule_3": "Arrays marked required: true must have at least one item.",
+    "rule_4": "The 'id' must match the filename exactly — e.g. file mean-median-mode.json → id: mean-median-mode.",
     "rule_5": "The 'section' value must exactly match one of the allowed section slugs listed below.",
     "rule_6": "The 'color' value must exactly match one of the allowed pastel keys listed below.",
     "rule_7": "Keep 'what_it_is' under 3 sentences — it is shown as a summary card on the section page.",
-    "rule_8": "The 'formula' field is optional — not every concept has one. Omit it cleanly if not needed.",
-    "rule_9": "related_concepts must reference valid IDs of other concepts that already exist."
+    "rule_8": "The 'formulas' field is optional — omit entirely for conceptual topics with no math. If a concept has multiple formulas, add each as a separate object in the array.",
+    "rule_9": "'related_concepts' must reference valid IDs of other concepts that already exist.",
+    "rule_10": "The 'example' field is intentionally separate from 'intuition'. Use 'intuition' for analogies and stories. Use 'example' for concrete numbers, datasets, or worked outputs. For simple concepts, fold the example into 'intuition' and omit the field. For complex topics (e.g. algorithms, multi-step processes), use 'example' for the worked case.",
+    "rule_11": "Use 'steps' for algorithm or process walkthroughs — any concept that has a sequence of operations. Omit for purely conceptual topics.",
+    "rule_12": "Use 'notes' for important caveats, edge cases, or real-world gotchas that don't fit cleanly into when_not_to_use or common_mistakes.",
+    "rule_13": "Use 'visual' to describe a diagram or chart that would help understanding — even if the visual isn't built yet. This acts as a content brief for the UI team."
   },
 
   "_allowed_sections": [
@@ -38,6 +42,7 @@
   "_allowed_difficulty": ["beginner", "intermediate", "advanced"],
 
   "schema": {
+
     "id": {
       "type": "string",
       "required": true,
@@ -62,14 +67,14 @@
     "difficulty": {
       "type": "string",
       "required": true,
-      "description": "Difficulty level — controls the badge shown on the concept card.",
+      "description": "Difficulty level — controls the badge shown on the concept card. Must be one of: beginner, intermediate, advanced.",
       "example": "beginner"
     },
 
     "color": {
       "type": "string",
       "required": true,
-      "description": "Pastel accent color used for the highlight boxes on this concept page.",
+      "description": "Pastel accent color used for highlight boxes on this concept page. Must be one of the allowed color keys.",
       "example": "blue"
     },
 
@@ -83,40 +88,96 @@
     "what_it_is": {
       "type": "string",
       "required": true,
-      "description": "Plain English explanation of the concept. Max 3 sentences. No jargon unless immediately explained. This is the blue box on the concept page.",
+      "description": "Plain English explanation of the concept. Max 3 sentences. No jargon unless immediately explained. Shown as a summary card on the section page and as the blue box on the concept page.",
       "example": "The mean is the sum of all values divided by how many there are. The median is the middle value when sorted. The mode is the value that appears most often."
+    },
+
+    "key_points": {
+      "type": "array",
+      "required": true,
+      "description": "3 to 5 bullet points summarising the most important things to remember. Shown as the quick-revision box. Future use: interview questions will be generated from these.",
+      "items": "string",
+      "example": [
+        "Mean = sum divided by count. Sensitive to outliers.",
+        "Median = middle value when sorted. Robust to outliers. Use for skewed data.",
+        "Mode = most frequent value. Only meaningful measure for categorical data.",
+        "In a perfectly normal distribution, mean = median = mode.",
+        "Always check all three before deciding which to report."
+      ]
     },
 
     "why_it_exists": {
       "type": "string",
-      "required": true,
-      "description": "What problem this concept was invented to solve. Why do we need it? What breaks without it? This is the green box.",
-      "example": "A single number to represent a whole dataset is useful for comparison, communication and decision-making — but different measures protect against different distortions in the data."
+      "required": false,
+      "description": "What problem this concept was invented to solve. Why do we need it? What breaks without it? Shown as a green box.",
+      "example": "A single number to represent a whole dataset is useful for comparison and decision-making — but different measures protect against different distortions in the data."
     },
 
     "what_it_measures": {
       "type": "string",
-      "required": true,
-      "description": "What this concept actually tells you about your data. What does the number/result represent in reality?",
+      "required": false,
+      "description": "What this concept actually tells you about your data. What does the number or result represent in reality? Include this when the output of the concept needs explicit interpretation.",
       "example": "Each measure tells you where most of your data sits — the center of gravity of the distribution. They differ in how much weight they give to extreme values."
     },
 
     "intuition": {
       "type": "string",
-      "required": true,
-      "description": "A concrete analogy, story, or example that makes the concept click. Avoid abstract descriptions — use real scenarios. This is the most important field for understanding.",
+      "required": false,
+      "description": "A concrete analogy, story, or scenario that makes the concept click. Avoid abstract descriptions — use real situations. For simple concepts you can fold the example in here. For complex ones, keep this as the story and use the separate 'example' field for the worked numbers.",
       "example": "Imagine 5 friends earn: 20k, 22k, 21k, 23k, 200k. The mean is 57.2k — misleading because of the outlier. The median is 22k — a much truer picture of a typical salary in this group."
     },
 
-    "formula": {
+    "example": {
       "type": "object",
       "required": false,
-      "description": "Optional. Only include if a formula adds genuine understanding. Omit for purely conceptual topics. Written in LaTeX for KaTeX rendering.",
-      "shape": {
+      "description": "A concrete worked example with real numbers, a dataset, or step-by-step output. Intentionally separate from 'intuition' — intuition is the story, example is the numbers. Use this for complex topics where a proper worked case adds genuine clarity beyond what the intuition covers. Omit for simple concepts where the numbers are already in intuition.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The example itself — dataset, scenario, or worked output with actual values."
+        },
+        "interpretation": {
+          "type": "string",
+          "description": "One or two sentences explaining what the example demonstrates or what to take away from it."
+        }
+      },
+      "example": {
+        "text": "Dataset: [20, 22, 23, 24, 200]. Mean = 57.8, Median = 23, Mode = none.",
+        "interpretation": "Mean gets pulled toward the outlier. Median stays at the center and is the honest summary."
+      }
+    },
+
+    "steps": {
+      "type": "array",
+      "required": false,
+      "description": "Step-by-step walkthrough of a process or algorithm. Use this for any concept that involves a sequence of operations — e.g. how k-means clustering works, how a decision tree splits, how ETL runs. Omit entirely for purely conceptual or definitional topics.",
+      "items": {
+        "step": "integer — step number",
+        "title": "short label for this step",
+        "description": "what happens in this step and why"
+      },
+      "example": [
+        { "step": 1, "title": "Initialise centroids", "description": "Pick k random points from the dataset as starting cluster centres." },
+        { "step": 2, "title": "Assign points", "description": "Each data point is assigned to the nearest centroid by Euclidean distance." },
+        { "step": 3, "title": "Recompute centroids", "description": "Recalculate the mean of all points in each cluster — the centroid moves." },
+        { "step": 4, "title": "Repeat until stable", "description": "Repeat steps 2 and 3 until assignments stop changing." }
+      ]
+    },
+
+    "formulas": {
+      "type": "array",
+      "required": false,
+      "description": "Only include if formulas add genuine understanding. Omit entirely for conceptual topics with no math. Each formula is a separate object — one concept can have one formula or many. Written in LaTeX for KaTeX rendering.",
+      "items": {
+        "label": {
+          "type": "string",
+          "description": "Short name for this formula — shown as a heading above it.",
+          "example": "MAE"
+        },
         "expression": {
           "type": "string",
           "description": "The LaTeX formula string.",
-          "example": "\\bar{x} = \\frac{1}{n}\\sum_{i=1}^{n} x_i"
+          "example": "\\text{MAE} = \\frac{1}{n}\\sum_{i=1}^{n}|y_i - \\hat{y}_i|"
         },
         "breakdown": {
           "type": "array",
@@ -124,58 +185,79 @@
           "items": {
             "symbol": "The symbol as it appears in the formula",
             "means": "What it represents in plain English"
-          },
-          "example": [
-            { "symbol": "x̄", "means": "the mean — what we are calculating" },
-            { "symbol": "n", "means": "how many values are in the dataset" },
-            { "symbol": "Σ", "means": "add up everything that follows" },
-            { "symbol": "xᵢ", "means": "each individual value in the dataset" }
-          ]
+          }
         }
       }
     },
 
     "when_to_use": {
       "type": "array",
-      "required": true,
-      "description": "List of specific situations where this concept is the right choice. Be concrete — name the scenario.",
+      "required": false,
+      "description": "Specific situations where this concept is the right choice. Be concrete — name the scenario, not just the principle.",
       "items": "string",
       "example": [
         "Use mean when data has no extreme outliers and follows a roughly normal distribution",
         "Use median when data is skewed — e.g. income, house prices, response times",
-        "Use mode when data is categorical — e.g. most common product category, most frequent error code"
+        "Use mode when data is categorical — e.g. most common product category"
       ]
     },
 
     "when_not_to_use": {
       "type": "array",
-      "required": true,
-      "description": "Specific situations where this concept breaks, misleads, or is the wrong choice. This is the yellow warning box — it is what makes this platform different from a textbook.",
+      "required": false,
+      "description": "Situations where this concept breaks, misleads, or is the wrong choice. The yellow warning box — what makes this platform different from a textbook.",
       "items": "string",
       "example": [
-        "Do not use mean with heavily skewed data — one outlier can make the mean unrepresentative of everyone else",
-        "Do not use mode as the only summary for continuous data — values rarely repeat exactly",
-        "Do not report only one measure — always consider all three together before choosing"
+        "Do not use mean with heavily skewed data — one outlier can make it unrepresentative",
+        "Do not use mode as the only summary for continuous data — values rarely repeat exactly"
       ]
     },
 
     "common_mistakes": {
       "type": "array",
-      "required": true,
-      "description": "Mistakes people actually make with this concept in real DS work. Not theoretical errors — real ones.",
+      "required": false,
+      "description": "Mistakes people actually make with this concept in real DS work. Not theoretical errors — real ones that show up in notebooks and production code.",
       "items": "string",
       "example": [
-        "Using mean salary to describe a company's compensation without checking for executive pay outliers",
-        "Assuming mean and median are always close — they diverge significantly in skewed distributions",
-        "Ignoring the mode entirely when analyzing customer behavior data"
+        "Using mean salary to describe a company's compensation without checking for executive outliers",
+        "Assuming mean and median are always close — they diverge significantly in skewed distributions"
+      ]
+    },
+
+    "notes": {
+      "type": "array",
+      "required": false,
+      "description": "Important caveats, edge cases, or real-world nuances that don't fit cleanly into when_not_to_use or common_mistakes. Use for things like: assumptions the concept relies on, behaviour in edge cases, important variants, things that are technically correct but practically dangerous.",
+      "items": "string",
+      "example": [
+        "In a bimodal distribution, the mode is not a useful single summary — it signals that two subgroups exist in your data.",
+        "Mean and median converge as sample size grows in many distributions — the difference matters most in small samples."
       ]
     },
 
     "ds_usage": {
       "type": "string",
-      "required": true,
-      "description": "How and where this concept appears specifically in Data Science work. Name the real tasks, tools, or model types where it comes up.",
-      "example": "Used in EDA to understand data distribution before modeling. Pandas provides mean(), median() and mode() directly on Series. Choosing the wrong central tendency for imputing missing values can silently bias your entire model."
+      "required": false,
+      "description": "How and where this concept appears specifically in Data Science work. Name the real tasks, tools, libraries, or model types where it comes up. Include code method names where relevant.",
+      "example": "Used in EDA to understand data distribution before modeling. Pandas: df['col'].mean(), .median(), .mode(). The choice of measure for missing value imputation directly affects model quality."
+    },
+
+    "visual": {
+      "type": "object",
+      "required": false,
+      "description": "Description of a diagram or chart that would help explain this concept visually. Use this even if the visual isn't built yet — it acts as a brief for the UI. Omit if no visual would add genuine value.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The kind of visual — e.g. histogram, scatter plot, flowchart, tree diagram, comparison table.",
+          "example": "histogram"
+        },
+        "description": {
+          "type": "string",
+          "description": "What the visual should show and what insight it should make obvious.",
+          "example": "A right-skewed histogram showing salary distribution where mean is pulled far right by outliers while median stays near the bulk of the data."
+        }
+      }
     },
 
     "related_concepts": {
@@ -184,20 +266,7 @@
       "description": "IDs of other concepts on the platform that connect to this one. Used to render the related links at the bottom of each page. Only reference concepts that actually exist.",
       "items": "string",
       "example": ["variance-standard-deviation", "normal-distribution", "outliers"]
-    },
-
-    "key_points": {
-      "type": "array",
-      "required": true,
-      "description": "3 to 5 bullet points summarising the most important things to remember. Used as the quick-revision box at the top of the page. Future use: interview questions will be generated from these.",
-      "items": "string",
-      "example": [
-        "Mean = sum divided by count. Sensitive to outliers.",
-        "Median = middle value. Robust to outliers. Use for skewed data.",
-        "Mode = most frequent value. Only meaningful measure for categorical data.",
-        "In a perfectly normal distribution, mean = median = mode.",
-        "Always check all three before deciding which to report."
-      ]
     }
+
   }
 }

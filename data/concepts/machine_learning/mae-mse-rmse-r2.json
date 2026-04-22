@@ -4,36 +4,72 @@
   "section": "machine-learning",
   "difficulty": "beginner",
   "color": "blue",
-
   "tagline": "Four ways to measure how wrong your model is — and why it matters which one you pick.",
-
-  "what_it_is": "These are regression error metrics — numbers that tell you how far off your model's predictions are from reality. MAE (Mean Absolute Error) is the average gap between predicted and actual values. MSE (Mean Squared Error) squares those gaps before averaging, punishing large errors more harshly. RMSE (Root Mean Squared Error) is just MSE square-rooted back to the original unit. R² (R-squared) tells you what percentage of the variation in your data your model actually explains.",
-
+  "what_it_is": "These are regression error metrics — numbers that tell you how far off your model's predictions are from reality. MAE (Mean Absolute Error) is the average gap between predicted and actual values. MSE (Mean Squared Error) squares those gaps before averaging, punishing large errors more harshly. RMSE (Root Mean Squared Error) is MSE square-rooted back to the original unit. R² (R-squared) tells you what percentage of the variation in your data your model actually explains.",
+  "key_points": [
+    "MAE = average absolute error. Treats all errors equally. Interpretable unit. Use for general reporting.",
+    "MSE = average squared error. Punishes large mistakes hard. Uninterpretable squared unit. Use for training loss.",
+    "RMSE = √MSE. Same penalty as MSE but back in original unit. Best choice for reporting to humans.",
+    "R² = proportion of variance explained. 1.0 is perfect, 0.0 is no better than always guessing the mean.",
+    "The gap between MAE and RMSE is diagnostic — a large gap means a few big errors are dominating your score."
+  ],
   "why_it_exists": "A model that predicts house prices can be wrong in many different ways — slightly wrong on most houses, or catastrophically wrong on a few. These metrics exist because different use cases care about different types of wrongness. A metric that treats all errors equally (MAE) is right for some problems. A metric that punishes large mistakes extra hard (MSE/RMSE) is right for others. Without these measures, you have no objective way to compare two models or know if your model is good enough.",
-
   "what_it_measures": "Each metric measures a different aspect of prediction error. MAE measures the typical size of your errors in plain units — dollars, degrees, kilograms. MSE measures the same but amplifies large errors so they dominate the score. RMSE brings MSE back to interpretable units. R² measures not the size of your errors but how much better your model is than simply predicting the mean every time — a score of 1.0 is perfect, 0.0 means your model adds no value over a naive guess.",
-
   "intuition": "Imagine you are a weather forecaster. On Monday you are off by 2°, Tuesday by 3°, Wednesday by 10° (you missed a storm completely). MAE treats all three days equally — average error is 5°. MSE punishes Wednesday's disaster: 4 + 9 + 100 = 113, averaged to 37.7. RMSE brings that back to degrees: √37.7 = 6.1°. The big miss on Wednesday inflates your RMSE far above your MAE. That difference is the signal — RMSE tells you that you have an outlier problem, MAE hides it.",
-
-  "formula": {
-    "expression": "\\text{MAE} = \\frac{1}{n}\\sum_{i=1}^{n}|y_i - \\hat{y}_i|",
-    "breakdown": [
-      { "symbol": "n",         "means": "total number of predictions" },
-      { "symbol": "yᵢ",        "means": "the actual real value for row i" },
-      { "symbol": "ŷᵢ",        "means": "your model's predicted value for row i" },
-      { "symbol": "|yᵢ − ŷᵢ|", "means": "absolute difference — negative errors count the same as positive" },
-      { "symbol": "Σ / n",     "means": "sum all differences then divide by count to get the average" }
-    ]
-  },
-
+  "formulas": [
+    {
+      "label": "MAE",
+      "expression": "\\text{MAE} = \\frac{1}{n}\\sum_{i=1}^{n}|y_i - \\hat{y}_i|",
+      "breakdown": [
+        { "symbol": "n", "means": "total number of predictions" },
+        { "symbol": "yᵢ", "means": "the actual real value for row i" },
+        { "symbol": "ŷᵢ", "means": "your model's predicted value for row i" },
+        { "symbol": "|yᵢ − ŷᵢ|", "means": "absolute difference — negative errors count the same as positive" },
+        { "symbol": "Σ / n", "means": "sum all differences then divide by count to get the average" }
+      ]
+    },
+    {
+      "label": "MSE",
+      "expression": "\\text{MSE} = \\frac{1}{n}\\sum_{i=1}^{n}(y_i - \\hat{y}_i)^2",
+      "breakdown": [
+        { "symbol": "n", "means": "total number of predictions" },
+        { "symbol": "yᵢ", "means": "the actual real value for row i" },
+        { "symbol": "ŷᵢ", "means": "your model's predicted value for row i" },
+        { "symbol": "(yᵢ − ŷᵢ)²", "means": "squared difference — large errors become much larger" },
+        { "symbol": "Σ / n", "means": "average squared error" }
+      ]
+    },
+    {
+      "label": "RMSE",
+      "expression": "\\text{RMSE} = \\sqrt{\\frac{1}{n}\\sum_{i=1}^{n}(y_i - \\hat{y}_i)^2}",
+      "breakdown": [
+        { "symbol": "n", "means": "total number of predictions" },
+        { "symbol": "yᵢ", "means": "the actual real value for row i" },
+        { "symbol": "ŷᵢ", "means": "your model's predicted value for row i" },
+        { "symbol": "(yᵢ − ŷᵢ)²", "means": "squared difference (same as MSE)" },
+        { "symbol": "√", "means": "square root brings the units back to original — e.g. dollars, degrees" }
+      ]
+    },
+    {
+      "label": "R²",
+      "expression": "R^2 = 1 - \\frac{\\sum_{i=1}^{n}(y_i - \\hat{y}_i)^2}{\\sum_{i=1}^{n}(y_i - \\bar{y})^2}",
+      "breakdown": [
+        { "symbol": "yᵢ", "means": "actual real value for row i" },
+        { "symbol": "ŷᵢ", "means": "predicted value for row i" },
+        { "symbol": "ȳ", "means": "mean of the actual values (simple average)" },
+        { "symbol": "numerator", "means": "sum of squared errors — what your model misses" },
+        { "symbol": "denominator", "means": "total variance in the data — how wrong you would be if you always guessed the mean" },
+        { "symbol": "1 − ratio", "means": "proportion of variance your model explains" }
+      ]
+    }
+  ],
   "when_to_use": [
     "Use MAE when all prediction errors matter equally and you want a result in the same unit as your target — easy to explain to non-technical stakeholders",
     "Use MSE/RMSE when large errors are especially dangerous — medical dosing, structural load predictions, financial risk — because it penalises outlier mistakes heavily",
-    "Use RMSE over MSE when you need the error in the original unit (MSE gives squared units which are uninterpretable)",
+    "Use RMSE over MSE when you need the error in the original unit — MSE gives squared units which are uninterpretable",
     "Use R² when comparing two models on the same dataset — it tells you which explains more of the variance",
-    "Use R² alongside MAE or RMSE together — R² alone does not tell you the actual size of your errors"
+    "Use R² alongside MAE or RMSE — R² alone does not tell you the actual size of your errors"
   ],
-
   "when_not_to_use": [
     "Do not use R² as your only metric — high R² does not mean small errors, it means your model tracks the pattern. You can have R²=0.95 and still have errors too large to be useful",
     "Do not use MSE to report results to stakeholders — squared units (e.g. dollars²) are meaningless to humans, use RMSE or MAE instead",
@@ -41,29 +77,18 @@
     "Do not compare R² across different datasets or target variables — it is a relative measure and loses meaning across different problems",
     "Do not use any of these for classification problems — they are regression-only, use accuracy, F1, AUC instead"
   ],
-
   "common_mistakes": [
     "Reporting R²=0.87 and declaring the model good without checking actual error size — you need MAE or RMSE to know if errors are acceptable for your use case",
     "Comparing MAE from one model to RMSE from another — they are not on the same scale, the comparison is meaningless",
     "Using MSE to compare models trained on datasets of different scales — wildly different MSE values will be unrelated to actual model quality",
     "Ignoring that RMSE is always >= MAE — the gap between them tells you how much large errors are hurting you, a big gap means an outlier problem worth investigating"
   ],
-
   "ds_usage": "These metrics appear at the end of every regression model evaluation pipeline. In scikit-learn: mean_absolute_error(), mean_squared_error(), r2_score() from sklearn.metrics. In practice you compute all four, report MAE or RMSE to stakeholders, and use the MAE-RMSE gap to detect outlier sensitivity. When tuning models via cross-validation, the choice of which metric to optimise directly shapes what the model learns to minimise — choose carefully.",
-
   "related_concepts": [
     "linear-regression",
     "bias-variance-tradeoff",
     "classification-metrics",
     "overfitting-underfitting",
     "cross-validation"
-  ],
-
-  "key_points": [
-    "MAE = average absolute error. Treats all errors equally. Interpretable unit. Use for general reporting.",
-    "MSE = average squared error. Punishes large mistakes hard. Uninterpretable squared unit. Use for training loss.",
-    "RMSE = √MSE. Same penalty as MSE but back in original unit. Best choice for reporting to humans.",
-    "R² = proportion of variance explained. 1.0 is perfect, 0.0 is no better than always guessing the mean.",
-    "The gap between MAE and RMSE is diagnostic — a large gap means a few big errors are dominating your score."
   ]
 }

@@ -4,27 +4,53 @@
   "section": "statistics",
   "difficulty": "beginner",
   "color": "blue",
-
   "tagline": "Three ways to describe the center of your data — and why they disagree.",
-
   "what_it_is": "Mean, median and mode are all measures of central tendency — single numbers that try to represent where the bulk of your data sits. The mean is the sum of all values divided by how many there are. The median is the middle value when all values are sorted. The mode is the value (or values) that appear most frequently.",
-
+  "key_points": [
+    "Mean = sum ÷ count. Sensitive to outliers. Best for symmetric data.",
+    "Median = middle value when sorted. Robust to outliers. Best for skewed data like income or prices.",
+    "Mode = most frequent value. Only meaningful measure for categorical data.",
+    "In a perfectly normal distribution, mean = median = mode. Real data is rarely perfect.",
+    "For missing value imputation: skewed columns → use median, not mean."
+  ],
   "why_it_exists": "A dataset of 1000 values is too much to hold in your head at once. A single representative number lets you communicate, compare and make decisions quickly. But data comes in many shapes — sometimes symmetric, sometimes skewed, sometimes categorical — and no single measure works for all shapes. These three measures exist to handle those different situations.",
-
   "what_it_measures": "All three try to answer the same question — where is the center? — but they define center differently. The mean is the balancing point of the data, pulled by every value including extremes. The median is the geometric middle — half the data falls above it, half below. The mode is the most common value — where data concentrates most densely.",
-
   "intuition": "Five friends have these annual salaries: 22k, 23k, 21k, 20k, 200k. The mean is 57.2k — but nobody earns close to that. It got dragged up by one outlier. The median is 22k — which actually describes what a typical person in this group earns. The mode does not exist here since all values are unique. Now imagine a shoe store: sizes sold today were 38, 40, 40, 40, 42, 44. The mode is 40 — the most important number for restocking inventory. Mean shoe size is useless for ordering stock.",
-
-  "formula": {
-    "expression": "\\bar{x} = \\frac{1}{n}\\sum_{i=1}^{n} x_i",
-    "breakdown": [
-      { "symbol": "x̄",  "means": "the mean — pronounced x-bar" },
-      { "symbol": "n",   "means": "total number of values in the dataset" },
-      { "symbol": "Σ",   "means": "sum — add up everything that follows" },
-      { "symbol": "xᵢ",  "means": "each individual value in the dataset" }
-    ]
+  "example": {
+    "text": "Dataset: [20, 22, 23, 24, 200]. Mean = 57.8, Median = 23, Mode = none.",
+    "interpretation": "Mean gets pulled toward the outlier (200). Median stays at the center. Mode only works when values repeat — here every value is unique so it's undefined."
   },
-
+  "formulas": [
+    {
+      "label": "Mean",
+      "expression": "\\bar{x} = \\frac{1}{n}\\sum_{i=1}^{n} x_i",
+      "breakdown": [
+        { "symbol": "x̄", "means": "the mean — pronounced x-bar" },
+        { "symbol": "n", "means": "total number of values" },
+        { "symbol": "Σ", "means": "sum — add up everything" },
+        { "symbol": "xᵢ", "means": "each individual value" }
+      ]
+    },
+    {
+      "label": "Median",
+      "expression": "\\text{Median} = \\begin{cases} x_{(n+1)/2} & \\text{if } n \\text{ is odd} \\\\ \\frac{x_{n/2} + x_{n/2+1}}{2} & \\text{if } n \\text{ is even} \\end{cases}",
+      "breakdown": [
+        { "symbol": "n", "means": "number of values (sorted)" },
+        { "symbol": "x_{(k)}", "means": "the k-th value in sorted order" },
+        { "symbol": "odd n", "means": "median is the middle value" },
+        { "symbol": "even n", "means": "median is the average of the two middle values" }
+      ]
+    },
+    {
+      "label": "Mode",
+      "expression": "\\text{Mode} = \\arg\\max_{v} \\text{count}(x_i = v)",
+      "breakdown": [
+        { "symbol": "v", "means": "a possible value in the dataset" },
+        { "symbol": "count", "means": "how many times v occurs" },
+        { "symbol": "arg max", "means": "the value v with the highest frequency" }
+      ]
+    }
+  ],
   "when_to_use": [
     "Use mean when data is roughly symmetric with no significant outliers — e.g. heights, test scores in a large class",
     "Use median when data is skewed or has outliers — income, house prices, response times, anything where a few extreme values exist",
@@ -32,36 +58,24 @@
     "Use mode for discrete data where repetition is meaningful — shoe sizes, number of children per household",
     "Report all three during EDA to understand the shape of your data before choosing which to use downstream"
   ],
-
   "when_not_to_use": [
     "Do not use mean with heavily skewed data — one extreme outlier can make the mean unrepresentative of the entire rest of the dataset",
     "Do not use mode as the primary summary for continuous data — values rarely repeat exactly so mode is often undefined or meaningless",
     "Do not use median when you need a value that accounts for the total — total revenue depends on the sum, not the middle",
     "Do not report only one measure without checking whether the data is symmetric — always look at all three before deciding"
   ],
-
   "common_mistakes": [
     "Using mean salary to describe a company's pay without checking for executive outliers — mean becomes misleading, median is the honest number",
     "Assuming mean and median are always close — they diverge significantly whenever data is skewed, which is common in real-world DS data",
     "Forgetting that mode can return multiple values in a multimodal distribution — two equally common values is a signal worth investigating, not an error to ignore",
     "Using mean to impute missing values in a skewed column — this is one of the most common ways to silently bias a model"
   ],
-
   "ds_usage": "These appear constantly in EDA (Exploratory Data Analysis). In Pandas: df['column'].mean(), .median(), .mode(). The choice of which to use for imputing missing values directly affects model quality — skewed columns should use median imputation. In feature engineering, creating a new column that is the deviation from the median (rather than the mean) is often more robust. Salary, revenue, and time-based columns are almost always right-skewed — always check before using mean.",
-
   "related_concepts": [
     "variance-standard-deviation",
     "normal-distribution",
     "outliers",
     "skewness",
     "hypothesis-testing"
-  ],
-
-  "key_points": [
-    "Mean = sum ÷ count. Sensitive to outliers. Best for symmetric data.",
-    "Median = middle value when sorted. Robust to outliers. Best for skewed data like income or prices.",
-    "Mode = most frequent value. Only meaningful measure for categorical data.",
-    "In a perfectly normal distribution, mean = median = mode. Real data is rarely perfect.",
-    "For missing value imputation: skewed columns → use median, not mean."
   ]
 }
