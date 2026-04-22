@@ -3,6 +3,7 @@
 // The card's background color, border color, and text color are determined by the section's assigned color, which is defined in the colorMap.
 // The card also has a hover effect that slightly lifts the card and adds a shadow to indicate interactivity.
 // When clicked, the card navigates to the section's page using Next.js's Link component.
+// e.g links to statistics section page when clicked on statistics section card.
 
 import Link from 'next/link'
 import { Section } from '@/types/concept'
