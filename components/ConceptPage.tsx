@@ -1,12 +1,10 @@
-// path: components/ConceptPage.tsx
-
 "use client"
 
 import { Concept } from '@/types/concept'
 import { colorMap, conceptPageBlocks } from '@/lib/colors'
+import Link from 'next/link'
 import DifficultyBadge from '@/components/ui/DifficultyBadge'
 import Formula from '@/components/ui/Formula'
-import InlineText from '@/components/InlineText'
 
 export default function ConceptPage({ concept }: { concept: Concept }) {
   // colorMap still used for related concept pills (matches the card color)
@@ -23,9 +21,20 @@ export default function ConceptPage({ concept }: { concept: Concept }) {
       <div style={{ marginBottom: '48px', textAlign: 'center' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', marginBottom: '16px' }}>
           <DifficultyBadge difficulty={concept.difficulty} />
-          <span style={{ color: '#9CA3AF', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px' }}>
+          <Link
+            href={`/${concept.section}`}
+            style={{
+              color: '#9CA3AF',
+              fontSize: '0.9rem',
+              textTransform: 'uppercase',
+              letterSpacing: '1px',
+              textDecoration: 'none',
+            }}
+            onMouseEnter={e => (e.currentTarget.style.color = '#5D5C61')}
+            onMouseLeave={e => (e.currentTarget.style.color = '#9CA3AF')}
+          >
             {concept.section}
-          </span>
+          </Link>
         </div>
         <h1 style={{
           fontFamily: 'var(--font-nunito), sans-serif',
@@ -53,14 +62,14 @@ export default function ConceptPage({ concept }: { concept: Concept }) {
       {/* What it is — purple */}
       <Section bg={b.whatItIs.bg} border={b.whatItIs.border}>
         <SectionTitle color={b.whatItIs.text}>What it is</SectionTitle>
-        <InlineText text={concept.what_it_is} style={textStyle} />
+        <p style={textStyle}>{concept.what_it_is}</p>
       </Section>
 
       {/* Why it exists — yellow */}
       {concept.why_it_exists && (
         <Section bg={b.whyItExists.bg} border={b.whyItExists.border}>
           <SectionTitle color={b.whyItExists.text}>Why it exists</SectionTitle>
-          <InlineText text={concept.why_it_exists} style={textStyle} />
+          <p style={textStyle}>{concept.why_it_exists}</p>
         </Section>
       )}
 
@@ -68,7 +77,7 @@ export default function ConceptPage({ concept }: { concept: Concept }) {
       {concept.what_it_measures && (
         <Section bg={b.whatItMeasures.bg} border={b.whatItMeasures.border}>
           <SectionTitle color={b.whatItMeasures.text}>What it measures</SectionTitle>
-          <InlineText text={concept.what_it_measures} style={textStyle} />
+          <p style={textStyle}>{concept.what_it_measures}</p>
         </Section>
       )}
 
@@ -76,7 +85,7 @@ export default function ConceptPage({ concept }: { concept: Concept }) {
       {concept.intuition && (
         <Section bg={b.intuition.bg} border={b.intuition.border}>
           <SectionTitle color={b.intuition.text}>Intuition</SectionTitle>
-          <InlineText text={concept.intuition} style={textStyle} />
+          <p style={textStyle}>{concept.intuition}</p>
         </Section>
       )}
 
@@ -194,7 +203,7 @@ export default function ConceptPage({ concept }: { concept: Concept }) {
       {concept.ds_usage && (
         <Section bg={b.dsUsage.bg} border={b.dsUsage.border}>
           <SectionTitle color={b.dsUsage.text}>In practice</SectionTitle>
-          <InlineText text={concept.ds_usage} style={textStyle} />
+          <p style={textStyle}>{concept.ds_usage}</p>
         </Section>
       )}
 
