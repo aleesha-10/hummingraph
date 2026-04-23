@@ -1,0 +1,68 @@
+{
+  "id": "conditional-probability",
+  "title": "Conditional Probability",
+  "section": "statistics",
+  "difficulty": "beginner",
+  "color": "blue",
+  "tagline": "How does knowing one thing change the probability of another?",
+  "what_it_is": "Conditional probability is the probability of an event occurring given that another event has already occurred. Written as P(A|B), it is read as 'the probability of A given B.' It answers the question: now that I know B happened, how likely is A? Conditional probability is not a special type of probability — it is just probability calculated on a restricted subset of possibilities.",
+  "key_points": [
+    "P(A|B) = probability of A given that B has already happened.",
+    "Knowing B changes the sample space — you no longer consider all possible outcomes, only those where B is true.",
+    "P(A|B) ≠ P(B|A). These are different quantities and confusing them is one of the most dangerous errors in statistics.",
+    "If A and B are independent, P(A|B) = P(A) — knowing B gives you no new information about A.",
+    "Bayes' theorem is built entirely on conditional probability — it is how you update beliefs with evidence."
+  ],
+  "why_it_exists": "Most real-world probability questions involve context. Not 'what is the probability this patient has cancer' but 'what is the probability this patient has cancer given they tested positive.' The test result is new information — it should change the probability. Conditional probability is the formal tool for updating probabilities when you learn something new. Without it, you cannot build classifiers, medical diagnostic systems, spam filters, or recommendation engines.",
+  "what_it_measures": "Conditional probability measures how much one event narrows down the likelihood of another. If P(rain) = 0.3 but P(rain | dark clouds) = 0.8, then dark clouds are a strong signal. The difference between the unconditional and conditional probability tells you how informative the condition is — which is exactly the concept behind information gain in decision trees.",
+  "intuition": "Imagine a standard deck of 52 cards. P(King) = 4/52 ≈ 0.077. Now someone tells you the card is a face card (Jack, Queen, or King). There are 12 face cards, 4 of which are Kings. So P(King | face card) = 4/12 ≈ 0.333. The sample space shrank from 52 to 12, and the probability jumped from 7.7% to 33.3%. The condition did not change the card — it changed what you know, and that changed the probability.",
+  "example": {
+    "text": "In a dataset of 1000 emails: 200 are spam. Of the 200 spam emails, 180 contain the word 'free'. Of the 800 legitimate emails, 40 contain 'free'.",
+    "interpretation": "P(spam) = 200/1000 = 0.2. P(spam | contains 'free') = 180/(180+40) = 180/220 ≈ 0.818. Knowing the email contains 'free' raises the probability of spam from 20% to 82%. This is exactly how a Naive Bayes spam filter works."
+  },
+  "formulas": [
+    {
+      "label": "Conditional Probability",
+      "expression": "P(A \\mid B) = \\frac{P(A \\cap B)}{P(B)}",
+      "breakdown": [
+        { "symbol": "P(A|B)", "means": "probability of A given that B occurred" },
+        { "symbol": "P(A ∩ B)", "means": "probability that both A and B occur together" },
+        { "symbol": "P(B)", "means": "probability of B — the condition. Must be > 0." }
+      ]
+    },
+    {
+      "label": "Bayes' Theorem",
+      "expression": "P(A \\mid B) = \\frac{P(B \\mid A) \\cdot P(A)}{P(B)}",
+      "breakdown": [
+        { "symbol": "P(A|B)", "means": "posterior — updated probability of A after observing B" },
+        { "symbol": "P(B|A)", "means": "likelihood — how probable is B if A is true" },
+        { "symbol": "P(A)", "means": "prior — initial probability of A before seeing B" },
+        { "symbol": "P(B)", "means": "marginal probability of B — acts as a normalizing constant" }
+      ]
+    }
+  ],
+  "when_to_use": [
+    "Use conditional probability whenever new information should update your belief about an outcome",
+    "Use it in classification problems — P(class | features) is exactly what every classifier computes",
+    "Use Bayes' theorem when you know P(B|A) but need P(A|B) — common in medical testing and spam filtering",
+    "Use conditional probability in feature selection — features where P(outcome | feature) differs greatly from P(outcome) are informative"
+  ],
+  "when_not_to_use": [
+    "Do not use the conditional probability formula if P(B) = 0 — conditioning on an impossible event is undefined",
+    "Do not assume P(A|B) = P(B|A) — this confusion is called the base rate fallacy and leads to serious errors in medical and legal reasoning",
+    "Do not ignore the prior P(A) when applying Bayes — a test with 99% accuracy still produces mostly false positives if the disease is very rare"
+  ],
+  "common_mistakes": [
+    "Confusing P(A|B) with P(B|A) — the prosecutor's fallacy in legal cases is exactly this error: P(evidence | innocent) ≠ P(innocent | evidence)",
+    "Ignoring base rates — P(disease | positive test) depends heavily on how common the disease is in the population, not just on test accuracy",
+    "Treating correlated events as independent — if A and B are correlated, P(A and B) ≠ P(A) × P(B)",
+    "Forgetting to restrict the sample space — conditional probability is just regular probability calculated on the subset where B is true"
+  ],
+  "ds_usage": "Conditional probability is the mathematical core of Naive Bayes classifiers, logistic regression, and all probabilistic models. In Bayesian statistics, updating a prior with observed data to get a posterior is a direct application of Bayes' theorem. In NLP, language models estimate P(next word | previous words). In recommendation systems, P(user clicks | user profile, item features) is the quantity being predicted. Every use of model.predict_proba() in scikit-learn is computing a conditional probability.",
+  "related_concepts": [
+    "probability-basics",
+    "hypothesis-testing",
+    "normal-distribution",
+    "correlation-vs-causation"
+  ]
+}

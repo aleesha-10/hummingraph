@@ -1,0 +1,78 @@
+{
+  "id": "variance-standard-deviation",
+  "title": "Variance & Standard Deviation",
+  "section": "statistics",
+  "difficulty": "beginner",
+  "color": "blue",
+  "tagline": "How spread out is your data? Two numbers that measure the same thing — in different units.",
+  "what_it_is": "Variance and standard deviation both answer the same question: how spread out is your data? The mean tells you where the center is — these two tell you how wide the data is around that center. Variance gets there by looking at how far each value is from the mean, squaring those gaps, and averaging them. Standard deviation is just the square root of that — which sounds like a small tweak, but it matters because it brings the number back into the same units as your data, making it actually readable.",
+  "key_points": [
+    "Variance measures spread by squaring the distance each value is from the mean, then averaging those. The squaring means the unit gets squared too (like kg²), which is hard to interpret.",
+    "Standard deviation is the square root of variance — it's in the same unit as your data, so it's the one you actually use when talking to people.",
+    "Low standard deviation means values are clustered tightly around the mean. High means they're all over the place.",
+    "One extreme outlier can push standard deviation way up — it's sensitive to values that are far from the rest.",
+    "In a normal bell-shaped distribution, about 68% of data falls within 1 standard deviation of the mean, and 95% falls within 2."
+  ],
+  "why_it_exists": "The mean on its own can be misleading. A dataset of [49, 50, 51] and a dataset of [1, 50, 99] both have a mean of 50 — but they're completely different situations. The first is consistent and predictable. The second is all over the place. Variance and standard deviation exist to capture that difference. Without them, you'd have no way to talk about risk, reliability, or how much you can trust an average.",
+  "what_it_measures": "Both measure how far individual values tend to stray from the mean. A variance of 0 means every single value is the same — no spread at all. As it grows, values are increasingly scattered. Standard deviation translates this into something readable: if you're measuring exam scores and the standard deviation is 10, it means a typical student scores within 10 points of the mean.",
+  "intuition": "Picture two coffee shops. Both serve coffee with an average temperature of 70°C. Shop A's standard deviation is 1°C — basically every cup is the same. Shop B's is 15°C — some cups are lukewarm, some are burning hot. The mean is identical. The standard deviation tells you which shop is actually consistent. In data science, a feature with high standard deviation has a lot of variation — which could mean it carries useful signal, or just a lot of noise.",
+  "example": {
+    "text": "Dataset: [2, 4, 4, 4, 5, 5, 7, 9]. Mean = 5. Variance = 4. Standard Deviation = 2.",
+    "interpretation": "On average, each value sits about 2 units away from the mean of 5. The value 9 is 2 standard deviations above the mean. The value 2 is 1.5 standard deviations below. This gives you a sense of scale — what counts as 'close to average' and what counts as 'far out' for this particular dataset."
+  },
+  "formulas": [
+    {
+      "label": "Population Variance",
+      "expression": "\\sigma^2 = \\frac{1}{N}\\sum_{i=1}^{N}(x_i - \\mu)^2",
+      "breakdown": [
+        { "symbol": "σ²", "means": "population variance — pronounced 'sigma squared'. This is what we're calculating." },
+        { "symbol": "N", "means": "the total number of values — every single one in the group" },
+        { "symbol": "xᵢ", "means": "each individual value in the dataset" },
+        { "symbol": "μ", "means": "the mean of the dataset — pronounced 'mu'" },
+        { "symbol": "(xᵢ − μ)²", "means": "how far each value is from the mean, squared. Squaring does two things: removes negatives, and makes large gaps count more" }
+      ]
+    },
+    {
+      "label": "Sample Variance",
+      "expression": "s^2 = \\frac{1}{n-1}\\sum_{i=1}^{n}(x_i - \\bar{x})^2",
+      "breakdown": [
+        { "symbol": "s²", "means": "sample variance — used when you only have part of the data, not all of it" },
+        { "symbol": "n−1", "means": "dividing by n−1 instead of n gives a slightly larger, more honest estimate when you're working from a sample. Using just n would underestimate the spread." },
+        { "symbol": "x̄", "means": "the sample mean — the average of your sample, not the whole population" }
+      ]
+    },
+    {
+      "label": "Standard Deviation",
+      "expression": "\\sigma = \\sqrt{\\frac{1}{N}\\sum_{i=1}^{N}(x_i - \\mu)^2}",
+      "breakdown": [
+        { "symbol": "σ", "means": "standard deviation — just the square root of variance" },
+        { "symbol": "√", "means": "the square root undoes the squaring from the variance formula, bringing the unit back to normal — so if your data is in kg, standard deviation is also in kg" }
+      ]
+    }
+  ],
+  "when_to_use": [
+    "Whenever you report a mean, report the standard deviation alongside it — they tell the full story together",
+    "Use it to spot outliers — values more than 2 or 3 standard deviations from the mean are worth a closer look",
+    "Use it to compare consistency across groups — a lower standard deviation means more predictable, more reliable",
+    "Many ML algorithms use variance internally, so understanding it helps you understand what the model is actually doing"
+  ],
+  "when_not_to_use": [
+    "If your data is heavily skewed (a few extreme values pulling the mean), standard deviation can be misleading — the interquartile range (IQR) is a better measure of spread in that case",
+    "Don't report variance to anyone who isn't a data person — the squared unit is unreadable. Always convert to standard deviation",
+    "Don't use the population variance formula when you only have a sample — you'll underestimate the spread. Use n−1 instead of n"
+  ],
+  "common_mistakes": [
+    "Reporting variance instead of standard deviation — if your data is in kilograms, variance is in kg², which means nothing to most people",
+    "Using population variance on a sample — if you don't have every data point, divide by n−1, not n",
+    "Comparing two groups only by their means — two groups can have the same mean but completely different spreads, which tells a very different story",
+    "Assuming low variance is always good — in a feature you're using to make predictions, very low variance means the feature barely changes and may not be useful at all"
+  ],
+  "ds_usage": "Standard deviation shows up constantly in data science. When you normalize features before training a model (called standardization), you subtract the mean and divide by the standard deviation — so every feature ends up on the same scale. Outlier detection often uses standard deviation as the measuring stick. When you run cross-validation and check how consistent a model's score is across folds, you're looking at variance in performance. And PCA — a technique for reducing the number of features — is entirely built around finding the directions where data varies the most.",
+  "related_concepts": [
+    "mean-median-mode",
+    "normal-distribution",
+    "outliers",
+    "probability-basics",
+    "hypothesis-testing"
+  ]
+}

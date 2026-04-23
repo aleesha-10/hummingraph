@@ -1,25 +1,15 @@
-// Path : components/ConceptPage.tsx
-// This component renders the page for a specific concept, displaying detailed information about the concept such as its key points, what it is, why it exists, intuition, examples, formulas, when to use it, common mistakes, and related concepts.
-// The page is styled using inline styles, with colors determined by the concept's assigned color from the colorMap.
-// The component also includes helper components for rendering sections and section titles to maintain consistent styling across different sections of the concept page.
-
-// Path : components/ConceptPage.tsx
-// path: components/ConceptPage.tsx
-
-"use client" // 1. Keep this
+"use client"
 
 import { Concept } from '@/types/concept'
-import { colorMap } from '@/lib/colors'
+import { colorMap, conceptPageBlocks } from '@/lib/colors'
 import DifficultyBadge from '@/components/ui/DifficultyBadge'
-
-// 2. Use a standard import (Remove the 'dynamic' code entirely)
 import Formula from '@/components/ui/Formula'
 
-
 export default function ConceptPage({ concept }: { concept: Concept }) {
+  // colorMap still used for related concept pills (matches the card color)
   const color = colorMap[concept.color]
+  const b = conceptPageBlocks
 
-  // Shared text styles
   const textStyle = { color: '#4A4A4A', fontSize: '1rem', lineHeight: '1.75' }
   const headingStyle = { color: '#5D5C61', fontWeight: 700, fontSize: '0.95rem' }
 
@@ -30,13 +20,15 @@ export default function ConceptPage({ concept }: { concept: Concept }) {
       <div style={{ marginBottom: '48px', textAlign: 'center' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', marginBottom: '16px' }}>
           <DifficultyBadge difficulty={concept.difficulty} />
-          <span style={{ color: '#9CA3AF', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px' }}>{concept.section}</span>
+          <span style={{ color: '#9CA3AF', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px' }}>
+            {concept.section}
+          </span>
         </div>
-        <h1 style={{ 
+        <h1 style={{
           fontFamily: 'var(--font-nunito), sans-serif',
-          fontSize: '2.75rem', 
-          fontWeight: 800, 
-          color: '#5D5C61', 
+          fontSize: '2.75rem',
+          fontWeight: 800,
+          color: '#5D5C61',
           marginBottom: '12px',
           lineHeight: '1.1'
         }}>
@@ -45,120 +37,112 @@ export default function ConceptPage({ concept }: { concept: Concept }) {
         <p style={{ fontSize: '1.25rem', color: '#7A7A7A', fontStyle: 'italic' }}>{concept.tagline}</p>
       </div>
 
-      {/* Key Points */}
-      <Section bg={color.bg} border={color.border}>
-        <SectionTitle color={color.text}>Key Points</SectionTitle>
+      {/* Key Points — blue */}
+      <Section bg={b.keyPoints.bg} border={b.keyPoints.border}>
+        <SectionTitle color={b.keyPoints.text}>Key Points</SectionTitle>
         <ul style={{ paddingLeft: '20px', margin: 0 }}>
           {concept.key_points.map((point, i) => (
-            <li key={i} style={{ ...textStyle, marginBottom: '8px' }}>
-              {point}
-            </li>
+            <li key={i} style={{ ...textStyle, marginBottom: '8px' }}>{point}</li>
           ))}
         </ul>
       </Section>
 
-      {/* What it is */}
-      <Section bg={color.bg} border={color.border}>
-        <SectionTitle color={color.text}>What it is</SectionTitle>
+      {/* What it is — purple */}
+      <Section bg={b.whatItIs.bg} border={b.whatItIs.border}>
+        <SectionTitle color={b.whatItIs.text}>What it is</SectionTitle>
         <p style={textStyle}>{concept.what_it_is}</p>
       </Section>
 
-      {/* Why it exists */}
+      {/* Why it exists — yellow */}
       {concept.why_it_exists && (
-        <Section bg={color.bg} border={color.border}>
-          <SectionTitle color={color.text}>Why it exists</SectionTitle>
+        <Section bg={b.whyItExists.bg} border={b.whyItExists.border}>
+          <SectionTitle color={b.whyItExists.text}>Why it exists</SectionTitle>
           <p style={textStyle}>{concept.why_it_exists}</p>
         </Section>
       )}
 
-      {/* What it measures */}
+      {/* What it measures — teal */}
       {concept.what_it_measures && (
-        <Section bg={color.bg} border={color.border}>
-          <SectionTitle color={color.text}>What it measures</SectionTitle>
+        <Section bg={b.whatItMeasures.bg} border={b.whatItMeasures.border}>
+          <SectionTitle color={b.whatItMeasures.text}>What it measures</SectionTitle>
           <p style={textStyle}>{concept.what_it_measures}</p>
         </Section>
       )}
 
-      {/* Intuition */}
+      {/* Intuition — orange */}
       {concept.intuition && (
-        <Section bg={color.bg} border={color.border}>
-          <SectionTitle color={color.text}>Intuition</SectionTitle>
+        <Section bg={b.intuition.bg} border={b.intuition.border}>
+          <SectionTitle color={b.intuition.text}>Intuition</SectionTitle>
           <p style={textStyle}>{concept.intuition}</p>
         </Section>
       )}
 
-      {/* Example */}
+      {/* Example — rose */}
       {concept.example && (
-        <Section bg={color.bg} border={color.border}>
-          <SectionTitle color={color.text}>Example</SectionTitle>
+        <Section bg={b.example.bg} border={b.example.border}>
+          <SectionTitle color={b.example.text}>Example</SectionTitle>
           <p style={{ ...textStyle, marginBottom: '12px', fontWeight: 500 }}>
             {concept.example.text}
           </p>
           {concept.example.interpretation && (
-            <p style={{ color: '#7A7A7A', fontSize: '0.95rem', fontStyle: 'italic', borderLeft: '3px solid #ccc', paddingLeft: '12px' }}>
+            <p style={{ color: '#7A7A7A', fontSize: '0.95rem', fontStyle: 'italic', borderLeft: `3px solid ${b.example.border}`, paddingLeft: '12px' }}>
               {concept.example.interpretation}
             </p>
           )}
         </Section>
       )}
 
-      {/* Steps */}
+      {/* Steps — blue */}
       {concept.steps && concept.steps.length > 0 && (
-        <Section bg={color.bg} border={color.border}>
-          <SectionTitle color={color.text}>How it works</SectionTitle>
+        <Section bg={b.steps.bg} border={b.steps.border}>
+          <SectionTitle color={b.steps.text}>How it works</SectionTitle>
           <ol style={{ paddingLeft: '20px', margin: 0 }}>
             {concept.steps.map(step => (
               <li key={step.step} style={{ marginBottom: '16px' }}>
                 <span style={{ ...headingStyle, fontSize: '1rem', display: 'block' }}>{step.title}</span>
-                <p style={{ ...textStyle, fontSize: '0.95rem', margin: '4px 0 0 0' }}>
-                  {step.description}
-                </p>
+                <p style={{ ...textStyle, fontSize: '0.95rem', margin: '4px 0 0 0' }}>{step.description}</p>
               </li>
             ))}
           </ol>
         </Section>
       )}
 
-      {/* Formulas */}
-{concept.formulas && concept.formulas.length > 0 && (
-  <Section bg="#FFFFFF" border="#E5E7EB">
-    <SectionTitle color="#374151">Formulas</SectionTitle>
-    {concept.formulas.map((formula, i) => (
-      <div key={i} style={{ marginBottom: i < concept.formulas!.length - 1 ? '32px' : 0 }}>
-        <p style={{ ...headingStyle, marginBottom: '12px' }}>
-          {formula.label}
-        </p>
-        
-        {/* REPLACE THE OLD <code> TAG WITH THIS NEW STYLED DIV CONTAINING FORMULA */}
-        <div style={{
-            backgroundColor: '#F3F4F6',
-            padding: '24px 20px',
-            borderRadius: '12px',
-            marginBottom: '16px',
-            fontSize: '1.1rem',
-            color: '#111827',
-            overflowX: 'auto',
-            display: 'flex',
-            justifyContent: 'center', // Center the math for a nicer look
-        }}>
-            <Formula expression={formula.expression} />
-        </div>
-        
-        <ul style={{ paddingLeft: '20px', margin: 0 }}>
-          {formula.breakdown.map((item, j) => (
-            <li key={j} style={{ fontSize: '0.95rem', color: '#555', lineHeight: '1.6', marginBottom: '4px' }}>
-              <code style={{ fontWeight: 700, color: color.text, background: 'none', padding: 0 }}>{item.symbol}</code> — {item.means}
-            </li>
+      {/* Formulas — white/clean */}
+      {concept.formulas && concept.formulas.length > 0 && (
+        <Section bg={b.formulas.bg} border={b.formulas.border}>
+          <SectionTitle color={b.formulas.text}>Formulas</SectionTitle>
+          {concept.formulas.map((formula, i) => (
+            <div key={i} style={{ marginBottom: i < concept.formulas!.length - 1 ? '32px' : 0 }}>
+              <p style={{ ...headingStyle, marginBottom: '12px' }}>{formula.label}</p>
+              <div style={{
+                backgroundColor: '#F3F4F6',
+                padding: '24px 20px',
+                borderRadius: '12px',
+                marginBottom: '16px',
+                fontSize: '1.1rem',
+                color: '#111827',
+                overflowX: 'auto',
+                display: 'flex',
+                justifyContent: 'center',
+              }}>
+                <Formula expression={formula.expression} />
+              </div>
+              <ul style={{ paddingLeft: '20px', margin: 0 }}>
+                {formula.breakdown.map((item, j) => (
+                  <li key={j} style={{ fontSize: '0.95rem', color: '#555', lineHeight: '1.6', marginBottom: '4px' }}>
+                    <code style={{ fontWeight: 700, color: b.formulas.text, background: 'none', padding: 0 }}>{item.symbol}</code> — {item.means}
+                  </li>
+                ))}
+              </ul>
+            </div>
           ))}
-        </ul>
-      </div>
-    ))}
-  </Section>
-)}
-      {/* When to use - Hardcoded Green Logic from original code updated for style */}
+        </Section>
+      )}
+
+      {/* When to use — green */}
       {concept.when_to_use && concept.when_to_use.length > 0 && (
-        <Section bg='#F0FDF4' border='#BBF7D0'>
-          <SectionTitle color='#166534'>When to use</SectionTitle>
+        <Section bg={b.whenToUse.bg} border={b.whenToUse.border}>
+          <SectionTitle color={b.whenToUse.text}>When to use</SectionTitle>
           <ul style={{ paddingLeft: '20px', margin: 0 }}>
             {concept.when_to_use.map((item, i) => (
               <li key={i} style={textStyle}>{item}</li>
@@ -167,10 +151,10 @@ export default function ConceptPage({ concept }: { concept: Concept }) {
         </Section>
       )}
 
-      {/* When not to use */}
+      {/* When not to use — amber */}
       {concept.when_not_to_use && concept.when_not_to_use.length > 0 && (
-        <Section bg='#FEFCE8' border='#FDE68A'>
-          <SectionTitle color='#854D0E'>When not to use</SectionTitle>
+        <Section bg={b.whenNotToUse.bg} border={b.whenNotToUse.border}>
+          <SectionTitle color={b.whenNotToUse.text}>When not to use</SectionTitle>
           <ul style={{ paddingLeft: '20px', margin: 0 }}>
             {concept.when_not_to_use.map((item, i) => (
               <li key={i} style={textStyle}>{item}</li>
@@ -179,10 +163,10 @@ export default function ConceptPage({ concept }: { concept: Concept }) {
         </Section>
       )}
 
-      {/* Common mistakes */}
+      {/* Common mistakes — red */}
       {concept.common_mistakes && concept.common_mistakes.length > 0 && (
-        <Section bg='#FEFCE8' border='#FDE68A'>
-          <SectionTitle color='#854D0E'>Common mistakes</SectionTitle>
+        <Section bg={b.commonMistakes.bg} border={b.commonMistakes.border}>
+          <SectionTitle color={b.commonMistakes.text}>Common mistakes</SectionTitle>
           <ul style={{ paddingLeft: '20px', margin: 0 }}>
             {concept.common_mistakes.map((item, i) => (
               <li key={i} style={textStyle}>{item}</li>
@@ -191,10 +175,10 @@ export default function ConceptPage({ concept }: { concept: Concept }) {
         </Section>
       )}
 
-      {/* Notes */}
+      {/* Notes — slate */}
       {concept.notes && concept.notes.length > 0 && (
-        <Section bg={color.bg} border={color.border}>
-          <SectionTitle color={color.text}>Notes</SectionTitle>
+        <Section bg={b.notes.bg} border={b.notes.border}>
+          <SectionTitle color={b.notes.text}>Notes</SectionTitle>
           <ul style={{ paddingLeft: '20px', margin: 0 }}>
             {concept.notes.map((note, i) => (
               <li key={i} style={textStyle}>{note}</li>
@@ -203,10 +187,10 @@ export default function ConceptPage({ concept }: { concept: Concept }) {
         </Section>
       )}
 
-      {/* DS Usage */}
+      {/* In practice — teal */}
       {concept.ds_usage && (
-        <Section bg={color.bg} border={color.border}>
-          <SectionTitle color={color.text}>In practice</SectionTitle>
+        <Section bg={b.dsUsage.bg} border={b.dsUsage.border}>
+          <SectionTitle color={b.dsUsage.text}>In practice</SectionTitle>
           <p style={textStyle}>{concept.ds_usage}</p>
         </Section>
       )}
@@ -214,7 +198,9 @@ export default function ConceptPage({ concept }: { concept: Concept }) {
       {/* Related concepts */}
       {concept.related_concepts && concept.related_concepts.length > 0 && (
         <div style={{ marginTop: '48px' }}>
-          <p style={{ fontFamily: 'var(--font-nunito)', fontSize: '1.25rem', color: '#5D5C61', marginBottom: '16px' }}>Related concepts</p>
+          <p style={{ fontFamily: 'var(--font-nunito)', fontSize: '1.25rem', color: '#5D5C61', marginBottom: '16px' }}>
+            Related concepts
+          </p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
             {concept.related_concepts.map(id => (
               <span
@@ -242,14 +228,13 @@ export default function ConceptPage({ concept }: { concept: Concept }) {
   )
 }
 
-// helpers
 function Section({ bg, border, children }: { bg: string; border: string; children: React.ReactNode }) {
   return (
     <div style={{
       backgroundColor: bg,
       border: `1px solid ${border}`,
-      borderRadius: '20px', // Softer corners
-      padding: '32px',      // More breathing room
+      borderRadius: '20px',
+      padding: '32px',
       marginBottom: '24px',
     }}>
       {children}
@@ -259,14 +244,14 @@ function Section({ bg, border, children }: { bg: string; border: string; childre
 
 function SectionTitle({ color, children }: { color: string; children: React.ReactNode }) {
   return (
-    <p style={{ 
+    <p style={{
       fontFamily: 'var(--font-nunito), sans-serif',
-      fontWeight: 800, 
-      color, 
-      fontSize: '1rem', 
-      textTransform: 'uppercase', 
-      letterSpacing: '0.05em', 
-      marginBottom: '16px' 
+      fontWeight: 800,
+      color,
+      fontSize: '1rem',
+      textTransform: 'uppercase',
+      letterSpacing: '0.05em',
+      marginBottom: '16px'
     }}>
       {children}
     </p>

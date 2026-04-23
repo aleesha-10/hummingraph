@@ -32,7 +32,7 @@ export default function SectionCard({ section }: { section: Section }) {
         }}
         onMouseEnter={e => {
           (e.currentTarget as HTMLDivElement).style.transform = 'translateY(-5px)'
-          ;(e.currentTarget as HTMLDivElement).style.boxShadow = '0 10px 30px rgba(0,0,0,0.06)'
+          ;(e.currentTarget as HTMLDivElement).style.boxShadow = '0 10px 30px rgba(10, 52, 79, 0.96)'
         }}
         onMouseLeave={e => {
           (e.currentTarget as HTMLDivElement).style.transform = 'translateY(0)'

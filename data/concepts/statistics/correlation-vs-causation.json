@@ -1,0 +1,62 @@
+{
+  "id": "correlation-vs-causation",
+  "title": "Correlation vs Causation",
+  "section": "statistics",
+  "difficulty": "beginner",
+  "color": "yellow",
+  "tagline": "Two things moving together does not mean one is causing the other.",
+  "what_it_is": "Correlation measures the statistical relationship between two variables — how much they tend to move together. Causation means one variable directly causes changes in the other. These are fundamentally different things. Two variables can be perfectly correlated without any causal link between them. Confusing the two is one of the most common and consequential errors in data science, journalism, and research.",
+  "key_points": [
+    "Correlation coefficient (r) ranges from -1 to +1. +1 is perfect positive correlation, -1 is perfect negative, 0 is no linear relationship.",
+    "Correlation is symmetric: if A correlates with B, then B correlates with A. Causation is directional.",
+    "A confounding variable can cause two unrelated variables to appear correlated — the hidden cause drives both.",
+    "Establishing causation requires controlled experiments (randomized controlled trials) or careful causal inference methods — correlation alone is never enough.",
+    "High correlation between two features in a dataset causes multicollinearity in linear models — a practical problem regardless of causation."
+  ],
+  "why_it_exists": "Correlation is easy to compute and appears everywhere in data analysis. It is a useful signal for finding relationships worth investigating. But acting on correlations as if they were causal leads to bad decisions — spending money on interventions that do not work, or mistaking a symptom for a cause. The distinction exists because the question 'what happens if I intervene?' requires causation, not just correlation.",
+  "what_it_measures": "Correlation measures the strength and direction of a linear relationship between two continuous variables. A correlation of 0.9 means that when one variable increases, the other tends to increase in a predictable, linear way. It does not tell you why — just that they move together. Causation goes further: it tells you that changing one variable will produce a change in the other, even if everything else stays the same.",
+  "intuition": "Ice cream sales and drowning rates are strongly positively correlated. Does eating ice cream cause drowning? No. Both are caused by hot weather — people buy more ice cream in summer AND swim more in summer. Hot weather is the confounding variable. This is a classic example of spurious correlation. Another: countries with more TVs per household have higher life expectancy. TVs do not cause longevity — both are driven by wealth. Acting on the TV correlation by distributing televisions to poor countries would accomplish nothing.",
+  "example": {
+    "text": "A company finds that employees who use the company gym have 30% higher performance reviews on average. Correlation: gym usage and performance are positively correlated.",
+    "interpretation": "This does not mean the gym causes better performance. It is possible that high-performing, motivated employees are also the ones who use the gym — motivation is the confounding variable driving both. Building more gyms may not improve performance at all. A randomized trial (randomly assign some employees to gym access) would be needed to establish causation."
+  },
+  "formulas": [
+    {
+      "label": "Pearson Correlation Coefficient",
+      "expression": "r = \\frac{\\sum_{i=1}^{n}(x_i - \\bar{x})(y_i - \\bar{y})}{\\sqrt{\\sum_{i=1}^{n}(x_i - \\bar{x})^2 \\cdot \\sum_{i=1}^{n}(y_i - \\bar{y})^2}}",
+      "breakdown": [
+        { "symbol": "r", "means": "Pearson correlation coefficient — ranges from -1 to +1" },
+        { "symbol": "(xᵢ − x̄)", "means": "how far each x value is from the mean of x" },
+        { "symbol": "(yᵢ − ȳ)", "means": "how far each y value is from the mean of y" },
+        { "symbol": "numerator", "means": "covariance — how much x and y vary together" },
+        { "symbol": "denominator", "means": "product of standard deviations — normalizes to [-1, +1]" }
+      ]
+    }
+  ],
+  "when_to_use": [
+    "Use correlation during EDA to identify which features are related to your target variable — high correlation with the target is a signal worth investigating",
+    "Use correlation to detect multicollinearity — highly correlated features in a regression model cause unstable coefficients",
+    "Use Pearson correlation for continuous, linear relationships. Use Spearman for monotonic but non-linear relationships or ordinal data.",
+    "Use correlation as a starting point for hypothesis generation — then design experiments to test causation"
+  ],
+  "when_not_to_use": [
+    "Do not use Pearson correlation for non-linear relationships — two variables can be strongly related but have r ≈ 0 if the relationship is curved",
+    "Do not act on correlation as if it were causation — especially in policy decisions, medical recommendations, or product interventions",
+    "Do not interpret r² = 0.81 as 'X causes 81% of Y' — r² is the proportion of variance explained by a linear model, not a causal measure",
+    "Do not use correlation when variables are not continuous — use chi-squared for categorical relationships"
+  ],
+  "common_mistakes": [
+    "Reporting a high correlation and implying causation without acknowledging confounders — this is the most widespread error in data journalism and business analytics",
+    "Ignoring non-linear relationships — a correlation of 0 does not mean no relationship, just no LINEAR relationship",
+    "Dropping one of two correlated features in a model without thinking — sometimes both contain unique signal, sometimes one is redundant. Check before deciding.",
+    "Assuming correlation means the relationship is stable — correlation measured in one time period or population may not hold in another"
+  ],
+  "ds_usage": "In Pandas: df.corr() produces a correlation matrix for all numeric columns — one of the first things to run during EDA. Heatmaps of the correlation matrix (via seaborn) are a standard visualization. In feature selection, you drop one of two features with |r| > 0.9 to reduce multicollinearity. In linear regression, correlated features inflate variance of coefficients. Causal inference methods (propensity score matching, instrumental variables, difference-in-differences) are the tools used when you need to move from correlation to causation in observational data.",
+  "related_concepts": [
+    "hypothesis-testing",
+    "normal-distribution",
+    "variance-standard-deviation",
+    "probability-basics",
+    "conditional-probability"
+  ]
+}

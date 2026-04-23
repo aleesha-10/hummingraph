@@ -1,0 +1,75 @@
+{
+  "id": "bayes-theorem",
+  "title": "Bayes' Theorem",
+  "section": "statistics",
+  "difficulty": "intermediate",
+  "color": "purple",
+  "tagline": "How to update what you believe when you get new evidence.",
+
+  "what_it_is": "Bayes' Theorem is a formula that tells you how to update a probability when you learn new information. You start with a belief about how likely something is — before seeing any evidence. Then new evidence comes in, and Bayes tells you exactly how much to revise that belief up or down. It's the mathematical version of changing your mind rationally.",
+
+  "key_points": [
+    "You start with a prior — your best guess before seeing any evidence.",
+    "You observe something new — this is your evidence or data.",
+    "Bayes' Theorem combines both to give you a posterior — your updated belief after seeing the evidence.",
+    "The result is always a probability, not a definite answer.",
+    "The prior matters a lot — if something is very rare to begin with, even strong evidence may not make it likely."
+  ],
+
+  "why_it_exists": "Standard probability tells you the chance of an outcome given a situation. But in real life, we often need to go backwards — we see an outcome and want to know what caused it. A test came back positive: what's the actual chance you have the disease? Bayes' Theorem is the tool that answers that question correctly. Without it, people systematically overestimate or underestimate probabilities when working backwards from results.",
+
+  "what_it_measures": "Bayes' Theorem calculates the probability of a cause given that you've already seen an effect. More precisely: given that something has already happened, how likely is a particular explanation for it?",
+
+  "intuition": "Say a disease affects 1 in every 1,000 people. A test for it is 99% accurate — if you have the disease, it correctly says positive 99% of the time, and if you don't, it correctly says negative 99% of the time. You test positive. What's the actual chance you have the disease? Most people say '99%.' Bayes says it's closer to 9%. Why? Because the disease is so rare that most of the positive tests are false alarms on the 999 healthy people. Bayes forces you to account for how common or rare something is before jumping to conclusions from a test result.",
+
+  "example": {
+    "text": "Population: 1,000 people. 1 has the disease. Test accuracy: 99%. True positive: 1 person correctly flagged. False positives: ~10 healthy people incorrectly flagged (1% of 999). Total positives: ~11. Chance you actually have the disease given a positive test: 1/11 ≈ 9%.",
+    "interpretation": "Even a highly accurate test produces mostly false positives when the condition is rare. This is not a flaw in the test — it's a consequence of the base rate. Ignoring how common something is before seeing the test result is one of the most common reasoning errors in medicine, law, and data science."
+  },
+
+  "formulas": [
+    {
+      "label": "Bayes' Theorem",
+      "expression": "P(A|B) = \\frac{P(B|A) \\cdot P(A)}{P(B)}",
+      "breakdown": [
+        { "symbol": "P(A|B)", "means": "the probability of A given that B has happened — this is what we want to find (the posterior)" },
+        { "symbol": "P(B|A)", "means": "the probability of B given A — how likely is this evidence if A is true (the likelihood)" },
+        { "symbol": "P(A)", "means": "the probability of A before seeing any evidence — our starting belief (the prior)" },
+        { "symbol": "P(B)", "means": "the overall probability of seeing this evidence regardless of cause — acts as a normalising factor to keep the result between 0 and 1" }
+      ]
+    }
+  ],
+
+  "when_to_use": [
+    "When you want to update a probability after observing new evidence",
+    "When diagnosing a cause from a symptom or result — medical tests, spam detection, fault detection",
+    "When combining expert prior knowledge with data — especially useful when data is limited",
+    "When building probabilistic classifiers like Naive Bayes"
+  ],
+
+  "when_not_to_use": [
+    "Don't use Bayes if you have no reasonable prior — the result is only as good as your starting assumptions",
+    "Don't ignore the base rate — the prior is not optional. Dropping it leads to wildly wrong conclusions",
+    "Don't confuse P(A|B) with P(B|A) — these are very different things and mixing them up is a serious error"
+  ],
+
+  "common_mistakes": [
+    "The prosecutor's fallacy: confusing P(evidence | innocent) with P(innocent | evidence) — these are not the same thing and mixing them up has sent innocent people to prison",
+    "Ignoring the prior — assuming that a positive test means you definitely have what's being tested for, without considering how rare it is",
+    "Treating the posterior as final — in Bayesian thinking, every posterior becomes the new prior when fresh evidence arrives. Belief is always provisional."
+  ],
+
+  "notes": [
+    "Bayes' Theorem is the foundation of an entire school of statistics called Bayesian statistics, which treats probability as a degree of belief rather than a long-run frequency. This leads to very different approaches compared to traditional (frequentist) statistics — covered in Advanced Statistics.",
+    "In machine learning, Naive Bayes classifiers apply this theorem to classify text, emails, and documents by calculating the probability of each class given the observed words."
+  ],
+
+  "ds_usage": "Bayes' Theorem is directly used in Naive Bayes classifiers — a fast, simple algorithm commonly used for spam filtering and text classification. It also underpins Bayesian A/B testing, which gives you a probability that one variant is better rather than just a yes/no significance result. More broadly, Bayesian reasoning is a mindset used throughout data science for updating model beliefs as more data arrives.",
+
+  "related_concepts": [
+    "probability-basics",
+    "conditional-probability",
+    "hypothesis-testing",
+    "normal-distribution"
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "id": "normal-distribution",
+  "title": "Normal Distribution",
+  "section": "statistics",
+  "difficulty": "beginner",
+  "color": "green",
+  "tagline": "The bell curve — why so much data naturally clusters around the middle.",
+  "what_it_is": "The normal distribution is a symmetric, bell-shaped probability distribution defined entirely by two parameters: the mean (center of the bell) and the standard deviation (width of the bell). It is the most important distribution in statistics because a huge range of real-world measurements — heights, IQ scores, measurement errors, blood pressure — naturally follow it. It is also the foundation of most classical statistical tests and the central limit theorem.",
+  "key_points": [
+    "Defined by mean (μ) and standard deviation (σ). Mean sets the center, SD sets the spread.",
+    "Perfectly symmetric — mean = median = mode. The bell is identical on both sides.",
+    "The 68-95-99.7 rule: 68% of data falls within 1σ, 95% within 2σ, 99.7% within 3σ of the mean.",
+    "The total area under the curve = 1 (all probabilities sum to 1).",
+    "Many statistical tests assume normality — violating this assumption can invalidate results."
+  ],
+  "why_it_exists": "The normal distribution emerges naturally from the central limit theorem: when you average many independent random variables, the result tends toward a normal distribution regardless of the original distribution. This is why errors in measurement, biological traits, and aggregated effects all cluster into bell shapes. Its mathematical properties make it tractable — many calculations that are impossible for other distributions have clean closed-form solutions for the normal distribution.",
+  "what_it_measures": "The normal distribution describes how probable different values are for a continuous variable. The peak (at the mean) is the most probable value. Values further from the mean are progressively less probable. The standard deviation controls how quickly probability drops off — a narrow bell (small σ) means most values are close to the mean, a wide bell (large σ) means values are spread far from it.",
+  "intuition": "Imagine measuring the heights of 10,000 adults. A few people are very short, a few are very tall, and the vast majority cluster around 170cm. If you plotted this as a histogram, the bars would form a bell shape — high in the middle, tapering symmetrically on both sides. This is the normal distribution. The mean is 170cm, the SD might be 10cm, which means 95% of people fall between 150cm and 190cm (within 2 SDs). The distribution tells you not just where the center is, but how confident you can be that any given person is near it.",
+  "example": {
+    "text": "Exam scores: mean = 70, standard deviation = 10. Distribution is approximately normal.",
+    "interpretation": "68% of students scored between 60 and 80. 95% scored between 50 and 90. A score of 90 is 2 standard deviations above the mean — in the top 2.5% of the class. A score of 50 is 2 SDs below the mean — in the bottom 2.5%."
+  },
+  "formulas": [
+    {
+      "label": "Probability Density Function",
+      "expression": "f(x) = \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{-\\frac{1}{2}\\left(\\frac{x-\\mu}{\\sigma}\\right)^2}",
+      "breakdown": [
+        { "symbol": "f(x)", "means": "probability density at value x — height of the curve at that point" },
+        { "symbol": "μ", "means": "mean — the center of the bell" },
+        { "symbol": "σ", "means": "standard deviation — controls width of the bell" },
+        { "symbol": "e", "means": "Euler's number ≈ 2.718 — base of natural logarithm" },
+        { "symbol": "1/σ√2π", "means": "normalizing constant — ensures total area under curve equals 1" }
+      ]
+    },
+    {
+      "label": "Z-Score (Standardization)",
+      "expression": "z = \\frac{x - \\mu}{\\sigma}",
+      "breakdown": [
+        { "symbol": "z", "means": "z-score — how many standard deviations x is from the mean" },
+        { "symbol": "x", "means": "the observed value" },
+        { "symbol": "μ", "means": "mean of the distribution" },
+        { "symbol": "σ", "means": "standard deviation of the distribution" }
+      ]
+    }
+  ],
+  "when_to_use": [
+    "Use when data is continuous and you expect it to cluster symmetrically around a central value — heights, weights, measurement errors",
+    "Use the normal distribution assumption when applying t-tests, ANOVA, linear regression, and most classical statistical tests",
+    "Use z-scores to compare values from different normal distributions on a common scale",
+    "Use it to detect outliers — values beyond 3 standard deviations from the mean are flagged as anomalies"
+  ],
+  "when_not_to_use": [
+    "Do not assume normality for income, prices, or any quantity that cannot be negative — these are typically right-skewed",
+    "Do not use normal distribution for count data (number of events) — use Poisson distribution instead",
+    "Do not apply tests that assume normality to small samples without checking — the central limit theorem requires sufficiently large n",
+    "Do not use it for binary outcomes — use Bernoulli or binomial distributions instead"
+  ],
+  "common_mistakes": [
+    "Assuming all continuous data is normally distributed — checking with a histogram or Q-Q plot before applying parametric tests is essential",
+    "Confusing the probability density f(x) with probability — the density can exceed 1, only areas under the curve are probabilities",
+    "Ignoring skewness — a histogram that looks roughly bell-shaped but has a long tail is NOT normal and will violate test assumptions",
+    "Using z-scores without checking normality — z-scores are meaningful summaries of position only within a normal distribution"
+  ],
+  "ds_usage": "Normal distribution is assumed by linear regression (residuals should be normally distributed), t-tests, ANOVA, and many other classical methods. In feature engineering, checking whether a feature is normally distributed before applying normalization matters — log transformation is commonly applied to right-skewed features to make them more normal. In scikit-learn, StandardScaler standardizes features to have mean=0 and SD=1 (a standard normal), which is prerequisite for many algorithms like SVM and PCA. scipy.stats.norm provides pdf, cdf, and sampling functions.",
+  "related_concepts": [
+    "variance-standard-deviation",
+    "mean-median-mode",
+    "hypothesis-testing",
+    "probability-basics",
+    "correlation-vs-causation"
+  ]
+}

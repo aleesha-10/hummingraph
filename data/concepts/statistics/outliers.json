@@ -1,0 +1,91 @@
+{
+  "id": "outliers",
+  "title": "Outliers",
+  "section": "statistics",
+  "difficulty": "beginner",
+  "color": "yellow",
+  "tagline": "The data points that don't fit — and why they're either your biggest problem or your most important signal.",
+
+  "what_it_is": "An outlier is a data point that sits far away from the rest of the data. It could be a genuine extreme value — a billionaire in a salary dataset, a record-breaking temperature reading — or it could be an error: a typo, a sensor glitch, a data entry mistake. The challenge is that you can't always tell which one it is just by looking at the number. Outliers matter because they can pull averages, distort models, and make results look very different from reality.",
+
+  "key_points": [
+    "An outlier is any value that is unusually far from the rest of the data — but 'unusually far' needs a definition.",
+    "The two most common detection methods: Z-score (how many standard deviations from the mean?) and IQR (how far outside the middle 50% of data?).",
+    "Not all outliers are errors. Some are the most important data points you have.",
+    "Removing outliers changes your results — always document it and have a reason.",
+    "Models like linear regression are very sensitive to outliers. Tree-based models are much less so."
+  ],
+
+  "why_it_exists": "Data collection is never perfect. Sensors fail, people enter wrong values, rare events genuinely happen. If you feed those values into a model or a summary statistic without thinking, the results can be completely misleading. A single billionaire makes the average salary of a small group look like everyone is rich. One faulty temperature sensor reading -999°C drags the average temperature of a whole city down. Outlier detection is how you catch these problems before they become conclusions.",
+
+  "what_it_measures": "Outlier detection measures how much a value deviates from what's typical in the dataset. The output is usually a flag (this point is an outlier / it isn't) or a score (how extreme is this point relative to the rest).",
+
+  "intuition": "Picture 9 people in a room each earning around $50,000 a year. Then Elon Musk walks in. The average income of the room instantly jumps to tens of millions — but nothing changed for the original 9 people. Musk is an outlier. He's not an error — he's real — but including him in the average makes the statistic useless for describing anyone in the room. Whether to include him depends on what question you're trying to answer. If you're studying wealth inequality, he's essential. If you're studying typical salaries, he's noise.",
+
+  "example": {
+    "text": "Dataset of house prices in a neighbourhood (£): [210k, 225k, 198k, 240k, 215k, 1,800k]. Mean with outlier: £481k. Mean without: £218k. Median with outlier: £220k. Median without: £215k.",
+    "interpretation": "The single expensive house nearly triples the mean. The median barely moves. This is why median is preferred for skewed data with outliers, and why you should always check your summary statistics before trusting them."
+  },
+
+  "formulas": [
+    {
+      "label": "Z-Score Method",
+      "expression": "z = \\frac{x - \\mu}{\\sigma}",
+      "breakdown": [
+        { "symbol": "z", "means": "the z-score — how many standard deviations this value is from the mean" },
+        { "symbol": "x", "means": "the individual data point you're checking" },
+        { "symbol": "μ", "means": "the mean of the dataset" },
+        { "symbol": "σ", "means": "the standard deviation — a value with |z| > 2 or 3 is typically flagged as an outlier" }
+      ]
+    },
+    {
+      "label": "IQR Method",
+      "expression": "\\text{Outlier if } x < Q1 - 1.5 \\times IQR \\text{ or } x > Q3 + 1.5 \\times IQR",
+      "breakdown": [
+        { "symbol": "Q1", "means": "the 25th percentile — the value below which 25% of the data falls" },
+        { "symbol": "Q3", "means": "the 75th percentile — the value below which 75% of the data falls" },
+        { "symbol": "IQR", "means": "Interquartile Range = Q3 − Q1 — the spread of the middle 50% of data" },
+        { "symbol": "1.5 × IQR", "means": "the standard fence distance — anything beyond 1.5 times the IQR outside Q1 or Q3 is flagged. This is what box plots use." }
+      ]
+    }
+  ],
+
+  "when_to_use": [
+    "Always check for outliers during exploratory data analysis before building any model",
+    "Use Z-score when your data is roughly normally distributed",
+    "Use IQR when your data is skewed — it's more robust because it doesn't depend on the mean",
+    "Flag outliers for review before deciding what to do — don't automatically remove them"
+  ],
+
+  "when_not_to_use": [
+    "Don't remove outliers just because they're extreme — first understand why they exist",
+    "Don't use Z-score outlier detection on heavily skewed data — the mean and SD are themselves distorted by outliers, making the detection circular",
+    "Don't assume outlier = error. In fraud detection, cybersecurity, and rare disease research, outliers are exactly what you're looking for"
+  ],
+
+  "common_mistakes": [
+    "Removing outliers without documenting it — your results will look cleaner but you've hidden information from anyone reading your analysis",
+    "Using mean and standard deviation to detect outliers in a dataset that already has many outliers — they pull the mean and inflate the SD, making other outliers harder to spot",
+    "Treating all outliers the same — a data entry error (age = 999) needs to be removed; a genuine extreme value (a record-breaking sale) might be the most important row in the dataset",
+    "Only checking for high outliers — outliers can be suspiciously low too (negative ages, zero revenue on a busy day)"
+  ],
+
+  "notes": [
+    "In some domains, detecting outliers IS the whole job. Fraud detection, network intrusion detection, and medical anomaly detection are all outlier detection problems at their core.",
+    "There is no universally correct threshold for what counts as an outlier. Z > 3 and 1.5×IQR are conventions, not laws. Use domain knowledge alongside the numbers."
+  ],
+
+  "visual": {
+    "type": "box plot + scatter",
+    "description": "A box plot showing Q1, Q3, the IQR fence, and dots beyond the whiskers flagged as outliers. Alongside it, a scatter plot of the same data showing how the outlier sits visually isolated from the main cluster."
+  },
+
+  "ds_usage": "Outlier handling is a standard step in data cleaning before model training. Tree-based models (Random Forest, XGBoost) handle outliers naturally because they split on thresholds rather than distances. Linear regression, KNN, and neural networks are much more affected. Common approaches: cap outliers at a threshold (winsorization), log-transform the feature to reduce the impact of extreme values, or train a separate model on flagged outliers if they represent a genuinely different group.",
+
+  "related_concepts": [
+    "variance-standard-deviation",
+    "mean-median-mode",
+    "normal-distribution",
+    "sampling-and-bias"
+  ]
+}

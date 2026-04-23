@@ -1,0 +1,82 @@
+{
+  "id": "p-value-and-confidence-intervals",
+  "title": "P-Value & Confidence Intervals",
+  "section": "statistics",
+  "difficulty": "intermediate",
+  "color": "purple",
+  "tagline": "Two ways to express how certain you are about a result — and how often they get misread.",
+
+  "what_it_is": "The p-value and confidence interval are the two main tools statisticians use to say how much they trust a result. The p-value asks: if there were actually no real effect, how likely is it that we'd see a result this extreme just by chance? A confidence interval takes a different angle: here's a range of values where the true answer probably lives. Both are outputs of hypothesis testing, and both are widely misunderstood — even by people who use them daily.",
+
+  "key_points": [
+    "A p-value is the probability of getting your result (or something more extreme) if the null hypothesis were true — i.e. if nothing interesting were actually happening.",
+    "A small p-value (typically under 0.05) means the result is unlikely to be pure chance. It does not mean the result is important or large.",
+    "A confidence interval gives a range — e.g. 'we're 95% confident the true value is between 12 and 18.' It's not a probability that the true value is in that range.",
+    "Statistical significance (low p-value) and practical significance (actually matters) are different things.",
+    "The 0.05 threshold is a convention, not a law. Some fields use 0.01 or 0.10 depending on the stakes."
+  ],
+
+  "why_it_exists": "When you run an experiment or analyse data, you'll almost always see some difference — but is it real or just noise? If you flip a coin 10 times and get 6 heads, is the coin biased or did you just get lucky? The p-value gives you a way to answer that question with a number. The confidence interval gives you a sense of how precisely you know an estimate. Together they let you make decisions based on data without claiming more certainty than you have.",
+
+  "what_it_measures": "The p-value measures how surprising your result is under the assumption that nothing is going on. The confidence interval measures the precision of your estimate — a narrow interval means you have a tight, reliable estimate; a wide interval means there's a lot of uncertainty remaining.",
+
+  "intuition": "Imagine you flip a coin 100 times and get 60 heads. You suspect the coin is biased. The p-value answers: if the coin were perfectly fair, how often would we get 60 or more heads out of 100 just by chance? If the answer is 2%, the p-value is 0.02 — small enough that we start doubting the coin is fair. The confidence interval would say something like: 'based on these 100 flips, we're 95% confident the true probability of heads is between 50% and 70%.' The interval captures the uncertainty — we know it's probably biased, but we're not sure how biased.",
+
+  "example": {
+    "text": "A/B test: you change the colour of a checkout button. Variant A (old): 5.0% conversion. Variant B (new): 5.4% conversion. P-value: 0.03. 95% confidence interval for the difference: [0.1%, 0.7%].",
+    "interpretation": "The p-value of 0.03 says there's a 3% chance of seeing this gap if the button colour had no real effect — small enough to call it statistically significant. The confidence interval says the true improvement is likely between 0.1% and 0.7%. It's real, but the actual effect might be tiny. Whether a 0.1–0.7% lift is worth acting on is a business decision, not a statistics decision."
+  },
+
+  "formulas": [
+    {
+      "label": "Confidence Interval for a Mean",
+      "expression": "\\bar{x} \\pm z \\cdot \\frac{\\sigma}{\\sqrt{n}}",
+      "breakdown": [
+        { "symbol": "x̄", "means": "your sample mean — the average from your data" },
+        { "symbol": "±", "means": "plus or minus — you go this far in both directions to create the interval" },
+        { "symbol": "z", "means": "the z-score for your confidence level — for 95% confidence, z = 1.96" },
+        { "symbol": "σ", "means": "standard deviation of your data — how spread out values are" },
+        { "symbol": "√n", "means": "square root of sample size — larger samples give narrower, more precise intervals" }
+      ]
+    }
+  ],
+
+  "when_to_use": [
+    "Use the p-value when you need a yes/no decision about whether an effect is real — A/B tests, clinical trials, model comparisons",
+    "Use confidence intervals when you want to communicate a range of plausible values — they're more informative than a p-value alone",
+    "Report both together when possible — the p-value tells you if it's real, the confidence interval tells you how big it is"
+  ],
+
+  "when_not_to_use": [
+    "Don't use p-values as a measure of effect size — a tiny, meaningless difference can have a very small p-value with a large enough sample",
+    "Don't treat p = 0.049 and p = 0.051 as meaningfully different — the 0.05 cutoff is arbitrary, not a cliff edge",
+    "Don't interpret a 95% confidence interval as 'there's a 95% chance the true value is in this range' — the true value either is or isn't in the range. The 95% refers to the method, not this specific interval"
+  ],
+
+  "common_mistakes": [
+    "Thinking a low p-value means a large or important effect — it only means the effect probably isn't zero",
+    "Stopping an A/B test the moment it hits p < 0.05 — this is called p-hacking and inflates false positive rates significantly",
+    "Running many tests and only reporting the ones with p < 0.05 — out of 20 tests, one will cross that threshold by chance alone",
+    "Confusing a wide confidence interval for a bad result — a wide interval just means you need more data to be precise"
+  ],
+
+  "notes": [
+    "The replication crisis in science is partly caused by misuse of p-values — studies optimised to hit p < 0.05 rather than to find truth. This is worth knowing because the same traps exist in data science.",
+    "A confidence interval of 95% means: if you repeated this experiment 100 times and built an interval each time, about 95 of those intervals would contain the true value. It's a statement about the procedure, not the single interval in front of you."
+  ],
+
+  "visual": {
+    "type": "dual diagram",
+    "description": "Left: a normal distribution with the p-value shown as the shaded tail area beyond the observed result. Right: a point estimate on a number line with the confidence interval shown as a bar extending either side, with a narrow vs wide version to illustrate precision differences."
+  },
+
+  "ds_usage": "P-values appear in feature selection (is this feature significantly correlated with the target?), A/B testing (is this product change actually better?), and model comparison (is model A significantly better than model B?). Confidence intervals are used in reporting model performance — instead of saying 'accuracy is 87%', a more honest statement is 'accuracy is 87% ± 2% at 95% confidence.' Most statistical libraries return p-values automatically — scipy.stats, statsmodels, and sklearn all produce them.",
+
+  "related_concepts": [
+    "hypothesis-testing",
+    "normal-distribution",
+    "central-limit-theorem",
+    "variance-standard-deviation",
+    "correlation-vs-causation"
+  ]
+}

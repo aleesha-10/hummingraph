@@ -1,0 +1,67 @@
+{
+  "id": "central-limit-theorem",
+  "title": "Central Limit Theorem",
+  "section": "statistics",
+  "difficulty": "intermediate",
+  "color": "purple",
+  "tagline": "No matter what your data looks like, averages tend to behave normally.",
+
+  "what_it_is": "The Central Limit Theorem says that if you take enough random samples from any dataset and calculate the mean of each sample, those means will form a normal (bell-shaped) distribution — even if the original data is skewed, weird-shaped, or nothing like a bell curve. It's one of the most useful ideas in all of statistics because it means we can use normal distribution math on almost anything, as long as we're working with sample averages.",
+
+  "key_points": [
+    "No matter the shape of the original data, the distribution of sample means becomes roughly normal as sample size grows.",
+    "A sample size of around 30 is usually enough for CLT to kick in — though skewed data may need more.",
+    "The mean of the sample means equals the true population mean.",
+    "Larger samples produce sample means that cluster more tightly around the true mean — less spread, more reliable.",
+    "CLT is why so many statistical tests assume normality — not because the data is normal, but because the averages are."
+  ],
+
+  "why_it_exists": "Most real-world data is messy — incomes are skewed, website visit durations spike randomly, exam scores have weird gaps. If statistics only worked on perfectly normal data, it would be almost useless. CLT is the reason we can apply powerful statistical tools to messy real data: we don't need the data itself to be normal, we just need to work with sample means.",
+
+  "what_it_measures": "CLT doesn't measure anything directly — it's a theorem about behaviour. It tells you that sampling distributions of means become predictable and normal, which lets you calculate how confident you can be about an estimate and how much uncertainty remains.",
+
+  "intuition": "Imagine a six-sided die. Roll it once — you get a random number between 1 and 6, and the distribution is flat (each number equally likely, nothing bell-shaped about it). Now roll it 10 times and take the average. Do that 1,000 times, plotting each average. You'll get a bell curve centred around 3.5. The individual rolls are still random and flat — but the averages form a beautiful normal distribution. That's the CLT at work. The data doesn't have to be normal. The averages will be.",
+
+  "example": {
+    "text": "A company's daily sales figures are heavily right-skewed — most days are quiet, but occasionally a massive order comes in. The raw distribution looks nothing like a bell curve. But if you take random samples of 40 days and calculate the average sales for each sample, those averages will be approximately normally distributed around the true mean.",
+    "interpretation": "This means you can build confidence intervals and run hypothesis tests on average daily sales using normal distribution tools — even though the underlying data is skewed. CLT is what makes that valid."
+  },
+
+  "when_to_use": [
+    "When building confidence intervals for a mean — CLT is what justifies the normal distribution assumption",
+    "When running hypothesis tests on averages, even if the raw data is not normal",
+    "When working with large enough samples (typically n ≥ 30) and you need to make probability statements about sample means"
+  ],
+
+  "when_not_to_use": [
+    "Don't rely on CLT with very small samples (under 30) — the approximation breaks down, especially with skewed data",
+    "CLT applies to means, not to individual data points — the original data doesn't become normal just because CLT applies",
+    "Don't use it when you need to make statements about individual values rather than averages"
+  ],
+
+  "common_mistakes": [
+    "Thinking CLT means your data is normally distributed — it doesn't. Only the sampling distribution of the mean is normal.",
+    "Using CLT with tiny samples (n = 5 or 10) and assuming it holds — it needs enough data to work",
+    "Forgetting that CLT is about repeated sampling — in practice you usually have one sample, and you're reasoning about what would happen if you sampled many times"
+  ],
+
+  "notes": [
+    "The 'magic number' of 30 is a rough rule of thumb, not a law. For very skewed distributions, you may need 100+ samples for CLT to give a reliable approximation.",
+    "CLT is the theoretical foundation behind confidence intervals, t-tests, z-tests, and many other standard statistical tools."
+  ],
+
+  "visual": {
+    "type": "multi-panel histogram",
+    "description": "Three panels side by side: (1) the original skewed distribution of raw data, (2) the distribution of sample means from small samples (n=5), still somewhat skewed, (3) the distribution of sample means from larger samples (n=30+), visibly bell-shaped. Makes the convergence to normality obvious."
+  },
+
+  "ds_usage": "CLT is what makes A/B testing work. When you compare two groups, you're comparing sample means — and CLT is why you can assume those means are normally distributed even if individual user behaviour is wildly variable. It's also the justification behind confidence intervals in model evaluation and why the z-test and t-test are so commonly used.",
+
+  "related_concepts": [
+    "normal-distribution",
+    "hypothesis-testing",
+    "probability-basics",
+    "variance-standard-deviation",
+    "sampling-and-bias"
+  ]
+}

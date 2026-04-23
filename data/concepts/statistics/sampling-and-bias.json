@@ -1,0 +1,67 @@
+{
+  "id": "sampling-and-bias",
+  "title": "Sampling & Bias",
+  "section": "statistics",
+  "difficulty": "beginner",
+  "color": "yellow",
+  "tagline": "Your data is only as good as how you collected it.",
+
+  "what_it_is": "Sampling is the process of selecting a smaller group from a larger population to study. Since you usually can't collect data from everyone or everything, you collect from a sample and use it to draw conclusions about the whole. Bias happens when that sample doesn't fairly represent the population — leading to conclusions that sound valid but are systematically wrong.",
+
+  "key_points": [
+    "A sample is a subset of the population. The goal is for it to represent the whole group accurately.",
+    "Random sampling gives every member of the population an equal chance of being selected — reducing bias.",
+    "Bias is a systematic error — it doesn't go away with more data, it just becomes more confidently wrong.",
+    "Larger samples reduce random variation but do not fix bias. A biased sample of 1 million is still biased.",
+    "The way data is collected shapes what conclusions are possible — and what mistakes are invisible."
+  ],
+
+  "why_it_exists": "Collecting data from an entire population is usually impossible — too expensive, too slow, or just impractical. Sampling lets you study a manageable piece of the whole. But if that piece is selected carelessly, everything built on it — models, reports, decisions — inherits the flaw. Understanding bias is what separates a data scientist who produces reliable insights from one who produces confident nonsense.",
+
+  "what_it_measures": "Sampling tells you how representative your data is of the real world. Bias measures the gap between your sample and the population it's supposed to represent — and whether that gap is random (acceptable) or systematic (dangerous).",
+
+  "intuition": "A restaurant wants to know if customers are happy. They survey people as they leave on a Friday night. The results are glowing. But they missed: people who left early because of bad service, people who never came back after a bad experience, and weekday regulars who have a completely different experience. The sample felt legitimate — they asked real customers — but it only captured the happiest, most recent slice. The bias was baked into the method, not the math.",
+
+  "example": {
+    "text": "A model is trained to predict loan defaults using historical data from a bank. The historical data only includes people who were approved for loans. People who were rejected never appear in the dataset.",
+    "interpretation": "The model has never seen examples of the kinds of people most likely to default — because they were never given loans to default on. This is called survivorship bias. The model will seem accurate on historical data but may fail badly on new applicants who resemble the rejected group."
+  },
+
+  "when_to_use": [
+    "Always think about sampling when collecting or receiving data — ask how it was gathered before trusting it",
+    "Use random sampling when you need a fair representation of a population",
+    "Use stratified sampling when subgroups in your data are important — e.g. making sure each age group, region, or category is proportionally represented"
+  ],
+
+  "when_not_to_use": [
+    "Don't assume that a large dataset is unbiased — size and bias are independent problems",
+    "Don't use convenience sampling (just grabbing whatever data is easy to get) for anything where representativeness matters",
+    "Don't use a sample collected at one time or place to draw conclusions about a different time or place without checking for differences"
+  ],
+
+  "common_mistakes": [
+    "Survivorship bias — only studying things that made it through some filter, like analysing successful companies to find success patterns while ignoring the failures",
+    "Confirmation bias in data collection — unconsciously collecting data in a way that supports what you already believe",
+    "Assuming online survey respondents represent everyone — people who fill out surveys differ from those who don't in predictable ways",
+    "Fixing bias by adding more biased data — if your collection method is flawed, collecting more data the same way doesn't help"
+  ],
+
+  "notes": [
+    "There are many named types of bias in data science: selection bias, survivorship bias, reporting bias, response bias, automation bias. All share the same core problem — the data doesn't fairly represent the reality you're trying to study.",
+    "In machine learning, biased training data produces biased models. This is not just a statistical problem — it has real consequences when models are used in hiring, lending, healthcare, or criminal justice."
+  ],
+
+  "visual": {
+    "type": "diagram",
+    "description": "A large circle representing the full population, with a small circle inside it representing the sample. Arrows show which subgroups are included vs excluded. A second version shows a biased sample where the selected circle is off-centre, missing large parts of the population."
+  },
+
+  "ds_usage": "Bias in training data is one of the most common and consequential problems in real ML projects. Train/test splits must be done carefully to avoid data leakage — a form of sampling bias where future information sneaks into the training set. Feature engineering can accidentally introduce bias. Evaluating a model only on the kind of data it was trained on gives an inflated picture of how it will perform in the real world.",
+
+  "related_concepts": [
+    "central-limit-theorem",
+    "hypothesis-testing",
+    "probability-basics",
+    "mean-median-mode"
+  ]
+}

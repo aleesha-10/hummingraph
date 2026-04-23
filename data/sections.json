@@ -17,12 +17,20 @@
       "conceptCount": 0,
       "order": 1
     },
+    {"id": "dav", 
+    "title": "Data Analysis & Visualization", 
+    "description": "EDA, data storytelling, and the art of communicating insights with charts and dashboards.",
+    "color": "blue", 
+    "conceptCount": 0, 
+    "order": 1.5
+
+    },
     {
       "id": "statistics",
       "title": "Statistics",
       "description": "The mathematical foundation everything else is built on — distributions, probability, hypothesis testing.",
       "color": "green",
-      "conceptCount": 1,
+      "conceptCount": 12,
       "order": 2
     },
     {
@@ -63,7 +71,6 @@
       "description": "Data warehouses, ETL pipelines, star and snowflake schemas and the architecture behind analytical systems.",
       "color": "gray",
       "conceptCount": 0,
-      "hidden": true,
       "order": 7
     },
     {

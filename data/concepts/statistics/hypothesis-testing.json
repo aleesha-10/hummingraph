@@ -1,0 +1,70 @@
+{
+  "id": "hypothesis-testing",
+  "title": "Hypothesis Testing",
+  "section": "statistics",
+  "difficulty": "beginner",
+  "color": "green",
+  "tagline": "Is this result real, or did it happen by chance?",
+  "what_it_is": "Hypothesis testing is a formal statistical procedure for deciding whether an observation is likely due to a real effect or just random chance. You start with a null hypothesis — the boring default assumption that nothing interesting is happening. You then collect data and calculate how probable that data would be if the null hypothesis were true. If the probability is very low, you reject the null hypothesis and conclude something real is going on.",
+  "key_points": [
+    "Null hypothesis (H₀): the default assumption — no effect, no difference, nothing interesting.",
+    "Alternative hypothesis (H₁): what you are trying to show — there IS an effect or difference.",
+    "p-value: the probability of seeing your result (or more extreme) if H₀ were true. NOT the probability that H₀ is true.",
+    "Significance level (α): the threshold you set in advance. Typically 0.05. If p < α, reject H₀.",
+    "Rejecting H₀ does not prove H₁ is true — it only means the data is inconsistent with H₀."
+  ],
+  "why_it_exists": "Without hypothesis testing, you cannot distinguish a real signal from noise. A new drug appears to reduce blood pressure by 5mmHg in a trial of 20 patients. Is that real or just luck? Two versions of a webpage have different click rates. Is version B actually better, or did the difference happen by chance? Hypothesis testing provides a rigorous framework for making that call — and quantifying how confident you are in it.",
+  "what_it_measures": "Hypothesis testing measures the strength of evidence against the null hypothesis. The p-value tells you how surprised you should be by your data if the null hypothesis were true. A small p-value means your data is very unlikely under H₀ — which is evidence against it. A large p-value means your data is consistent with H₀ — which is not evidence for H₀, just a lack of evidence against it.",
+  "intuition": "Imagine flipping a coin 100 times and getting 65 heads. Is the coin biased? If the coin were fair, getting 65 or more heads in 100 flips would happen only about 1.4% of the time. That 1.4% is the p-value. Since it is less than 5% (our significance threshold), we reject the null hypothesis that the coin is fair. We did not prove the coin is biased — but the data is too unlikely under a fair-coin assumption for us to keep believing it.",
+  "example": {
+    "text": "A/B test: Version A has a 10% click rate. Version B has a 12% click rate. Sample size: 5000 users each. p-value = 0.03.",
+    "interpretation": "If there were truly no difference between A and B, we would see a gap this large or larger only 3% of the time. Since 0.03 < 0.05, we reject the null hypothesis and conclude B performs significantly better. However — a 2% absolute improvement with 5000 users per variant may not be practically significant even if statistically significant."
+  },
+  "formulas": [
+    {
+      "label": "Z-Test Statistic",
+      "expression": "z = \\frac{\\bar{x} - \\mu_0}{\\sigma / \\sqrt{n}}",
+      "breakdown": [
+        { "symbol": "z", "means": "test statistic — how many standard errors the sample mean is from the hypothesized mean" },
+        { "symbol": "x̄", "means": "observed sample mean" },
+        { "symbol": "μ₀", "means": "hypothesized population mean under H₀" },
+        { "symbol": "σ/√n", "means": "standard error — how much the sample mean varies by chance for samples of size n" }
+      ]
+    },
+    {
+      "label": "p-value (conceptual)",
+      "expression": "p = P(\\text{observed result or more extreme} \\mid H_0 \\text{ is true})",
+      "breakdown": [
+        { "symbol": "p", "means": "p-value — not the probability H₀ is true, but the probability of seeing this data if H₀ were true" },
+        { "symbol": "H₀", "means": "null hypothesis — the assumption being tested" },
+        { "symbol": "more extreme", "means": "results at least as far from H₀ as what was observed" }
+      ]
+    }
+  ],
+  "when_to_use": [
+    "Use when you need to decide whether an observed difference is real or due to chance — A/B tests, clinical trials, model comparisons",
+    "Use to validate that a new feature or intervention actually improves an outcome before deploying it",
+    "Use when comparing two groups — t-test for means, chi-squared for categorical data, F-test for variances",
+    "Use in model evaluation — testing whether one model significantly outperforms another on a holdout set"
+  ],
+  "when_not_to_use": [
+    "Do not use p < 0.05 as proof that an effect is important — statistical significance is not practical significance",
+    "Do not run many tests on the same data without correction — running 20 tests at α=0.05 will produce one false positive on average (multiple comparisons problem)",
+    "Do not use hypothesis testing to confirm what you already know — it is for making decisions under genuine uncertainty, not for validating predetermined conclusions",
+    "Do not interpret p > 0.05 as proof that H₀ is true — it is absence of evidence, not evidence of absence"
+  ],
+  "common_mistakes": [
+    "Saying 'p = 0.03 means there is a 3% chance the null hypothesis is true' — this is completely wrong. p is the probability of the data given H₀, not the probability of H₀.",
+    "Ignoring effect size — a p-value of 0.001 with an effect size of 0.001% is statistically significant but completely useless in practice",
+    "p-hacking — running tests repeatedly until p < 0.05 appears. This is the most common form of statistical fraud in research.",
+    "Not setting α in advance — choosing the significance level after seeing the p-value defeats the entire purpose of the test"
+  ],
+  "ds_usage": "Hypothesis testing is used in A/B testing (the backbone of product decisions at every tech company), feature selection (chi-squared test for categorical feature relevance), model comparison (paired t-tests on cross-validation scores), and data validation (testing whether a new data batch has the same distribution as training data). In Python: scipy.stats.ttest_ind() for two-sample t-test, scipy.stats.chi2_contingency() for categorical independence, statsmodels for more advanced tests.",
+  "related_concepts": [
+    "probability-basics",
+    "conditional-probability",
+    "normal-distribution",
+    "variance-standard-deviation",
+    "correlation-vs-causation"
+  ]
+}

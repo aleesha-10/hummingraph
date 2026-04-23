@@ -32,11 +32,37 @@
   ],
 
   "_allowed_colors": {
-    "blue":   "concepts / definitions / what it is",
-    "green":  "intuition / correctness / when to use",
-    "purple": "advanced ideas / ML concepts",
-    "yellow": "warnings / exceptions / when NOT to use",
-    "gray":   "neutral / structural concepts"
+    "blue":   "related concept pills — foundational / definition concepts",
+    "green":  "related concept pills — intuition / process concepts",
+    "purple": "related concept pills — advanced / ML concepts",
+    "yellow": "related concept pills — warning / exception concepts",
+    "gray":   "related concept pills — neutral / structural concepts"
+  },
+
+  "_color_note": "The color field no longer controls card appearance (now driven by difficulty: beginner=peach, intermediate=mustard, advanced=terracotta) or concept page block colors (now fixed per block type in conceptPageBlocks inside lib/colors.ts). The color field only affects the related concept pills at the bottom of each concept page. When in doubt, pick the color that best matches the nature of the concept.",
+
+  "_concept_page_block_colors": {
+    "note": "These are fixed in lib/colors.ts → conceptPageBlocks. Do not set these per concept.",
+    "Key Points":      "blue",
+    "What it is":      "purple",
+    "Why it exists":   "yellow",
+    "What it measures":"teal",
+    "Intuition":       "orange",
+    "Example":         "rose",
+    "How it works":    "blue",
+    "Formulas":        "white / clean gray",
+    "When to use":     "green",
+    "When not to use": "amber",
+    "Common mistakes": "red",
+    "Notes":           "slate",
+    "In practice":     "turquoise"
+  },
+
+  "_card_colors": {
+    "note": "Concept card colors are driven by difficulty level, defined in ConceptCard.tsx. Do not set these per concept.",
+    "beginner":     "peach/orange left border — #F5A673",
+    "intermediate": "mustard/amber left border — #E8B84B",
+    "advanced":     "terracotta/rose left border — #D4756B"
   },
 
   "_allowed_difficulty": ["beginner", "intermediate", "advanced"],
@@ -67,14 +93,14 @@
     "difficulty": {
       "type": "string",
       "required": true,
-      "description": "Difficulty level — controls the badge shown on the concept card. Must be one of: beginner, intermediate, advanced.",
+      "description": "Difficulty level — controls the card color and badge. Must be one of: beginner, intermediate, advanced.",
       "example": "beginner"
     },
 
     "color": {
       "type": "string",
       "required": true,
-      "description": "Pastel accent color used for highlight boxes on this concept page. Must be one of the allowed color keys.",
+      "description": "Controls only the related concept pills at the bottom of the concept page. Must be one of the allowed color keys. Pick based on the nature of the concept — see _allowed_colors.",
       "example": "blue"
     },
 
@@ -88,14 +114,14 @@
     "what_it_is": {
       "type": "string",
       "required": true,
-      "description": "Plain English explanation of the concept. Max 3 sentences. No jargon unless immediately explained. Shown as a summary card on the section page and as the blue box on the concept page.",
+      "description": "Plain English explanation of the concept. Max 3 sentences. No jargon unless immediately explained. Shown as a summary card on the section page and as the purple box on the concept page.",
       "example": "The mean is the sum of all values divided by how many there are. The median is the middle value when sorted. The mode is the value that appears most often."
     },
 
     "key_points": {
       "type": "array",
       "required": true,
-      "description": "3 to 5 bullet points summarising the most important things to remember. Shown as the quick-revision box. Future use: interview questions will be generated from these.",
+      "description": "3 to 5 bullet points summarising the most important things to remember. Shown as the blue quick-revision box at the top of the concept page. Future use: interview questions will be generated from these.",
       "items": "string",
       "example": [
         "Mean = sum divided by count. Sensitive to outliers.",
@@ -109,28 +135,28 @@
     "why_it_exists": {
       "type": "string",
       "required": false,
-      "description": "What problem this concept was invented to solve. Why do we need it? What breaks without it? Shown as a green box.",
+      "description": "What problem this concept was invented to solve. Why do we need it? What breaks without it? Shown as the yellow box.",
       "example": "A single number to represent a whole dataset is useful for comparison and decision-making — but different measures protect against different distortions in the data."
     },
 
     "what_it_measures": {
       "type": "string",
       "required": false,
-      "description": "What this concept actually tells you about your data. What does the number or result represent in reality? Include this when the output of the concept needs explicit interpretation.",
+      "description": "What this concept actually tells you about your data. What does the number or result represent in reality? Include this when the output of the concept needs explicit interpretation. Shown as the teal box.",
       "example": "Each measure tells you where most of your data sits — the center of gravity of the distribution. They differ in how much weight they give to extreme values."
     },
 
     "intuition": {
       "type": "string",
       "required": false,
-      "description": "A concrete analogy, story, or scenario that makes the concept click. Avoid abstract descriptions — use real situations. For simple concepts you can fold the example in here. For complex ones, keep this as the story and use the separate 'example' field for the worked numbers.",
+      "description": "A concrete analogy, story, or scenario that makes the concept click. Avoid abstract descriptions — use real situations. Shown as the orange box. For simple concepts you can fold the example in here. For complex ones, keep this as the story and use the separate 'example' field for the worked numbers.",
       "example": "Imagine 5 friends earn: 20k, 22k, 21k, 23k, 200k. The mean is 57.2k — misleading because of the outlier. The median is 22k — a much truer picture of a typical salary in this group."
     },
 
     "example": {
       "type": "object",
       "required": false,
-      "description": "A concrete worked example with real numbers, a dataset, or step-by-step output. Intentionally separate from 'intuition' — intuition is the story, example is the numbers. Use this for complex topics where a proper worked case adds genuine clarity beyond what the intuition covers. Omit for simple concepts where the numbers are already in intuition.",
+      "description": "A concrete worked example with real numbers, a dataset, or step-by-step output. Shown as the rose box. Intentionally separate from 'intuition' — intuition is the story, example is the numbers. Use this for complex topics where a proper worked case adds genuine clarity beyond what the intuition covers. Omit for simple concepts where the numbers are already in intuition.",
       "properties": {
         "text": {
           "type": "string",
@@ -150,7 +176,7 @@
     "steps": {
       "type": "array",
       "required": false,
-      "description": "Step-by-step walkthrough of a process or algorithm. Use this for any concept that involves a sequence of operations — e.g. how k-means clustering works, how a decision tree splits, how ETL runs. Omit entirely for purely conceptual or definitional topics.",
+      "description": "Step-by-step walkthrough of a process or algorithm. Shown as the blue 'How it works' box. Use this for any concept that involves a sequence of operations — e.g. how k-means clustering works, how a decision tree splits, how ETL runs. Omit entirely for purely conceptual or definitional topics.",
       "items": {
         "step": "integer — step number",
         "title": "short label for this step",
@@ -167,7 +193,7 @@
     "formulas": {
       "type": "array",
       "required": false,
-      "description": "Only include if formulas add genuine understanding. Omit entirely for conceptual topics with no math. Each formula is a separate object — one concept can have one formula or many. Written in LaTeX for KaTeX rendering.",
+      "description": "Only include if formulas add genuine understanding. Omit entirely for conceptual topics with no math. Shown as the clean white/gray box. Each formula is a separate object — one concept can have one formula or many. Written in LaTeX for KaTeX rendering.",
       "items": {
         "label": {
           "type": "string",
@@ -193,7 +219,7 @@
     "when_to_use": {
       "type": "array",
       "required": false,
-      "description": "Specific situations where this concept is the right choice. Be concrete — name the scenario, not just the principle.",
+      "description": "Specific situations where this concept is the right choice. Be concrete — name the scenario, not just the principle. Shown as the green box.",
       "items": "string",
       "example": [
         "Use mean when data has no extreme outliers and follows a roughly normal distribution",
@@ -205,7 +231,7 @@
     "when_not_to_use": {
       "type": "array",
       "required": false,
-      "description": "Situations where this concept breaks, misleads, or is the wrong choice. The yellow warning box — what makes this platform different from a textbook.",
+      "description": "Situations where this concept breaks, misleads, or is the wrong choice. Shown as the amber box.",
       "items": "string",
       "example": [
         "Do not use mean with heavily skewed data — one outlier can make it unrepresentative",
@@ -216,7 +242,7 @@
     "common_mistakes": {
       "type": "array",
       "required": false,
-      "description": "Mistakes people actually make with this concept in real DS work. Not theoretical errors — real ones that show up in notebooks and production code.",
+      "description": "Mistakes people actually make with this concept in real DS work. Not theoretical errors — real ones that show up in notebooks and production code. Shown as the red box.",
       "items": "string",
       "example": [
         "Using mean salary to describe a company's compensation without checking for executive outliers",
@@ -227,7 +253,7 @@
     "notes": {
       "type": "array",
       "required": false,
-      "description": "Important caveats, edge cases, or real-world nuances that don't fit cleanly into when_not_to_use or common_mistakes. Use for things like: assumptions the concept relies on, behaviour in edge cases, important variants, things that are technically correct but practically dangerous.",
+      "description": "Important caveats, edge cases, or real-world nuances that don't fit cleanly into when_not_to_use or common_mistakes. Shown as the slate/gray box.",
       "items": "string",
       "example": [
         "In a bimodal distribution, the mode is not a useful single summary — it signals that two subgroups exist in your data.",
@@ -238,8 +264,8 @@
     "ds_usage": {
       "type": "string",
       "required": false,
-      "description": "How and where this concept appears specifically in Data Science work. Name the real tasks, tools, libraries, or model types where it comes up. Include code method names where relevant.",
-      "example": "Used in EDA to understand data distribution before modeling. Pandas: df['col'].mean(), .median(), .mode(). The choice of measure for missing value imputation directly affects model quality."
+      "description": "How and where this concept appears specifically in Data Science work. Name the real tasks, tools, or model types where it comes up. Shown as the teal 'In practice' box.",
+      "example": "Used in EDA to understand data distribution before modeling. The choice of measure for missing value imputation directly affects model quality."
     },
 
     "visual": {
@@ -263,7 +289,7 @@
     "related_concepts": {
       "type": "array",
       "required": false,
-      "description": "IDs of other concepts on the platform that connect to this one. Used to render the related links at the bottom of each page. Only reference concepts that actually exist.",
+      "description": "IDs of other concepts on the platform that connect to this one. Used to render the related concept pills at the bottom of each page — styled using the concept's color field. Only reference concepts that actually exist.",
       "items": "string",
       "example": ["variance-standard-deviation", "normal-distribution", "outliers"]
     }
