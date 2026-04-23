@@ -1,0 +1,42 @@
+{
+  "id": "1-what-is-eda",
+  "title": "Exploratory Data Analysis (EDA)",
+  "section": "dav",
+  "difficulty": "intermediate",
+  "color": "green",
+  "tagline": "Poking, prodding, and visualizing your data until it tells you its secrets.",
+  "what_it_is": "EDA is the detective work you do before any formal modeling. You plot, summarize, filter, and transform. You look for missing values, outliers, weird patterns, and surprising relationships. It's not about testing a hypothesis. It's about generating them. The goal is to know your data so well that when something looks wrong later, you notice immediately.",
+  "key_points": [
+    "EDA is not confirmatory. It's exploratory. You're not proving anything yet.",
+    "Always start with the distribution plots. Histograms, box plots, density curves.",
+    "Check for missing data and anomalies before you do anything else.",
+    "Use aggregation (mean, sum, count) to see big picture, then drill down.",
+    "The visualization pipeline: from raw data to visual form happens through mappings (marks + channels)."
+  ],
+  "why_it_exists": "Because raw data is chaos. You can't just run a model and hope. EDA reveals data quality issues, suggests transformations, and points you toward the right analysis.",
+  "intuition": "Imagine you're a jeweler who just got a box of rough stones... EDA is that inspection. You're looking for the gems and the duds before you waste time polishing.\n\n{{viz:eda-histogram}}\n\n{{viz:eda-missing-heatmap}}\n\n{{viz:eda-scatter-matrix}}",  "steps": [
+    { "step": 1, "title": "Load & peek", "description": "Look at first rows, column names, data types. Spot obvious errors like negative ages or 'NaN' placeholders." },
+    { "step": 2, "title": "Univariate analysis", "description": "Plot each variable alone. Histograms for numbers, bar charts for categories. Check distribution shape, center, spread." },
+    { "step": 3, "title": "Missing & dirty data", "description": "Count missing values per column. Look for duplicates, inconsistent formatting (e.g., 'NY' vs 'New York')." },
+    { "step": 4, "title": "Bivariate & multivariate", "description": "Scatter plots, box plots, heatmaps. Look for correlations, clusters, and separations." },
+    { "step": 5, "title": "Transform & simplify", "description": "Filter irrelevant rows, aggregate, pivot, create new features, reduce dimensionality if needed." }
+  ],
+  "visualizations": ["eda-histogram", "eda-missing-heatmap", "eda-scatter-matrix"],
+  "visual_alt": "Interactive EDA dashboard: histogram of age, missing data heatmap (white to pink), and a scatter matrix of four variables.",
+  "when_to_use": [
+    "Every single time you get a new dataset. No exceptions.",
+    "After each major transformation (after cleaning, after merging, after feature engineering) – re‑EDA to confirm.",
+    "When a model gives surprising results – go back to EDA to find the cause."
+  ],
+  "common_mistakes": [
+    "Skipping EDA because you're eager to build models. That's like baking without tasting the batter.",
+    "Only looking at summary statistics (mean, median) without plotting. Anscombe's quartet shows why this fails.",
+    "Not checking for missing values or outliers before modeling. They will wreck your results."
+  ],
+  "notes": [
+    "EDA is where most of real data science time goes. Up to 80 percent. Don't rush it.",
+    "Tools like pandas profiling, Sweetviz, or D‑Tale can automate parts, but you still need human eyes."
+  ],
+  "ds_usage": "EDA is the 'Explore' step in the data science workflow. It informs feature engineering, model selection, and even how you clean data. Interactive tools like Tableau, Plotly, and D3.js are modern EDA powerhouses.",
+  "related_concepts": ["data-distributions", "scatter-plots-and-patterns", "box-plots-and-outliers", "summary-statistics"]
+}

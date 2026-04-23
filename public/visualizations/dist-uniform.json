@@ -1,0 +1,18 @@
+{
+  "data": [
+    {
+      "x": [1,2,3,4,5,6,1,2,3,4,5,6,1,2,3,4,5,6,1,2,3,4,5,6],
+      "type": "histogram",
+      "marker": { "color": "#6EE7B7", "line": { "color": "white", "width": 1 } },
+      "name": "Uniform",
+      "nbinsx": 6
+    }
+  ],
+  "layout": {
+    "title": "Uniform (Equal frequency)",
+    "xaxis": { "title": "Dice roll outcome" },
+    "yaxis": { "title": "Frequency" },
+    "plot_bgcolor": "#fdf8f5",
+    "height": 300
+  }
+}

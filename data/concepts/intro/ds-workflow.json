@@ -1,0 +1,39 @@
+{
+  "id": "ds-workflow",
+  "title": "The Data Science Workflow",
+  "section": "intro",
+  "difficulty": "beginner",
+  "color": "blue",
+  "tagline": "The step by step that turns a vague question into a real answer.",
+  "what_it_is": "It's just a repeatable process. You start with a question, then get data, clean it, explore it, build a model, and finally tell someone what you found. Real projects loop back. You learn something late that forces you to rethink earlier steps. That's fine. Normal.",
+  "key_points": [
+    "Step 1: Ask a clear question. Not 'find insights' but 'does changing X increase Y?'",
+    "Step 2: Get the data, from databases, CSVs, APIs, or scraping.",
+    "Step 3: Clean it, fix missing values, standardise formats, remove duplicates.",
+    "Step 4: Explore (EDA). Visualise, summarise, find weird stuff.",
+    "Step 5: Model. Use stats or ML to answer your question.",
+    "Step 6: Communicate. Share results so someone can actually use them."
+  ],
+  "why_it_exists": "Without a workflow, you just stare at numbers and try random things. That's not data science, that's guessing. A structured workflow saves time, reduces mistakes, and makes your work reproducible. Also, when you're stuck, you know what to do next.",
+  "intuition": "It's like cooking from a recipe. First, decide what dish you're making (question). Then gather ingredients (data). Wash and chop (cleaning). Taste as you go (exploration). Cook (modelling). Finally, plate it so someone wants to eat it (communication). And just like cooking, sometimes you realise halfway that you need to go back to the store.",
+  "steps": [
+    { "step": 1, "title": "Question definition", "description": "Turn a business problem into a data question with a clear success measure." },
+    { "step": 2, "title": "Data acquisition", "description": "Find and pull the data you need, from internal databases, external APIs, or flat files." },
+    { "step": 3, "title": "Data cleaning", "description": "Fix missing values, standardise formats, kill duplicates, handle outliers." },
+    { "step": 4, "title": "Exploratory analysis (EDA)", "description": "Plot distributions, check correlations, generate guesses about patterns." },
+    { "step": 5, "title": "Modelling", "description": "Build statistics or machine learning models to answer the question, then validate them." },
+    { "step": 6, "title": "Communication", "description": "Present findings with visuals, plain language, and a clear 'so what?', not just code dumps." }
+  ],
+  "when_to_use": [
+    "Every data project longer than an hour should follow some version of this.",
+    "Use it to structure a new analysis from scratch.",
+    "Use it to debug where things went wrong. Did you skip cleaning? Forget to explore?"
+  ],
+  "common_mistakes": [
+    "Starting with modelling before looking at the data. Ouch.",
+    "Treating the workflow as one way instead of looping back when you find issues.",
+    "Leaving communication to the end. Thinking about your audience from the start changes everything."
+  ],
+  "note": "There's no single 'right' workflow. CRISP DM is a famous one, but the idea is always the same: question, data, clean, explore, model, tell.",
+  "related_concepts": ["what-is-data-science", "what-is-eda", "data-vs-information-vs-insight"]
+}

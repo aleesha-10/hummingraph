@@ -1,0 +1,29 @@
+{
+  "data": [
+    {
+      "x": [20,22,24,25,26,27,28,29,30,31,32,33,34,35,40,50,70,100,150,200],
+      "type": "histogram",
+      "marker": { "color": "#F5A673", "line": { "color": "white", "width": 1 } },
+      "name": "Right skewed"
+    }
+  ],
+  "layout": {
+    "title": "Right Skewed (Long tail to the right)",
+    "xaxis": { "title": "Income (thousands)" },
+    "yaxis": { "title": "Frequency" },
+    "plot_bgcolor": "#fdf8f5",
+    "height": 300,
+    "annotations": [
+      {
+        "x": 120,
+        "y": 4,
+        "text": "Tail →",
+        "showarrow": true,
+        "arrowhead": 1,
+        "ax": 30,
+        "ay": 0,
+        "font": { "color": "#E8B84B" }
+      }
+    ]
+  }
+}

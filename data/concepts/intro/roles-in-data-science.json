@@ -1,0 +1,33 @@
+{
+  "id": "roles-in-data-science",
+  "title": "Roles in Data Science",
+  "section": "intro",
+  "difficulty": "beginner",
+  "color": "green",
+  "tagline": "It's not just 'data scientist'. Here's who actually does what on a real team.",
+  "what_it_is": "Data science is a team sport. Different people handle different parts. Data engineers build the pipes that get and clean data. Data analysts query and make dashboards. Data scientists build models and run experiments. ML engineers put those models into production. And domain experts make sure everyone's asking the right questions. One person can't do it all, at least not well.",
+  "key_points": [
+    "Data Analyst: writes SQL, builds dashboards, does descriptive stats. Answers 'what happened and why?'",
+    "Data Scientist: runs experiments, builds predictive models, uses stats and ML. Answers 'what will happen and what should we do?'",
+    "Data Engineer: builds data pipelines, maintains databases and warehouses. The plumbing behind everything.",
+    "ML Engineer: takes models and turns them into production systems, like APIs, scaling, and monitoring.",
+    "Domain Expert: knows the business or science. Without them, you solve the wrong problems.",
+    "Titles vary wildly. Some companies call all of these 'Data Scientist'. Read the job description, not the title."
+  ],
+  "why_it_exists": "Nobody can be an expert at everything: statistics, distributed computing, database optimisation, business strategy, and communication. Splitting roles lets people go deep in one area and not burn out.",
+  "intuition": "Think of a restaurant. Data engineers are the kitchen plumbers and electricians, invisible but nothing works without them. Data analysts are line cooks. They follow recipes (queries) to produce consistent plates (reports). Data scientists are head chefs. They invent new dishes (models) and taste constantly. ML engineers are the packaging and shipping team. They make sure the dish can be served to a thousand people quickly. Domain experts are the customers. They tell you if the food actually tastes good.",
+  "when_to_use": [
+    "Use this to understand job postings. Learn the skills for the role you want, not every role at once.",
+    "Use it to spot gaps on a project team. Do you have someone to build the pipeline? Deploy the model? Ask the business questions?",
+    "Small companies often combine roles. Early career means broad exposure. Later comes specialisation."
+  ],
+  "common_mistakes": [
+    "Thinking 'data scientist' is an entry level job. Most require solid SQL, stats, and Python first.",
+    "Underestimating data engineering. Most real problems are data problems, not modeling problems.",
+    "Ignoring domain expertise. The most elegant model is useless if it answers the wrong question."
+  ],
+  "notes": [
+    "Newer roles include Analytics Engineer, which sits between analyst and engineer, and Prompt Engineer, still emerging. The field changes fast."
+  ],
+  "related_concepts": ["what-is-data-science", "ds-workflow", "python-for-data-science"]
+}

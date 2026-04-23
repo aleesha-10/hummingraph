@@ -1,0 +1,26 @@
+{
+  "data": [
+    {
+      "x": [65,68,70,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,90,92,95],
+      "type": "histogram",
+      "marker": { "color": "#D4756B", "line": { "color": "white", "width": 1 } },
+      "name": "Normal distribution"
+    }
+  ],
+  "layout": {
+    "title": "Normal (Bell Curve)",
+    "xaxis": { "title": "Value" },
+    "yaxis": { "title": "Frequency" },
+    "plot_bgcolor": "#fdf8f5",
+    "height": 300,
+    "annotations": [
+      {
+        "x": 80,
+        "y": 8,
+        "text": "🛎️ Most data near center",
+        "showarrow": false,
+        "font": { "size": 14 }
+      }
+    ]
+  }
+}

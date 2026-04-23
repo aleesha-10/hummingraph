@@ -1,0 +1,39 @@
+{
+  "id": "z-dashboards-and-storytelling",
+  "title": "Dashboards and Storytelling",
+  "section": "dav",
+  "difficulty": "intermediate",
+  "color": "blue",
+  "tagline": "Turning charts into decisions. Don't just show data – tell a story.",
+  "what_it_is": "A dashboard is a collection of visualizations on one screen. Storytelling is the narrative that connects them. A good dashboard answers questions and prompts action. A great one guides the viewer through a logical flow: here's the problem, here's the data, here's what we found, here's what to do. Without storytelling, dashboards become graveyards of ignored charts.",
+  "key_points": [
+    "Start with the question, not the chart type.",
+    "Use visual hierarchy: important insights bigger, brighter, higher.",
+    "Interactive elements (filters, brushing, linking) let users explore.",
+    "Keep it simple. 3 to 7 views max. Too many = confusion.",
+    "Provide context: what's the benchmark? Is this change good or bad?",
+    "Every element should pass the 'so what?' test."
+  ],
+  "why_it_exists": "Most dashboards are built because 'we have data'. They clutter screens with useless gauges. Storytelling forces you to be intentional. It bridges the gap between analyst and decision‑maker. You move from 'here are numbers' to 'here's why you should care, and here's what to do.'",
+"intuition": "A dashboard without storytelling is like a pile of ingredients on a counter. Storytelling is the recipe.\n\nFirst, crack the eggs — identify the problem:\n\n{{viz:story-line-chart}}\n\nThen mix with sugar — find the insight:\n\n{{viz:story-scatter}}\n\nThen bake — show the action:\n\n{{viz:story-before-after}}",
+  "visualizations": ["story-line-chart", "story-scatter", "story-before-after"],
+  "visual_alt": "Three‑part story: line chart showing mobile sales dropping, scatter plot showing conversion vs load time (mobile worse), and before‑after bar chart predicting improvement after fixing payment screen.",
+  "when_to_use": [
+    "Building a weekly or monthly performance report for stakeholders.",
+    "Presenting findings from an analysis project.",
+    "Creating an executive summary dashboard for KPIs.",
+    "Designing a self‑service tool for business users to explore data."
+  ],
+  "common_mistakes": [
+    "Including every possible chart. Edit ruthlessly.",
+    "No clear narrative. The viewer has to guess what's important.",
+    "Using misleading scales (truncated axes, dual axes that confuse).",
+    "Ignoring the audience. A dashboard for engineers differs from one for executives."
+  ],
+  "notes": [
+    "Principles of graphical integrity from Tufte: show data variation, not design variation; avoid chartjunk; use appropriate scales.",
+    "Interaction techniques: brushing (selecting points highlights them across views), linking (multiple views update together), overview+detail, and details‑on‑demand."
+  ],
+  "ds_usage": "Data scientists use dashboards to communicate model performance over time, monitor data quality, and share insights. Tools: Tableau, Power BI, Looker, Streamlit, R Shiny, and D3.js for custom web dashboards.",
+  "related_concepts": ["what-is-eda", "bar-charts-vs-histograms", "scatter-plots-and-patterns"]
+}

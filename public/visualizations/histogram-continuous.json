@@ -1,0 +1,31 @@
+{
+  "data": [
+    {
+      "x": [18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,45,48,50,55,60],
+      "type": "histogram",
+      "marker": {
+        "color": "#D4756B",
+        "line": { "color": "white", "width": 1 }
+      },
+      "name": "Customer ages",
+      "xbins": { "size": 5 }
+    }
+  ],
+  "layout": {
+    "title": "Histogram (Continuous) - Bars Touch",
+    "xaxis": { "title": "Age" },
+    "yaxis": { "title": "Count" },
+    "plot_bgcolor": "#fdf8f5",
+    "height": 400,
+    "annotations": [
+      {
+        "x": 0.5,
+        "y": -0.15,
+        "xref": "paper",
+        "yref": "paper",
+        "text": "No gaps = continuous number line",
+        "showarrow": false
+      }
+    ]
+  }
+}

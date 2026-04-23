@@ -1,0 +1,26 @@
+{
+  "data": [
+    {
+      "z": [[0, 0.02, 0.15, 0], [0.01, 0, 0.2, 0.03], [0, 0, 0.05, 0], [0.1, 0, 0, 0]],
+      "type": "heatmap",
+      "colorscale": [
+        [0, "#ffffff"],
+        [0.5, "#FFB7B2"],
+        [1, "#FF6B6B"]
+      ],
+      "zmin": 0,
+      "zmax": 0.25,
+      "showscale": true,
+      "colorbar": { "title": "Missing %" },
+      "x": ["age", "income", "address", "signup_date"],
+      "y": ["batch1", "batch2", "batch3", "batch4"]
+    }
+  ],
+  "layout": {
+    "title": "Missing Data Heatmap (white = complete, pink = missing)",
+    "plot_bgcolor": "#fdf8f5",
+    "paper_bgcolor": "#fdf8f5",
+    "height": 400,
+    "xaxis": { "tickangle": -45 }
+  }
+}

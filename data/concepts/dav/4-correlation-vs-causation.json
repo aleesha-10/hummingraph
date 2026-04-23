@@ -1,0 +1,40 @@
+{
+  "id": "4-correlation-vs-causation",
+  "title": "Correlation vs Causation",
+  "section": "dav",
+  "difficulty": "intermediate",
+  "color": "yellow",
+  "tagline": "Two things moving together doesn't mean one caused the other. Here's what does.",
+  "what_it_is": "Correlation means two variables change together. When one goes up, the other goes up (positive) or down (negative). Causation means changing one directly changes the other. Correlation is easy to measure. Causation is hard to prove. The classic reminder: ice cream sales and drowning incidents are correlated (both go up in summer), but ice cream doesn't cause drowning. Heat does.",
+  "key_points": [
+    "Correlation = they move together. No direction implied.",
+    "Causation = X causes Y. Changing X changes Y.",
+    "Confounding variable = a third thing that causes both. The real hidden driver.",
+    "Reverse causality = Y causes X, not the other way around.",
+    "Spurious correlation = coincidence or data mining. No real relationship.",
+    "Randomized controlled trials (RCTs) can prove causation. Observational data usually cannot."
+  ],
+  "why_it_exists": "People see two lines going up together and shout 'Eureka! This causes that!' But that mistake has real consequences: flooding schools with software that correlates with test scores, or prescribing drugs based on observational links. Correlation is a clue, not a conclusion.",
+  "intuition": "You wake up, stretch, and the sun rises. Correlated? Yes. Causation? No. You didn't cause sunrise. The earth's rotation did. That's the confounder. In data science, always ask: 'Is there a third thing that explains this?'\n\n{{viz:correlation-scatter}}",
+  "visualizations": ["correlation-scatter"],
+  "visual_alt": "Scatter plot of ice cream sales vs drownings. Points colored by temperature (cool to hot). Shows that hot days increase both, revealing temperature as a confounder.",
+  "when_to_use": [
+    "Use correlation to generate hypotheses about possible causal links.",
+    "Use correlation for feature selection in ML (keep features correlated with target).",
+    "Use randomized A/B tests to prove causation when possible."
+  ],
+  "when_not_to_use": [
+    "Do not claim causation from correlation alone in business or science reports.",
+    "Do not confuse high correlation with practical importance – two things can be tightly linked but trivial."
+  ],
+  "common_mistakes": [
+    "The classic: confusing correlation with causation in headlines (e.g., 'Chocolate makes you live longer' – actually healthy people indulge moderately).",
+    "Ignoring confounders (e.g., 'people who take vitamins are healthier' – but vitamin takers also exercise more).",
+    "Reverse causality fallacy: 'Low self‑esteem causes poor grades' – but poor grades might cause low self‑esteem."
+  ],
+  "notes": [
+    "Pearson correlation r ranges from -1 to +1. 0 means no linear relationship. Non‑linear relationships can have r near 0 even if strongly related (like a U‑shape)."
+  ],
+  "ds_usage": "EDA uses correlation heatmaps to spot promising relationships. Causal inference methods (instrumental variables, difference‑in‑differences, propensity scoring) attempt to tease out causation from observational data. But the gold standard remains randomized experiments.",
+  "related_concepts": ["scatter-plots-and-patterns", "data-distributions"]
+}

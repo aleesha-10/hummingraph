@@ -1,0 +1,36 @@
+{
+  "id": "python-for-data-science",
+  "title": "Python for Data Science",
+  "section": "intro",
+  "difficulty": "beginner",
+  "color": "yellow",
+  "tagline": "The one language to rule them all, and the four libraries you'll actually use.",
+  "what_it_is": "Python won. It's the most popular language for data science because it's readable, has a huge library ecosystem, and lets you go from exploring to production without switching tools. The core stack: NumPy for number crunching, pandas for data manipulation, Matplotlib and Seaborn for charts, and scikit learn for machine learning. You don't need to be a software engineer. But you do need to be comfortable with basic Python.",
+  "key_points": [
+    "NumPy: fast number crunching on arrays. The engine under almost everything else.",
+    "pandas: DataFrames. Like Excel in code. You'll load, clean, filter, group, and merge here.",
+    "Matplotlib and Seaborn: plotting. Histograms, scatter plots, bar charts, heatmaps.",
+    "scikit learn: all the standard ML algorithms, like regression, classification, clustering, plus tools for preprocessing and evaluation.",
+    "SQL is still essential. Most data lives in databases, and you'll use Python to connect and query them."
+  ],
+  "why_it_exists": "Before Python, data science was split across multiple tools: R for stats, MATLAB for matrices, Java for speed, Excel for quick looks. Python unified it. Now you can explore a CSV in pandas, visualise it, train a model, and deploy an API, all in one language.",
+  "intuition": "Python is a Swiss Army knife. NumPy is the blade, simple, sharp, used constantly. pandas is the corkscrew, oddly shaped but essential for certain tricky jobs. Matplotlib is the bottle opener. It works but isn't pretty. Seaborn is a nicer bottle opener. scikit learn is the set of small screwdrivers. Each does one thing well, and together they fix most problems.",
+  "example": {
+    "text": "One line of pandas: `df.groupby('region')['sales'].mean()` gives average sales per region. In pure Python without pandas, that's about 10 lines of loops and dictionaries.",
+    "interpretation": "Libraries save you from reinventing the wheel. You focus on the analysis, not the boring implementation details."
+  },
+  "when_to_use": [
+    "Use Python when you need to go beyond Excel or SQL: custom calculations, ML, advanced charts.",
+    "Use it when your data is too big for memory based tools, though pandas has limits. Then try Polars or Spark.",
+    "Use it for reproducibility. A Python script runs the same way every time, unlike clicking around in a spreadsheet."
+  ],
+  "common_mistakes": [
+    "Writing slow pandas code, like using `iterrows()` instead of vectorised operations. Learn to think in columns, not loops.",
+    "Not using virtual environments. Different projects need different library versions. Mixing them will break things.",
+    "Trying to learn every library at once. Master pandas first, then scikit learn, then add others as needed."
+  ],
+  "notes": [
+    "Jupyter Notebooks are the standard for exploration. But for production, you'll write `.py` scripts and functions. Both matter."
+  ],
+  "related_concepts": ["what-is-data-science", "ds-workflow", "what-is-eda"]
+}

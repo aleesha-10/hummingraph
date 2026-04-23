@@ -11,24 +11,27 @@
   "sections": [
     {
       "id": "intro",
-      "title": "Intro to Data Science",
-      "description": "What DS is, how it connects to AI and ML, the workflow, and the landscape of roles and tools.",
+      "title": "Introduction to Data Science",
+      "description": "The Front Door of Hummingraph",
+      "summary":"Data science is the practice of turning raw data into decisions. This section covers what the field actually is, how it connects to AI and machine learning, the workflow a data scientist follows, and the tools and roles involved. It gives you a full picture before diving into the details.",
       "color": "blue",
-      "conceptCount": 0,
+      "conceptCount": 8,
       "order": 1
     },
     {"id": "dav", 
     "title": "Data Analysis & Visualization", 
-    "description": "EDA, data storytelling, and the art of communicating insights with charts and dashboards.",
+    "description": "Turning Numbers into Visualizations",
+    "summary": "Collecting data is only the first step, understanding it is the next. This section covers exploratory data analysis, how to spot patterns and anomalies, and how to communicate findings through charts and dashboards. The goal is not just to see the data, but to make others see it too.",
     "color": "blue", 
-    "conceptCount": 0, 
+    "conceptCount": 8, 
     "order": 1.5
 
     },
     {
       "id": "statistics",
       "title": "Statistics",
-      "description": "The mathematical foundation everything else is built on — distributions, probability, hypothesis testing.",
+      "description": "The Foundation",
+      "summary": "models, predictions, tests, metrics. This section covers the core concepts: probability, distributions, hypothesis testing, and measures of spread and center. If something feels like magic later on, the explanation is probably here.",
       "color": "green",
       "conceptCount": 12,
       "order": 2
@@ -36,7 +39,8 @@
     {
       "id": "advanced-statistics",
       "title": "Advanced Statistics",
-      "description": "Bayesian thinking, experimental design, statistical power and the deeper reasoning behind inference.",
+      "description": "Digging Deeper into Uncertainty",
+      "summary": "This section goes beyond the basics into the deeper reasoning behind statistical inference. Topics include Bayesian thinking, experimental design, statistical power, and the assumptions underlying the tests most people use without questioning. For when you need to not just use statistics, but understand what they're actually saying.",
       "color": "green",
       "conceptCount": 0,
       "order": 3
@@ -44,7 +48,8 @@
     {
       "id": "machine-learning",
       "title": "Machine Learning",
-      "description": "How models learn, the core algorithms, evaluation metrics and the bias-variance tradeoff.",
+      "description": "Where Data Starts Learning",
+      "summary": "Machine learning is what happens when you let data find the patterns instead of programming them by hand. This section covers how models learn, the core algorithms, how to evaluate whether a model is actually good, and the fundamental tradeoffs every ML practitioner deals with. It's the heart of modern data science, and understanding it is key to using it effectively.",
       "color": "purple",
       "conceptCount": 1,
       "order": 4
@@ -52,7 +57,8 @@
     {
       "id": "advanced-ml",
       "title": "Advanced ML",
-      "description": "Ensembles, boosting, clustering, dimensionality reduction, time series and neural network basics.",
+      "description": "Where Models Get Smarter",
+      "summary": "This section covers the techniques that power real production systems — ensemble methods, boosting, clustering, dimensionality reduction, and time series. These are the tools you reach for when a single model isn't enough or when the problem doesn't fit neatly into supervised learning.",
       "color": "purple",
       "conceptCount": 0,
       "order": 5
@@ -60,7 +66,8 @@
     {
       "id": "dbms",
       "title": "DBMS",
-      "description": "Databases, SQL, normalization, transactions and the relational model — how data is stored and queried.",
+      "description": "Storage and Queries",
+      "summary": "Before data can be analysed, it has to be stored somewhere. This section covers how databases work — the relational model, SQL, normalization, transactions, and indexing. The concepts here are foundational for structured data at any scale.",
       "color": "gray",
       "conceptCount": 0,
       "order": 6
@@ -68,7 +75,8 @@
     {
       "id": "data-warehousing",
       "title": "Data Warehousing",
-      "description": "Data warehouses, ETL pipelines, star and snowflake schemas and the architecture behind analytical systems.",
+      "description": " The Architecture Behind Answers",
+      "summary": "A data warehouse is what you build when you need to ask analytical questions across large volumes of historical data. This section covers ETL pipelines, star and snowflake schemas, OLAP systems, and the architectural decisions behind systems designed for querying. It's where the data lives when it's not just about storing it, but about making it usable for analysis.",
       "color": "gray",
       "conceptCount": 0,
       "order": 7
@@ -76,7 +84,8 @@
     {
       "id": "data-mining",
       "title": "Data Mining",
-      "description": "Finding patterns in large datasets — association rules, anomaly detection, text mining.",
+      "description": "Uncovering Obscure Patterns",
+      "summary": "Data mining is the process of discovering patterns in large datasets that weren't explicitly looked for. This section covers association rules, anomaly detection, clustering, and text mining — the techniques used when the question isn't fully formed yet and the data itself has to suggest the answer",
       "color": "yellow",
       "conceptCount": 0,
       "order": 8
@@ -84,7 +93,8 @@
     {
       "id": "big-data",
       "title": "Big Data",
-      "description": "What happens when data outgrows one machine — distributed computing, Spark, streaming.",
+      "description": "Data Fights Back",
+      "summary": "Some datasets are too large, too fast, or too varied for a single machine to handle. This section covers what makes data 'big', how distributed computing systems like Spark work, streaming data pipelines, and the architectural patterns used when scale becomes the primary constraint.",
       "color": "yellow",
       "conceptCount": 0,
       "order": 9

@@ -1,0 +1,29 @@
+{
+  "data": [
+    {
+      "x": ["Current", "After fix (predicted)"],
+      "y": [75, 92],
+      "type": "bar",
+      "marker": { "color": ["#FF4444", "#6EE7B7"] },
+      "name": "Mobile conversion rate"
+    }
+  ],
+  "layout": {
+    "title": "Step 3: Predicted Impact of Fixing Payment Screen",
+    "yaxis": { "title": "Conversion rate (%)", "range": [0, 100] },
+    "plot_bgcolor": "#fdf8f5",
+    "height": 350,
+    "annotations": [
+      {
+        "x": "After fix (predicted)",
+        "y": 92,
+        "text": "+17% improvement",
+        "showarrow": true,
+        "arrowhead": 2,
+        "ax": 30,
+        "ay": -15,
+        "font": { "color": "#6EE7B7" }
+      }
+    ]
+  }
+}

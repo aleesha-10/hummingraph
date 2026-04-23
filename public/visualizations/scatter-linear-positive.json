@@ -1,0 +1,19 @@
+{
+  "data": [
+    {
+      "x": [1,2,3,4,5,6,7,8,9,10],
+      "y": [2,4,6,8,10,12,14,16,18,20],
+      "mode": "markers",
+      "type": "scatter",
+      "marker": { "color": "#F5A673", "size": 12 },
+      "name": "Positive linear"
+    }
+  ],
+  "layout": {
+    "title": "Linear Positive (upward slope)",
+    "xaxis": { "title": "X" },
+    "yaxis": { "title": "Y" },
+    "plot_bgcolor": "#fdf8f5",
+    "height": 350
+  }
+}

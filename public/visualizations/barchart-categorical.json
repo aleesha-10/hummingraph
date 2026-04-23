@@ -1,0 +1,31 @@
+{
+  "data": [
+    {
+      "x": ["Vanilla", "Chocolate", "Strawberry", "Mint", "Cookie Dough"],
+      "y": [45, 38, 12, 20, 25],
+      "type": "bar",
+      "marker": {
+        "color": ["#F5A673", "#A78BFA", "#F472B6", "#6EE7B7", "#E8B84B"],
+        "line": { "color": "white", "width": 2 }
+      },
+      "name": "Favorite ice cream"
+    }
+  ],
+  "layout": {
+    "title": "Bar Chart (Categorical) - Bars Have Gaps",
+    "xaxis": { "title": "Flavor", "type": "category" },
+    "yaxis": { "title": "Number of people" },
+    "plot_bgcolor": "#fdf8f5",
+    "height": 400,
+    "annotations": [
+      {
+        "x": 0.5,
+        "y": -0.15,
+        "xref": "paper",
+        "yref": "paper",
+        "text": "Gaps between bars = categories are separate",
+        "showarrow": false
+      }
+    ]
+  }
+}

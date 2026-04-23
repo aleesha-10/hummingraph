@@ -1,0 +1,36 @@
+{
+  "id": "bar-charts-vs-histograms",
+  "title": "Bar Charts vs Histograms",
+  "section": "dav",
+  "difficulty": "beginner",
+  "color": "blue",
+  "tagline": "One for categories, one for numbers. They look similar but are not the same.",
+  "what_it_is": "Bar charts are for categorical data. Each bar is a separate category (like 'red', 'blue', 'green'). Histograms are for numerical data. Bars touch because the x‑axis is a continuous number line (like ages 0‑10, 10‑20). In a histogram, you can change the bin width. In a bar chart, categories are fixed. Use the wrong one and you'll confuse your audience or obscure patterns.",
+  "key_points": [
+    "Bar chart = categorical x‑axis. Bars have gaps. Order can be rearranged.",
+    "Histogram = numerical x‑axis. Bars touch. Order is fixed by number line.",
+    "Bar chart height = count or value per category.",
+    "Histogram bar height = frequency of data points in that bin.",
+    "Bin width in histogram changes the story. Experiment with it.",
+    "Use bar charts for things like 'sales by product'. Use histograms for 'distribution of ages'."
+  ],
+  "why_it_exists": "Many beginners treat histograms as bar charts and reorder bins, which breaks the meaning of the number line. Or they treat bar charts as histograms and leave gaps where there shouldn't be. The distinction forces you to think: is this variable categorical or numerical?",
+  "intuition": "A bar chart is like a shelf of trophies. Each trophy is separate, you can swap their positions.\n\n{{viz:barchart-categorical}}\n\nA histogram is like a mountain range – the peaks are connected by the ground (number line), and you can't move a mountain past another one.\n\n{{viz:histogram-continuous}}",
+  "visualizations": ["barchart-categorical", "histogram-continuous"],
+  "visual_alt": "Left: bar chart of ice cream flavors (gaps between bars). Right: histogram of ages (touching bars) showing the number line continuity.",
+  "when_to_use": [
+    "Bar chart: comparing counts or percentages across categories (e.g., sales by region, survey responses).",
+    "Histogram: exploring distribution of a single numerical variable (e.g., age, income, time)."
+  ],
+  "common_mistakes": [
+    "Using a histogram for categorical data – the bars touch, implying order that doesn't exist.",
+    "Using a bar chart for numerical data with gaps – it implies categories, hiding continuity.",
+    "Choosing bad bin sizes in histograms: too few bins hide shape, too many show noise."
+  ],
+  "notes": [
+    "Pareto charts are bar charts sorted descending with a cumulative line – useful for prioritizing.",
+    "For ordinal categories (like 'small', 'medium', 'large'), a bar chart with natural order is fine, but keep gaps."
+  ],
+  "ds_usage": "Bar charts are used in reports and dashboards constantly. Histograms are EDA staples. Both are available in every plotting library (Matplotlib, Seaborn, Plotly, Tableau).",
+  "related_concepts": ["data-distributions", "summary-statistics", "what-is-eda"]
+}

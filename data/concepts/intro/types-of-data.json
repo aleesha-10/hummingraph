@@ -1,0 +1,36 @@
+{
+  "id": "types-of-data",
+  "title": "Types of Data",
+  "section": "intro",
+  "difficulty": "beginner",
+  "color": "green",
+  "tagline": "Not all data is the same. The type tells you what you can and can't do.",
+  "what_it_is": "Data comes in different flavors. The big split: numbers versus categories. Numbers you can do math on. Categories are labels, like 'red', 'blue', or 'apple'. Within numbers, there's continuous (height, temperature) and discrete (number of kids). Within categories, there's nominal (no order: colors, countries) and ordinal (has order: movie ratings, education level). Pick the wrong analysis for the wrong type, and you'll get nonsense.",
+  "key_points": [
+    "Numerical means numbers you can add and average. Discrete: whole numbers, like kids in a family. Continuous: any value in a range, like time or weight.",
+    "Categorical means labels. Nominal: no natural order, like eye color. Ordinal: order but uneven gaps, like small, medium, large.",
+    "Binary is a category with exactly two values: yes/no, true/false.",
+    "Text, images, time series are other common types. Each needs its own handling.",
+    "The type decides which summary stats, charts, and models actually make sense."
+  ],
+  "why_it_exists": "If you treat a category like a number, say encode 'red' as 1 and 'blue' as 2, then take the average, you get total nonsense. 'Average color' doesn't mean anything. Data types exist to stop you from doing stuff that makes no logical sense.",
+  "intuition": "Picture a fruit bowl. Numerical data is like counting apples (discrete) or weighing them (continuous). Categorical data is labeling them 'apple', 'orange', 'banana'. You can't average 'apple' and 'orange' to get 'aporange'. Ordinal is like ranking fruit from 'not ripe' to 'very ripe'. You know the order, but the gap between 'not ripe' and 'ripe' might not be the same as between 'ripe' and 'very ripe'.",
+  "example": {
+    "text": "Customer survey: Age (numerical continuous), Number of purchases (numerical discrete), Country (categorical nominal), Satisfaction (1=Very unhappy, 2=Neutral, 3=Happy, which is categorical ordinal).",
+    "interpretation": "You can average age and purchases. You can't average country. For satisfaction, you can say 'the median is 2', but don't say 'the average is 2.3'. The gap between 1 and 2 might not mean the same as between 2 and 3."
+  },
+  "when_to_use": [
+    "Before any analysis, check the type of each variable. It tells you your next move.",
+    "Use bar charts and mode for categories. Use histograms and mean or median for numbers.",
+    "For ordinal data, medians and percentiles are usually safer than means."
+  ],
+  "common_mistakes": [
+    "Turning categories into numbers, like 1=red, 2=blue, and feeding them into a model as if they were numerical. The model will think 2 is twice 'redness' of 1.",
+    "Using mean for ordinal data. 'Average satisfaction of 2.3' is meaningless if the scale isn't evenly spaced.",
+    "Calling discrete data 'continuous'. Treat counts appropriately."
+  ],
+  "notes": [
+    "In machine learning, you have to encode categories, using one hot or label encoding, before feeding them into most algorithms. The choice matters a lot."
+  ],
+  "related_concepts": ["data-vs-information-vs-insight", "what-is-eda", "probability-basics"]
+}

@@ -1,0 +1,37 @@
+{
+  "id": "what-is-eda",
+  "title": "What is EDA?",
+  "section": "intro",
+  "difficulty": "beginner",
+  "color": "green",
+  "tagline": "Exploratory Data Analysis. Looking at your data before you break it.",
+  "what_it_is": "EDA is you visually and quantitatively poking at a dataset to understand what's going on. You look at distributions, spot missing values, find outliers, check correlations, and start forming guesses. It happens before any formal modelling. Some people call it 'data gardening'. You're getting to know the soil before you decide what to plant.",
+  "key_points": [
+    "EDA is not about testing a specific hypothesis. It's about discovering what the data might say.",
+    "Tools: histograms (distributions), scatter plots (relationships), box plots (outliers), summary stats (mean, median, standard deviation).",
+    "You'll find: missing data, weird values, unexpected patterns, potential collection errors.",
+    "EDA drives feature engineering. Understanding the data tells you how to transform it for models.",
+    "Skipping EDA is the number one cause of garbage models. Seriously."
+  ],
+  "why_it_exists": "You don't know what's in a dataset until you look. Averages hide outliers. Correlations mislead without visualisation. Missing values surprise you. EDA exists to stop you from building a complex model on data that has a column full of 'NaN' or 'male' and 'mle' typos.",
+  "intuition": "EDA is like being a detective arriving at a crime scene. You don't immediately accuse someone, which would be testing a hypothesis. Instead, you walk around, take photos (histograms), look for footprints (relationships), check the time (distributions), and note broken windows (missing values). Only after you understand the scene do you form a theory. Jumping straight to modelling without EDA is like blaming the butler before you've even seen the body.",
+  "example": {
+    "text": "You load a customer dataset. First, `df.info()` shows 'age' has 200 missing values. You plot age distribution. It's bimodal: two peaks, young adults and retirees. Then you notice 'income' has a negative value, a data entry error.",
+    "interpretation": "In five minutes of EDA, you found data quality issues (missing age, negative income) and a meaningful pattern (two age groups that might behave differently). That shapes everything: how you fill missing values, whether you build separate models per age group, and what features to create."
+  },
+  "when_to_use": [
+    "Every single time you get a new dataset, before any cleaning decisions, before any modeling.",
+    "After cleaning, do EDA again to confirm nothing broke.",
+    "When something looks suspicious in your model results, go back to EDA."
+  ],
+  "common_mistakes": [
+    "Skipping EDA because you're excited to model. This is the most common and most expensive mistake in data science.",
+    "Only looking at summary stats (mean, median) without visualising. Anscombe's quartet shows four totally different datasets with identical stats but completely different shapes.",
+    "Assuming EDA is one and done. Re explore after every major transformation."
+  ],
+  "notes": [
+    "John Tukey formalised EDA in the 1970s. His message: let the data speak before you force it to answer your questions."
+  ],
+  "ds_usage": "EDA is the 'Explore' step in the workflow. It's the first thing you do in any analysis notebook. Tools like pandas profiling can automate parts, but you always need human eyes.",
+  "related_concepts": ["ds-workflow", "types-of-data", "statistics", "data-vs-information-vs-insight"]
+}

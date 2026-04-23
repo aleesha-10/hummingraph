@@ -1,0 +1,33 @@
+{
+  "id": "what-is-data-science",
+  "title": "What is Data Science?",
+  "section": "intro",
+  "difficulty": "beginner",
+  "color": "blue",
+  "tagline": "Turning messy numbers into decisions that actually make sense.",
+  "what_it_is": "Data science is you taking real world data and pulling out useful stuff from it. Not magic. Not just fancy math. It's asking a question, finding data, cleaning it up, looking for patterns, and then telling someone what you found. Simple as that.",
+  "key_points": [
+    "Data science isn't about calculating. It's about understanding.",
+    "You need three things: stats (to handle uncertainty), coding (to work with lots of data), and knowing the problem area (so you ask the right questions).",
+    "The output can be a prediction, a chart, a dashboard, or just a clear answer.",
+    "No, it's not magic. It's a loop: ask, get data, clean, explore, model, explain."
+  ],
+  "why_it_exists": "We're drowning in data. More than anyone knows what to do with. Spreadsheets and gut feelings don't cut it anymore. Data science is here to turn that firehose of numbers and text into something you can actually use, without going crazy.",
+  "intuition": "You're a chef in a giant, messy kitchen. Ingredients (data) come in. Some fresh, some rotten, some mislabeled. Your job? Clean them, figure out what goes together, and cook a dish (insight) that people actually want to eat. And you don't just follow recipes. You invent them based on what's in front of you.",
+  "when_to_use": [
+    "You have a question that one number or a simple chart can't answer.",
+    "You've got more data than you can look at manually.",
+    "You need to predict something, like sales, churn, or demand, based on the past.",
+    "You suspect there are hidden patterns you can't see with just averages."
+  ],
+  "common_mistakes": [
+    "Jumping straight to algorithms before understanding the problem. Oops.",
+    "Thinking more data means better answers. Nope. Garbage in, garbage out.",
+    "Going full machine learning when a simple count or average would do."
+  ],
+  "notes": [
+    "People sometimes mix up data science and data analytics. Analytics looks at what happened and why. Data science goes further: what will happen and what should we do about it?"
+  ],
+  "ds_usage": "Data science is the big tent. Everything else here, from stats to machine learning to data warehousing, is a tool you'll use as a data scientist.",
+  "related_concepts": ["ds-vs-ai-vs-ml", "ds-workflow", "roles-in-data-science"]
+}

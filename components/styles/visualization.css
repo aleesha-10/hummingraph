@@ -1,0 +1,52 @@
+/* Add these styles to your global CSS or the relevant module */
+
+/* Wrapper around each Plotly chart */
+.viz-block {
+  width: 100%;
+  min-height: 300px;
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 1.5rem 0;
+  background: #fdf8f5; /* matches your Plotly plot_bgcolor */
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+/* Loading skeleton */
+.viz-skeleton {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 1.5rem 0;
+  background: #f3f3f3;
+  animation: viz-pulse 1.5s ease-in-out infinite;
+}
+
+.viz-skeleton-bar {
+  border-radius: 12px;
+  background: linear-gradient(90deg, #ececec 25%, #f9f9f9 50%, #ececec 75%);
+  background-size: 200% 100%;
+  animation: viz-shimmer 1.5s infinite;
+}
+
+/* Error state */
+.viz-error {
+  margin: 1.5rem 0;
+  padding: 1rem 1.25rem;
+  border-radius: 8px;
+  background: #fff5f5;
+  border: 1px solid #fecaca;
+  color: #b91c1c;
+  font-size: 0.875rem;
+}
+
+.viz-error code {
+  background: #fee2e2;
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  font-family: monospace;
+}
+
+@keyframes viz-shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}

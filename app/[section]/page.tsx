@@ -34,9 +34,10 @@ export default async function SectionPage({ params }: { params: Promise<{ sectio
         >
           {sectionData.title}
         </h1>
-        <p style={{ fontSize: '1rem', color: '#6B7280', maxWidth: '560px' }}>
-          {sectionData.description}
-        </p>
+        
+<p style={{ fontSize: '1rem', color: '#6B7280', maxWidth: '640px' }}>
+  {sectionData.summary}
+</p>
       </div>
 
       <div

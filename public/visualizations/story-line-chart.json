@@ -1,0 +1,32 @@
+{
+  "data": [
+    {
+      "x": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+      "y": [105, 102, 98, 95, 90, 85, 75],
+      "type": "scatter",
+      "mode": "lines+markers",
+      "marker": { "color": "#FF4444", "size": 8 },
+      "line": { "color": "#FF4444", "width": 3 },
+      "name": "Mobile sales"
+    }
+  ],
+  "layout": {
+    "title": "Step 1: Mobile Sales Are Dropping",
+    "xaxis": { "title": "Month" },
+    "yaxis": { "title": "Sales (thousands $" },
+    "plot_bgcolor": "#fdf8f5",
+    "height": 350,
+    "annotations": [
+      {
+        "x": "Jul",
+        "y": 75,
+        "text": "Down 30% from January",
+        "showarrow": true,
+        "arrowhead": 2,
+        "ax": 30,
+        "ay": -20,
+        "font": { "color": "#D4756B" }
+      }
+    ]
+  }
+}

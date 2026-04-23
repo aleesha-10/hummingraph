@@ -57,17 +57,17 @@ export type ColorKey = keyof typeof colorMap
 // Every concept page uses this same rhythm — the reader starts
 // associating colors with meaning rather than with a section.
 export const conceptPageBlocks = {
-  keyPoints:      { bg: '#EBF5FB', border: '#D6EAF8', text: '#2874A6' },  // blue     — sets the tone
-  whatItIs:       { bg: '#F4ECF7', border: '#E8DAEF', text: '#7D3C98' },  // purple   — definition
-  whyItExists:    { bg: '#FEF9E7', border: '#FCF3CF', text: '#B7950B' },  // yellow   — motivation
-  whatItMeasures: { bg: '#E8F8F5', border: '#226558', text: '#0E6655' },  // teal     — output meaning
-  intuition:      { bg: '#FEF5EC', border: '#FAD7A0', text: '#A04000' },  // orange   — lightbulb
-  example:        { bg: '#FDF2F8', border: '#F5B7D1', text: '#922B5E' },  // rose     — concrete numbers
-  steps:          { bg: '#EBF5FB', border: '#D6EAF8', text: '#2874A6' },  // blue     — process
-  formulas:       { bg: '#FFFFFF', border: '#E5E7EB', text: '#374151' },  // white    — clean math
-  whenToUse:      { bg: '#E9F7EF', border: '#D4EFDF', text: '#1E8449' },  // green    — go ahead
-  whenNotToUse:   { bg: '#FEF9E7', border: '#FDEBD0', text: '#784212' },  // amber    — caution
-  commonMistakes: { bg: '#FDEDEC', border: '#F5B7B1', text: '#922B21' },  // red      — warning
-  notes:          { bg: '#F0F3F4', border: '#D5D8DC', text: '#2C3E50' },  // slate    — neutral caveat
-  dsUsage:        { bg: '#E8F8F5', border: '#A3E4D7', text: '#0E6655' },  // turquoise — real world
+  keyPoints:      { bg: '#EBF5FB', border: '#b5ddfa', text: '#2874A6' },  // blue     — sets the tone
+  whatItIs:       { bg: '#F4ECF7', border: '#d8aeed', text: '#7D3C98' },  // purple   — definition
+  whyItExists:    { bg: '#FEF9E7', border: '#f5c9a5', text: '#B7950B' },  // yellow   — motivation
+  whatItMeasures: { bg: '#E8F8F5', border: '#069494', text: '#0E6655' },  // teal     — output meaning
+  intuition:      { bg: '#FEF5EC', border: '#f69d77', text: '#A04000' },  // orange   — lightbulb
+  example:        { bg: '#FDF2F8', border: '#f88db9', text: '#922B5E' },  // rose     — concrete numbers
+  steps:          { bg: '#EBF5FB', border: '#aedbfa', text: '#2874A6' },  // blue     — process
+  formulas:       { bg: '#FFFFFF', border: '#b6c4e2', text: '#374151' },  // white    — clean math
+  whenToUse:      { bg: '#E9F7EF', border: '#b0f3cb', text: '#1E8449' },  // green    — go ahead
+  whenNotToUse:   { bg: '#FEF9E7', border: '#e29d61c2', text: '#784212' },  // amber    — caution
+  commonMistakes: { bg: '#FDEDEC', border: '#f8a7a0', text: '#922B21' },  // red      — warning
+  notes:          { bg: '#F0F3F4', border: '#b0c3db', text: '#2C3E50' },  // slate    — neutral caveat
+  dsUsage:        { bg: '#E8F8F5', border: '#92e7d6', text: '#0E6655' },  // turquoise — real world
 }

@@ -1,0 +1,38 @@
+{
+  "id": "box-plots-and-outliers",
+  "title": "Box Plots and Outliers",
+  "section": "dav",
+  "difficulty": "intermediate",
+  "color": "green",
+  "tagline": "Five numbers that summarize a distribution, plus a spotlight on outliers.",
+  "what_it_is": "A box plot shows the median, quartiles, and outliers in one clean picture. The box spans the interquartile range (IQR, from 25th to 75th percentile). A line inside is the median. Whiskers extend to the furthest points within 1.5 times the IQR. Anything beyond is plotted as a dot – an outlier. Box plots are great for comparing distributions side by side.",
+  "key_points": [
+    "Box = middle 50 percent of data (IQR).",
+    "Line in box = median (50th percentile).",
+    "Whiskers = range of non‑outlier data, usually max 1.5 * IQR from box edges.",
+    "Dots = outliers. Points beyond the whiskers.",
+    "Notches around median show confidence interval for comparison.",
+    "Best for comparing multiple groups (e.g., salaries by department)."
+  ],
+  "why_it_exists": "Mean and standard deviation get pulled by outliers. Box plots use robust statistics (median, IQR). They show skewness (if one whisker is much longer) and flag outliers for investigation. They summarize a whole distribution without hiding weird values.",
+  "intuition": "A box plot is like a race result summary. The box is the middle pack of runners. The line inside is the median runner's time. Whiskers are the fastest and slowest within reason. Dots are the freakishly fast outlier who finished in half the time, and the straggler who stopped for coffee. You see the whole story without listing every runner.\n\n{{viz:boxplot-with-outliers}}",
+  "visualizations": ["boxplot-with-outliers"],
+  "visual_alt": "Box plots for three departments (Engineering, Marketing, Support). Engineering has a high outlier marked as a red diamond. Boxes colored green, orange, and yellow.",
+  "when_to_use": [
+    "Comparing distributions across multiple categories (e.g., home prices per city).",
+    "Checking for outliers before modeling.",
+    "When your data is skewed – box plots are robust.",
+    "In EDA as a quick summary of many variables."
+  ],
+  "common_mistakes": [
+    "Calling every point beyond whiskers an error. Some outliers are real, interesting events.",
+    "Using box plots for small datasets (n < 10) – not enough data for stable quartiles.",
+    "Ignoring notches when comparing medians – overlapping notches suggest no significant difference."
+  ],
+  "notes": [
+    "The 1.5 IQR rule is a convention, not a mathematical law. Adjust for domain knowledge.",
+    "Violin plots combine box plot with a density curve – even richer information."
+  ],
+  "ds_usage": "Box plots appear in EDA, diagnostic plots for ANOVA, and feature analysis. They are also used in anomaly detection (points outside whiskers as potential anomalies).",
+  "related_concepts": ["summary-statistics", "data-distributions", "scatter-plots-and-patterns"]
+}

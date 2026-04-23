@@ -1,0 +1,33 @@
+
+{
+  "id": "ds-vs-ai-vs-ml",
+  "title": "Data Science vs AI vs ML",
+  "section": "intro",
+  "difficulty": "beginner",
+  "color": "blue",
+  "tagline": "Three buzzwords. They're not the same thing. Here's the simple version.",
+  "what_it_is": "Think of it like a set of Russian dolls. Data science is the biggest. It covers everything from cleaning data to building dashboards to making predictions. Inside that sits machine learning, algorithms that learn patterns from data without you programming every rule. And inside that? AI is the big dream: machines that act smart. But right now, ML is how we actually get there.",
+  "key_points": [
+    "AI is the goal: machines that see, reason, and act like humans.",
+    "ML is the current way we try to make AI work. Algorithms that get better with experience.",
+    "Data science is what you do day to day: ask questions, get data, clean it, explore, model, share.",
+    "You can do data science without ML (just stats and charts). And you can do ML without it being 'AI', like a simple recommendation system.",
+    "In real jobs, they overlap constantly. Don't get hung up on the boundaries."
+  ],
+  "why_it_exists": "These words get thrown around like confetti. Job ads. News headlines. Everyone sounds confused. Knowing the difference helps you understand what you're actually learning, and what employers mean when they say 'we need AI'. Spoiler: they usually just want a bar chart.",
+  "intuition": "Imagine teaching a dog tricks. AI is the goal: a dog that understands commands and acts smart. Machine learning is the method: you give treats for good behavior, and the dog figures out the pattern on its own. Data science is the whole thing: picking the trick, getting the dog's attention, measuring progress, and telling the owner if it worked, whether you used treats or something else.",
+  "when_to_use": [
+    "Say 'data science' when you mean the whole journey of working with data to answer questions.",
+    "Say 'machine learning' when you mean algorithms that learn from data: regression, classification, clustering.",
+    "Say 'AI' when you mean systems trying to be human like, such as LLMs, computer vision, or robotics."
+  ],
+  "common_mistakes": [
+    "Calling every Excel chart 'AI'. No. AI is not a synonym for 'using a computer'.",
+    "Thinking ML is always the right tool. Sometimes a simple average tells you everything.",
+    "Assuming data science is just a fancy new name for statistics. It's not. It also needs coding, data engineering, and talking to humans."
+  ],
+  "notes": [
+    "Job titles are messy. A 'Data Scientist' might do zero ML, just SQL dashboards. An 'AI Engineer' might just call OpenAI's API. Read the job description, not the title."
+  ],
+  "related_concepts": ["what-is-data-science", "machine-learning", "ds-workflow"]
+}

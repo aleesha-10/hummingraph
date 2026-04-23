@@ -7,6 +7,7 @@ export type Difficulty = 'beginner' | 'intermediate' | 'advanced'
 
 export type SectionId =
   | 'intro'
+  | 'dav'
   | 'statistics'
   | 'advanced-statistics'
   | 'machine-learning'
@@ -73,6 +74,7 @@ export interface Concept {
 export interface Section {
   id: SectionId
   title: string
+  summary?: string 
   description: string
   color: ConceptColor
   conceptCount: number

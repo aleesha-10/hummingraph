@@ -1,0 +1,29 @@
+{
+  "data": [
+    {
+      "x": [50,55,60,65,70,75,80,82,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100],
+      "type": "histogram",
+      "marker": { "color": "#A78BFA", "line": { "color": "white", "width": 1 } },
+      "name": "Left skewed"
+    }
+  ],
+  "layout": {
+    "title": "Left Skewed (Long tail to the left)",
+    "xaxis": { "title": "Exam Score" },
+    "yaxis": { "title": "Frequency" },
+    "plot_bgcolor": "#fdf8f5",
+    "height": 300,
+    "annotations": [
+      {
+        "x": 55,
+        "y": 3,
+        "text": "← Tail",
+        "showarrow": true,
+        "arrowhead": 1,
+        "ax": -20,
+        "ay": 0,
+        "font": { "color": "#E8B84B" }
+      }
+    ]
+  }
+}

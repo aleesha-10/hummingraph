@@ -1,0 +1,33 @@
+{
+  "id": "2-summary-statistics",
+  "title": "Summary Statistics",
+  "section": "dav",
+  "difficulty": "beginner",
+  "color": "blue",
+  "tagline": "One‑number summaries that tell you the shape and feel of your data.",
+  "what_it_is": "Summary statistics are single numbers that describe a whole dataset. Mean is the average. Median is the middle. Standard deviation tells you how spread out the numbers are. Range is max minus min. IQR is the middle 50 percent range. These are quick, but they hide details. Always plot too.",
+  "key_points": [
+    "Mean = sum divided by count. Sensitive to outliers.",
+    "Median = middle value when sorted. Robust to outliers.",
+    "Standard deviation = typical distance from the mean.",
+    "Range = max minus min. Very sensitive to outliers.",
+    "IQR = 75th percentile minus 25th percentile. Robust spread.",
+    "Summary stats are good for initial sanity checks, not final answers."
+  ],
+  "why_it_exists": "You can't look at every data point in a large dataset. Summary statistics compress everything into a few numbers, so you can compare datasets, spot obvious errors (like a mean of -100 for age), and get a quick feel for center and spread.",
+  "intuition": "Summary statistics are like a movie trailer... always watch the whole movie (visualize) after the trailer.\n\n{{viz:summary-strip-plot}}",
+  "visualizations": ["summary-strip-plot"],
+  "visual_alt": "Strip plot with box overlay showing mean (magenta diamond), median (gold circle), standard deviation ribbon (lavender), IQR box (teal), and outliers (red triangles).",
+  "when_to_use": [
+    "Quickly checking if data is sane (e.g., age mean between 0 and 120).",
+    "Comparing central tendency across groups (e.g., median income by city).",
+    "Reporting to non‑technical audiences (but pair with visuals)."
+  ],
+  "common_mistakes": [
+    "Relying only on mean and standard deviation without visualizing.",
+    "Using range as a measure of spread when outliers are present.",
+    "Reporting mean for skewed data (e.g., income, house prices) without also reporting median."
+  ],
+  "ds_usage": "Used in EDA as a first pass. Also used in feature scaling (mean and std for normalization), anomaly detection (values beyond 3 standard deviations), and reporting.",
+  "related_concepts": ["data-distributions", "box-plots-and-outliers"]
+}

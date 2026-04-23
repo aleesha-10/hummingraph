@@ -1,0 +1,19 @@
+{
+  "data": [
+    {
+      "x": [-5,-4,-3,-2,-1,0,1,2,3,4,5],
+      "y": [25,16,9,4,1,0,1,4,9,16,25],
+      "mode": "markers",
+      "type": "scatter",
+      "marker": { "color": "#D4756B", "size": 12 },
+      "name": "U‑shape nonlinear"
+    }
+  ],
+  "layout": {
+    "title": "Nonlinear (U‑shape)",
+    "xaxis": { "title": "X" },
+    "yaxis": { "title": "Y" },
+    "plot_bgcolor": "#fdf8f5",
+    "height": 350
+  }
+}

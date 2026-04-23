@@ -1,0 +1,38 @@
+{
+  "id": "5-scatter-plots-and-patterns",
+  "title": "Scatter Plots and Patterns",
+  "section": "dav",
+  "difficulty": "beginner",
+  "color": "green",
+  "tagline": "Two variables, one plot. You'll see clusters, lines, curves, and weirdos.",
+  "what_it_is": "A scatter plot puts one variable on the x‑axis, another on the y‑axis. Each point is one observation. The pattern tells you the relationship. Linear: points form a line. Nonlinear: they form a curve. Clusters: separate groups. Outliers: lonely points far from the crowd. Scatter plots are the workhorse of bivariate EDA.",
+  "key_points": [
+    "Linear pattern = straight line. Positive slope (up right) or negative (down right).",
+    "Nonlinear = curved. Examples: U‑shape, exponential growth, logarithmic.",
+    "Clusters = distinct groups. May need separate models per cluster.",
+    "Outliers = extreme points. Could be errors or rare events.",
+    "No pattern = random scatter. Variables likely unrelated.",
+    "Always check for overplotting when many points overlap."
+  ],
+  "why_it_exists": "Correlation coefficients (like Pearson's r) only detect linear relationships. A perfect U‑shape gives r near 0, but the relationship is strong. Scatter plots reveal the truth. They also show clustering and outliers that summary stats hide.",
+  "intuition": "Scatter plot is like birdwatching. You see a flock (cluster). One bird flies far away (outlier). Some birds fly in a V shape (linear). Others in a spiral (nonlinear). Without looking, you'd just have a list of bird positions. The plot makes the pattern obvious.\n\n{{viz:scatter-linear-positive}}\n\n{{viz:scatter-linear-negative}}\n\n{{viz:scatter-nonlinear-u}}\n\n{{viz:scatter-clusters}}\n\n{{viz:scatter-outlier}}\n\n{{viz:scatter-noise}}",
+  "visualizations": ["scatter-linear-positive", "scatter-linear-negative", "scatter-nonlinear-u", "scatter-clusters", "scatter-outlier", "scatter-noise"],
+  "visual_alt": "Gallery of 6 scatter plots: positive linear (orange), negative linear (yellow), U‑shape nonlinear (red), three color clusters (purple/green), one outlier as a red star, and random noise (blue).",
+  "when_to_use": [
+    "Whenever you want to see relationship between two continuous variables.",
+    "Before calculating Pearson correlation – the plot tells you if linear is appropriate.",
+    "To spot clusters that could be different segments or groups.",
+    "To identify outliers that might be data errors."
+  ],
+  "common_mistakes": [
+    "Relying on correlation without plotting. A U‑shape or outlier‑driven line can lie.",
+    "Ignoring overplotting – use transparency (alpha), hexbin plots, or sampling.",
+    "Claiming a nonlinear pattern is random just because correlation is near zero."
+  ],
+  "notes": [
+    "Add a trend line (linear regression) to help the eye, but beware of forcing linearity.",
+    "For categorical vs continuous, use box plots or violin plots, not scatter."
+  ],
+  "ds_usage": "Scatter plots are everywhere in EDA, diagnostic plots for regression (residuals vs fitted), and visualizing clustering results (PCA scatter plots). Also used in correlation heatmaps as a matrix of scatter plots.",
+  "related_concepts": ["correlation-vs-causation", "data-distributions", "box-plots-and-outliers"]
+}

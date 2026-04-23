@@ -1,0 +1,37 @@
+{
+  "id": "data-vs-information-vs-insight",
+  "title": "Data vs Information vs Insight",
+  "section": "intro",
+  "difficulty": "beginner",
+  "color": "blue",
+  "tagline": "From raw facts to real understanding, and why most analysis stops way too early.",
+  "what_it_is": "Data is just raw facts. '145', '23', 'New York'. No meaning yet. Information is data with context: 'the average temperature in New York today is 23 degrees Celsius'. Insight is the deep stuff. It answers 'so what?' and 'what do we do now?' Like 'when it drops below 20 degrees, hot chocolate sales jump 40 percent, so stock more hot chocolate.' Data science is the climb from the bottom to the top.",
+  "key_points": [
+    "Data: 145, 23, 'New York', 145. Just numbers and words.",
+    "Information: 'The average temperature on this day in New York is 23 degrees.' Now it means something.",
+    "Insight: 'Below 20 degrees, hot chocolate sales increase 40 percent.' That suggests an action.",
+    "More data doesn't automatically mean more insight. You need analysis and context.",
+    "Dashboards usually give information. Good data science gives insight."
+  ],
+  "why_it_exists": "Companies collect tons of data but struggle to get value from it. They mistake fancy dashboards for actual insights. This distinction reminds you: the goal isn't just to report what happened. It's to explain why and what to do about it.",
+  "intuition": "Data is like having a pile of bricks. Information is stacking them into a wall, useful but still just a wall. Insight is realising the wall faces south, so it'll get afternoon sun, which means you should plant shade loving plants there. Same bricks, same wall, but now you understand something that changes your actions.",
+  "example": {
+    "text": "Ecommerce data: 10,000 purchases, average cart 45 dollars, 30 percent from mobile. Information: 'Mobile users have lower average cart value than desktop.' Insight: 'Mobile users abandon checkout mostly on the payment screen because the form isn't touch friendly. Redesigning it could increase mobile cart value by 15 percent.'",
+    "interpretation": "Information describes what is. Insight diagnoses why and points to a specific, testable fix."
+  },
+  "when_to_use": [
+    "Use this to check your own analysis: have you just described data, or found something actionable?",
+    "Ask 'so what?' after every finding. If the answer doesn't change a decision, it's still just information.",
+    "Use it to scope problems. Stakeholders often ask for 'more data' (bricks) when they really need insight (the garden plan)."
+  ],
+  "common_mistakes": [
+    "Calling a bar chart an 'insight'. A chart is still just information if it doesn't suggest an action.",
+    "Thinking insight requires complex models. Sometimes a simple comparison, like 'customers who see feature X buy 2 times more', is pure gold.",
+    "Presenting raw data or information and expecting your audience to find the insights themselves. That's your job."
+  ],
+  "notes": [
+    "Insights are often domain specific. The same pattern might be a huge insight in one business and trivial in another. Context is everything."
+  ],
+  "ds_usage": "The entire data science workflow is a machine for turning data into insight. EDA finds potential insights. Modelling quantifies them. Communication frames them so people act.",
+  "related_concepts": ["what-is-data-science", "ds-workflow", "what-is-eda"]
+}

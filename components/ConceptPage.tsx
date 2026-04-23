@@ -1,9 +1,12 @@
+// path: components/ConceptPage.tsx
+
 "use client"
 
 import { Concept } from '@/types/concept'
 import { colorMap, conceptPageBlocks } from '@/lib/colors'
 import DifficultyBadge from '@/components/ui/DifficultyBadge'
 import Formula from '@/components/ui/Formula'
+import InlineText from '@/components/InlineText'
 
 export default function ConceptPage({ concept }: { concept: Concept }) {
   // colorMap still used for related concept pills (matches the card color)
@@ -50,14 +53,14 @@ export default function ConceptPage({ concept }: { concept: Concept }) {
       {/* What it is — purple */}
       <Section bg={b.whatItIs.bg} border={b.whatItIs.border}>
         <SectionTitle color={b.whatItIs.text}>What it is</SectionTitle>
-        <p style={textStyle}>{concept.what_it_is}</p>
+        <InlineText text={concept.what_it_is} style={textStyle} />
       </Section>
 
       {/* Why it exists — yellow */}
       {concept.why_it_exists && (
         <Section bg={b.whyItExists.bg} border={b.whyItExists.border}>
           <SectionTitle color={b.whyItExists.text}>Why it exists</SectionTitle>
-          <p style={textStyle}>{concept.why_it_exists}</p>
+          <InlineText text={concept.why_it_exists} style={textStyle} />
         </Section>
       )}
 
@@ -65,7 +68,7 @@ export default function ConceptPage({ concept }: { concept: Concept }) {
       {concept.what_it_measures && (
         <Section bg={b.whatItMeasures.bg} border={b.whatItMeasures.border}>
           <SectionTitle color={b.whatItMeasures.text}>What it measures</SectionTitle>
-          <p style={textStyle}>{concept.what_it_measures}</p>
+          <InlineText text={concept.what_it_measures} style={textStyle} />
         </Section>
       )}
 
@@ -73,7 +76,7 @@ export default function ConceptPage({ concept }: { concept: Concept }) {
       {concept.intuition && (
         <Section bg={b.intuition.bg} border={b.intuition.border}>
           <SectionTitle color={b.intuition.text}>Intuition</SectionTitle>
-          <p style={textStyle}>{concept.intuition}</p>
+          <InlineText text={concept.intuition} style={textStyle} />
         </Section>
       )}
 
@@ -191,7 +194,7 @@ export default function ConceptPage({ concept }: { concept: Concept }) {
       {concept.ds_usage && (
         <Section bg={b.dsUsage.bg} border={b.dsUsage.border}>
           <SectionTitle color={b.dsUsage.text}>In practice</SectionTitle>
-          <p style={textStyle}>{concept.ds_usage}</p>
+          <InlineText text={concept.ds_usage} style={textStyle} />
         </Section>
       )}
 

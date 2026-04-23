@@ -1,0 +1,35 @@
+{
+  "data": [
+    {
+      "x": [22,25,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,45,48,50,55,60,65,70,75,80],
+      "type": "histogram",
+      "marker": {
+        "color": "#F5A673",
+        "line": { "color": "#ffffff", "width": 1 }
+      },
+      "opacity": 0.8,
+      "nbinsx": 10,
+      "name": "Age distribution"
+    }
+  ],
+  "layout": {
+    "title": "Age Distribution (EDA Histogram)",
+    "xaxis": { "title": "Age" },
+    "yaxis": { "title": "Count" },
+    "plot_bgcolor": "#fdf8f5",
+    "paper_bgcolor": "#fdf8f5",
+    "height": 400,
+    "annotations": [
+      {
+        "x": 42,
+        "y": 6,
+        "text": "Peak around 30-40",
+        "showarrow": true,
+        "arrowhead": 2,
+        "ax": 20,
+        "ay": -30,
+        "font": { "color": "#D4756B" }
+      }
+    ]
+  }
+}

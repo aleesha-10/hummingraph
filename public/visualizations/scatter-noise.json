@@ -1,0 +1,19 @@
+{
+  "data": [
+    {
+      "x": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],
+      "y": [5,7,4,6,8,3,7,5,9,4,6,8,5,7,6],
+      "mode": "markers",
+      "type": "scatter",
+      "marker": { "color": "#93C5FD", "size": 12 },
+      "name": "No pattern (noise)"
+    }
+  ],
+  "layout": {
+    "title": "No Pattern (Random Scatter)",
+    "xaxis": { "title": "X" },
+    "yaxis": { "title": "Y" },
+    "plot_bgcolor": "#fdf8f5",
+    "height": 350
+  }
+}

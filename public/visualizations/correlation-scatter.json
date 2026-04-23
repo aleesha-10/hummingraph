@@ -1,0 +1,37 @@
+{
+  "data": [
+    {
+      "x": [10,12,15,18,20,22,25,28,30,32,35,38,40],
+      "y": [2,3,5,7,8,9,11,13,14,15,17,18,20],
+      "mode": "markers",
+      "type": "scatter",
+      "marker": {
+        "size": 15,
+        "color": [60,65,70,75,80,82,85,88,90,92,95,98,100],
+        "colorscale": "Viridis",
+        "showscale": true,
+        "colorbar": { "title": "Temperature (F)" }
+      },
+      "name": "Data points"
+    }
+  ],
+  "layout": {
+    "title": "Ice Cream Sales vs Drownings (color = temperature)",
+    "xaxis": { "title": "Ice cream sales (thousands)" },
+    "yaxis": { "title": "Drowning incidents" },
+    "plot_bgcolor": "#fdf8f5",
+    "height": 450,
+    "annotations": [
+      {
+        "x": 25,
+        "y": 18,
+        "text": "Hot days → more ice cream AND more drownings",
+        "showarrow": true,
+        "arrowhead": 2,
+        "ax": -50,
+        "ay": -30,
+        "font": { "color": "#D4756B", "size": 12 }
+      }
+    ]
+  }
+}

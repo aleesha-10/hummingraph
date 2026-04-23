@@ -1,0 +1,33 @@
+{
+  "id": "3-data-distributions",
+  "title": "Data Distributions",
+  "section": "dav",
+  "difficulty": "beginner",
+  "color": "green",
+  "tagline": "The shape of your data – normal, skewed, uniform, bimodal – and why it matters.",
+  "what_it_is": "A distribution tells you how often each value appears. It's the shape you see when you draw a histogram. Normal looks like a bell. Skewed has a long tail on one side. Uniform is flat. Bimodal has two peaks. The shape decides which summary stats are safe and which models will work.",
+  "key_points": [
+    "Normal (bell) = symmetric, mean = median. Common in nature (heights, errors).",
+    "Right skewed = long tail on the right (income). Mean > median.",
+    "Left skewed = long tail on the left (test scores where most passed). Mean < median.",
+    "Uniform = all values roughly equally common (like dice rolls).",
+    "Bimodal = two peaks, often means two different groups mixed together.",
+    "Always plot before you assume normality."
+  ],
+  "why_it_exists": "Different distributions break different assumptions. Many statistical tests assume normality. If your data is skewed, using mean as a summary misleads. If it's bimodal, a single average is meaningless. Knowing the shape protects you from stupid mistakes.",
+  "intuition": "Imagine dropping a handful of marbles on the floor. Normal: most land near the center, few at edges – a mountain shape.\n\n{{viz:dist-normal}}\n\nRight skewed: most marbles clump on the left, a few roll far right.\n\n{{viz:dist-right-skewed}}\n\nLeft skewed: the mirror image, tail pointing left.\n\n{{viz:dist-left-skewed}}\n\nUniform: marbles spread evenly – like someone placed them in a grid.\n\n{{viz:dist-uniform}}\n\nBimodal: two separate piles – maybe marbles from two different tables.\n\n{{viz:dist-bimodal}}",
+  "visualizations": ["dist-normal", "dist-right-skewed", "dist-left-skewed", "dist-uniform", "dist-bimodal"],
+  "visual_alt": "Five histograms: normal bell curve (magenta), right skewed with long tail (gold), left skewed with tail to left (purple), uniform flat (green), and bimodal with two peaks (pink).",
+  "when_to_use": [
+    "Before reporting mean vs median – skewed data calls for median.",
+    "Before using t‑tests or linear regression (they assume normality).",
+    "When you see two peaks – consider splitting your data into two groups."
+  ],
+  "common_mistakes": [
+    "Assuming a dataset is normal without checking. Most real data is not.",
+    "Using mean on bimodal data – the average of two peaks is a valley nobody lives in.",
+    "Ignoring skewness when building linear models – they get pulled toward the tail."
+  ],
+  "ds_usage": "EDA starts with distribution plots. Many ML algorithms perform better with normally distributed features (so people log‑transform skewed data). Clustering algorithms can naturally find the two groups in a bimodal distribution.",
+  "related_concepts": ["summary-statistics", "box-plots-and-outliers", "scatter-plots-and-patterns"]
+}
