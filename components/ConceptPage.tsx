@@ -1,5 +1,6 @@
 "use client"
 
+import InlineText from '@/components/InlineText'
 import { Concept } from '@/types/concept'
 import { colorMap, conceptPageBlocks } from '@/lib/colors'
 import Link from 'next/link'
@@ -85,7 +86,8 @@ export default function ConceptPage({ concept }: { concept: Concept }) {
       {concept.intuition && (
         <Section bg={b.intuition.bg} border={b.intuition.border}>
           <SectionTitle color={b.intuition.text}>Intuition</SectionTitle>
-          <p style={textStyle}>{concept.intuition}</p>
+          <InlineText text={concept.intuition} style={textStyle} />
+
         </Section>
       )}
 

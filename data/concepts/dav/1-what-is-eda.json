@@ -14,7 +14,8 @@
     "The visualization pipeline: from raw data to visual form happens through mappings (marks + channels)."
   ],
   "why_it_exists": "Because raw data is chaos. You can't just run a model and hope. EDA reveals data quality issues, suggests transformations, and points you toward the right analysis.",
-  "intuition": "Imagine you're a jeweler who just got a box of rough stones... EDA is that inspection. You're looking for the gems and the duds before you waste time polishing.\n\n{{viz:eda-histogram}}\n\n{{viz:eda-missing-heatmap}}\n\n{{viz:eda-scatter-matrix}}",  "steps": [
+  "intuition": "Imagine you're a jeweler who just got a box of rough stones... EDA is that inspection. You're looking for the gems and the duds before you waste time polishing.\n\n{{viz:eda-histogram}}\n\n{{viz:eda-missing-heatmap}}\n\n{{viz:eda-scatter-matrix}}",
+  "steps": [
     { "step": 1, "title": "Load & peek", "description": "Look at first rows, column names, data types. Spot obvious errors like negative ages or 'NaN' placeholders." },
     { "step": 2, "title": "Univariate analysis", "description": "Plot each variable alone. Histograms for numbers, bar charts for categories. Check distribution shape, center, spread." },
     { "step": 3, "title": "Missing & dirty data", "description": "Count missing values per column. Look for duplicates, inconsistent formatting (e.g., 'NY' vs 'New York')." },

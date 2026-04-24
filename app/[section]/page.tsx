@@ -7,6 +7,14 @@
 
 // path : app/[section]/page.tsx
 
+// This file defines the page component for a specific section of concepts.
+// It uses Next.js's dynamic routing to generate pages for each section based on the section ID.
+// The page displays the section's title and description, as well as a grid of ConceptCard components for each concept in the section.
+// The concepts are retrieved using the getConceptsBySection function from the concepts library, which reads the concepts data from the filesystem.
+// The generateStaticParams function is used to generate the static paths for each section page at build time, ensuring that all section pages are pre-rendered and available for fast loading.
+
+// path : app/[section]/page.tsx
+
 import { getConceptsBySection, getAllSections } from '@/lib/concepts'
 import ConceptCard from '@/components/ConceptCard'
 
@@ -36,9 +44,22 @@ export default async function SectionPage({ params }: { params: Promise<{ sectio
         >
           {sectionData.title}
         </h1>
-        <p style={{ fontSize: '1rem', color: '#6B7280', maxWidth: '560px' }}>
+        <p style={{ fontSize: '1rem', color: '#6B7280', maxWidth: '560px', marginBottom: '16px' }}>
           {sectionData.description}
         </p>
+        {sectionData.summary && (
+          <p style={{
+            fontSize: '0.95rem',
+            color: '#9CA3AF',
+            maxWidth: '640px',
+            lineHeight: '1.7',
+            borderLeft: '3px solid #E5E7EB',
+            paddingLeft: '16px',
+            margin: 0,
+          }}>
+            {sectionData.summary}
+          </p>
+        )}
       </div>
 
       <div
