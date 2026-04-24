@@ -1,6 +1,7 @@
 // path: components/Navbar.tsx
 "use client"
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function Navbar() {
   return (
@@ -36,6 +37,14 @@ export default function Navbar() {
             }}>
               Hummingraph
             </span>
+          </Link>
+          <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }} className="nav-logo">
+            <Image 
+              src="/logo2.svg" 
+              alt="Hummingraph logo" 
+              width={32} 
+              height={32}
+            />
           </Link>
         </div>
       </nav>
