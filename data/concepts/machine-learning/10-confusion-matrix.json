@@ -1,0 +1,54 @@
+{
+  "id": "10-confusion-matrix",
+  "title": "Confusion Matrix",
+  "section": "machine-learning",
+  "difficulty": "beginner",
+  "color": "blue",
+  "tagline": "A simple 2x2 table that shows exactly where your classifier is getting confused.",
+  "what_it_is": "A confusion matrix is a table that compares your model's predictions to the actual true labels. For binary classification, it has four cells: True Positives (correctly predicted Yes), True Negatives (correctly predicted No), False Positives (predicted Yes but actually No – a 'false alarm'), and False Negatives (predicted No but actually Yes – a 'miss'). From these four numbers, you can calculate accuracy, precision, recall, and many other metrics. It tells you not just how many errors, but what kind of errors.",
+  "key_points": [
+    "True Positive (TP): model said yes, actual yes. Hit.",
+    "True Negative (TN): model said no, actual no. Correct rejection.",
+    "False Positive (FP): model said yes, actual no. Type I error. False alarm.",
+    "False Negative (FN): model said no, actual yes. Type II error. Miss.",
+    "The sum of all four = total number of predictions."
+  ],
+  "why_it_exists": "Accuracy alone hides critical information. A cancer test that always says 'no cancer' is 99% accurate if only 1% of people have cancer. But it misses every single cancer patient – a disaster. The confusion matrix exists because different errors have different costs. A false positive (telling a healthy person they have cancer) causes stress. A false negative (telling a sick person they are healthy) can kill. You need to see both separately. The confusion matrix gives you that view.",
+  "what_it_measures": "The confusion matrix measures not just overall performance but the tradeoffs. From it you calculate precision: of all the times you said yes, how many were actually yes? Recall: of all the actual yes cases, how many did you catch? Specificity: of all actual no cases, how many did you correctly reject? False positive rate: of actual no cases, how many did you falsely say yes? Each number tells a different story about your model's behavior.",
+  "intuition": "Imagine you are a security guard at an airport. Your job is to flag potential threats. Your model (the metal detector) can beep (predict threat) or not. Confusion matrix: True Positive: beep and actual weapon. True Negative: no beep and no weapon. False Positive: beep but no weapon (someone's belt buckle). False Negative: no beep but actual weapon (bad). The matrix lets you see: are you annoying innocent travelers (many false positives) or are you missing real threats (false negatives)? You cannot optimize both at the same time. The matrix makes this tradeoff explicit.",
+  "formulas": [
+    {
+      "label": "Confusion matrix layout",
+      "expression": "\\begin{bmatrix} TN & FP \\\\ FN & TP \\end{bmatrix}",
+      "breakdown": [
+        { "symbol": "Top left", "means": "True Negatives (predicted No, actual No)" },
+        { "symbol": "Top right", "means": "False Positives (predicted Yes, actual No)" },
+        { "symbol": "Bottom left", "means": "False Negatives (predicted No, actual Yes)" },
+        { "symbol": "Bottom right", "means": "True Positives (predicted Yes, actual Yes)" }
+      ]
+    }
+  ],
+  "when_to_use": [
+    "Always look at the confusion matrix for any classification problem. It is the first thing to check after training.",
+    "When you need to choose a threshold for your classifier. Vary the threshold and see how TP, FP, FN, TN change.",
+    "When costs of errors are different. For spam detection, a false positive (email marked spam that is important) is worse than a false negative (spam in inbox). You want low FP, even if FN increases.",
+    "When you want to explain model performance to non-technical people. The 2x2 grid is intuitive."
+  ],
+  "when_not_to_use": [
+    "Do not use the confusion matrix as your only evaluation if you have more than two classes. For multiclass, use a larger matrix (k x k) but it gets messy. Use per-class metrics instead.",
+    "Do not use raw counts if your dataset is imbalanced. A confusion matrix with 1000 TNs and 10 TPs looks impressive, but the TP count is very low. Look at normalized percentages.",
+    "Do not forget to label which class is positive. The matrix is not symmetric. Swapping positive/negative swaps the cells."
+  ],
+  "common_mistakes": [
+    "Confusing which cell is which. Remember: the row is actual, the column is predicted (or vice versa depending on library). In scikit-learn, rows = actual, columns = predicted. Always check the documentation.",
+    "Focusing only on total accuracy and ignoring the four cells. A 95% accurate model might have zero TP and still be 95% accurate if the class is rare.",
+    "Using the confusion matrix without normalizing. For imbalanced data, look at percentages per class (e.g., of all actual positives, what fraction were caught?).",
+    "Thinking a perfect confusion matrix means a perfect model. It might just mean your test set is too easy or your model memorized."
+  ],
+  "ds_usage": "In Python: `from sklearn.metrics import confusion_matrix`. Run `cm = confusion_matrix(y_true, y_pred)`. This returns a 2D array. Plot it with `seaborn.heatmap(cm, annot=True)`. For multiclass, same function works. Use `normalize='true'` to get recall per class, or `normalize='pred'` to get precision per class. Also `ConfusionMatrixDisplay.from_estimator()` is a quick plot. Always look at the matrix before calculating any single-number metric.",
+  "related_concepts": [
+    "precision-recall",
+    "roc-auc",
+    "classification-threshold"
+  ]
+}

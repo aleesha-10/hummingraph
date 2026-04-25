@@ -1,0 +1,62 @@
+{
+  "id": "8-regularization",
+  "title": "Regularization",
+  "section": "machine-learning",
+  "difficulty": "intermediate",
+  "color": "blue",
+  "tagline": "A trick to stop your model from overfitting by punishing it for being too complex.",
+  "what_it_is": "Regularization adds a penalty to the model's loss function for having large coefficients or too many features. This encourages the model to stay simpler. There are two main types: Ridge regression (L2 penalty) adds the sum of squared coefficients. That shrinks all coefficients but rarely to zero. Lasso regression (L1 penalty) adds the sum of absolute coefficients. That can push some coefficients exactly to zero, effectively removing features. Elastic Net combines both.",
+  "key_points": [
+    "Without regularization, linear regression can overfit, especially with many features.",
+    "Ridge (L2): penalty is sum of squared coefficients. Shrinks all coefficients but none become zero.",
+    "Lasso (L1): penalty is sum of absolute coefficients. Can shrink coefficients to zero – feature selection.",
+    "Elastic Net: combines L1 and L2 penalties. Best of both worlds.",
+    "The strength of regularization is controlled by a hyperparameter (alpha or lambda). Larger alpha means more regularization (simpler model)."
+  ],
+  "why_it_exists": "Regularization exists because ordinary linear regression can produce huge, unstable coefficients when features are correlated or when there are more features than samples. A model with giant coefficients is very sensitive to small changes in inputs – that is high variance. Regularization pulls those coefficients toward zero, reducing variance and preventing overfitting, at the cost of increasing bias slightly. It is a tool to manage the bias-variance tradeoff.",
+  "what_it_measures": "The amount of regularization changes the model's coefficients. A coefficient that shrinks to zero means that feature is not useful. The regularization path (how coefficients change as alpha increases) tells you which features are important. Cross-validation helps you pick the best alpha – the one that gives the lowest validation error.",
+  "intuition": "Imagine you are trying to predict a student's exam score based on 100 different study habits. Without regularization, your model might assign a huge weight to 'wearing a red shirt on Tuesday' just because it happened to correlate in your small training set. That is overfitting. Regularization says: every time you make a coefficient big, I will add a penalty. So the model only makes a coefficient big if it really helps prediction enough to overcome the penalty. Small, noisy relationships get zeroed out or shrunk.",
+  "formulas": [
+    {
+      "label": "Ridge regression loss (L2)",
+      "expression": "\\sum_{i=1}^{n}(y_i - \\hat{y}_i)^2 + \\alpha \\sum_{j=1}^{p} \\beta_j^2",
+      "breakdown": [
+        { "symbol": "first term", "means": "usual squared error" },
+        { "symbol": "α", "means": "regularization strength (higher = more penalty)" },
+        { "symbol": "∑βⱼ²", "means": "sum of squared coefficients – penalizes large coefficients" }
+      ]
+    },
+    {
+      "label": "Lasso regression loss (L1)",
+      "expression": "\\sum_{i=1}^{n}(y_i - \\hat{y}_i)^2 + \\alpha \\sum_{j=1}^{p} |\\beta_j|",
+      "breakdown": [
+        { "symbol": "∑|βⱼ|", "means": "sum of absolute coefficients – can drive some to zero" }
+      ]
+    }
+  ],
+  "when_to_use": [
+    "Always use regularization when you have many features (hundreds or thousands) relative to samples.",
+    "Use Lasso if you suspect many features are irrelevant. It does feature selection for you.",
+    "Use Ridge if you think all features have some predictive power but you want to shrink them.",
+    "Use Elastic Net when you have correlated features. Lasso will pick one arbitrarily; Elastic Net keeps groups.",
+    "Use cross-validation to choose the best alpha."
+  ],
+  "when_not_to_use": [
+    "Do not use regularization if your model is already underfitting (high bias). It will make bias worse.",
+    "Do not use Lasso if you have more features than samples and many are correlated. It can be unstable. Use Elastic Net.",
+    "Do not use regularization when interpretability is critical and you have few features. Ordinary linear regression coefficients are easier to explain.",
+    "Do not forget to scale your features before regularization. The penalty is on the coefficient magnitude, but if one feature is in dollars and another in years, their scales are arbitrary. Standardize first."
+  ],
+  "common_mistakes": [
+    "Not scaling features before applying regularization. This makes the penalty meaningless.",
+    "Using Lasso and expecting it to always select the 'correct' features. It works well but can be unstable with correlated features.",
+    "Setting alpha too high. Your model becomes too simple (underfit). Use cross-validation to find the sweet spot.",
+    "Thinking regularization only applies to linear regression. Almost all models (neural nets, trees with pruning) have some form of regularization."
+  ],
+  "ds_usage": "In scikit-learn: `from sklearn.linear_model import Ridge, Lasso, ElasticNet`. Use `Ridge(alpha=1.0)`, `Lasso(alpha=0.1)`, etc. Always scale your features with `StandardScaler` before training. Use `RidgeCV` or `LassoCV` to automatically choose alpha via cross-validation. Regularization is also used in logistic regression (`penalty='l1'` or `'l2'`), SVM, and neural networks (weight decay).",
+  "related_concepts": [
+    "linear-regression",
+    "overfitting-underfitting",
+    "feature-selection"
+  ]
+}

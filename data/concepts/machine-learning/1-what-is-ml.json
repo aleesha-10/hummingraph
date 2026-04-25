@@ -1,0 +1,44 @@
+{
+  "id": "1-what-is-ml",
+  "title": "What is Machine Learning?",
+  "section": "machine-learning",
+  "difficulty": "beginner",
+  "color": "blue",
+  "tagline": "Teaching computers to learn from examples instead of following a fixed set ofrules.",
+  "what_it_is": "Machine learning is a way of programming computers where you don't write step-by-step instructions. Instead, you show the computer lots of examples and let it figure out the pattern on its own. For example, instead of writing rules to detect spam ('if email contains 'lottery' then spam'), you show the computer thousands of spam and non-spam emails. It learns the patterns by itself. There are three main types: supervised learning (learning with answers given), unsupervised learning (finding hidden patterns without answers), and reinforcement learning (learning by trial and error).",
+  "key_points": [
+    "Traditional programming: you give rules + data → computer gives answers.",
+    "Machine learning: you give answers + data → computer learns the rules.",
+    "Supervised learning: training data has labels (e.g., emails marked spam or not). Used for prediction.",
+    "Unsupervised learning: no labels. Computer finds natural groups or patterns on its own. Used for exploration.",
+    "Reinforcement learning: computer learns by taking actions and getting rewards or penalties. Used for games and robots."
+  ],
+  "why_it_exists": "Life is too messy for hand-written rules. Imagine trying to write rules to recognize a cat in a photo. Is it the pointy ears? But some cats have floppy ears. The fur color? Changes with lighting. There are just too many exceptions. Machine learning exists because humans are bad at writing explicit rules for complex things like images, speech, or human behavior. But we are great at giving examples. So we flip the problem: let the computer learn the rules from the examples.",
+  "what_it_measures": "Machine learning isnt one single measure. Its a whole approach. But in general, we measure how well the computer learned by testing it on new examples it hasnt seen before. If it makes correct predictions on new data, it learned well. If it only memorized the training examples and fails on new ones, that is called overfitting. The goal is to find patterns that generalize.",
+  "intuition": "Think of teaching a kid what a dog is. You dont hand them a dictionary definition with 50 rules. You just point at dogs and say 'dog'. And point at cats and say 'not a dog'. After enough examples, the kid figures it out. Thats machine learning. The kid's brain automatically finds the pattern. A computer does the same but with math instead of neurons.",
+  "formulas": [],
+  "when_to_use": [
+    "When the problem is too complex to write explicit rules – image recognition, speech, language translation.",
+    "When the rules change over time – fraud detection (fraudsters adapt), recommendation systems (tastes change).",
+    "When you need personalization – Netflix recommendations are different for each user.",
+    "When you have lots of data and a clear pattern to discover."
+  ],
+  "when_not_to_use": [
+    "When you have very little data – machine learning needs examples to learn from. With 10 rows of data, just use simple statistics or rules.",
+    "When you need perfect interpretability – a decision tree might be fine, but a deep neural network is a black box. If you need to explain exactly why a decision was made (like loan denial), simple rules are better.",
+    "When a simple rule already works perfectly – dont use a cannon to kill a mosquito.",
+    "When the cost of a mistake is extremely high and unpredictable – some safety critical systems still use traditional control theory."
+  ],
+  "common_mistakes": [
+    "Thinking machine learning is magic. It is not. It finds patterns in the data you give it. Garbage in, garbage out.",
+    "Using ML for everything. Sometimes a simple average or a lookup table is better, faster, and easier to explain.",
+    "Forgetting that ML models are only as good as the data they are trained on. If your training data is biased, your model will be biased.",
+    "Assuming a model that worked last year will still work this year. Data distributions drift over time."
+  ],
+  "ds_usage": "In data science, machine learning is the main tool for prediction. You use it to forecast sales, classify customer churn, recommend products, detect fraud, and much more. The workflow: collect data, clean it, split into training and test sets, pick a model, train it, evaluate it, and then deploy. Most of your time is spent on data preparation, not on fancy algorithms.",
+  "related_concepts": [
+    "training-vs-inference",
+    "supervised-vs-unsupervised",
+    "overfitting-underfitting"
+  ]
+}

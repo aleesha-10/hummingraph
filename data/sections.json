@@ -51,7 +51,7 @@
       "description": "Where Data Starts Learning",
       "summary": "Machine learning is what happens when you let data find the patterns instead of programming them by hand. This section covers how models learn, the core algorithms, how to evaluate whether a model is actually good, and the fundamental tradeoffs every ML practitioner deals with. It's the heart of modern data science, and understanding it is key to using it effectively.",
       "color": "purple",
-      "conceptCount": 1,
+      "conceptCount": 17,
       "order": 4
     },
     {

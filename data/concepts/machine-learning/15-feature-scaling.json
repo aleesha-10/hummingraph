@@ -1,0 +1,71 @@
+{
+  "id": "15-feature-scaling",
+  "title": "Feature Scaling",
+  "section": "machine-learning",
+  "difficulty": "beginner",
+  "color": "blue",
+  "tagline": "Putting all your features on the same ruler so no single one dominates just because it has bigger numbers.",
+  "what_it_is": "Feature scaling is the process of transforming your input features so they have similar ranges. Common methods: Standardization (z-score) subtracts the mean and divides by the standard deviation, giving features with mean 0 and variance 1. Min-max scaling subtracts the minimum and divides by the range, squeezing values between 0 and 1. Scaling is necessary for distance-based algorithms (KNN, SVM, K-means) and for regularized models (ridge, lasso). Tree-based models do not need scaling.",
+  "key_points": [
+    "Standardization: (x - mean) / std. Result: mean=0, variance=1. No fixed bounds.",
+    "Min-max scaling: (x - min) / (max - min). Result: values between 0 and 1. Sensitive to outliers.",
+    "Robust scaling: uses median and IQR instead. Handles outliers better.",
+    "Needed for: KNN, linear regression with regularization, PCA, SVM, neural networks.",
+    "Not needed for: decision trees, random forests, gradient boosting."
+  ],
+  "why_it_exists": "Imagine you have two features: age (0-100) and income ($0-$200,000). If you use KNN without scaling, income will dominate the distance calculation because its numbers are 2000 times larger than age. The algorithm will essentially ignore age. That is ridiculous – age might be just as important. Scaling exists to give every feature a fair chance. It also helps gradient descent converge faster because the loss landscape becomes more spherical instead of elongated.",
+  "what_it_measures": "Scaling measures the location and spread of each feature. Standardization measures how many standard deviations a value is from the mean. Min-max measures the position between the minimum and maximum. After scaling, you can compare coefficients (in linear regression) to see relative importance, provided the features were scaled before training.",
+  "intuition": "Think of a map with two coordinates: latitude and longitude. They are both in degrees, so they are naturally on the same scale. But if one coordinate was in meters and the other in kilometers, a distance of '1000 meters east, 1 kilometer north' would be inconsistent. Scaling is like converting everything to the same unit (meters or kilometers). In machine learning, every feature is in its own unit (years, dollars, count of clicks). Scaling converts each to a common 'standardized' unit so they can be compared fairly.",
+  "formulas": [
+    {
+      "label": "Standardization (Z-score)",
+      "expression": "z = \\frac{x - \\mu}{\\sigma}",
+      "breakdown": [
+        { "symbol": "x", "means": "original value" },
+        { "symbol": "μ", "means": "mean of the feature in the training set" },
+        { "symbol": "σ", "means": "standard deviation of the feature" },
+        { "symbol": "z", "means": "scaled value – how many standard deviations away from mean" }
+      ]
+    },
+    {
+      "label": "Min-max scaling",
+      "expression": "x' = \\frac{x - min}{max - min}",
+      "breakdown": [
+        { "symbol": "min, max", "means": "minimum and maximum of the feature in training set" },
+        { "symbol": "x'", "means": "scaled value between 0 and 1" }
+      ]
+    },
+    {
+      "label": "Robust scaling (using median and IQR)",
+      "expression": "x' = \\frac{x - median}{IQR}",
+      "breakdown": [
+        { "symbol": "IQR", "means": "interquartile range (75th percentile – 25th percentile)" }
+      ]
+    }
+  ],
+  "when_to_use": [
+    "Always scale features before using KNN, K-means, SVM, or any distance-based algorithm.",
+    "Always scale features before using linear or logistic regression with regularization (ridge, lasso, elastic net).",
+    "Scale features before PCA or any dimensionality reduction that uses variance (PCA is sensitive to scale).",
+    "Scale features for neural networks – helps gradient descent converge faster.",
+    "Scale features if you are using gradient descent for any model (including linear regression without regularization)."
+  ],
+  "when_not_to_use": [
+    "Do not scale if using decision trees, random forests, or gradient boosting. They are invariant to monotonic transformations and scaling does nothing.",
+    "Do not use min-max scaling if you have extreme outliers – they will compress the rest of the data into a tiny range. Use robust scaling instead.",
+    "Do not scale after splitting data. Compute scaling parameters (mean, std, min, max) from the training set only, then apply to test set. Otherwise you leak information.",
+    "Do not assume scaling is always harmless for interpretation. After scaling, coefficients in linear regression are on the scale of 'per standard deviation', which is fine but different from original units."
+  ],
+  "common_mistakes": [
+    "Scaling the entire dataset before splitting into train and test. This leaks test information – the test mean and std are used in scaling. Always fit scaler on train, transform both.",
+    "Scaling categorical features (one-hot encoded columns). You generally do not scale binary 0/1 features – they are already on the same scale.",
+    "Forgetting to scale before PCA. PCA will be dominated by the feature with the largest variance if you don't scale.",
+    "Using min-max scaling with non-stationary data (e.g., stock prices over time where min/max keep changing). Use standardization instead."
+  ],
+  "ds_usage": "In scikit-learn: `from sklearn.preprocessing import StandardScaler, MinMaxScaler, RobustScaler`. Create scaler: `scaler = StandardScaler()`. Fit on training data: `scaler.fit(X_train)`. Transform: `X_train_scaled = scaler.transform(X_train)`, `X_test_scaled = scaler.transform(X_test)`. For pipelines: use `make_pipeline(StandardScaler(), LogisticRegression())`. Always save the scaler if you save the model for production, because new data needs the same transformation.",
+  "related_concepts": [
+    "k-nearest-neighbors",
+    "regularization",
+    "pca"
+  ]
+}

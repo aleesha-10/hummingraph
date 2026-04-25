@@ -1,0 +1,71 @@
+{
+  "id": "13-decision-trees",
+  "title": "Decision Trees",
+  "section": "machine-learning",
+  "difficulty": "intermediate",
+  "color": "blue",
+  "tagline": "Flowchart-style questions that split your data into smaller groups until you can make a prediction.",
+  "what_it_is": "A decision tree is a model that looks like a flow chart. You start at the top (root) and ask a question about one feature, like 'is age < 30?'. Depending on the answer, you go down one branch. At the next node, you ask another question. You keep going until you reach a leaf node that gives you a prediction. For regression, the leaf gives a number (average of training values in that leaf). For classification, it gives a class (majority vote). Trees are easy to draw and explain, even to non-experts.",
+  "key_points": [
+    "Split the data based on feature values to make the groups as pure as possible (all same class for classification, low variance for regression).",
+    "Splitting criteria: Gini impurity or entropy for classification, variance reduction for regression.",
+    "Depth of tree controls complexity: shallow trees underfit, deep trees overfit.",
+    "Can handle both numerical and categorical features without scaling.",
+    "Feature importance can be extracted from how much each feature reduces impurity."
+  ],
+  "why_it_exists": "Linear models assume a straight line relationship. But many real problems have interactions and non-linearities that a straight line cannot capture. A decision tree can model complex decision boundaries like 'if young and male and lives in city, then buy product; else not'. Trees exist because they are intuitive – humans naturally think in if-then-else rules. They are also non-parametric, meaning they can fit any shape if you let them grow deep enough.",
+  "what_it_measures": "A decision tree measures impurity (how mixed the classes are) at each node. The goal is to choose splits that decrease impurity the most. For classification, common measures are Gini impurity: probability of misclassifying a random element if you guessed according to the class distribution. And entropy: the amount of disorder. For regression, the measure is variance. The tree also measures feature importance: total reduction in impurity from splits on that feature, averaged across all nodes.",
+  "intuition": "Imagine you are trying to guess if someone will like a movie. You ask questions one by one. 'Do they like action movies?' If yes, go to the next question: 'Are they under 30?' If yes, guess 'Yes, they will like it'. If no to action, ask 'Do they like romance?' If yes, guess 'Maybe'. That is a decision tree. Each question splits the group into subgroups that are more similar to each other. The tree is built automatically by a computer that tries all possible questions and picks the one that makes the subgroups most pure.",
+  "formulas": [
+    {
+      "label": "Gini impurity for a node",
+      "expression": "\\text{Gini} = 1 - \\sum_{k=1}^{K} p_k^2",
+      "breakdown": [
+        { "symbol": "K", "means": "number of classes" },
+        { "symbol": "pₖ", "means": "proportion of class k in the node" },
+        { "symbol": "Gini=0", "means": "node is pure (all one class)" },
+        { "symbol": "Gini near 1", "means": "mixed classes" }
+      ]
+    },
+    {
+      "label": "Entropy (information gain)",
+      "expression": "\\text{Entropy} = -\\sum_{k=1}^{K} p_k \\log_2(p_k)",
+      "breakdown": [
+        { "symbol": "log₂", "means": "log base 2 – gives bits of information" }
+      ]
+    },
+    {
+      "label": "Information gain from a split",
+      "expression": "\\text{IG} = \\text{Impurity(parent)} - \\sum_{j} \\frac{n_j}{n} \\text{Impurity(child}_j)",
+      "breakdown": [
+        { "symbol": "nⱼ", "means": "number of samples in child j" },
+        { "symbol": "n", "means": "samples in parent" }
+      ]
+    }
+  ],
+  "when_to_use": [
+    "When you need an interpretable model. A small tree (depth 3-5) can be explained to anyone.",
+    "When relationships are non-linear and have interactions. Trees handle those naturally.",
+    "When you have mixed data types (numbers and categories) and don't want to scale features.",
+    "As a building block for random forests and gradient boosting (much more powerful).",
+    "When you want feature importance scores to understand which inputs matter."
+  ],
+  "when_not_to_use": [
+    "Do not use a single deep decision tree – it will overfit badly. Use a random forest or limit depth with pruning.",
+    "Do not use decision trees if you need smooth predictions. Trees give step functions, not smooth curves.",
+    "Do not use trees with very small datasets. The tree might be unstable (small changes in data change the tree a lot).",
+    "Do not use trees if your features have many categories (e.g., zip codes with 1000 levels). The tree will be biased toward high-cardinality features."
+  ],
+  "common_mistakes": [
+    "Growing a tree to full depth and then being surprised by overfitting. Always prune or set max_depth.",
+    "Using feature importance from a single tree as a reliable ranking. It can be unstable. Use random forest for stable importance.",
+    "Forgetting that decision trees are greedy – they pick the best split at each node without looking ahead. A different sequence of splits might be better globally, but greedy is fast and works well enough.",
+    "Assuming the tree is 'correct' if it perfectly fits training data. That is overfitting, not correctness."
+  ],
+  "ds_usage": "In scikit-learn: `from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor`. Use `model = DecisionTreeClassifier(max_depth=5, min_samples_leaf=10)` to prevent overfitting. Fit, then predict. Visualize tree with `export_graphviz` or `plot_tree`. Feature importances: `model.feature_importances_`. Tune hyperparameters like `max_depth`, `min_samples_split`, `min_samples_leaf` via cross-validation. For real work, use random forest or gradient boosting instead of a single tree.",
+  "related_concepts": [
+    "random-forest",
+    "gradient-boosting",
+    "bagging"
+  ]
+}

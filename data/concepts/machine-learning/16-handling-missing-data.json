@@ -1,0 +1,45 @@
+{
+  "id": "16-handling-missing-data",
+  "title": "Handling Missing Data",
+  "section": "machine-learning",
+  "difficulty": "beginner",
+  "color": "blue",
+  "tagline": "Real data has holes. You have to decide what to fill them with – or whether to leave them be.",
+  "what_it_is": "Missing data is when some values in your dataset are not recorded. Instead of a number, you have NaN (Not a Number) or NULL. Most machine learning algorithms cannot handle missing values directly – they expect a number for every cell. So you need to handle them. Options: delete rows with missing values (if few), delete columns (if too many missing), fill (impute) with a statistic like mean or median, or use a model to predict the missing values. The best method depends on why data is missing and how much.",
+  "key_points": [
+    "Drop rows: simple but loses data. Only do if missing percentage is very low (<5%).",
+    "Drop columns: if a feature has >70% missing, it's usually not worth keeping.",
+    "Mean/median imputation: fill with average. Simple, but reduces variance and distorts relationships.",
+    "Model-based imputation: use KNN or regression to predict missing values. More accurate but complex.",
+    "Indicator variable: add a binary column that flags whether a value was missing. Useful if missingness itself is informative."
+  ],
+  "why_it_exists": "Missing data exists because the real world is messy. A sensor fails. A survey respondent skips a question. A patient doesn't show up for a test. You cannot just pretend the data is complete. If you drop all rows with any missing value, you might lose most of your data. If you fill blindly with the mean, you introduce bias. Different missingness mechanisms (missing completely at random, missing at random, missing not at random) require different treatments. The field exists to minimize the damage from missing values.",
+  "what_it_measures": "Missing data measures how complete your dataset is. You should measure the percentage of missing values per column and per row. The pattern of missingness matters: are there columns that tend to be missing together? You can also measure the effect of imputation by comparing distributions before and after. The goal is to preserve as much of the true relationship as possible while making the data usable.",
+  "intuition": "Imagine you are analyzing a survey of 1000 people. 50 people skipped the income question. If you just delete those 50 rows, you lose 5% of your data – maybe okay. But if you delete all rows where any question is missing, you might lose 200 rows. That hurts. Instead, you might fill missing incomes with the average income of the whole group. But then you make those 50 people look 'average' when they might be very rich or very poor. A better way: predict their income from other questions they did answer (education, job title). That is model-based imputation. The method you choose changes your results, so you must think about it.",
+  "formulas": [],
+  "when_to_use": [
+    "Use deletion (drop rows) when missing data is very rare (<5%) and missing completely at random.",
+    "Use mean/median imputation for numeric features when missing is not too high (5-20%) and you want a simple fast method.",
+    "Use mode imputation (most frequent value) for categorical features.",
+    "Use KNN imputation when data has moderate missingness and you have the computational resources. It often works well.",
+    "Use an indicator variable if missingness itself is predictive (e.g., patients who skip the question might be hiding something)."
+  ],
+  "when_not_to_use": [
+    "Do not use mean imputation if missing data is missing not at random (e.g., very rich people skip income question). Your imputed values will be biased low.",
+    "Do not drop rows if missing is high (>20% per row). You lose too much data. Impute instead.",
+    "Do not drop columns if the feature is important, even if it has high missingness. Try to impute or use a model that handles missing values (like XGBoost can handle missing internally).",
+    "Do not use KNN imputation on high-dimensional data (many features). Distances become meaningless."
+  ],
+  "common_mistakes": [
+    "Imputing missing values before splitting into train and test. You must fit imputation parameters (e.g., mean) on training data only, then apply to test. Otherwise you leak information.",
+    "Using mean imputation for skewed features (like income). The mean is pulled by outliers. Use median instead.",
+    "Deleting rows with missing values and forgetting to check if the remaining data is still representative of the original distribution.",
+    "Treating '0' and 'missing' as the same. In many datasets, 0 is a valid value (e.g., zero sales). Do not fill missing with 0 unless you are sure."
+  ],
+  "ds_usage": "In pandas: check missing with `df.isnull().sum()`. Drop rows: `df.dropna()`. Fill with mean: `df.fillna(df.mean())`. For better imputation, scikit-learn has `SimpleImputer`: `from sklearn.impute import SimpleImputer`; `imputer = SimpleImputer(strategy='median')`. For KNN imputation: `KNNImputer`. Use `IterativeImputer` (MICE) for model-based imputation. For tree-based models that handle missing natively (like XGBoost, LightGBM), you can leave missing as NaN and the algorithm will learn the best direction to send missing values. Always document your imputation method.",
+  "related_concepts": [
+    "feature-engineering",
+    "data-cleaning",
+    "eda"
+  ]
+}

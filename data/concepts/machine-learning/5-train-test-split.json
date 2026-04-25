@@ -1,0 +1,44 @@
+{
+  "id": "5-train-test-split",
+  "title": "Train-Test Split",
+  "section": "machine-learning",
+  "difficulty": "beginner",
+  "color": "blue",
+  "tagline": "Never test your model on the data it trained on. That is like giving students the exam questions during lectures.",
+  "what_it_is": "Train-test split is the simple but essential technique of dividing your dataset into two parts. The training set (usually 70-80% of the data) is used to teach the model. The test set (the remaining 20-30%) is kept completely hidden during training. After the model is trained, you evaluate it on the test set to see how well it performs on new, unseen data. This tells you if your model actually generalizes or just memorized the training data.",
+  "key_points": [
+    "Training set: used to fit the model. The model sees these examples and their answers.",
+    "Test set: used only once at the end to evaluate final performance. The model never sees it during training.",
+    "Typical split: 80% train, 20% test. For small datasets you might do 70/30 or even 90/10.",
+    "Always shuffle the data before splitting to avoid ordering bias (e.g., all examples from January in training, February in test).",
+    "If you use the test set to make decisions (like tuning hyperparameters), it stops being a true test set. Use a validation set for that."
+  ],
+  "why_it_exists": "If you evaluate a model on the same data it learned from, you have no idea if it actually learned the general pattern or just memorized the answers. A decision tree could grow a leaf for every single training example and get 100% accuracy on training, but be useless on new data. The test set simulates the real world where you ask the model to predict something it has never seen. Without a test set, you are fooling yourself.",
+  "what_it_measures": "The train-test split measures generalization error. The difference between training accuracy and test accuracy tells you how much overfitting is happening. A small gap (e.g., 95% train, 93% test) means good generalization. A large gap (99% train, 70% test) means severe overfitting. If both are low (60% train, 58% test), the model is underfitting.",
+  "intuition": "Think of studying for a math test. Your teacher gives you a practice problem set (training data). You learn from those problems. The real test (test data) has new problems you have never seen. If you just memorized the practice problems but dont understand the concepts, you will fail the real test. The train-test split is like your teacher making sure the test is different from the practice set. That way they know if you actually learned math or just memorized answers.",
+  "formulas": [],
+  "when_to_use": [
+    "Always, always, always split your data before doing any modeling. Even for exploratory analysis, keep a test set aside untouched.",
+    "Use stratification when your classes are imbalanced. For example, if only 5% of your data is 'fraud', a random split might put all fraud cases in training and none in test. Stratified split keeps the same percentage in both sets.",
+    "For time series data, do not shuffle randomly. Use a chronological split: train on past, test on future.",
+    "If your dataset is tiny (less than 100 rows), consider cross-validation instead of a single test split because a single split might be unstable."
+  ],
+  "when_not_to_use": [
+    "Do not use a simple train-test split when you need to tune hyperparameters. You need a validation set or cross-validation.",
+    "Do not split before exploring the data. If you look at the test set, you might unconsciously bias your decisions. Lock it away until the end.",
+    "Do not use a 50/50 split. You need enough training data to learn properly. 70/30 is usually the smallest training proportion.",
+    "Do not forget to shuffle if your data is ordered. Otherwise your test set might be systematically different (e.g., all later time points)."
+  ],
+  "common_mistakes": [
+    "Using the test set multiple times to improve the model. That leaks information and your final test score is optimistic.",
+    "Forgetting to split before doing feature engineering. If you compute the mean of a feature using the whole dataset, you have leaked test information into training.",
+    "Splitting randomly on time series data. That puts future data in training and past in test, which is unrealistic.",
+    "Not setting a random seed. Every time you rerun your code, you get a different split and different results, making reproduction impossible."
+  ],
+  "ds_usage": "Train-test split is the first step in any supervised learning pipeline. In Python with scikit-learn: `from sklearn.model_selection import train_test_split`. You call `X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)`. Then you train on `X_train, y_train`, and evaluate on `X_test, y_test`. Never touch the test set until the very end when you compute final metrics.",
+  "related_concepts": [
+    "cross-validation",
+    "overfitting-underfitting",
+    "validation-set"
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "id": "3-underfitting-overfitting",
+  "title": "Underfitting vs Overfitting",
+  "section": "machine-learning",
+  "difficulty": "beginner",
+  "color": "blue",
+  "tagline": "Too simple and you miss the pattern. Too complex and you memorize the noise. Goldilocks is in the middle.",
+  "what_it_is": "Underfitting happens when your model is too simple to capture the real pattern in the data. It makes large errors on both training data and new data. Overfitting happens when your model is too complex and learns not just the pattern but also the random noise in the training data. It performs great on training data but fails on new data. The sweet spot is a model that is just complex enough to capture the real pattern but not so complex that it memorizes random quirks.",
+  "key_points": [
+    "Underfitting: high error on training data. Also high error on test data. Model is too weak.",
+    "Overfitting: low error on training data. High error on test data. Model memorized the training set.",
+    "Good fit: reasonably low error on both training and test. Generalizes well.",
+    "Underfitting is often caused by a model that is too simple (linear model for a non-linear problem) or too few training examples.",
+    "Overfitting is caused by a model that is too complex (deep tree, many features) or too few training examples relative to model complexity."
+  ],
+  "why_it_exists": "Every dataset has a real signal (the true relationship) and random noise (measurement errors, one-off flukes). A good model learns the signal and ignores the noise. An underfit model does not even learn the signal. An overfit model learns the signal plus the noise, so it fails when the noise changes. This tradeoff exists because we never have perfect data. We have to decide how much complexity is appropriate.",
+  "what_it_measures": "We measure underfitting by looking at training error – if it is high, the model is too simple. We measure overfitting by looking at the gap between training error and test error. If the test error is much higher than training error, the model is overfitting. The ideal is training error low enough and test error close to training error.",
+  "intuition": "Imagine you are learning to predict a friend's mood. You have 5 days of data. Underfitting: you always predict 'neutral'. You ignore all the details. You are wrong a lot. Overfitting: you notice that on Tuesday when they wore a red shirt and it was raining, they were grumpy. But that happened only once by chance. Next Tuesday, you predict grumpy but they are happy. You memorized a coincidence. Good fit: you notice they are grumpy when tired, happy when well-rested. That pattern holds on new days.",
+  "formulas": [],
+  "when_to_use": [
+    "Diagnose underfitting if training accuracy is low. Solution: increase model complexity (add features, switch to a more powerful model).",
+    "Diagnose overfitting if training accuracy is high but validation accuracy is low. Solution: simplify model, add regularization, or get more data.",
+    "Use learning curves (plot training and validation error vs training set size) to see if more data would help overfitting.",
+    "Use cross-validation to estimate the generalization error without overfitting to a single test set."
+  ],
+  "when_not_to_use": [
+    "Do not assume that a low training error means your model is good. It might be overfitting.",
+    "Do not try to fix underfitting by adding more data. Underfitting means the model is too simple. More data wont help a linear model fit a curve.",
+    "Do not try to fix overfitting by making the model even more complex – that makes it worse."
+  ],
+  "common_mistakes": [
+    "Looking only at training accuracy and declaring victory. Always check test or validation accuracy.",
+    "Thinking that overfitting is always bad. For some applications (like memorizing a lookup table), overfitting is fine. But for prediction, it is bad.",
+    "Adding too many features without regularization – a sure path to overfitting.",
+    "Using a test set many times to tune hyperparameters. Eventually you overfit to the test set. Use a validation set."
+  ],
+  "ds_usage": "Every time you train a model, you check for overfitting. It is the most common problem in machine learning. Standard workflow: split data into train, validation, test. Train on train, evaluate on validation to tune hyperparameters. Finally evaluate once on test. If train accuracy is 99% and validation is 70%, you are overfitting. Add regularization or reduce model complexity. If train accuracy is 60% and validation is 58%, you are underfitting. Use a more complex model.",
+  "related_concepts": [
+    "bias-variance-tradeoff",
+    "cross-validation",
+    "regularization"
+  ]
+}
