@@ -42,7 +42,7 @@
       "description": "Digging Deeper into Uncertainty",
       "summary": "This section goes beyond the basics into the deeper reasoning behind statistical inference. Topics include Bayesian thinking, experimental design, statistical power, and the assumptions underlying the tests most people use without questioning. For when you need to not just use statistics, but understand what they're actually saying.",
       "color": "green",
-      "conceptCount": 0,
+      "conceptCount": 8,
       "order": 3
     },
     {
@@ -51,7 +51,7 @@
       "description": "Where Data Starts Learning",
       "summary": "Machine learning is what happens when you let data find the patterns instead of programming them by hand. This section covers how models learn, the core algorithms, how to evaluate whether a model is actually good, and the fundamental tradeoffs every ML practitioner deals with. It's the heart of modern data science, and understanding it is key to using it effectively.",
       "color": "purple",
-      "conceptCount": 1,
+      "conceptCount": 16,
       "order": 4
     },
     {

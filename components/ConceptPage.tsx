@@ -5,6 +5,7 @@ import { colorMap, conceptPageBlocks } from '@/lib/colors'
 import Link from 'next/link'
 import DifficultyBadge from '@/components/ui/DifficultyBadge'
 import Formula from '@/components/ui/Formula'
+import InlineText from './InlineText'
 
 export default function ConceptPage({ concept }: { concept: Concept }) {
   // colorMap still used for related concept pills (matches the card color)
@@ -85,7 +86,8 @@ export default function ConceptPage({ concept }: { concept: Concept }) {
       {concept.intuition && (
         <Section bg={b.intuition.bg} border={b.intuition.border}>
           <SectionTitle color={b.intuition.text}>Intuition</SectionTitle>
-          <p style={textStyle}>{concept.intuition}</p>
+          <InlineText text={concept.intuition} style={textStyle} />
+
         </Section>
       )}
 
