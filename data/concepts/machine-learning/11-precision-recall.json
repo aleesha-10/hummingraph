@@ -1,0 +1,68 @@
+{
+  "id": "11-precision-recall",
+  "title": "Precision and Recall",
+  "section": "machine-learning",
+  "difficulty": "beginner",
+  "color": "blue",
+  "tagline": "Precision: of the ones you said yes to, how many were right? Recall: of the actual yeses, how many did you catch?",
+  "what_it_is": "Precision and recall are two metrics that give you a more nuanced view of classification performance than accuracy. Precision answers: when your model predicts the positive class (say 'spam'), how often is it correct? Recall answers: out of all the actual positive cases, how many did your model catch? There is usually a tradeoff – increasing recall often lowers precision, and vice versa. The F1 score is the harmonic mean of the two, giving you a single number that balances both.",
+  "key_points": [
+    "Precision = TP / (TP + FP). Among all positive predictions, fraction that are correct.",
+    "Recall = TP / (TP + FN). Among all actual positives, fraction that were caught.",
+    "High precision means few false alarms. High recall means few misses.",
+    "F1 score = 2 * (precision * recall) / (precision + recall). Balances both.",
+    "For imbalanced classes, precision and recall are much more informative than accuracy."
+  ],
+  "why_it_exists": "Accuracy breaks when classes are imbalanced. If only 1% of emails are spam, a model that never predicts spam is 99% accurate but useless. Precision and recall exist because you care about performance on the rare class. Do you want to catch most spam (high recall) even if some good emails get flagged? Or do you want to be very sure before flagging spam (high precision) even if you miss some? Different problems need different answers. Precision and recall let you make that choice.",
+  "what_it_measures": "Precision measures the model's exactness. When it claims something is positive, you can trust it. Recall measures completeness. It tells you how many positives you are missing. The F1 score measures the harmonic mean – you only get a high F1 if both precision and recall are high. The precision-recall curve plots precision against recall at different thresholds, showing the tradeoff. The area under the PR curve (AUPRC) is a good single-number metric for imbalanced problems.",
+  "intuition": "Imagine you are a fish spotter in a lake, trying to catch invasive carp. Precision: of all the fish you pull out, how many are actually carp (not a native fish)? If you pull out 10 fish and 8 are carp, precision is 80%. Recall: of all the carp in the lake, how many did you catch? If there are 100 carp and you catch 30, recall is 30%. You can increase recall by catching more fish, but you might also catch more native fish (lowering precision). Or you can increase precision by being very selective, but you will miss many carp (low recall). You have to choose based on what matters more.",
+  "formulas": [
+    {
+      "label": "Precision",
+      "expression": "\\text{Precision} = \\frac{TP}{TP + FP}",
+      "breakdown": [
+        { "symbol": "TP", "means": "True Positives – correctly caught" },
+        { "symbol": "FP", "means": "False Positives – false alarms" }
+      ]
+    },
+    {
+      "label": "Recall (also called Sensitivity, True Positive Rate)",
+      "expression": "\\text{Recall} = \\frac{TP}{TP + FN}",
+      "breakdown": [
+        { "symbol": "FN", "means": "False Negatives – missed positives" }
+      ]
+    },
+    {
+      "label": "F1 Score",
+      "expression": "F_1 = 2 \\cdot \\frac{\\text{Precision} \\cdot \\text{Recall}}{\\text{Precision} + \\text{Recall}}",
+      "breakdown": [
+        { "symbol": "harmonic mean", "means": "punishes extreme values. If either precision or recall is low, F1 is low." }
+      ]
+    }
+  ],
+  "when_to_use": [
+    "Use precision when false positives are costly. Example: spam detection – marking a good email as spam is bad (high precision needed).",
+    "Use recall when false negatives are costly. Example: cancer screening – missing a cancer is terrible (high recall needed).",
+    "Use F1 when you want a balance and classes are imbalanced. Better than accuracy.",
+    "Use the precision-recall curve when you have a very imbalanced dataset (e.g., 1% positives). ROC curves can be misleading in that case.",
+    "Use average precision (AP) or AUPRC as a single-number summary for comparing models on imbalanced data."
+  ],
+  "when_not_to_use": [
+    "Do not use precision or recall alone. Always report both. A model can have 99% precision but 1% recall – it catches almost nothing.",
+    "Do not use F1 if you care more about one than the other. Use weighted F-beta instead (beta>1 weights recall higher).",
+    "Do not use precision-recall for perfectly balanced datasets. Accuracy or ROC are fine and simpler.",
+    "Do not compare precision across datasets with different base rates. A 90% precision on a dataset with 50% positives is different from 90% on 1% positives."
+  ],
+  "common_mistakes": [
+    "Reporting precision but not recall (or vice versa) to make a model look good. A spam filter with 100% precision but 0% recall catches nothing.",
+    "Using accuracy on imbalanced data instead of precision/recall. You get a false sense of success.",
+    "Choosing a threshold that maximizes F1 without thinking about costs. Sometimes a miss is 10x worse than a false alarm. Adjust accordingly.",
+    "Forgetting that precision and recall are threshold-dependent. The same model can have wildly different values by changing the classification threshold."
+  ],
+  "ds_usage": "In scikit-learn: `from sklearn.metrics import precision_score, recall_score, f1_score`. Use `precision_score(y_true, y_pred)`, etc. For precision-recall curve: `from sklearn.metrics import precision_recall_curve`. `precision, recall, thresholds = precision_recall_curve(y_true, y_scores)`. Plot precision vs recall. Average precision: `average_precision_score(y_true, y_scores)`. For imbalanced data, prefer average precision over AUC-ROC. Always know your business costs before picking a threshold.",
+  "related_concepts": [
+    "confusion-matrix",
+    "roc-auc",
+    "classification-threshold"
+  ]
+}

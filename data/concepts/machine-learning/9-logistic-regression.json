@@ -1,0 +1,64 @@
+{
+  "id": "9-logistic-regression",
+  "title": "Logistic Regression",
+  "section": "machine-learning",
+  "difficulty": "intermediate",
+  "color": "blue",
+  "tagline": "A linear model for yes/no questions. It gives you probabilities, not just guesses.",
+  "what_it_is": "Logistic regression is a classification algorithm, despite the confusing name. It predicts the probability that something belongs to a category (like 'spam' or 'not spam'). It works by taking a linear combination of inputs (like linear regression) and then squashing that number through a special S-shaped curve called the sigmoid function. The output is always between 0 and 1, perfect for probabilities. You then decide a threshold (usually 0.5) to turn that probability into a yes/no prediction.",
+  "key_points": [
+    "Used for binary classification (two categories) and extended to multiclass.",
+    "Outputs a probability between 0 and 1, not a raw score.",
+    "The decision boundary is linear – a straight line or plane separating the two classes.",
+    "The model learns coefficients that maximize the likelihood of the observed data.",
+    "Interpret coefficients as log-odds: increasing a feature by one unit multiplies the odds by exp(coefficient)."
+  ],
+  "why_it_exists": "Linear regression would give you numbers like -5 or 10 for probabilities, which makes no sense. You need a model that stays between 0 and 1. Logistic regression was invented to do exactly that. It is the simplest and most interpretable classification model. It exists because many real problems are binary yes/no: will this customer buy? Is this tumor malignant? Will this email be spam? And you often want a probability, not just a label.",
+  "what_it_measures": "The coefficients measure the effect of each input on the log-odds of the positive class. If the coefficient is positive, higher values of that feature increase the probability of being in class 1. The magnitude tells you the strength. The model's performance is measured with accuracy, precision, recall, ROC curve, and log-loss (cross-entropy). The predicted probabilities should be well-calibrated – a predicted 0.7 should mean 70% chance in reality.",
+  "intuition": "Imagine you want to predict if a student will pass an exam based on hours studied. You collect data: many points where hours studied is on the x-axis and pass/fail (0 or 1) on the y-axis. Linear regression would draw a straight line through those 0s and 1s, giving values below 0 and above 1 – nonsense. Logistic regression fits an S-curve that stays between 0 and 1. At 0 hours, it might say 10% chance of passing. At 20 hours, 95% chance. The curve is smooth and interpretable.",
+  "formulas": [
+    {
+      "label": "Sigmoid function",
+      "expression": "p = \\frac{1}{1 + e^{-(\\beta_0 + \\beta_1 x_1 + \\dots)}}",
+      "breakdown": [
+        { "symbol": "p", "means": "predicted probability that class = 1" },
+        { "symbol": "β₀ + β₁x₁ + ...", "means": "same linear combination as linear regression" },
+        { "symbol": "e^{-z}", "means": "exponential of negative z. When z is large positive, p is near 1. When z is large negative, p near 0." }
+      ]
+    },
+    {
+      "label": "Log-odds (logit)",
+      "expression": "\\log\\left(\\frac{p}{1-p}\\right) = \\beta_0 + \\beta_1 x_1 + \\dots",
+      "breakdown": [
+        { "symbol": "p/(1-p)", "means": "odds of being in class 1 (e.g., 3:1 odds means p=0.75)" },
+        { "symbol": "log(...)", "means": "natural log – makes the linear relationship work" }
+      ]
+    }
+  ],
+  "when_to_use": [
+    "When you need to predict a binary outcome (yes/no, true/false, spam/not spam).",
+    "When you want probabilities, not just hard classifications. For example, 'this loan has a 90% default risk'.",
+    "When interpretability matters – you can explain why the model gave a certain probability.",
+    "As a baseline for any classification problem. It is simple, fast, and surprisingly effective.",
+    "When the decision boundary between classes is roughly linear."
+  ],
+  "when_not_to_use": [
+    "When the relationship between features and the log-odds is highly non-linear. A decision tree or neural net would work better.",
+    "When you have many correlated features. Regularized logistic regression (L1 or L2) can help, but tree-based models handle correlations naturally.",
+    "When you need very high accuracy and have lots of data. More complex models might outperform logistic regression.",
+    "When classes are perfectly separable. Logistic regression coefficients go to infinity. Regularization fixes this."
+  ],
+  "common_mistakes": [
+    "Setting the threshold at 0.5 without thinking. For imbalanced classes (e.g., 1% fraud), you might want a lower threshold to catch more fraud.",
+    "Interpreting coefficients as 'increase in probability'. The effect on probability depends on the starting point. A coefficient of 2 does not mean 'adds 2% probability'.",
+    "Forgetting that logistic regression assumes linearity in the log-odds, not in the probability. Check with residual plots.",
+    "Using accuracy as the only metric when classes are imbalanced. A model that always predicts 'not fraud' is 99% accurate but useless."
+  ],
+  "ds_usage": "In scikit-learn: `from sklearn.linear_model import LogisticRegression`. Use `model = LogisticRegression()`. Fit with `model.fit(X_train, y_train)`. Get probabilities with `model.predict_proba(X_test)` – that gives [prob_class0, prob_class1]. Get hard predictions with `model.predict(X_test)`. Use `penalty='l1'` or `'l2'` for regularization. Always scale features if using regularization. For imbalanced data, use `class_weight='balanced'`.",
+  "related_concepts": [
+    "linear-regression",
+    "confusion-matrix",
+    "roc-auc",
+    "log-loss"
+  ]
+}

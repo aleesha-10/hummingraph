@@ -1,0 +1,65 @@
+{
+  "id": "12-roc-auc",
+  "title": "ROC Curve and AUC",
+  "section": "machine-learning",
+  "difficulty": "intermediate",
+  "color": "blue",
+  "tagline": "A tool to see how well your classifier separates the two classes at every possible threshold.",
+  "what_it_is": "ROC (Receiver Operating Characteristic) curve plots the True Positive Rate (recall) against the False Positive Rate (1 - specificity) as you vary the classification threshold. Each point on the curve corresponds to a different threshold. The AUC (Area Under the Curve) is a single number that summarizes the curve – it tells you the probability that your model will rank a random positive example higher than a random negative example. AUC of 1.0 is perfect, 0.5 is random guessing.",
+  "key_points": [
+    "ROC curve shows tradeoff: catching more positives (higher TPR) usually increases false alarms (higher FPR).",
+    "AUC = area under the ROC curve. Higher is better.",
+    "AUC of 0.5 means the model is no better than random. AUC of 1.0 means perfect separation.",
+    "ROC curve is insensitive to class imbalance because it uses rates, not raw counts.",
+    "For very imbalanced data, Precision-Recall curve is often more informative than ROC."
+  ],
+  "why_it_exists": "A single threshold gives you one point (precision and recall at that threshold). But different applications want different tradeoffs. A cancer screener might accept more false positives to catch almost all cancers (low threshold). A spam filter might prefer fewer false positives even if it misses some spam (high threshold). The ROC curve shows you the entire range of possibilities so you can choose the threshold that matches your cost. AUC gives you a single number to compare models without picking a threshold first.",
+  "what_it_measures": "The ROC curve measures the model's ability to separate the two classes. A steep curve near the top left means the model can get high recall without many false positives. AUC measures the model's ranking quality: if you pick one random positive and one random negative, what is the probability that the model assigns a higher score to the positive? An AUC of 0.8 means 80% of the time, the positive gets a higher score than the negative.",
+  "intuition": "Imagine you have a test that gives a score from 0 to 100 for a disease. Healthy people tend to score low, sick people high. But there is overlap. You need to choose a cutoff: anyone above the cutoff is diagnosed as sick. ROC curve: For every possible cutoff, you calculate two rates: what fraction of sick people you correctly diagnose (TPR) and what fraction of healthy people you falsely diagnose (FPR). Plot them. A perfect test would have TPR=1 with FPR=0 (top left corner). A useless test gives a diagonal line (TPR = FPR). The area under the curve tells you how far your test is from useless. A doctor uses the ROC curve to choose a cutoff that balances missing cases vs. false alarms.",
+  "formulas": [
+    {
+      "label": "True Positive Rate (Recall)",
+      "expression": "TPR = \\frac{TP}{TP + FN}",
+      "breakdown": [
+        { "symbol": "TPR", "means": "same as recall – how many positives you catch" }
+      ]
+    },
+    {
+      "label": "False Positive Rate",
+      "expression": "FPR = \\frac{FP}{FP + TN}",
+      "breakdown": [
+        { "symbol": "FPR", "means": "false alarm rate – proportion of negatives you incorrectly call positive" }
+      ]
+    },
+    {
+      "label": "AUC interpretation",
+      "expression": "\\text{AUC} = P(\\text{score}_{positive} > \\text{score}_{negative})",
+      "breakdown": [
+        { "symbol": "P(...)", "means": "probability that a randomly chosen positive has a higher predicted score than a randomly chosen negative" }
+      ]
+    }
+  ],
+  "when_to_use": [
+    "Use ROC when you want to compare classifiers without choosing a threshold.",
+    "Use ROC when classes are roughly balanced. For imbalanced data, consider PR curve instead.",
+    "Use AUC as a single-number metric for model comparison during development (but not for final business decision).",
+    "Use the ROC curve to choose a threshold that meets your business requirements (e.g., FPR < 5%)."
+  ],
+  "when_not_to_use": [
+    "Do not use ROC when your data is extremely imbalanced (e.g., 1:1000). The FPR uses negatives, which dominate, so the curve can look overly optimistic. Use Precision-Recall curve instead.",
+    "Do not use AUC alone to pick a model if the costs of false positives vs false negatives are very different. Two models with same AUC can have very different performance in the region you care about.",
+    "Do not use ROC for comparing models on different datasets. AUC is relative to that dataset's prevalence and difficulty."
+  ],
+  "common_mistakes": [
+    "Interpreting AUC as 'accuracy'. It is not. AUC 0.8 does not mean 80% correct.",
+    "Using AUC with imbalanced data and concluding a model is good when it is actually bad. Example: a model that predicts the majority class all the time gets AUC 0.5, so anything above 0.5 seems good, but with imbalance you might need 0.9+ to be useful.",
+    "Choosing a threshold based on the ROC curve without considering actual costs. The point closest to (0,1) is not necessarily optimal.",
+    "Forgetting that ROC curves for multiclass need one-vs-rest or one-vs-one approaches."
+  ],
+  "ds_usage": "In scikit-learn: `from sklearn.metrics import roc_curve, roc_auc_score`. Get probabilities: `y_scores = model.predict_proba(X_test)[:, 1]`. Then `fpr, tpr, thresholds = roc_curve(y_test, y_scores)`. Plot fpr vs tpr. Compute AUC: `auc = roc_auc_score(y_test, y_scores)`. For multiclass, use `roc_auc_score(y_test, y_scores, multi_class='ovo')`. A common plot also includes the diagonal line (random classifier) for reference.",
+  "related_concepts": [
+    "precision-recall",
+    "confusion-matrix",
+    "classification-threshold"
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "id": "2-training-vs-inference",
+  "title": "Training vs Inference",
+  "section": "machine-learning",
+  "difficulty": "beginner",
+  "color": "blue",
+  "tagline": "Learning is one phase. Using what you learned is another. Dont mix them up.",
+  "what_it_is": "Training is when the model learns from data. You give it examples with answers, and it adjusts its internal parameters to reduce errors. This is the slow, heavy computation phase. Inference is when you use the trained model to make predictions on new data. The model does not learn anymore. It just takes inputs and produces outputs. Think of training like studying for an exam. Inference is like taking the exam – you use what you studied, you dont study during the exam.",
+  "key_points": [
+    "Training: model sees data + answers. It updates its internal parameters to minimize error. This is computationally expensive and happens offline.",
+    "Inference: model sees only new inputs. It produces predictions without changing anything. This is fast and happens in real time often.",
+    "You train once (or periodically). You infer many times.",
+    "During training you need the true answers (labels). During inference you do not.",
+    "A model that is good at training but bad at inference is overfitting – it memorized instead of learned."
+  ],
+  "why_it_exists": "If you had to re-learn from scratch every time you made a prediction, it would be impossibly slow. Imagine a self-driving car re-training its brain at every intersection. The car would crash before finishing. So we separate the heavy learning phase from the fast prediction phase. This split lets us use expensive compute clusters for training and then deploy the small, fast model to a phone or a web server for inference.",
+  "what_it_measures": "Training measures how well the model fits the training data – usually with a loss function like MSE or cross-entropy. Inference measures how well the model performs on new data – with metrics like accuracy, precision, recall, or MAE. The gap between training performance and inference performance tells you if you are overfitting.",
+  "intuition": "Imagine learning to ride a bike. Training is the first afternoon when you fall down a lot, scrape your knees, and slowly figure out balance. It is messy and takes time. After you learn, you just ride. You dont re-learn balance every time you get on the bike. That is inference – you already know how, you just do it. The bike doesnt change when you ride it. Your brain doesnt re-wire itself during a casual ride.",
+  "formulas": [],
+  "when_to_use": [
+    "Training happens when you have a batch of labeled data and time to compute. Do it before deployment.",
+    "Inference happens whenever you need a prediction – on a website, in a mobile app, in a car.",
+    "If your data changes over time, you might re-train periodically (e.g., every night). Between re-trainings, you run inference.",
+    "Use inference only for new data that the model has never seen before to evaluate true performance."
+  ],
+  "when_not_to_use": [
+    "Do not run inference on your training data to claim your model is good – that is cheating. The model already saw those examples.",
+    "Do not try to update your model during inference unless you are doing online learning (a different paradigm).",
+    "Do not treat inference as training – inference should be fast and stateless."
+  ],
+  "common_mistakes": [
+    "Evaluating a model on the training data and thinking it is great. Always use a separate test set for inference evaluation.",
+    "Confusing the two phases in conversation: 'the model is training on new user requests' – no, it is inferring. Training requires backpropagation and labels.",
+    "Forgetting that inference time and memory matter. A huge deep learning model might be too slow for a phone. You might need a smaller model just for inference.",
+    "Not versioning your trained models. When you re-train, you get a new model. Keep track of which version is in production."
+  ],
+  "ds_usage": "In practice, you train a model on historical data using a notebook or a cloud job. You save the model to a file. Then you load that file into a web service (like a Flask API) and it runs inference on incoming requests. Most of the compute cost is during training. Inference is cheap but you need low latency. Many data scientists only train models; engineers deploy them for inference.",
+  "related_concepts": [
+    "train-test-split",
+    "overfitting-underfitting",
+    "cross-validation"
+  ]
+}

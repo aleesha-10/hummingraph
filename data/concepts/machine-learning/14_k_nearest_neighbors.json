@@ -1,0 +1,68 @@
+{
+  "id": "14_k_nearest_neighbors",
+  "title": "K-Nearest Neighbors (KNN)",
+  "section": "machine-learning",
+  "difficulty": "intermediate",
+  "color": "blue",
+  "tagline": "Tell me who your neighbors are, and I will tell you what you are.",
+  "what_it_is": "KNN is a simple algorithm that makes predictions based on the majority vote (or average) of the k closest training examples. To predict a new point, you measure its distance to every point in the training set (using something like Euclidean distance). You pick the k nearest ones. For classification, you take the most common class among those k neighbors. For regression, you average their values. There is no explicit training step – the model is just the data itself. That is why it is called a lazy learner.",
+  "key_points": [
+    "No training phase. The model stores all training data.",
+    "Prediction requires computing distances to all training points – slow for large datasets.",
+    "Choice of k matters: small k (e.g., 1) overfits (noisy), large k underfits (too smooth).",
+    "Distance metric is usually Euclidean, but can be Manhattan, Minkowski, or others.",
+    "Requires feature scaling because features with larger ranges dominate distance."
+  ],
+  "why_it_exists": "KNN exists because sometimes the simplest idea works: similar things have similar outcomes. If you want to know if a new wine is high quality, look at the wines most similar to it in chemical composition and see what quality they had. You don't need complex equations or assumptions about linearity. KNN is intuitive, non-parametric (makes no assumptions about data distribution), and works well for many problems, especially when the decision boundary is irregular.",
+  "what_it_measures": "KNN measures distances. The choice of k measures the bias-variance tradeoff. Distance metrics measure similarity. The algorithm's performance is measured by classification accuracy or regression error on a test set. The number of neighbors (k) is a hyperparameter you tune. For high-dimensional data, distances become less meaningful – a phenomenon called the curse of dimensionality.",
+  "intuition": "Imagine you move to a new city and want to know if a neighborhood is safe. You look at the safety ratings of the 5 houses closest to your potential new house. If 4 of them have been broken into, you might think twice. If 4 are very safe, you feel good. That is KNN with k=5. You didn't learn any general rule about what makes a neighborhood safe. You just looked at similar examples. If you only looked at the single closest house (k=1), you might be misled by one weird outlier. If you looked at 100 houses (k=100), you would be averaging across too many, losing local information.",
+  "formulas": [
+    {
+      "label": "Euclidean distance (two dimensions)",
+      "expression": "d = \\sqrt{(x_1 - x_2)^2 + (y_1 - y_2)^2}",
+      "breakdown": [
+        { "symbol": "(x₁, y₁)", "means": "coordinates of first point" },
+        { "symbol": "(x₂, y₂)", "means": "coordinates of second point" }
+      ]
+    },
+    {
+      "label": "Euclidean distance (p dimensions)",
+      "expression": "d(\\mathbf{a}, \\mathbf{b}) = \\sqrt{\\sum_{j=1}^{p} (a_j - b_j)^2}",
+      "breakdown": [
+        { "symbol": "p", "means": "number of features" },
+        { "symbol": "aⱼ, bⱼ", "means": "value of feature j for each point" }
+      ]
+    },
+    {
+      "label": "Manhattan distance",
+      "expression": "d = \\sum_{j=1}^{p} |a_j - b_j|",
+      "breakdown": [
+        { "symbol": "absolute sum", "means": "sum of absolute differences – like city block distance" }
+      ]
+    }
+  ],
+  "when_to_use": [
+    "Use KNN when your dataset is small to medium (less than 50,000 rows) because prediction is O(n) for each new point.",
+    "Use KNN when the decision boundary is very irregular and complex. KNN can approximate any shape given enough data.",
+    "Use KNN as a baseline – simple to implement and sometimes surprisingly effective.",
+    "Use KNN for recommendation systems ('users who liked this also liked...' is a form of KNN)."
+  ],
+  "when_not_to_use": [
+    "Do not use KNN for high-dimensional data (more than 20 features). The curse of dimensionality makes distances meaningless.",
+    "Do not use KNN for large datasets where prediction latency matters. Each prediction takes O(n) time. Use a model with fast inference like a tree or neural net.",
+    "Do not use KNN without scaling features. A feature with range 0-1000 will dominate a feature with range 0-1.",
+    "Do not use KNN when you have many missing values. Distance computation fails. Impute first."
+  ],
+  "common_mistakes": [
+    "Forgetting to scale features. The algorithm is distance-based, so unscaled features make no sense.",
+    "Choosing k = 1 and then wondering why the model overfits. Small k is sensitive to noise.",
+    "Using Euclidean distance on categorical features. You need to convert categories to numbers (one-hot) or use a different distance (Hamming).",
+    "Thinking KNN has no hyperparameters. You need to choose k, distance metric, and weighting scheme (uniform or distance-weighted)."
+  ],
+  "ds_usage": "In scikit-learn: `from sklearn.neighbors import KNeighborsClassifier`. Use `model = KNeighborsClassifier(n_neighbors=5)`. Fit: `model.fit(X_train, y_train)`. Prediction: `model.predict(X_test)`. For regression: `KNeighborsRegressor`. Always scale features with `StandardScaler` before KNN. Use cross-validation to pick k. Weighted KNN: `weights='distance'` gives more influence to closer neighbors. For large datasets, consider approximate nearest neighbor libraries like `annoy`, `faiss`, or `nmslib`.",
+  "related_concepts": [
+    "feature-scaling",
+    "curse-of-dimensionality",
+    "distance-metrics"
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "id": "4-bias-variance-tradeoff",
+  "title": "Bias-Variance Tradeoff",
+  "section": "machine-learning",
+  "difficulty": "intermediate",
+  "color": "blue",
+  "tagline": "Every model has two sources of error: being too rigid (bias) or being too jumpy (variance). You cannot eliminate both.",
+  "what_it_is": "Bias is the error from wrong assumptions in the model. A linear model trying to fit a curve has high bias – it will never fit well no matter how much data you give it. Variance is the error from being too sensitive to small changes in the training data. A deep decision tree has high variance – if you change a few training examples, the tree looks completely different. The tradeoff says that decreasing bias often increases variance, and vice versa. The best model balances the two.",
+  "key_points": [
+    "High bias = underfitting. Model is too simple. Makes strong assumptions that are wrong. Errors are consistent but large.",
+    "High variance = overfitting. Model is too complex. Changes a lot with different training data. Errors are small on training but large on new data ( testing ).",
+    "Total error = bias² + variance + irreducible error (noise you cannot remove).",
+    "You cannot have both low bias and low variance with a fixed amount of data. You have to trade off.",
+    "Increasing model complexity reduces bias but increases variance. Reducing complexity does the opposite."
+  ],
+  "why_it_exists": "The tradeoff exists because of a simple fact: any model that is flexible enough to fit many different patterns will also be easily misled by random noise. A simple model is stable but might miss the pattern. You have to choose where on this spectrum you want to be. More data helps reduce variance without increasing bias, but bias can only be reduced by changing the model family.",
+  "what_it_measures": "Bias is the difference between the average prediction of your model (over many different training sets) and the true value. High bias means the model consistently misses the target. Variance is how much your model's predictions vary from one training set to another. High variance means small changes in training data cause big changes in predictions. You cannot directly measure bias and variance from a single training run – you need to train many models on different subsets of data.",
+  "intuition": "Imagine shooting arrows at a target. Bias is how far your average shot is from the bullseye. If all arrows cluster to the left, you have high bias. Variance is how spread out your arrows are. If they are all over the place, you have high variance. Low bias and low variance means all arrows hit the bullseye in a tight cluster – perfect. Low bias but high variance means the average is bullseye but arrows are scattered. High bias low variance means all arrows are tight but off target (e.g., all high and left). High bias high variance means arrows are everywhere and off target. You want to minimize both, but often fixing one worsens the other.",
+  "formulas": [
+    {
+      "label": "Expected test error",
+      "expression": "\\text{Error} = \\text{Bias}^2 + \\text{Variance} + \\sigma^2",
+      "breakdown": [
+        { "symbol": "Bias²", "means": "how far the model's average prediction is from the truth, squared" },
+        { "symbol": "Variance", "means": "how much predictions change across different training sets" },
+        { "symbol": "σ²", "means": "irreducible noise in the data – you cannot remove it" }
+      ]
+    }
+  ],
+  "when_to_use": [
+    "When choosing between models: a simple linear model (low variance, high bias) or a deep tree (low bias, high variance). Pick based on your data size. With little data, prefer low variance. With lots of data, low bias can win.",
+    "When adding features: more features reduce bias but increase variance. Use regularization to control variance.",
+    "When ensemble methods like bagging help: bagging reduces variance without increasing bias.",
+    "When you see overfitting: that is high variance. Reduce complexity or add regularization."
+  ],
+  "when_not_to_use": [
+    "Do not use bias-variance reasoning for a single fixed dataset without resampling. You need multiple training sets to estimate them.",
+    "Do not obsess over the theoretical decomposition for deep learning. In practice, very large neural networks can have low bias and surprisingly low variance (double descent phenomenon). But for classical models, the tradeoff is central.",
+    "Do not ignore irreducible noise. Sometimes the data is just noisy and no model can do better."
+  ],
+  "common_mistakes": [
+    "Thinking that low bias is always better. On small datasets, a low bias model will overfit terribly.",
+    "Confusing bias (systematic error) with accuracy. You can have high accuracy and high bias if the target is easy.",
+    "Believing that adding more data fixes bias. More data helps reduce variance, not bias. If your model is too simple for the problem, more data wont help.",
+    "Forgetting that the bias-variance tradeoff is about expected error over many training sets, not your single model."
+  ],
+  "ds_usage": "When you debug a model, think: is the error due to high bias (underfitting) or high variance (overfitting)? Learning curves tell you. If both training and validation error are high and flat, it is bias. Add features, use a more complex model. If training error is low but validation error is high, it is variance. Add regularization, get more data, or simplify. In practice, you often trade off by tuning hyperparameters like tree depth or regularization strength.",
+  "related_concepts": [
+    "underfitting-overfitting",
+    "cross-validation",
+    "regularization",
+    "ensemble-methods"
+  ]
+}

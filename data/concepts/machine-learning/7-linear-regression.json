@@ -1,0 +1,76 @@
+
+{
+  "id": "7-linear-regression",
+  "title": "Linear Regression",
+  "section": "machine-learning",
+  "difficulty": "beginner",
+  "color": "blue",
+  "tagline": "The straight line through your data. Simple, interpretable, and the foundation of almost everything else.",
+  "what_it_is": "Linear regression is a way to predict a number (like house price) from one or more input numbers (like square footage, bedrooms, age). It assumes the relationship is a straight line. You find the line that minimizes the sum of squared errors between the predicted values and the actual values. With one input, it is a simple line: y = slope * x + intercept. With multiple inputs, it is a plane or hyperplane: y = w1*x1 + w2*x2 + ... + b.",
+  "key_points": [
+    "Predicts a continuous number, not a category.",
+    "Assumes a linear relationship between inputs and output.",
+    "The coefficients (weights) tell you the expected change in output for a one-unit change in that input, holding others constant.",
+    "The intercept is the predicted value when all inputs are zero.",
+    "Minimizes the sum of squared residuals (differences between actual and predicted)."
+  ],
+  "why_it_exists": "Before machine learning was a thing, people needed a simple way to model relationships. Linear regression was invented in the 1800s. It exists because many relationships are approximately linear, and even when they are not, linear regression gives a simple baseline. It is fast, easy to explain, and the coefficients give direct insights: 'each additional bedroom adds $30,000 to the house price'. More complex models might be more accurate but harder to understand. Linear regression is the starting point.",
+  "what_it_measures": "The coefficients measure the effect of each input. A coefficient of zero means that input has no linear relationship with the output. The R-squared value measures how much of the variance in the output is explained by the inputs. The p-values (in statistics) tell you if a coefficient is significantly different from zero. The residuals (errors) tell you if the straight line assumption is reasonable.",
+  "intuition": "Imagine you sell lemonade. You notice that on hotter days, you sell more cups. You plot temperature on the x-axis and cups sold on the y-axis. You draw a straight line through the cloud of points. That line is linear regression. For any new temperature, you follow the line up to see predicted cups. The line might say: for every 10 degrees hotter, you sell 5 more cups. That is the slope. When temperature is zero (not realistic), you would sell 2 cups – that is the intercept. Simple.",
+  "formulas": [
+    {
+      "label": "Simple linear regression (one input)",
+      "expression": "\\hat{y} = \\beta_0 + \\beta_1 x",
+      "breakdown": [
+        { "symbol": "ŷ", "means": "predicted value of y (e.g., house price)" },
+        { "symbol": "β₀", "means": "intercept – value when x is zero" },
+        { "symbol": "β₁", "means": "slope – change in y for a one-unit change in x" },
+        { "symbol": "x", "means": "input feature (e.g., square feet)" }
+      ]
+    },
+    {
+      "label": "Multiple linear regression",
+      "expression": "\\hat{y} = \\beta_0 + \\beta_1 x_1 + \\beta_2 x_2 + \\dots + \\beta_p x_p",
+      "breakdown": [
+        { "symbol": "p", "means": "number of input features" },
+        { "symbol": "βⱼ", "means": "coefficient for feature j" },
+        { "symbol": "xⱼ", "means": "value of feature j" }
+      ]
+    },
+    {
+      "label": "Ordinary least squares (minimized)",
+      "expression": "\\min_{\\beta} \\sum_{i=1}^{n} (y_i - \\hat{y}_i)^2",
+      "breakdown": [
+        { "symbol": "n", "means": "number of data points" },
+        { "symbol": "yᵢ", "means": "actual value" },
+        { "symbol": "ŷᵢ", "means": "predicted value" },
+        { "symbol": "sum of squares", "means": "total squared error the line tries to minimize" }
+      ]
+    }
+  ],
+  "when_to_use": [
+    "When you need to predict a continuous number (sales, temperature, price).",
+    "When you want an interpretable model – the coefficients tell a story.",
+    "When the relationship between inputs and output is roughly linear, or you are okay with a linear approximation.",
+    "As a baseline model. Always try linear regression first before complicated methods.",
+    "When you have a small dataset. Linear regression works well with few examples."
+  ],
+  "when_not_to_use": [
+    "When the relationship is clearly non-linear (e.g., U-shaped or periodic). A straight line will be terrible.",
+    "When there is severe multicollinearity (two inputs are almost the same). Coefficients become unstable. Use ridge regression instead.",
+    "When you have more features than samples (p > n). Ordinary linear regression fails. Use regularization (lasso or ridge).",
+    "When your output is a category (yes/no). Use logistic regression instead."
+  ],
+  "common_mistakes": [
+    "Interpreting a coefficient as causal. 'One more bedroom adds $30k' – only if all other things are equal, which they never are in real data.",
+    "Forgetting to scale features. Coefficients of different magnitudes are not comparable without scaling.",
+    "Using linear regression on non-linear data and then being surprised by poor predictions.",
+    "Ignoring outliers. One extreme point can completely change the line because squared errors blow up."
+  ],
+  "ds_usage": "In Python, you use `from sklearn.linear_model import LinearRegression`. Fit with `model.fit(X_train, y_train)`. Coefficients are `model.coef_`, intercept is `model.intercept_`. Predict with `model.predict(X_test)`. Evaluate with MAE, MSE, RMSE, or R². For statistical inference (p-values, confidence intervals), use `statsmodels` instead of scikit-learn.",
+  "related_concepts": [
+    "regularization",
+    "r-squared",
+    "gradient-descent"
+  ]
+}

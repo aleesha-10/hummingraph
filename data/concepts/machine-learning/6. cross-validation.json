@@ -1,0 +1,44 @@
+{
+  "id": "6-cross-validation",
+  "title": "Cross-Validation",
+  "section": "machine-learning",
+  "difficulty": "intermediate",
+  "color": "blue",
+  "tagline": "When you cannot afford to waste data on a single test set, use this trick to get a honest performance estimate.",
+  "what_it_is": "Cross-validation is a method to estimate how well your model will perform on new data without using a separate test set. The most common type is k-fold cross-validation. You split your data into k equal parts (folds). Then you train the model k times, each time using a different fold as the validation set and the other k-1 folds as training. You average the performance across the k runs. This gives you a robust estimate of generalization error using all your data for both training and validation (but never at the same time).",
+  "key_points": [
+    "k-fold CV: split data into k folds. For each fold, train on all other folds, validate on that fold. Average the k validation scores.",
+    "Typical k is 5 or 10. More folds gives lower bias but higher computational cost.",
+    "Leave-one-out CV (LOOCV) is k = number of rows. Very expensive but nearly unbiased. Used for tiny datasets.",
+    "Stratified k-fold preserves class percentages in each fold for classification problems.",
+    "CV is not a test set. It is a way to tune models and get a validation estimate. You still need a final test set."
+  ],
+  "why_it_exists": "A single train-test split is wasteful if you have limited data. You lose 20-30% of your data to testing, and the model never learns from those examples. Worse, the performance estimate from one split can be noisy – if your test set happens to be easy or hard by chance, your estimate is wrong. Cross-validation uses your data more efficiently and gives a more stable estimate because it averages over multiple splits.",
+  "what_it_measures": "Cross-validation measures the expected performance of your model on unseen data, but using only your training data. The average CV score is an estimate of generalization error. The standard deviation across folds tells you how sensitive your model is to the specific training set. High standard deviation means high variance (overfitting risk).",
+  "intuition": "Imagine you have 100 practice questions for an exam, but no official test. You want to know how well you would do on the real exam. You could split the 100 questions into 80 for practice and 20 for self-test. But you lose 20 questions. Cross-validation says: split them into 10 groups of 10. Practice on 9 groups (90 questions) and test on the 1 group you set aside. Do this 10 times, each time with a different test group. Average your scores. Now every question has been used for both practice (in 9 runs) and testing (in 1 run). You get a very honest estimate without wasting any questions.",
+  "formulas": [],
+  "when_to_use": [
+    "When you have a small to medium dataset (hundreds to thousands of rows). A single test split would be too unstable or waste too much data.",
+    "When you need to tune hyperparameters. Use CV on the training set to compare different parameter settings, then evaluate the best model once on the test set.",
+    "When you want to see if your model is stable. Look at the variance of CV scores across folds. High variance means your model is sensitive to the data.",
+    "For model selection: compare two algorithms using CV on the same training data."
+  ],
+  "when_not_to_use": [
+    "Do not use CV on very large datasets (millions of rows). A single train-test split is fine and much faster.",
+    "Do not use CV when your data has strong time dependencies. You cannot randomly shuffle time series. Use time series split instead.",
+    "Do not use CV if your model is extremely expensive to train. 10-fold CV means training 10 times. That might be impossible for deep learning. Use a single validation set instead.",
+    "Do not use CV to report final performance. You still need a separate test set that was never touched during CV."
+  ],
+  "common_mistakes": [
+    "Using CV on the entire dataset, including the test set. That leaks information and your final estimate is optimistic.",
+    "Forgetting to stratify for classification with imbalanced classes. Random folds might have a fold with no positive examples, causing a division by zero in metrics.",
+    "Using too few folds (k=2 or 3) – high bias. Or too many folds (k=number of rows) – high variance and expensive.",
+    "Not shuffling the data before dividing into folds if your data has order (e.g., sorted by date)."
+  ],
+  "ds_usage": "In scikit-learn: `from sklearn.model_selection import cross_val_score`. You run `scores = cross_val_score(model, X, y, cv=5)`. Then `scores.mean()` is your CV estimate. For hyperparameter tuning, use `GridSearchCV` or `RandomizedSearchCV` which perform CV internally. Always set `random_state` for reproducibility. Report mean and standard deviation of CV scores (e.g., 'accuracy 0.85 ± 0.02').",
+  "related_concepts": [
+    "train-test-split",
+    "bias-variance-tradeoff",
+    "hyperparameter-tuning"
+  ]
+}
