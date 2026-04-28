@@ -1,0 +1,76 @@
+{
+  "id": "assumptions-of-statistical-tests",
+  "title": "Assumptions of Statistical Tests",
+  "section": "advanced-statistics",
+  "difficulty": "intermediate",
+  "color": "yellow",
+  "tagline": "Every statistical test has a list of things it assumes are true about your data — and most people never check them.",
+
+  "what_it_is": "Statistical tests are built on assumptions about the data they're applied to. If those assumptions are violated, the test can give you completely wrong p-values and conclusions — even confidently wrong ones. Checking assumptions is not optional busywork. It's what separates a result you can trust from one you can't.",
+
+  "key_points": [
+    "Normality: many tests assume the data (or residuals) are roughly normally distributed. Violated by heavily skewed data.",
+    "Independence: observations must not influence each other. Violated by time series, repeated measures, clustered data.",
+    "Homoscedasticity (equal variances): many tests assume groups have similar variance. Violated when one group is much more spread out than another.",
+    "Linearity: regression assumes a linear relationship between predictors and outcome. Violated when the relationship is curved.",
+    "When assumptions are violated, use robust alternatives — not just ignore the problem and report the p-value."
+  ],
+
+  "why_it_exists": "When statisticians derive the formulas behind t-tests, ANOVA, and regression, they prove those formulas give the right answer only under certain conditions. Those conditions are the assumptions. Using a test outside its assumptions is like using a ruler to measure temperature — you'll get a number, but it won't mean what you think it means.",
+
+  "intuition": "Think of statistical tests as power tools. A circular saw is designed for straight cuts in wood. You can technically try to use it on metal or make curved cuts — but the tool wasn't built for that, and the results will be unreliable or dangerous. Assumptions are the manufacturer's specifications. Checking them is reading the manual before you start cutting.",
+
+  "example": {
+    "text": "A researcher uses a two-sample t-test to compare salaries between two departments. Department A: 20 employees, mostly similar salaries around £40k. Department B: 18 employees, mostly similar but one executive earning £800k. The t-test gives p = 0.08 — 'not significant.' But the executive outlier violates both normality and homoscedasticity. A Mann-Whitney U test (non-parametric, robust to outliers) gives p = 0.03 — the departments actually do differ significantly when you use the right tool.",
+    "interpretation": "The assumption violation didn't just change the p-value slightly — it flipped the conclusion entirely. Checking assumptions isn't pedantry. It directly determines whether your result is trustworthy."
+  },
+
+  "steps": [
+    { "step": 1, "title": "Check normality", "description": "Plot a histogram and Q-Q plot of your data or residuals. Roughly bell-shaped is fine — exact normality isn't required. For formal testing: Shapiro-Wilk test (small samples) or Kolmogorov-Smirnov (large samples). If violated: use non-parametric equivalents (Mann-Whitney instead of t-test, Kruskal-Wallis instead of ANOVA)." },
+    { "step": 2, "title": "Check independence", "description": "Ask: could any observation influence another? Time series data, measurements from the same person, or data from the same school/hospital/household are all potentially non-independent. If violated: use methods designed for dependent data (mixed models, repeated-measures ANOVA, time series models)." },
+    { "step": 3, "title": "Check equal variances (homoscedasticity)", "description": "Plot residuals vs fitted values — if the spread of residuals fans out or narrows, variances aren't equal. Levene's test gives a formal check. If violated: use Welch's t-test (doesn't assume equal variances) or Welch's ANOVA instead of standard ANOVA." },
+    { "step": 4, "title": "Check linearity (for regression)", "description": "Plot your predictor against your outcome. Does the relationship look like a line? Plot residuals vs fitted — they should scatter randomly around zero, not show a curve. If violated: try transformations (log, square root), or use polynomial/non-linear regression." },
+    { "step": 5, "title": "Check for outliers", "description": "Outliers can violate normality and heavily influence results. Identify them with box plots or z-scores. Investigate them — are they data errors or real extreme values? Don't delete outliers just because they're inconvenient." }
+  ],
+
+  "visual": {
+    "type": "diagnostic plots grid",
+    "description": "A 2x2 grid of diagnostic plots for regression: (1) Residuals vs Fitted — checks linearity and homoscedasticity. A good plot shows random scatter around zero. A bad plot shows a curve or a fan shape. (2) Q-Q plot — checks normality. Points should fall along the diagonal. Heavy tails show as points curving away at the ends. (3) Scale-Location — another homoscedasticity check. (4) Residuals vs Leverage — identifies influential outliers. Annotate each with what a 'good' vs 'bad' version looks like.",
+    "file": "visualizations/regression-diagnostic-plots.json"
+  },
+
+  "when_to_use": [
+    "Before reporting any result from a t-test, ANOVA, regression, or correlation — always check assumptions first",
+    "When a model gives surprising or suspiciously clean results — assumption violations often hide in plain sight",
+    "When working with real-world data, which is almost always messy — assumptions are rarely perfectly met, so the question is always 'violated enough to matter?'"
+  ],
+
+  "when_not_to_use": [
+    "Don't treat assumption checks as a ritual that justifies skipping them — a Shapiro-Wilk p-value of 0.06 doesn't mean normality is 'confirmed'. Use judgment alongside formal tests.",
+    "Don't obsess over minor violations with large samples — the Central Limit Theorem makes many tests robust to non-normality when n is large"
+  ],
+
+  "common_mistakes": [
+    "Running a t-test on count data or highly skewed outcomes (response times, income, website sessions) without checking normality — these distributions are almost never normal",
+    "Ignoring the independence assumption for panel data or repeated measurements — this is the most commonly violated and least checked assumption",
+    "Testing for outliers after seeing results and removing them to make the result more significant — this is data manipulation, not analysis",
+    "Confusing 'the test is robust' with 'the assumption doesn't matter' — robust means the test holds up reasonably well under mild violations, not under severe ones"
+  ],
+
+  "notes": [
+    "Real data almost never perfectly meets statistical assumptions. The question isn't 'are assumptions perfectly met?' but 'are they violated badly enough to distort the result?' Minor violations with large samples usually don't matter. Severe violations always do.",
+    "Non-parametric tests (Mann-Whitney, Kruskal-Wallis, Spearman) don't assume normality but do still assume independence — that assumption is rarely escapable.",
+    "In machine learning, assumption checking takes a different form — you look at residuals, learning curves, and calibration plots rather than formal tests. But the same principle applies: understand what your model is assuming and check whether your data supports it."
+  ],
+
+  "ds_usage": "In practice, assumption checking happens through diagnostic plots — histogram and Q-Q plot for normality, residual plots for regression, Levene's test for variances. Python's scipy.stats and R's base stats both include formal tests. Pandas and seaborn make visual checks fast. Skipping this step is the single most common source of incorrect conclusions in applied data science work.",
+
+  "related_concepts": [
+    "hypothesis-testing",
+    "p-value-and-confidence-intervals",
+    "normal-distribution",
+    "outliers",
+    "variance-standard-deviation",
+    "anova"
+  ]
+}

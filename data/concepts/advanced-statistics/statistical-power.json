@@ -1,0 +1,81 @@
+{
+  "id": "statistical-power",
+  "title": "Statistical Power",
+  "section": "advanced-statistics",
+  "difficulty": "intermediate",
+  "color": "green",
+  "tagline": "How good is your test at actually catching something real when it's there?",
+
+  "what_it_is": "Statistical power is the probability that your test will detect a real effect if one actually exists. A test with high power rarely misses real things. A test with low power lets real effects slip through undetected. Power is what separates a study that can actually answer its question from one that was doomed to find nothing, regardless of reality.",
+
+  "key_points": [
+    "Power = 1 − β, where β is the probability of a Type II error (missing a real effect).",
+    "The standard target for power is 0.80 — meaning an 80% chance of catching a real effect if it exists.",
+    "Power increases with larger sample sizes. More data = better chance of detecting real signals.",
+    "Power increases with larger effect sizes. Big differences are easier to catch than tiny ones.",
+    "Power decreases when you lower alpha (get stricter) — making it harder to cross the significance threshold."
+  ],
+
+  "why_it_exists": "Running a test and getting p > 0.05 feels like a result. But what if your test just wasn't sensitive enough to detect the effect? Without understanding power, you can't tell the difference between 'there is no effect' and 'my test was too weak to notice the effect.' Power forces you to be honest about what your study is actually capable of answering.",
+
+  "what_it_measures": "Power measures how sensitive your test is. A power of 0.80 means: if the effect is real, you'll detect it 80% of the time. The remaining 20% is the probability of a Type II error — walking away thinking nothing is there, when something is.",
+
+  "intuition": "Imagine you're trying to hear someone whisper from across a football pitch. If the wind is loud (lots of noise in your data), the whisper is very far away (small effect), and your ears aren't great (small sample), you probably won't hear it. That's a low-power test. Now bring them closer, calm the wind, and use a microphone (larger sample, bigger effect, better design) — suddenly you can hear clearly. Power is essentially how good your 'hearing' is. And the cruel part: if you finish the experiment and say 'I heard nothing,' you can't tell if there really was nothing to hear, or if you just couldn't hear it. You have to figure that out before the experiment — which is what a power calculation does.",
+
+  "steps": [
+    { "step": 1, "title": "Choose your effect size", "description": "Decide what the smallest meaningful effect would be. Not just any effect — the minimum one that would actually matter in practice. If you're testing a drug, a 2% improvement might not be worth it. 15% might be. Cohen's d, odds ratios, and correlation coefficients are common ways to express this." },
+    { "step": 2, "title": "Set your alpha", "description": "Choose your significance threshold — usually 0.05. This controls Type I error and directly affects power." },
+    { "step": 3, "title": "Choose your target power", "description": "Convention says 0.80. Some fields (clinical trials) use 0.90 or higher because missing a real drug effect is costly." },
+    { "step": 4, "title": "Calculate required sample size", "description": "Plug these three inputs into a power formula or calculator (Python's statsmodels, R's pwr package, or online tools). Out comes the minimum sample size you need." },
+    { "step": 5, "title": "Run the study with enough data", "description": "If you can't reach the required sample size, your test is underpowered and the result — significant or not — is unreliable. Be honest about this in your conclusions." }
+  ],
+
+  "formulas": [
+    {
+      "label": "Power",
+      "expression": "\\text{Power} = 1 - \\beta = P(\\text{reject } H_0 \\mid H_0 \\text{ is false})",
+      "breakdown": [
+        { "symbol": "\\beta", "means": "probability of a Type II error — failing to detect a real effect" },
+        { "symbol": "H_0", "means": "the null hypothesis — the 'nothing is happening' claim you're testing against" }
+      ]
+    }
+  ],
+
+  "visual": {
+    "type": "two overlapping normal distributions",
+    "description": "Two bell curves side by side: the null distribution (left) and the alternative distribution (right). A vertical line marks the critical value at alpha. The area to the right of the critical value under the null curve is alpha (Type I error). The area to the left of the critical value under the alternative curve is beta (Type II error). The area to the right of the critical value under the alternative curve is shaded and labeled as Power. Show how sliding the distributions further apart (larger effect size) or making them taller and narrower (larger sample) increases the power region.",
+    "file": "visualizations/statistical-power-distributions.json"
+  },
+
+  "when_to_use": [
+    "Before running an experiment — to figure out how large your sample needs to be",
+    "When interpreting a non-significant result — to check if the test was powerful enough to detect a real effect",
+    "When designing A/B tests, clinical trials, or any study where false negatives are costly"
+  ],
+
+  "when_not_to_use": [
+    "Don't calculate power after the fact to 'explain' a non-significant result — post-hoc power calculations are circular and misleading",
+    "Don't assume power of 0.80 is always enough — in high-stakes settings like medical trials, you want 0.90 or higher"
+  ],
+
+  "common_mistakes": [
+    "Running a test without doing a power calculation first — then getting p > 0.05 and concluding 'no effect' when the test was underpowered all along",
+    "Stopping data collection early because significance was reached — this inflates Type I error and the study was likely overpowered at that moment by luck",
+    "The entire field of psychology spent decades publishing underpowered studies — this is a large part of why the replication crisis happened"
+  ],
+
+  "notes": [
+    "Underpowered studies don't just fail to find effects — they're also more likely to produce inflated effect size estimates when they do find something, because only unusually large effects cross the significance threshold by chance. This is called the 'Winner's Curse'.",
+    "Power and sample size are two sides of the same coin. Given effect size and alpha, power is entirely determined by sample size — more data always means more power."
+  ],
+
+  "ds_usage": "Power calculations are standard practice before running A/B tests. Tools like Evan Miller's A/B test calculator and statsmodels.stats.power in Python do the math. In industry, 'minimum detectable effect' (MDE) is the business version of effect size — it's the smallest improvement worth detecting, and it directly sets your required sample size.",
+
+  "related_concepts": [
+    "type-1-type-2-errors",
+    "hypothesis-testing",
+    "effect-size",
+    "ab-testing",
+    "p-value-and-confidence-intervals"
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "id": "effect-size",
+  "title": "Effect Size",
+  "section": "advanced-statistics",
+  "difficulty": "beginner",
+  "color": "green",
+  "tagline": "Statistical significance tells you something is real. Effect size tells you if it actually matters.",
+
+  "what_it_is": "Effect size is a number that tells you how big a difference or relationship actually is — independent of sample size. A result can be statistically significant (very unlikely to be chance) but have a tiny effect size (barely makes a difference in practice). Effect size separates 'we can reliably detect this' from 'this is worth caring about.'",
+
+  "key_points": [
+    "Statistical significance (p-value) tells you whether an effect is real. Effect size tells you how large it is.",
+    "With a big enough sample, even a meaningless difference will be statistically significant.",
+    "Cohen's d measures effect size for comparing two means. Small ≈ 0.2, Medium ≈ 0.5, Large ≈ 0.8.",
+    "Pearson's r (correlation) is itself an effect size — it's already standardised between −1 and +1.",
+    "Always report effect size alongside p-values. A p-value alone is not enough."
+  ],
+
+  "why_it_exists": "The p-value has a dirty secret: it's heavily influenced by sample size. Give a test enough data and it will find any difference 'significant', even one so small it has zero practical meaning. Effect size was introduced to answer the question p-values can't: okay, but how much does this actually matter?",
+
+  "what_it_measures": "Effect size measures the magnitude of a difference or relationship in standardised units — meaning it's not in dollars or kilograms or clicks, but in a unit that lets you compare across different studies and contexts. It answers: if there is an effect, how big is it relative to the natural variability in the data?",
+
+  "intuition": "A painkiller trial with 100,000 participants finds that Drug A reduces pain scores by 0.3 points on a 100-point scale. p = 0.0001. Extremely significant. But the effect size is tiny — the average person would barely notice. Meanwhile, a small study of 40 people finds that a specific therapy reduces depression scores by 12 points on a 20-point scale. p = 0.04. Less significant. But the effect is enormous — people's lives are materially better. The p-value is about reliability. The effect size is about importance. You need both.",
+
+  "example": {
+    "text": "Two groups of students: Group A studies with background music, Group B studies in silence. Group A scores: mean = 72, SD = 10. Group B scores: mean = 75, SD = 10. Cohen's d = (75 − 72) / 10 = 0.3. With n = 1000 per group, p = 0.001 — highly significant. But d = 0.3 is a small effect. The 3-point difference is real, but it explains almost nothing about student performance.",
+    "interpretation": "The test is so large it detects a 3-point difference with high confidence. But 3 points on an exam is not a meaningful pedagogical finding. Effect size catches what the p-value misses."
+  },
+
+  "formulas": [
+    {
+      "label": "Cohen's d (comparing two means)",
+      "expression": "d = \\frac{\\mu_1 - \\mu_2}{\\sigma_{pooled}}",
+      "breakdown": [
+        { "symbol": "\\mu_1, \\mu_2", "means": "the means of the two groups you're comparing" },
+        { "symbol": "\\sigma_{pooled}", "means": "the pooled standard deviation — a combined measure of spread across both groups" },
+        { "symbol": "d", "means": "the effect size — how many standard deviations apart the two group means are" }
+      ]
+    },
+    {
+      "label": "Cohen's benchmarks",
+      "expression": "\\text{Small} \\approx 0.2 \\quad \\text{Medium} \\approx 0.5 \\quad \\text{Large} \\approx 0.8",
+      "breakdown": [
+        { "symbol": "0.2", "means": "small effect — real but hard to notice without careful measurement" },
+        { "symbol": "0.5", "means": "medium effect — visible to a careful observer" },
+        { "symbol": "0.8", "means": "large effect — obvious difference, clearly visible in the data" }
+      ]
+    }
+  ],
+
+  "when_to_use": [
+    "Whenever you report a hypothesis test result — always pair the p-value with an effect size",
+    "When comparing results across different studies — effect sizes are standardised, p-values are not",
+    "When deciding if a result is worth acting on — 'significant' doesn't mean 'important'"
+  ],
+
+  "when_not_to_use": [
+    "Cohen's benchmarks (small/medium/large) are rough guides, not laws. A 'small' effect in medicine might save thousands of lives. Context matters.",
+    "Don't use Cohen's d for proportions or non-continuous outcomes — use Cohen's h or odds ratios instead"
+  ],
+
+  "common_mistakes": [
+    "Reporting only p-values and calling a result 'highly significant' without mentioning the effect size — this is still extremely common in published research",
+    "Treating Cohen's thresholds as absolute — 0.2 is not 'unimportant' and 0.8 is not 'important'. Always interpret effect size relative to the domain.",
+    "Confusing a large sample size with a large effect — big samples inflate significance, not importance"
+  ],
+
+  "notes": [
+    "Cohen himself warned that his benchmarks were arbitrary conventions for when researchers had no other basis for comparison. They were never meant to be universal rules.",
+    "In machine learning, effect size thinking shows up in model evaluation — a 0.2% improvement in accuracy might be statistically significant but not worth the added complexity of the new model."
+  ],
+
+  "ds_usage": "Effect size thinking is essential in A/B testing — companies set a 'minimum detectable effect' (MDE) before running an experiment, which is directly an effect size judgement. It also matters in feature selection: a feature might be significantly correlated with the target but have near-zero effect size — not worth including. In model comparison, use effect sizes to determine if a more complex model is genuinely better, or just marginally so.",
+
+  "related_concepts": [
+    "statistical-power",
+    "type-1-type-2-errors",
+    "hypothesis-testing",
+    "p-value-and-confidence-intervals",
+    "ab-testing"
+  ]
+}

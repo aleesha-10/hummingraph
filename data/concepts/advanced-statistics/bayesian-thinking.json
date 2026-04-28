@@ -1,0 +1,70 @@
+{
+  "id": "bayesian-thinking",
+  "title": "Bayesian Thinking",
+  "section": "advanced-statistics",
+  "difficulty": "intermediate",
+  "color": "purple",
+  "tagline": "A completely different way of thinking about probability — not as frequencies, but as beliefs that update.",
+
+  "what_it_is": "Bayesian thinking is a framework where probability represents your degree of belief in something, not just how often it happens in repeated trials. You start with a prior belief, collect evidence, and update your belief to get a posterior — your new, improved belief after seeing the data. It's less about yes/no answers and more about continuously refining your confidence.",
+
+  "key_points": [
+    "Frequentist statistics asks: 'If I repeated this experiment forever, how often would I see this result?' Bayesian statistics asks: 'Given what I know, how confident should I be in this claim?'",
+    "Prior: your belief before seeing data. Posterior: your belief after. Likelihood: how well the data fits each possible explanation.",
+    "The posterior becomes the new prior when new data arrives. Belief is always provisional.",
+    "Bayesian results are probability distributions over hypotheses — not just 'reject' or 'fail to reject'.",
+    "You can incorporate domain knowledge through the prior — which is both its strength and the source of most criticism."
+  ],
+
+  "why_it_exists": "Frequentist statistics — the kind taught in most intro stats courses — has a fundamental limitation: it can only tell you 'what's the probability of this data, assuming the null is true?' It cannot tell you 'what's the probability that my hypothesis is true?' Bayesian statistics was developed to answer that second question directly. It's also more natural for sequential decision-making, where evidence arrives in chunks over time.",
+
+  "what_it_measures": "Bayesian methods produce a posterior distribution — a full picture of how plausible every possible value of your parameter is, given the data. Instead of 'the effect is significant at p < 0.05', you get 'there's a 91% probability the effect is positive, and a 73% probability it's larger than 5%.' That's a much richer answer.",
+
+  "intuition": "You're a detective. Before you arrive at the crime scene, you have a prior — maybe 60% of crimes like this are committed by someone the victim knew. You examine the evidence: the door wasn't forced, there are no signs of struggle. This shifts your belief upward — now you think it's 85% likely someone the victim knew. More evidence comes in: a witness saw a stranger nearby. You update again — maybe back to 70%. You never reach 100% certainty. You keep updating. That's Bayesian thinking. Now contrast with the frequentist detective: they'd collect all the evidence first, set up a hypothesis test, run it once, and report a p-value. No updating. No degree of belief. Just yes or no at the end.\n\n{{viz:bayesian-updating-chart}}",
+
+  "example": {
+    "text": "You're running a website. You believe the conversion rate is probably around 5% — that's your prior. You run an experiment: 200 visitors, 14 conversions (7%). Frequentist approach: is 7% significantly different from 5%? p = 0.24. Not significant. Conclusion: no evidence of difference. Bayesian approach: update the prior with the new data. Posterior: 'the conversion rate is probably between 4.5% and 8.5%, with the most likely value around 5.8%.' You get a full distribution of possibilities, not a binary answer.",
+    "interpretation": "The Bayesian answer is more useful for decision-making — it tells you the plausible range and the most likely value, not just whether you crossed an arbitrary threshold."
+  },
+
+  "visual": {
+    "type": "interactive updating chart",
+    "description": "Three panels. Panel 1: Prior distribution (before data) — a wide bell curve centered at the prior belief. Panel 2: Likelihood — how well the data fits different parameter values. Panel 3: Posterior — the prior multiplied by the likelihood, normalized. Show a slider so the user can increase sample size and watch the posterior get narrower and shift toward the true value. Label the 95% credible interval on the posterior.",
+    "file": "visualizations/bayesian-updating-chart.json"
+  },
+
+  "when_to_use": [
+    "When you have genuine prior knowledge you want to incorporate — expert beliefs, historical data, pilot studies",
+    "When you need continuous updating as data arrives — not waiting for one big experiment to finish",
+    "When you want to answer 'what's the probability my hypothesis is true?' rather than just 'is this significant?'",
+    "In A/B testing when you want to say 'there's an 87% chance variant B is better' instead of just p < 0.05"
+  ],
+
+  "when_not_to_use": [
+    "When you have no reasonable prior — a completely uninformed prior can be specified (uniform/flat) but adds little over frequentist methods",
+    "When computational cost matters — Bayesian methods with complex models often require heavy computation (MCMC sampling)",
+    "In regulated contexts that mandate frequentist methods — clinical trials for drug approval, for example, typically require p-values by regulation"
+  ],
+
+  "common_mistakes": [
+    "Thinking Bayesian and frequentist are about different math — they use the same probability rules. The difference is philosophical: what does probability mean?",
+    "Choosing a prior to get the answer you want — this is p-hacking's Bayesian cousin. Your prior should reflect genuine belief before seeing the data.",
+    "Interpreting a frequentist confidence interval as a Bayesian credible interval — a 95% confidence interval does NOT mean 'there's a 95% chance the true value is in this range.' A Bayesian 95% credible interval does mean exactly that."
+  ],
+
+  "notes": [
+    "The frequentist vs Bayesian debate has been going on for over a century and still isn't settled. In practice, most data scientists use both depending on the problem. Frequentist for standard hypothesis tests and A/B tests. Bayesian for modelling with limited data, updating over time, or where probabilistic reasoning is natural.",
+    "The prior is the most controversial part of Bayesian statistics. Critics argue it introduces subjectivity. Proponents argue all statistics involves assumptions — at least Bayesians make theirs explicit.",
+    "Bayesian A/B testing is increasingly popular in industry because it lets you stop a test early when confidence is high enough, rather than waiting for a pre-determined sample size."
+  ],
+
+  "ds_usage": "Bayesian methods appear in: Naive Bayes classifiers (spam filters, text classification), Bayesian A/B testing platforms (Optimizely, VWO), Bayesian optimization for hyperparameter tuning, probabilistic forecasting, and recommendation systems. The intuition of 'start with a prior, update with data' is also the core of many sequential learning algorithms.",
+
+  "related_concepts": [
+    "bayes-theorem",
+    "hypothesis-testing",
+    "p-value-and-confidence-intervals",
+    "ab-testing",
+    "probability-basics"
+  ]
+}

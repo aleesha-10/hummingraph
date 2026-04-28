@@ -1,0 +1,86 @@
+{
+  "id": "multiple-testing-problem",
+  "title": "The Multiple Testing Problem",
+  "section": "advanced-statistics",
+  "difficulty": "intermediate",
+  "color": "yellow",
+  "tagline": "Run enough tests and something will look significant. That's a bug, not a discovery.",
+
+  "what_it_is": "The multiple testing problem is what happens when you run many hypothesis tests at once. Each test has a small chance of a false positive (Type I error). But run enough tests and the probability of at least one false alarm grows rapidly — even if nothing is real. Without correction, most 'discoveries' in large-scale testing are noise.",
+
+  "key_points": [
+    "With alpha = 0.05, every single test has a 5% chance of a false positive — even if nothing is happening.",
+    "Run 20 tests: the chance of at least one false positive is roughly 64%. Run 100: it's over 99%.",
+    "The family-wise error rate (FWER) is the probability of any false positive across all your tests.",
+    "Bonferroni correction: divide alpha by the number of tests. Simple and conservative.",
+    "False Discovery Rate (FDR) control (Benjamini-Hochberg) is less strict — it controls the expected proportion of false positives among your significant results."
+  ],
+
+  "why_it_exists": "When researchers test one hypothesis with alpha = 0.05, a 5% false positive rate is acceptable. But modern data science often involves testing hundreds or thousands of hypotheses simultaneously — genomics studies testing 20,000 genes, online platforms running hundreds of A/B tests, feature selection scanning dozens of variables. The multiple testing problem is the statistical cost of fishing in a big pond.",
+
+  "intuition": "Imagine you're flipping 20 fair coins. The chance of any single coin landing heads 5 times in a row is very low. But across 20 coins, the chance that at least one of them lands heads 5 times in a row is much higher. If you then hold up that one coin and say 'look, this coin is biased!' — you're fooling yourself. You only noticed it because you were watching 20 coins. Running 20 hypothesis tests is the same. One of them will look significant by luck. Corrections for multiple testing force you to account for the fact that you were watching all of them.",
+
+  "example": {
+    "text": "A pharmaceutical company tests whether a drug affects 50 different biomarkers. They use alpha = 0.05. Even if the drug does nothing at all, they'd expect 50 × 0.05 = 2.5 false positives on average — tests that look significant purely by chance. If 4 biomarkers show p < 0.05, you can't tell which (if any) are real discoveries and which are noise. With Bonferroni correction: new alpha = 0.05 / 50 = 0.001. Only results with p < 0.001 count. With Benjamini-Hochberg (FDR = 0.05): you accept that up to 5% of your declared significant results might be false, but you detect more real effects.",
+    "interpretation": "Both corrections reduce false positives but at the cost of more false negatives. Bonferroni is the strictest. FDR control is more powerful — it's the standard in genomics and large-scale scientific discovery."
+  },
+
+  "formulas": [
+    {
+      "label": "Family-wise error rate (uncorrected)",
+      "expression": "P(\\text{at least one false positive}) = 1 - (1 - \\alpha)^m",
+      "breakdown": [
+        { "symbol": "\\alpha", "means": "your per-test significance threshold (e.g., 0.05)" },
+        { "symbol": "m", "means": "the number of tests you're running" },
+        { "symbol": "1 - (1-\\alpha)^m", "means": "the probability that at least one test produces a false positive — grows rapidly with m" }
+      ]
+    },
+    {
+      "label": "Bonferroni correction",
+      "expression": "\\alpha_{corrected} = \\frac{\\alpha}{m}",
+      "breakdown": [
+        { "symbol": "\\alpha_{corrected}", "means": "the new, stricter threshold to apply to each individual test" },
+        { "symbol": "m", "means": "the total number of tests" }
+      ]
+    }
+  ],
+
+  "visual": {
+    "type": "line chart",
+    "description": "X-axis: number of tests run (1 to 200). Y-axis: probability of at least one false positive (0 to 1). A single curve showing 1 − (1 − 0.05)^m rising steeply. Mark the point at m=20 (roughly 64%) and m=100 (99.4%). Add a horizontal dashed line at 0.05 labeled 'Your intended false positive rate'. The gap between the curve and that line is the problem.",
+    "file": "visualizations/multiple-testing-fwer-curve.json"
+  },
+
+  "when_to_use": [
+    "Any time you run more than one hypothesis test on the same dataset or experiment",
+    "Feature selection when testing many features for association with the target",
+    "Genomics, proteomics, and other high-dimensional biological studies — this is where FDR correction was invented",
+    "Multi-metric A/B tests where you're checking many secondary metrics after the primary one"
+  ],
+
+  "when_not_to_use": [
+    "Bonferroni is too conservative when tests are highly correlated — it overcorrects and misses real effects. Use FDR instead.",
+    "Don't correct across completely independent studies — corrections apply within a family of related tests, not across all research ever done"
+  ],
+
+  "common_mistakes": [
+    "Running many tests in exploratory analysis, finding something that looks significant, and then reporting it as a confirmed finding without correction — this is p-hacking, even if unintentional",
+    "Treating each comparison in a multi-variant A/B test (A vs B, A vs C, B vs C) as independent — they're part of the same family of tests and need correction",
+    "Using Bonferroni when you have hundreds of tests — at m = 200 and alpha = 0.05, you'd need p < 0.00025 to declare significance. That's so strict you'll miss many real effects. Benjamini-Hochberg is more appropriate."
+  ],
+
+  "notes": [
+    "The replication crisis in psychology is partly caused by multiple testing — researchers would test many outcomes, report only the significant one, and never publish the non-significant ones. This is called selective reporting or the file drawer problem.",
+    "Pre-registration — publicly declaring your hypothesis and analysis plan before collecting data — is the cleanest solution. If you only test what you said you'd test, the multiple testing problem doesn't apply."
+  ],
+
+  "ds_usage": "In feature selection, testing whether each of 50 features is correlated with the target at alpha = 0.05 without correction guarantees spurious features will be selected. FDR correction is standard in this setting. In online experimentation platforms, guardrail metrics (secondary metrics you're monitoring but not optimising) are particularly vulnerable — always apply correction when checking many metrics post-hoc.",
+
+  "related_concepts": [
+    "type-1-type-2-errors",
+    "hypothesis-testing",
+    "p-value-and-confidence-intervals",
+    "ab-testing",
+    "anova"
+  ]
+}

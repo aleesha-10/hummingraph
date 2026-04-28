@@ -1,0 +1,65 @@
+{
+  "id": "type-1-type-2-errors",
+  "title": "Type I & Type II Errors",
+  "section": "advanced-statistics",
+  "difficulty": "beginner",
+  "color": "yellow",
+  "tagline": "The two ways a hypothesis test can lie to you — and why fixing one makes the other worse.",
+
+  "what_it_is": "Every time you run a hypothesis test, there are two ways it can get it wrong. A Type I error is when the test says something is real when it isn't — a false alarm. A Type II error is when the test misses something that is real — a missed catch. You can't eliminate both at once. Reducing one always increases the risk of the other.",
+
+  "key_points": [
+    "Type I error (false positive): you reject the null hypothesis when it's actually true. You think you found something — you didn't.",
+    "Type II error (false negative): you fail to reject the null hypothesis when it's actually false. Something real is there — you missed it.",
+    "Alpha (α) is the threshold you set for Type I errors. Usually 0.05, meaning you're okay with a 5% chance of a false alarm.",
+    "Beta (β) is the probability of making a Type II error. Statistical power = 1 − β.",
+    "Lowering alpha (being stricter) reduces false positives but increases false negatives — and vice versa."
+  ],
+
+  "why_it_exists": "Hypothesis tests don't give you certainty — they give you probabilities. So there's always a chance the answer is wrong. These two error types exist to give you a framework for deciding which kind of mistake you can afford to make, because the right tradeoff depends entirely on the situation.",
+
+  "intuition": "Think about a metal detector at an airport. A Type I error is when it beeps on someone who has nothing — a false alarm. Security pulls them aside for nothing. A Type II error is when it stays silent on someone who actually does have something — a missed catch. Now ask yourself: which is worse? In airport security, missing a real threat (Type II) is far more dangerous than a few false alarms (Type I). So the detector is tuned to be very sensitive — lots of false alarms, almost no misses. But in a medical drug trial, a Type I error means you approve a drug that doesn't work. That's expensive and potentially harmful. So trials are tuned to avoid false positives. The cost of each error type depends on the situation — and that should drive how you set your thresholds.",
+
+  "example": {
+    "text": "A company tests whether a new webpage layout increases sales. Null hypothesis: no difference. They run the test and get p = 0.03, so they reject the null (α = 0.05). But the effect was actually random noise — the old layout and new layout perform identically in the long run. They just got unlucky with the sample. That's a Type I error — they'll spend money redesigning for no real gain. Alternatively: the new layout genuinely increases sales by 8%, but the test ran for only 3 days with a small sample. p = 0.14. They don't reject the null. They scrap the new layout. That's a Type II error — a real improvement was missed.",
+    "interpretation": "Type I errors waste resources chasing ghosts. Type II errors mean real opportunities get ignored. Neither is always worse — it depends on the stakes."
+  },
+
+  "visual": {
+    "type": "comparison table + decision matrix",
+    "description": "A 2x2 grid. Rows: 'Null is actually True' and 'Null is actually False'. Columns: 'Test says: Reject null' and 'Test says: Fail to reject'. Cells: Type I Error (top left, red), Correct (top right, green), Correct (bottom left, green), Type II Error (bottom right, orange). Below the grid, a see-saw diagram showing that lowering alpha tips the balance toward more Type II errors.",
+    "file": "visualizations/type-errors-matrix.json"
+  },
+
+  "when_to_use": [
+    "When deciding what alpha level to set — ask yourself what the cost of each error type is first",
+    "When interpreting a significant result — ask if a false positive is plausible given the context",
+    "When interpreting a non-significant result — ask if the test was powerful enough to detect a real effect"
+  ],
+
+  "when_not_to_use": [
+    "Don't treat α = 0.05 as a universal law — it's a convention, not a physical constant. Set it based on context.",
+    "Don't assume a non-significant result means the null is true — it might just mean your test lacked the power to detect the effect"
+  ],
+
+  "common_mistakes": [
+    "Setting α = 0.05 without thinking about it — in genomics or particle physics, thresholds are far stricter because thousands of tests are run simultaneously",
+    "Confusing 'not significant' with 'no effect' — failing to reject the null is not proof the null is true",
+    "Running multiple tests with the same α and not adjusting — covered in the Multiple Testing Problem"
+  ],
+
+  "notes": [
+    "In the real world, Type I and Type II errors have different names depending on the field. In medicine: false positive / false negative. In ML: false positive / false negative (same). In signal detection: false alarm / miss.",
+    "The asymmetry between error types is intentional in many fields. Courts prefer Type II errors (letting a guilty person go free) over Type I errors (convicting an innocent person). That's what 'beyond reasonable doubt' means statistically."
+  ],
+
+  "ds_usage": "In model evaluation, Type I and Type II errors map directly to false positives and false negatives in a confusion matrix. In A/B testing, they determine how long you need to run an experiment. In fraud detection, a Type II error (missing real fraud) is usually considered worse than a Type I error (flagging a legitimate transaction), so models are tuned to be very sensitive.",
+
+  "related_concepts": [
+    "hypothesis-testing",
+    "p-value-and-confidence-intervals",
+    "statistical-power",
+    "multiple-testing-problem",
+    "confusion-matrix"
+  ]
+}
