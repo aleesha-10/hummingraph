@@ -1,0 +1,40 @@
+{
+  "data": [
+    {
+      "type": "heatmap",
+      "z": [[1, 0], [0, 1]],
+      "x": ["Test says: Reject H₀", "Test says: Fail to Reject H₀"],
+      "y": ["H₀ is Actually True", "H₀ is Actually False"],
+      "colorscale": [
+        [0, "#F87171"],
+        [0.5, "#6EE7B7"],
+        [1, "#6EE7B7"]
+      ],
+      "showscale": false,
+      "text": [
+        ["Type I Error (False Positive)\nα = your false alarm rate", "Correct ✓\nTrue Negative"],
+        ["Correct ✓\nTrue Positive", "Type II Error (False Negative)\nβ = your miss rate"]
+      ],
+      "texttemplate": "%{text}",
+      "hoverinfo": "none"
+    }
+  ],
+  "layout": {
+    "title": "The Two Ways a Test Can Be Wrong",
+    "xaxis": { "side": "top", "tickfont": { "size": 13 } },
+    "yaxis": { "tickfont": { "size": 13 } },
+    "plot_bgcolor": "#fdf8f5",
+    "paper_bgcolor": "#fdf8f5",
+    "height": 340,
+    "margin": { "t": 80, "b": 20 },
+    "annotations": [
+      {
+        "x": 0.5, "y": -0.08,
+        "xref": "paper", "yref": "paper",
+        "text": "Lowering α (being stricter) reduces Type I errors — but increases Type II errors.",
+        "showarrow": false,
+        "font": { "size": 12, "color": "#6B7280" }
+      }
+    ]
+  }
+}

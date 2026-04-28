@@ -1,0 +1,64 @@
+{
+  "data": [
+    {
+      "type": "scatter",
+      "mode": "lines",
+      "name": "Actual false positive risk",
+      "x": [1,2,3,4,5,6,7,8,9,10,15,20,25,30,40,50,75,100,150,200],
+      "y": [0.05, 0.0975, 0.1426, 0.1855, 0.2262, 0.2649, 0.3017, 0.3366, 0.3698, 0.4013, 0.5367, 0.6415, 0.7226, 0.7854, 0.8715, 0.9231, 0.9796, 0.9994, 0.99997, 0.99999],
+      "line": { "color": "#F87171", "width": 3 },
+      "fill": "tozeroy",
+      "fillcolor": "rgba(248, 113, 113, 0.1)"
+    },
+    {
+      "type": "scatter",
+      "mode": "lines",
+      "name": "What you intended (α = 0.05)",
+      "x": [1, 200],
+      "y": [0.05, 0.05],
+      "line": { "color": "#6EE7B7", "width": 2, "dash": "dash" }
+    }
+  ],
+  "layout": {
+    "title": "The Multiple Testing Problem: Your Risk Grows With Every Test",
+    "xaxis": {
+      "title": "Number of hypothesis tests run",
+      "type": "log"
+    },
+    "yaxis": {
+      "title": "Probability of at least one false positive",
+      "tickformat": ".0%",
+      "range": [0, 1.05]
+    },
+    "plot_bgcolor": "#fdf8f5",
+    "paper_bgcolor": "#fdf8f5",
+    "height": 420,
+    "annotations": [
+      {
+        "x": 1.301,
+        "y": 0.6415,
+        "text": "20 tests → 64% chance<br>of a false positive",
+        "showarrow": true,
+        "arrowhead": 2,
+        "ax": 60, "ay": -40,
+        "font": { "size": 12, "color": "#DC2626" }
+      },
+      {
+        "x": 2,
+        "y": 0.9994,
+        "text": "100 tests → 99.4%",
+        "showarrow": true,
+        "arrowhead": 2,
+        "ax": -80, "ay": 30,
+        "font": { "size": 12, "color": "#DC2626" }
+      },
+      {
+        "x": 0.5, "y": -0.1,
+        "xref": "paper", "yref": "paper",
+        "text": "Formula: 1 − (1 − 0.05)^m  |  Bonferroni fix: use α/m per test  |  FDR (Benjamini-Hochberg): controls % of false discoveries",
+        "showarrow": false,
+        "font": { "size": 11, "color": "#6B7280" }
+      }
+    ]
+  }
+}

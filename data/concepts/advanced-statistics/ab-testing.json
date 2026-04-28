@@ -1,0 +1,71 @@
+{
+  "id": "ab-testing",
+  "title": "A/B Testing",
+  "section": "advanced-statistics",
+  "difficulty": "intermediate",
+  "color": "green",
+  "tagline": "The structured way companies test whether a change actually works — or just feels like it does.",
+
+  "what_it_is": "An A/B test is a controlled experiment where you randomly split users into two groups, show each group a different version of something, and measure which performs better. Group A gets the current version (control). Group B gets the changed version (treatment). Statistics then tells you whether any difference you observe is real or just random noise.",
+
+  "key_points": [
+    "Random assignment is non-negotiable. Without it, you can't establish causation — only correlation.",
+    "Run a power calculation first to know how long to run the test before starting.",
+    "Pick one primary metric before the test. Checking many metrics and picking the winner is p-hacking.",
+    "Don't stop the test early just because you see a significant result — early significance is often a fluke.",
+    "Practical significance (effect size) matters as much as statistical significance. A 0.01% lift that's significant isn't worth shipping."
+  ],
+
+  "why_it_exists": "Our intuition about what will work is frequently wrong. A redesigned button that looks better to the designer might perform worse for users. A clunkier checkout flow might actually increase conversions. A/B testing is the antidote to HiPPO decisions — Highest Paid Person's Opinion. It lets data decide instead of gut feel.",
+
+  "intuition": "Imagine a restaurant wants to know if a new menu layout increases orders of the daily special. Option 1: just switch the menu and see if specials sales go up. But what if sales went up because of a local event that week? Or a competitor closed? You can't separate the menu effect from everything else happening at the same time. Option 2: on the same day, half the tables get the new menu and half get the old one. Tables are assigned randomly. Now everything else is the same — the only difference is the menu. Any sales difference between the two groups has to be because of the menu. That isolation of cause is what an A/B test gives you.",
+
+  "steps": [
+    { "step": 1, "title": "Define the hypothesis", "description": "Be specific. Not 'will the new button perform better?' but 'will changing the CTA button from grey to orange increase clicks by at least 5%?' Name your primary metric. Name your minimum detectable effect." },
+    { "step": 2, "title": "Run a power calculation", "description": "Based on your baseline conversion rate, minimum detectable effect, alpha (typically 0.05), and target power (typically 0.80) — calculate the minimum sample size per group. This tells you how long to run the test." },
+    { "step": 3, "title": "Randomise assignment", "description": "Every user must be randomly assigned to control or treatment — not by device type, not by signup date, not by country. Random. Consistent (same user always sees the same variant)." },
+    { "step": 4, "title": "Run the test for the pre-specified duration", "description": "Don't peek and stop early. Don't extend when you're close. Commit to the sample size you calculated. This is the hardest part in practice." },
+    { "step": 5, "title": "Analyse the result", "description": "Run your chosen statistical test (usually a two-proportion z-test for conversion rates). Check p-value against alpha. Then check effect size — is the lift large enough to matter? Then ship or don't." }
+  ],
+
+  "visual": {
+    "type": "experiment flow diagram",
+    "description": "A flowchart showing: users enter → random split → 50% see Control (A), 50% see Treatment (B) → both groups measured on the same metric → statistical test applied → decision: ship or don't. Annotate each step with what can go wrong if done incorrectly (e.g., non-random split = selection bias, peeking early = inflated alpha).",
+    "file": "visualizations/ab-test-flow.json"
+  },
+
+  "when_to_use": [
+    "When you want to establish causation, not just observe a correlation",
+    "When you have enough traffic or users to reach the required sample size in a reasonable time",
+    "When there's one clear primary metric and a meaningful minimum effect size to detect"
+  ],
+
+  "when_not_to_use": [
+    "When you can't randomise — you can't run a proper A/B test on a policy change that affects everyone at once",
+    "When traffic is too low — if you need 50,000 users per group and only get 500/day, the test takes years",
+    "When the change has strong network effects — showing half the users a new social feature while others don't see it creates contamination between groups"
+  ],
+
+  "common_mistakes": [
+    "Peeking at results and stopping early when p < 0.05 appears — this inflates false positive rates dramatically. If you must peek, use sequential testing methods.",
+    "Testing too many variants at once without adjusting for multiple comparisons — A vs B vs C vs D is not 3 separate A/B tests",
+    "Forgetting the novelty effect — users sometimes engage more with anything new, regardless of quality. The lift may fade after a few weeks.",
+    "Using non-representative samples — if you test only on mobile users in the US, the result may not generalise to desktop users in Europe"
+  ],
+
+  "notes": [
+    "In industry, A/B tests are sometimes called 'controlled experiments', 'randomized controlled trials' (RCTs), or just 'experiments'. Same thing.",
+    "Bayesian A/B testing is an increasingly popular alternative. Instead of waiting for a fixed sample size and getting a p-value, you get a continuous probability that one variant is better — and can stop when confidence is high enough. Covered in Bayesian Thinking."
+  ],
+
+  "ds_usage": "A/B testing is the backbone of product development at tech companies. Google runs thousands simultaneously. The data science role includes: designing the experiment, calculating required sample sizes, monitoring for data quality issues (SRM — sample ratio mismatch), running the statistical analysis, and communicating results. Tools: Optimizely, LaunchDarkly, Statsig, and custom internal experimentation platforms.",
+
+  "related_concepts": [
+    "hypothesis-testing",
+    "statistical-power",
+    "effect-size",
+    "type-1-type-2-errors",
+    "multiple-testing-problem",
+    "bayesian-thinking"
+  ]
+}

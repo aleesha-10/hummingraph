@@ -1,0 +1,76 @@
+{
+  "id": "anova",
+  "title": "ANOVA",
+  "section": "advanced-statistics",
+  "difficulty": "intermediate",
+  "color": "green",
+  "tagline": "Like a t-test, but for when you have more than two groups to compare.",
+
+  "what_it_is": "ANOVA — Analysis of Variance — tests whether the means of three or more groups are all the same, or whether at least one group is different. It does this by comparing the variation between groups to the variation within groups. If the between-group variation is large relative to the within-group variation, something is probably driving the differences.",
+
+  "key_points": [
+    "ANOVA tests whether at least one group mean differs — it doesn't tell you which ones.",
+    "The F-statistic is the ratio of between-group variance to within-group variance. A high F = groups are more different than you'd expect by chance.",
+    "ANOVA assumes: normality within each group, equal variances across groups (homoscedasticity), and independent observations.",
+    "A significant ANOVA result requires a post-hoc test (e.g. Tukey's HSD) to find which specific groups differ.",
+    "Running multiple t-tests instead of ANOVA inflates your Type I error rate — ANOVA was designed to avoid exactly that."
+  ],
+
+  "why_it_exists": "When you have three groups and want to know if they differ, the tempting solution is to run three separate t-tests: A vs B, A vs C, B vs C. But each test has a 5% false positive rate. Three tests together means roughly a 14% chance of at least one false alarm. With 10 groups, it becomes a mess. ANOVA runs one test across all groups simultaneously, keeping the false positive rate controlled at your chosen alpha.",
+
+  "what_it_measures": "ANOVA measures whether the group membership explains a meaningful amount of variation in your outcome. The F-statistic captures the signal-to-noise ratio: how much do the groups differ from each other (signal) relative to how much they vary internally (noise)?",
+
+  "intuition": "Imagine you're testing three different study methods — flashcards, videos, and practice problems — on exam scores. Each student is randomly assigned to one method. Some variation in scores is expected just from student to student (some students are naturally stronger). That's the within-group noise. But if the study method actually works, you'd also see the three groups' average scores pulling apart from each other. ANOVA asks: is the pulling-apart bigger than what we'd expect from random noise alone? If yes — at least one method is genuinely different.",
+
+  "steps": [
+    { "step": 1, "title": "Check assumptions", "description": "Verify your data is roughly normal within each group (histogram or Shapiro-Wilk test), that variances are similar across groups (Levene's test), and that observations are independent." },
+    { "step": 2, "title": "Calculate the F-statistic", "description": "F = (variance between groups) / (variance within groups). Software does this for you. The bigger the F, the more the groups differ relative to noise." },
+    { "step": 3, "title": "Check the p-value", "description": "If p < alpha, at least one group mean is different from the others. But ANOVA doesn't say which one." },
+    { "step": 4, "title": "Run a post-hoc test", "description": "Use Tukey's HSD (Honest Significant Difference) or Bonferroni correction to compare all pairs of groups while keeping the family-wise error rate controlled. This tells you which specific groups differ." }
+  ],
+
+  "formulas": [
+    {
+      "label": "F-statistic",
+      "expression": "F = \\frac{MS_{between}}{MS_{within}} = \\frac{\\text{variance between group means}}{\\text{average variance within groups}}",
+      "breakdown": [
+        { "symbol": "MS_{between}", "means": "mean square between groups — measures how much the group means deviate from the grand mean" },
+        { "symbol": "MS_{within}", "means": "mean square within groups — measures how much individual observations deviate from their group mean" },
+        { "symbol": "F", "means": "the ratio — if F is large, the group differences are large relative to the internal noise" }
+      ]
+    }
+  ],
+
+  "when_to_use": [
+    "When comparing the means of three or more independent groups on one continuous outcome",
+    "When you've run an experiment with multiple treatment conditions and a control",
+    "When doing feature analysis — does this categorical feature produce significantly different target values across its levels?"
+  ],
+
+  "when_not_to_use": [
+    "When you only have two groups — use a t-test instead",
+    "When your groups violate the assumptions badly (heavy skew, very unequal variances, small samples) — consider the Kruskal-Wallis test (non-parametric ANOVA)",
+    "When observations are not independent — for repeated measurements on the same subjects, use repeated-measures ANOVA"
+  ],
+
+  "common_mistakes": [
+    "Stopping at the ANOVA p-value without running a post-hoc test — 'at least one group differs' is rarely your actual research question",
+    "Ignoring the assumption of equal variances — if groups have very different spreads, Welch's ANOVA is more appropriate",
+    "Using ANOVA to compare groups that weren't randomly assigned — ANOVA can detect differences but cannot establish causation without randomisation"
+  ],
+
+  "notes": [
+    "One-way ANOVA compares groups on a single factor (e.g., study method). Two-way ANOVA tests two factors simultaneously (e.g., study method AND sleep amount) and can detect interaction effects — where the effect of one factor depends on the level of the other.",
+    "ANOVA and linear regression are mathematically equivalent when your predictor is categorical. Running ANOVA is the same as fitting a regression model with dummy variables for the groups."
+  ],
+
+  "ds_usage": "ANOVA shows up in feature analysis — testing whether a categorical feature produces meaningfully different target distributions across its categories. It's also used in model comparison when you have multiple models and want to test if their performance differences are statistically significant across cross-validation folds. In product analytics, ANOVA handles multi-variant tests (A/B/C/D testing).",
+
+  "related_concepts": [
+    "hypothesis-testing",
+    "type-1-type-2-errors",
+    "multiple-testing-problem",
+    "ab-testing",
+    "p-value-and-confidence-intervals"
+  ]
+}
