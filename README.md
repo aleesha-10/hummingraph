@@ -141,5 +141,7 @@ hummingraph/
 │   └── concept.ts
 └── sections.json                 # Master section index
 ```
+<img width="1784" height="890" alt="image" src="https://github.com/user-attachments/assets/d904e65a-38fb-4310-8edc-17ac4e9b7274" />
+
 
 _Built by [@aleesha-10](https://github.com/aleesha-10)  because no one should have to watch a 45-minute video to remember what MAE means.
