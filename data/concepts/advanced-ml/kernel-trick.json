@@ -1,0 +1,38 @@
+{
+  "id": "kernel-trick",
+  "title": "The Kernel Trick",
+  "section": "advanced-ml",
+  "difficulty": "advanced",
+  "color": "purple",
+  "tagline": "Make non-linear data linearly separable — without ever actually computing the higher dimension.",
+  "what_it_is": "The kernel trick lets algorithms like SVM find non-linear decision boundaries by implicitly mapping data into a higher-dimensional space where it becomes linearly separable, without ever explicitly computing the coordinates in that higher space. A kernel function computes the equivalent result directly in the original space.",
+  "key_points": [
+    "Some data isn't linearly separable in its original space, but becomes separable when projected to higher dimensions.",
+    "Computing that higher-dimensional projection directly is often too expensive — the kernel trick avoids it entirely.",
+    "A kernel function computes the dot product of two points as if they were already in the higher dimension, using only their original coordinates.",
+    "Common kernels: linear, polynomial, and RBF (Radial Basis Function, the most widely used default).",
+    "Used primarily in SVMs, but the same trick applies to other algorithms like kernel PCA."
+  ],
+  "why_it_exists": "Many real-world datasets cannot be separated by a straight line in their original feature space. One fix is to manually engineer new, higher-dimensional features until they become separable — but this is expensive and often impossible to do by hand. The kernel trick exists to get the mathematical benefit of that higher-dimensional space without the computational cost of actually going there.",
+  "intuition": "Imagine red and blue dots scattered on a flat table in a circular pattern — no straight line separates them. Now imagine lifting the table into 3D so the red dots pop upward like a cone — suddenly a flat plane easily separates them. The kernel trick achieves this same separating effect mathematically, without physically 'lifting' every point into 3D — it just calculates as if you had.",
+  "when_to_use": [
+    "Use the RBF kernel as a strong default when your data is clearly not linearly separable.",
+    "Use a linear kernel when you already suspect the relationship is linear or your data is very high-dimensional and sparse (e.g. text)."
+  ],
+  "when_not_to_use": [
+    "Do not use complex kernels on very large datasets — kernel computation scales poorly and slows training significantly.",
+    "Do not use a non-linear kernel without cross-validating gamma and C — a poorly tuned kernel can badly overfit."
+  ],
+  "common_mistakes": [
+    "Assuming the RBF kernel is always the best choice without testing a simpler linear kernel first.",
+    "Not understanding that kernel choice fundamentally changes what kind of decision boundary is even possible to draw."
+  ],
+  "notes": [
+    "The 'trick' part of the name refers specifically to avoiding the explicit computation of the higher-dimensional feature vectors — only their dot products are ever needed."
+  ],
+  "ds_usage": "Central to SVM-based classification on non-linear data, and used more broadly in kernel PCA and Gaussian Processes wherever a linear method needs to handle non-linear relationships.",
+  "related_concepts": [
+    "support-vector-machines",
+    "principal-component-analysis"
+  ]
+}

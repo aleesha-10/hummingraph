@@ -1,0 +1,40 @@
+{
+  "id": "hadoop-ecosystem",
+  "title": "The Hadoop Ecosystem",
+  "section": "big-data",
+  "difficulty": "beginner",
+  "color": "blue",
+  "tagline": "The original toolkit that made storing and processing web-scale data on cheap hardware possible.",
+  "what_it_is": "Hadoop is an open-source framework for distributed storage (HDFS) and distributed processing (MapReduce) of large datasets across clusters of ordinary, low-cost machines. It grew into a broader ecosystem of related tools for querying, scheduling, and managing that data.",
+  "key_points": [
+    "HDFS (Hadoop Distributed File System) handles storage — splitting files into blocks spread across many machines.",
+    "MapReduce handles processing — the original programming model for distributed computation on Hadoop.",
+    "YARN manages cluster resources, deciding which jobs get which machines and when.",
+    "Hive lets you query Hadoop data using SQL-like syntax instead of writing raw MapReduce code.",
+    "Largely succeeded in practice by Apache Spark for processing, though HDFS is still widely used for storage."
+  ],
+  "why_it_exists": "Before Hadoop, storing and processing web-scale data required extremely expensive specialized hardware. Hadoop exists because it proved you could reliably store and process massive datasets using clusters of cheap, ordinary machines, by handling failure and coordination in the software layer instead of relying on expensive, failure-proof hardware.",
+  "intuition": "Think of Hadoop as building an entire distributed filing and processing system out of thousands of ordinary filing cabinets and clerks instead of one impossibly large, impossibly expensive vault with a single super-clerk. Any individual cabinet or clerk can fail without losing the whole operation, because the system was designed assuming failures would happen.",
+  "when_to_use": [
+    "Use HDFS as reliable, cost-effective long-term storage for very large datasets across a cluster.",
+    "Use the broader Hadoop ecosystem (Hive, YARN) when an organization already has Hadoop infrastructure in place."
+  ],
+  "when_not_to_use": [
+    "Do not choose raw MapReduce for new processing workloads — Spark is faster and easier to use for almost all use cases today.",
+    "Do not set up a Hadoop cluster for data that comfortably fits on a single machine or in a managed cloud data warehouse."
+  ],
+  "common_mistakes": [
+    "Assuming 'Hadoop' and 'big data' are synonymous — Hadoop is one specific (and now often legacy) toolkit within the broader big data landscape.",
+    "Writing new pipelines directly in MapReduce instead of using Spark, which is dramatically faster for the same job.",
+    "Underestimating the operational overhead of running and maintaining a Hadoop cluster."
+  ],
+  "notes": [
+    "Many companies still use HDFS or HDFS-compatible storage (like Amazon S3) as the storage layer, even while running Spark instead of MapReduce for processing."
+  ],
+  "ds_usage": "Historically the default big data stack; today, most new data engineering pipelines use Spark for processing while still relying on HDFS-compatible storage (like S3) underneath, especially in large legacy enterprise environments.",
+  "related_concepts": [
+    "hdfs",
+    "mapreduce",
+    "apache-spark-intro"
+  ]
+}

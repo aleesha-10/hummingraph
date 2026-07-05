@@ -1,0 +1,63 @@
+{
+  "data": [
+    {
+      "type": "table",
+      "domain": { "x": [0, 0.47] },
+      "header": {
+        "values": ["<b>Star Schema</b>"],
+        "fill": { "color": "#E8B84B" },
+        "font": { "color": "white", "size": 13 },
+        "height": 34
+      },
+      "cells": {
+        "values": [
+          [
+            "fact_sales: sale_id 🔑, date_id 🔗, customer_id 🔗, product_id 🔗, amount",
+            "dim_customer: customer_id 🔑, name, city, segment",
+            "dim_product: product_id 🔑, name, category, brand",
+            "dim_date: date_id 🔑, date, month, quarter, year",
+            "dim_store: store_id 🔑, city, region, type"
+          ]
+        ],
+        "fill": { "color": [["#fefce8", "#f0fdf4", "#fce7f3", "#ede9fe", "#fff7ed"]] },
+        "font": { "color": [["#92400e", "#14532d", "#831843", "#4c1d95", "#7c2d12"]], "size": 11 },
+        "align": "left",
+        "height": 34
+      }
+    },
+    {
+      "type": "table",
+      "domain": { "x": [0.53, 1.0] },
+      "header": {
+        "values": ["<b>Snowflake Schema</b>"],
+        "fill": { "color": "#06b6d4" },
+        "font": { "color": "white", "size": 13 },
+        "height": 34
+      },
+      "cells": {
+        "values": [
+          [
+            "fact_sales: sale_id 🔑, date_id 🔗, customer_id 🔗, product_id 🔗, amount",
+            "dim_customer: customer_id 🔑, name, city, segment",
+            "dim_product: product_id 🔑, name, category_id 🔗",
+            "dim_category: category_id 🔑, name, department_id 🔗",
+            "dim_department: department_id 🔑, name"
+          ]
+        ],
+        "fill": { "color": [["#fefce8", "#f0fdf4", "#fce7f3", "#fff7ed", "#fef9c3"]] },
+        "font": { "color": [["#92400e", "#14532d", "#831843", "#9a3412", "#713f12"]], "size": 11 },
+        "align": "left",
+        "height": 34
+      }
+    }
+  ],
+  "layout": {
+    "height": 310,
+    "margin": { "l": 10, "r": 10, "t": 30, "b": 60 },
+    "paper_bgcolor": "#fdf8f5",
+    "annotations": [
+      { "x": 0.235, "y": -0.12, "xref": "paper", "yref": "paper", "text": "Flat dimensions — fewer joins, faster BI queries", "showarrow": false, "font": { "size": 11, "color": "#92400e" } },
+      { "x": 0.765, "y": -0.12, "xref": "paper", "yref": "paper", "text": "Normalized dimensions — less redundancy, more joins", "showarrow": false, "font": { "size": 11, "color": "#0e7490" } }
+    ]
+  }
+}

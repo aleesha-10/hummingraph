@@ -1,0 +1,33 @@
+{
+  "id": "data-marts",
+  "title": "Data Marts",
+  "section": "data-warehousing",
+  "difficulty": "intermediate",
+  "color": "gray",
+  "tagline": "A focused slice of the warehouse built for one team's specific questions.",
+  "what_it_is": "A data mart is a subset of a data warehouse scoped to a specific business domain or team — marketing, finance, sales, HR. Instead of giving every team access to the full warehouse and letting them write their own queries against raw data, a data mart pre-builds the tables and models that team actually needs.",
+  "key_points": [
+    "A data mart is domain-specific. A marketing mart has campaign data, customer segments, attribution. A finance mart has revenue, costs, and P&L breakdowns.",
+    "Data marts can be dependent (built from the central warehouse) or independent (built directly from source systems, no central warehouse).",
+    "Dependent marts are cleaner — single source of truth. Independent marts are faster to set up but create consistency problems when two marts define 'revenue' differently.",
+    "In modern data stacks, dbt models and BI semantic layers serve the same function as traditional data marts.",
+    "A data mart should answer the questions that specific team asks every week — not every possible question."
+  ],
+  "why_it_exists": "A central warehouse serves everyone, which means it's structured for general use, not specific use. A marketing analyst doesn't want to join 12 tables every time they need campaign performance. A data mart pre-does those joins and exposes a clean, team-friendly model. It also controls access — HR data shouldn't be visible to sales.",
+  "intuition": "Think of the central warehouse as a library with every book in the company. A data mart is like a curated shelf in the marketing team's office — only the books they actually use, organized the way they think about their work. They can go to the full library when they need something unusual, but day to day the shelf is enough.",
+  "when_to_use": [
+    "When different teams need very different views of the same underlying data.",
+    "When you need to control data access — restrict sensitive data to specific teams.",
+    "When the central warehouse is too complex for non-technical users and you need to expose simpler, curated models."
+  ],
+  "common_mistakes": [
+    "Building independent data marts before a central warehouse exists, then discovering that 'revenue' means different things in the sales mart and the finance mart. This is called the 'spreadmart' problem.",
+    "Over-building a mart with every possible column and table. A mart should be opinionated about what the team actually needs."
+  ],
+  "notes": [
+    "The debate between 'warehouse first then mart' vs 'mart first then consolidate' is old and ongoing. Bill Inmon (top-down) vs Ralph Kimball (bottom-up) are the two camps from the 90s and the argument is still alive.",
+    "In cloud-native data stacks the line between a 'mart' and a 'dbt model layer' is blurry. The concept is the same — curated, team-specific data models on top of raw warehouse data."
+  ],
+  "ds_usage": "When you're asked to build models or reports for a specific team, you're essentially building a data mart — whether you call it that or not. Understanding the concept helps you think about scope, access control, and the right level of pre-aggregation.",
+  "related_concepts": ["etl-pipelines", "star-and-snowflake-schema", "olap-vs-oltp"]
+}

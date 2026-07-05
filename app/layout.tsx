@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Nunito, Mulish } from 'next/font/google';
 import "./globals.css";
 import Navbar from '@/components/Navbar';
+import ChatWidget from '@/components/ChatWidget';
 
 const nunito = Nunito({
   subsets: ["latin"],
@@ -42,6 +43,7 @@ export default function RootLayout({
       >
         <Navbar />
         {children}
+        <ChatWidget />
       </body>
     </html>
   );

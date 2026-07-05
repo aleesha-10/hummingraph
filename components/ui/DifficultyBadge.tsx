@@ -12,19 +12,18 @@ interface DifficultyBadgeProps {
 
 // Pastel difficulty colors
 const difficultyColors: { [key: string]: { bg: string; text: string } } = {
-  easy: {
-    bg: '#E9F7EF',    // Pastel Mint
-    text: '#1E8449',  // Deep Green
+  beginner: {
+    bg: '#E9F7EF',
+    text: '#1E8449',
   },
-  medium: {
-    bg: '#FEF9E7',    // Pastel Cream/Yellow
-    text: '#B7950B',  // Dark Gold
+  intermediate: {
+    bg: '#FEF9E7',
+    text: '#B7950B',
   },
-  hard: {
-    bg: '#FADBD8',    // Pastel Pink/Red
-    text: '#922B21',  // Deep Red
+  advanced: {
+    bg: '#FADBD8',
+    text: '#922B21',
   },
-  // Fallback for unknown levels
   default: {
     bg: '#F4F6F7',
     text: '#566573',

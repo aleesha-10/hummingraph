@@ -1,0 +1,36 @@
+{
+  "id": "spark-rdd",
+  "title": "Spark RDDs (Resilient Distributed Datasets)",
+  "section": "big-data",
+  "difficulty": "intermediate",
+  "color": "blue",
+  "tagline": "The original, low-level building block Spark is built on — resilient, distributed, and immutable.",
+  "what_it_is": "An RDD (Resilient Distributed Dataset) is Spark's original core data structure: an immutable, distributed collection of objects spread across a cluster that can be processed in parallel and automatically recovers from node failures using its lineage of transformations.",
+  "key_points": [
+    "Immutable — an RDD can't be changed once created; transformations produce a new RDD instead of modifying the old one.",
+    "Distributed — its data is split into partitions spread across the cluster's machines.",
+    "Resilient — if a partition is lost due to node failure, Spark can recompute it using its recorded lineage of transformations, without needing full replication.",
+    "Lower-level than DataFrames — offers more control but less automatic optimization.",
+    "Mostly superseded in day-to-day use by the higher-level, more optimized DataFrame API."
+  ],
+  "why_it_exists": "Early distributed systems needed fault tolerance, which usually meant replicating data across machines — expensive in storage. RDDs exist to achieve fault tolerance differently: by remembering the sequence of operations (lineage) that built the data, so any lost piece can simply be recomputed rather than restored from a redundant copy.",
+  "intuition": "Instead of keeping three physical backup copies of a document (expensive), imagine keeping a detailed, precise recipe of every edit that was ever made to produce it. If the document is destroyed, you can perfectly reconstruct it just by replaying the recipe from the original source. That recipe is the RDD's 'lineage.'",
+  "when_to_use": [
+    "Use RDDs when you need fine-grained, low-level control over data partitioning or custom transformations that the DataFrame API doesn't support.",
+    "Understand RDDs conceptually even if you mostly use DataFrames in practice, since DataFrames are built on top of them."
+  ],
+  "when_not_to_use": [
+    "Do not default to RDDs for typical structured data processing — DataFrames offer the same fault tolerance with far better automatic performance optimization.",
+    "Do not use RDDs when SQL-like queries would express the logic more simply and efficiently via DataFrames."
+  ],
+  "common_mistakes": [
+    "Using the low-level RDD API out of habit for tasks that DataFrames would handle faster with less code.",
+    "Not understanding lazy evaluation — transformations on an RDD don't execute until an action is called."
+  ],
+  "ds_usage": "Rarely used directly in modern data science pipelines, but understanding RDDs clarifies why Spark can recover gracefully from failures and why the DataFrame API — built on the same core idea — is both fault-tolerant and fast.",
+  "related_concepts": [
+    "spark-dataframes",
+    "spark-transformations-actions",
+    "apache-spark-intro"
+  ]
+}

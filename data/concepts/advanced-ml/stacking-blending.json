@@ -1,0 +1,60 @@
+{
+  "id": "stacking-blending",
+  "title": "Stacking & Blending",
+  "section": "advanced-ml",
+  "difficulty": "advanced",
+  "color": "purple",
+  "tagline": "Train a model whose only job is to learn how to best combine your other models.",
+  "what_it_is": "Stacking (and its simpler cousin, blending) is an ensemble technique where predictions from several different base models are used as input features to train a final 'meta-model,' which learns the best way to combine them into one final prediction.",
+  "key_points": [
+    "Different from bagging/boosting — stacking combines outputs of different types of models, not many copies of the same one.",
+    "Base models (e.g. Random Forest, SVM, logistic regression) each make predictions; those predictions become inputs to the meta-model.",
+    "The meta-model learns which base models to trust more in which situations, rather than a simple average or vote.",
+    "Blending is a simpler variant that uses a held-out validation set instead of full cross-validation to generate meta-features.",
+    "Adds complexity and inference cost — used mainly when squeezing out the last bit of accuracy matters."
+  ],
+  "why_it_exists": "Different model types make different kinds of mistakes — a tree-based model and a linear model fail on different examples. Stacking exists to let a learned meta-model exploit those different failure patterns, rather than combining models with a fixed rule like simple averaging or majority voting.",
+  "intuition": "Imagine a panel of three expert consultants, each with a different specialty, giving their opinion on a business decision. Instead of just averaging their opinions equally, you hire a fourth expert whose entire job is to learn, over time, which consultant to trust more in which situations — that fourth expert is the meta-model.",
+  "steps": [
+    {
+      "step": 1,
+      "title": "Train base models",
+      "description": "Train several different models (e.g. Random Forest, SVM, k-NN) on the training data using cross-validation to avoid leakage."
+    },
+    {
+      "step": 2,
+      "title": "Generate meta-features",
+      "description": "Use each base model's out-of-fold predictions as new input features for the meta-model."
+    },
+    {
+      "step": 3,
+      "title": "Train the meta-model",
+      "description": "Fit a typically simple model (e.g. logistic regression) on these meta-features to produce the final prediction."
+    },
+    {
+      "step": 4,
+      "title": "Predict on new data",
+      "description": "At inference time, run new data through all base models first, then feed their outputs into the trained meta-model."
+    }
+  ],
+  "when_to_use": [
+    "Use in competitions or high-stakes production systems where the last percent of accuracy justifies the added complexity.",
+    "Use when your base models make genuinely different kinds of errors — stacking gains little if they all fail on the same examples."
+  ],
+  "when_not_to_use": [
+    "Do not use stacking when model interpretability or simplicity matters — it's one of the least explainable approaches.",
+    "Do not use it without proper cross-validation to generate meta-features — using in-sample predictions leaks information and overstates performance.",
+    "Do not use it in latency-sensitive systems without accounting for the added inference cost of running multiple models."
+  ],
+  "common_mistakes": [
+    "Generating meta-features using the base models' training-set predictions directly, leaking information and inflating meta-model performance.",
+    "Stacking many highly correlated base models that all make the same mistakes — gains little over a single model.",
+    "Overcomplicating a pipeline with stacking when a single well-tuned gradient boosting model would perform nearly as well."
+  ],
+  "ds_usage": "A common technique in Kaggle-style machine learning competitions and select high-value production systems, though rarely used in early-stage or resource-constrained projects due to its added complexity.",
+  "related_concepts": [
+    "ensemble-methods",
+    "gradient-boosting",
+    "random-forest"
+  ]
+}

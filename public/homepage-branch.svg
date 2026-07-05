@@ -1,0 +1,35 @@
+<svg width="160" height="620" viewBox="0 0 160 620" xmlns="http://www.w3.org/2000/svg">
+  <!-- Branch -->
+  <path d="M 20 0 C 40 80, 15 160, 45 240 C 65 300, 30 380, 55 460 C 70 510, 45 570, 60 620"
+        stroke="#D9C9A8" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.8"/>
+
+  <!-- Leaves scattered along the branch -->
+  <g opacity="0.85">
+    <ellipse cx="52" cy="70" rx="18" ry="10" fill="#A8D8B9" transform="rotate(-25 52 70)"/>
+    <ellipse cx="18" cy="130" rx="16" ry="9" fill="#BFE3CC" transform="rotate(20 18 130)"/>
+    <ellipse cx="58" cy="200" rx="20" ry="11" fill="#A8D8B9" transform="rotate(-15 58 200)"/>
+    <ellipse cx="22" cy="270" rx="15" ry="8" fill="#F3D6DC" transform="rotate(30 22 270)"/>
+    <ellipse cx="60" cy="330" rx="18" ry="10" fill="#BFE3CC" transform="rotate(-20 60 330)"/>
+    <ellipse cx="25" cy="400" rx="16" ry="9" fill="#A8D8B9" transform="rotate(15 25 400)"/>
+    <ellipse cx="62" cy="470" rx="17" ry="9" fill="#F3D6DC" transform="rotate(-30 62 470)"/>
+    <ellipse cx="30" cy="540" rx="15" ry="8" fill="#BFE3CC" transform="rotate(18 30 540)"/>
+  </g>
+
+  <!-- Small pastel blossoms -->
+  <g opacity="0.8">
+    <circle cx="45" cy="240" r="5" fill="#F3D6DC"/>
+    <circle cx="55" cy="460" r="4.5" fill="#F6E2C4"/>
+  </g>
+
+  <!-- Hummingbird perched mid-branch -->
+  <g transform="translate(70 190) scale(1.15)">
+    <path d="M -8 14 C -14 17, -18 22, -20 28 C -14 26, -8 23, -4 19 Z" fill="#E8B6A8"/>
+    <ellipse cx="2" cy="12" rx="9" ry="7.2" fill="#8FCB9B"/>
+    <ellipse cx="3.5" cy="15" rx="5" ry="3.8" fill="#F3E7C9"/>
+    <path d="M 0 6 C -6 0, -8 -7, -4 -12 C 2 -8, 4 -1, 2 7 Z" fill="#9FD6C8" opacity="0.9"/>
+    <circle cx="11" cy="4" r="5.6" fill="#79B7E0"/>
+    <path d="M 16 3.5 L 25 2 L 16.5 5.8 Z" fill="#C98A5B"/>
+    <circle cx="12.8" cy="2.4" r="1.1" fill="#4A4A4A"/>
+    <path d="M 6.5 7 C 8.7 9.2, 12 9.2, 13.7 7 C 11.5 10.3, 7.7 10.3, 6.5 7 Z" fill="#E88FA6"/>
+  </g>
+</svg>

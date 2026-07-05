@@ -1,0 +1,39 @@
+{
+  "id": "apache-spark-intro",
+  "title": "Introduction to Apache Spark",
+  "section": "big-data",
+  "difficulty": "beginner",
+  "color": "blue",
+  "tagline": "Like MapReduce, but it keeps data in memory instead of writing to disk between every step.",
+  "what_it_is": "Apache Spark is a distributed data processing engine that processes large datasets across a cluster, keeping intermediate data in memory rather than writing it to disk between steps like MapReduce did — making it dramatically faster, especially for iterative and interactive workloads.",
+  "key_points": [
+    "Processes data in memory across a cluster, avoiding the slow disk writes between steps that MapReduce required.",
+    "Supports batch processing, streaming, SQL queries, and machine learning, all within one unified engine.",
+    "Works with data stored in HDFS, S3, databases, or many other sources.",
+    "Has APIs in Python (PySpark), Scala, Java, and R, making it accessible to data scientists and engineers alike.",
+    "Built around two core abstractions: RDDs (low-level) and DataFrames (higher-level, more optimized)."
+  ],
+  "why_it_exists": "MapReduce's habit of writing results to disk between every step made it painfully slow for jobs that needed multiple passes over the same data — like most iterative machine learning algorithms. Spark exists to keep data in memory across steps whenever possible, delivering major speed gains, especially for workloads that reuse the same data repeatedly.",
+  "intuition": "MapReduce is like a chef who, after every single step of a recipe, writes the current state down on paper, files it away, then re-reads it before the next step. Spark is a chef who just keeps the half-finished dish on the counter, ready for the next step immediately — far faster, as long as there's enough 'counter space' (memory) to do it.",
+  "when_to_use": [
+    "Use Spark as the default choice for large-scale batch data processing today, over raw MapReduce.",
+    "Use it for iterative workloads like training machine learning models on distributed data.",
+    "Use it when you need one unified tool for batch processing, SQL queries, and streaming."
+  ],
+  "when_not_to_use": [
+    "Do not use Spark for small datasets that fit comfortably in memory on one machine — the cluster overhead isn't worth it.",
+    "Do not use it for workloads needing millisecond-level real-time responses on individual events — dedicated streaming tools like Kafka Streams may fit better."
+  ],
+  "common_mistakes": [
+    "Using Spark for a small dataset out of habit, when pandas would run the same job faster with none of the cluster overhead.",
+    "Not understanding lazy evaluation, leading to confusion about when computation actually happens.",
+    "Running out of memory because too much data is cached without considering cluster memory limits."
+  ],
+  "ds_usage": "The industry-standard engine for large-scale data processing and feature engineering pipelines, often used to prepare data at scale before feeding it into machine learning models, either within Spark's own MLlib or exported for use elsewhere.",
+  "related_concepts": [
+    "spark-rdd",
+    "spark-dataframes",
+    "spark-transformations-actions",
+    "mapreduce"
+  ]
+}

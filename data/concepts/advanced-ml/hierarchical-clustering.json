@@ -1,0 +1,64 @@
+{
+  "id": "hierarchical-clustering",
+  "title": "Hierarchical Clustering",
+  "section": "advanced-ml",
+  "difficulty": "intermediate",
+  "color": "green",
+  "tagline": "Build a family tree of your data instead of committing to one fixed number of clusters upfront.",
+  "what_it_is": "Hierarchical clustering builds a tree-like structure (dendrogram) of nested clusters by either repeatedly merging the closest pairs of points/clusters (agglomerative, bottom-up) or repeatedly splitting the data (divisive, top-down). You decide the number of clusters afterward by cutting the tree at a chosen height.",
+  "key_points": [
+    "Unlike K-Means, you don't need to choose the number of clusters before running it.",
+    "Agglomerative (bottom-up) is far more common than divisive (top-down).",
+    "Produces a dendrogram — a tree diagram showing how clusters merge at increasing distances.",
+    "The 'linkage' method (single, complete, average, Ward) determines how the distance between clusters is measured.",
+    "Computationally expensive on large datasets compared to K-Means."
+  ],
+  "why_it_exists": "K-Means forces you to commit to a fixed number of clusters upfront, which is often unknown. Hierarchical clustering exists to reveal the full nested structure of the data at every possible granularity, letting you decide how many clusters make sense after seeing the whole picture.",
+  "intuition": "Think of building a family tree from a room full of strangers. You start by pairing up the two most similar people, then treat that pair as one unit and find the next closest match — repeating until everyone is one giant family. The dendrogram is that family tree; cutting it at different heights gives you different numbers of 'family groups.'",
+  "steps": [
+    {
+      "step": 1,
+      "title": "Start with every point as its own cluster",
+      "description": "Treat each data point as a singleton cluster."
+    },
+    {
+      "step": 2,
+      "title": "Merge the closest pair",
+      "description": "Find the two closest clusters (using the chosen linkage method) and merge them into one."
+    },
+    {
+      "step": 3,
+      "title": "Repeat",
+      "description": "Keep merging the closest pair of clusters until only one cluster containing all points remains."
+    },
+    {
+      "step": 4,
+      "title": "Cut the dendrogram",
+      "description": "Choose a height to 'cut' the resulting tree, which determines the final number of clusters."
+    }
+  ],
+  "when_to_use": [
+    "Use when you don't know the number of clusters in advance and want to explore structure at multiple levels.",
+    "Use on small-to-medium datasets where a dendrogram is interpretable and computation is feasible.",
+    "Use when a nested/hierarchical relationship between groups genuinely makes sense (e.g. taxonomy, organizational structure)."
+  ],
+  "when_not_to_use": [
+    "Do not use on very large datasets — it's computationally expensive (typically O(n^2) or worse).",
+    "Do not use single-linkage on noisy data — it's prone to 'chaining,' where clusters merge through thin bridges of noise."
+  ],
+  "common_mistakes": [
+    "Choosing linkage method arbitrarily without understanding how it changes cluster shape (single linkage chains, Ward tends toward compact clusters).",
+    "Cutting the dendrogram at an arbitrary height without a principled reason.",
+    "Running it on a large dataset and being surprised by how slow it is."
+  ],
+  "ds_usage": "Used in bioinformatics (gene expression clustering), document/topic organization, and any exploratory analysis where understanding nested group structure matters more than getting one fixed number of clusters quickly.",
+  "visual": {
+    "type": "dendrogram",
+    "description": "Tree diagram showing points merging pairwise from bottom to top, with a horizontal 'cut line' at a chosen height determining final clusters."
+  },
+  "related_concepts": [
+    "k-means-clustering",
+    "dbscan",
+    "clustering-evaluation-silhouette-score"
+  ]
+}

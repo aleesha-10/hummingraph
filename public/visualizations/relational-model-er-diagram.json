@@ -1,0 +1,39 @@
+{
+  "data": [
+    {
+      "type": "table",
+      "columnwidth": [120, 120, 120],
+      "header": {
+        "values": ["<b>Students</b>", "<b>Enrollments</b>", "<b>Courses</b>"],
+        "fill": { "color": ["#f97316", "#E8B84B", "#4ade80"] },
+        "font": { "color": "white", "size": 13 },
+        "align": "center",
+        "height": 36
+      },
+      "cells": {
+        "values": [
+          ["🔑 student_id", "name", "email", "enrolled_year"],
+          ["🔑 enrollment_id", "🔗 student_id", "🔗 course_id", ""],
+          ["🔑 course_id", "title", "credits", "department"]
+        ],
+        "fill": { "color": ["#fff7ed", "#fefce8", "#f0fdf4"] },
+        "font": { "color": ["#9a3412", "#92400e", "#14532d"], "size": 12 },
+        "align": "left",
+        "height": 30
+      }
+    }
+  ],
+  "layout": {
+    "title": {
+      "text": "Students ──(1:N)── Enrollments ──(N:1)── Courses",
+      "font": { "size": 13, "color": "#64748b" }
+    },
+    "height": 260,
+    "margin": { "l": 20, "r": 20, "t": 50, "b": 30 },
+    "paper_bgcolor": "#fdf8f5",
+    "annotations": [
+      { "x": 0.25, "y": -0.08, "xref": "paper", "yref": "paper", "text": "🔑 Primary Key", "showarrow": false, "font": { "size": 11, "color": "#94a3b8" } },
+      { "x": 0.75, "y": -0.08, "xref": "paper", "yref": "paper", "text": "🔗 Foreign Key (links tables)", "showarrow": false, "font": { "size": 11, "color": "#94a3b8" } }
+    ]
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "id": "gradient-boosting",
+  "title": "Gradient Boosting",
+  "section": "advanced-ml",
+  "difficulty": "advanced",
+  "color": "purple",
+  "tagline": "Instead of reweighting mistakes, each new model directly predicts the error of the last one.",
+  "what_it_is": "Gradient Boosting builds models sequentially, where each new model is trained to predict the residual errors (what's left over) of the combined models so far, using gradient descent to minimize a loss function. Adding these error-correcting models together produces a strong final predictor.",
+  "key_points": [
+    "Each new tree predicts the residual (error) of the current ensemble, not the original target directly.",
+    "Uses gradient descent on a loss function to decide the direction of correction at every step.",
+    "The learning rate controls how much each new tree's correction is trusted — smaller rate, more trees needed, usually better generalization.",
+    "Powers real-world implementations: XGBoost, LightGBM, CatBoost.",
+    "More flexible than AdaBoost — works with any differentiable loss function, not just classification error."
+  ],
+  "why_it_exists": "AdaBoost reweights misclassified examples but doesn't explicitly say 'this is exactly how wrong you were and in what direction.' Gradient Boosting exists to generalize boosting into an optimization problem: at every step, fit a new model to the gradient of the loss, moving the overall prediction closer to the truth the same way gradient descent moves toward a minimum.",
+  "intuition": "Imagine estimating someone's house price. Your first guess is off by $40,000. Instead of starting over, your second model's only job is to predict that $40,000 error. Your third model's job is to predict whatever error is still left after adding model two's correction. Keep stacking correction on top of correction, and your total estimate gets closer and closer to the real price.",
+  "example": {
+    "text": "True house price: $300k. Model 1 predicts $260k (residual = $40k). Model 2 is trained to predict that $40k residual and outputs $30k, bringing the total to $290k (residual = $10k). Model 3 predicts $8k of that, bringing the total to $298k.",
+    "interpretation": "Each successive tree chips away at whatever error remains, so the combined prediction converges toward the true value over many rounds."
+  },
+  "formulas": [
+    {
+      "label": "Additive Model Update",
+      "expression": "F_{m}(x) = F_{m-1}(x) + \\eta \\cdot h_{m}(x)",
+      "breakdown": [
+        {
+          "symbol": "F_{m}(x)",
+          "means": "Combined prediction after m rounds of boosting"
+        },
+        {
+          "symbol": "h_{m}(x)",
+          "means": "The new tree trained to predict the residual/gradient at round m"
+        },
+        {
+          "symbol": "\\eta",
+          "means": "Learning rate — how much to trust each new tree's correction"
+        }
+      ]
+    }
+  ],
+  "when_to_use": [
+    "Use for structured/tabular data problems where you want top-tier predictive accuracy.",
+    "Use when you can afford to tune hyperparameters (learning rate, tree depth, number of estimators) carefully.",
+    "Use for both regression and classification — the loss function can be swapped to fit the problem."
+  ],
+  "when_not_to_use": [
+    "Do not use without early stopping or regularization — it can overfit if allowed to run too many rounds.",
+    "Do not use on unstructured data like raw images or text — deep learning approaches usually win there.",
+    "Do not use when training speed and simplicity matter more than the last percent of accuracy."
+  ],
+  "common_mistakes": [
+    "Setting the learning rate too high — the model overshoots and overfits quickly.",
+    "Not using a validation set with early stopping — training for a fixed number of rounds regardless of overfitting.",
+    "Forgetting that gradient boosting is generally more sensitive to noisy data than Random Forest."
+  ],
+  "ds_usage": "The dominant algorithm family for winning tabular-data machine learning competitions and a common production choice for credit scoring, ranking, click-through-rate prediction, and demand forecasting, usually via XGBoost or LightGBM rather than from scratch.",
+  "related_concepts": [
+    "ensemble-methods",
+    "adaboost",
+    "random-forest",
+    "linear-regression"
+  ]
+}

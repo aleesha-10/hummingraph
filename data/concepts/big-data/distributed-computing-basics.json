@@ -1,0 +1,38 @@
+{
+  "id": "distributed-computing-basics",
+  "title": "Distributed Computing Basics",
+  "section": "big-data",
+  "difficulty": "beginner",
+  "color": "blue",
+  "tagline": "When one computer isn't enough, split the work across many that talk to each other.",
+  "what_it_is": "Distributed computing splits a large task across multiple machines (a cluster) that work in parallel and coordinate with each other, rather than relying on a single powerful computer to do everything alone.",
+  "key_points": [
+    "A cluster is a group of connected machines (nodes) working together as one system.",
+    "Work is split into smaller chunks distributed across nodes, processed in parallel, and results are combined.",
+    "Coordination and communication between nodes (networking, failure handling) adds real complexity that single-machine computing doesn't have.",
+    "Fault tolerance is essential — with many machines, some will fail, and the system must keep working anyway.",
+    "This is the foundational idea underneath Hadoop, Spark, and most big data infrastructure."
+  ],
+  "why_it_exists": "Buying one increasingly powerful machine (scaling vertically) eventually hits physical and cost limits. Distributed computing exists to scale horizontally instead — adding more ordinary machines rather than one impossibly powerful one — to handle data and computation at a scale no single machine could manage.",
+  "intuition": "One person alone could never count every grain of sand on a beach in a day. But split the beach into sections and hand each section to a different person with a clear counting method and a way to report back their subtotal, and the job becomes achievable — as long as everyone can coordinate and someone can handle it if one counter gets tired and drops out.",
+  "when_to_use": [
+    "Use distributed computing when a dataset or computation genuinely doesn't fit or finish in reasonable time on one machine.",
+    "Use it when you need fault tolerance — the system should survive individual machine failures without losing work."
+  ],
+  "when_not_to_use": [
+    "Do not distribute a workload that easily fits and runs fast on a single machine — the coordination overhead can make it slower, not faster.",
+    "Do not assume distributing automatically means faster — network communication between nodes can become the new bottleneck."
+  ],
+  "common_mistakes": [
+    "Underestimating the complexity of coordinating and debugging failures across many machines versus one.",
+    "Distributing a task where most of the time is spent shuffling data between nodes rather than computing.",
+    "Assuming linear speedup — doubling nodes rarely exactly doubles speed due to coordination overhead."
+  ],
+  "ds_usage": "The conceptual foundation for every big data tool — Hadoop's HDFS and MapReduce, Spark's cluster execution model, and distributed databases all exist because distributed computing lets organizations process data at a scale no single server could handle.",
+  "related_concepts": [
+    "cluster-computing-scalability",
+    "hadoop-ecosystem",
+    "apache-spark-intro",
+    "cap-theorem"
+  ]
+}

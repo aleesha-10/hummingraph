@@ -1,0 +1,38 @@
+{
+  "id": "data-partitioning-sharding",
+  "title": "Data Partitioning & Sharding",
+  "section": "big-data",
+  "difficulty": "intermediate",
+  "color": "green",
+  "tagline": "Split your data across machines so no single one becomes the bottleneck.",
+  "what_it_is": "Partitioning (often called sharding in databases) is the practice of splitting a large dataset into smaller pieces distributed across multiple machines or storage locations, so that reads, writes, and processing can happen in parallel instead of all going through one node.",
+  "key_points": [
+    "Partitioning splits data horizontally — different rows/records live on different nodes, not different columns.",
+    "A good partition key spreads data evenly; a bad one creates 'hot' partitions that get overloaded (data skew).",
+    "In Spark, data is automatically split into partitions across the cluster to enable parallel processing.",
+    "In databases, sharding spreads data across multiple database instances, each handling a subset of the data.",
+    "Repartitioning has a real cost — shuffling data across the network between nodes is one of the most expensive operations in distributed systems."
+  ],
+  "why_it_exists": "If all data and all requests funnel through a single machine, that machine becomes a bottleneck no matter how many other machines are in the cluster. Partitioning exists to spread both data and workload across many machines so the system can scale roughly linearly as more nodes are added.",
+  "intuition": "A single checkout line at a supermarket, no matter how fast the cashier, will always create a bottleneck during rush hour. Open ten checkout lines and spread customers evenly across them, and total throughput scales with the number of lines — as long as customers are actually distributed evenly and don't all pile into one line (a 'hot partition').",
+  "when_to_use": [
+    "Use partitioning whenever data or workload needs to scale across multiple machines.",
+    "Choose a partition key that distributes data evenly based on realistic access patterns — not just whatever field is convenient."
+  ],
+  "when_not_to_use": [
+    "Do not partition by a key that creates severe skew (e.g. partitioning by 'country' when 90% of users are in one country).",
+    "Do not over-partition small datasets — too many tiny partitions add overhead without meaningful parallelism benefit."
+  ],
+  "common_mistakes": [
+    "Choosing a partition key that causes data skew, overloading a few 'hot' partitions while others sit nearly empty.",
+    "Not repartitioning data before an expensive join, causing excessive shuffling across the network.",
+    "Assuming default partitioning is always optimal without checking for skew in real data."
+  ],
+  "ds_usage": "Central to designing efficient Spark jobs and scalable databases — proper partitioning is often the single biggest factor in whether a distributed job runs in minutes or hours.",
+  "related_concepts": [
+    "distributed-computing-basics",
+    "cluster-computing-scalability",
+    "hdfs",
+    "nosql-databases"
+  ]
+}

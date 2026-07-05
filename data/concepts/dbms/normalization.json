@@ -1,0 +1,49 @@
+{
+  "id": "normalization",
+  "title": "Normalization",
+  "section": "dbms",
+  "difficulty": "intermediate",
+  "color": "gray",
+  "tagline": "The art of organizing your tables so data doesn't contradict itself.",
+  "what_it_is": "Normalization is the process of structuring database tables to reduce redundancy and prevent data anomalies. It works by applying a series of rules called normal forms, each one stricter than the last. The goal is to store each fact exactly once.",
+  "key_points": [
+    "1NF: Every column holds atomic values (no lists or sets in a single cell). Every row is unique.",
+    "2NF: Every non-key column depends on the whole primary key, not just part of it. Only relevant when the primary key is composite.",
+    "3NF: Every non-key column depends only on the primary key \u2014 not on another non-key column (no transitive dependency).",
+    "Denormalization is intentional reversal of normalization, done for read performance. It's a valid choice in the right context.",
+    "BCNF (Boyce-Codd Normal Form) is a stricter version of 3NF that handles some edge cases 3NF misses."
+  ],
+  "why_it_exists": "When the same data lives in multiple places, updates become a problem. You update a customer's email in one row but forget it in three others \u2014 now the database disagrees with itself. Normalization prevents this by making sure each piece of information lives in exactly one place.",
+  "intuition": "Say you have an orders table with columns: order_id, customer_name, customer_email, product_name, product_price. Everything in one big flat table.\n\nNow a customer changes their email. You have to update every row with their name. Miss one, and you have two different emails for the same customer. A product changes price? Same problem. This is called an update anomaly.\n\nNormalization says: customer info goes in a customers table. Product info goes in a products table. Orders just stores the IDs that point to those tables. Now an email change is one row in one table. Done.\n\n{{viz:normalization-before-after}}",
+  "example": {
+    "text": "Unnormalized: OrderID | CustomerName | CustomerEmail | ProductName | ProductPrice\n1 | Alice | alice@x.com | Notebook | 5.00\n2 | Alice | alice@x.com | Pen | 1.00\n\nNormalized: Customers(customer_id, name, email). Products(product_id, name, price). Orders(order_id, customer_id, product_id).",
+    "interpretation": "In the normalized version, Alice's email is stored once. If she changes it, one update fixes it across all her orders."
+  },
+  "when_to_use": [
+    "When building a transactional database (OLTP) where data is frequently inserted and updated.",
+    "When data consistency is more important than read speed.",
+    "When storage space matters and you want to avoid repeating the same strings millions of times."
+  ],
+  "when_not_to_use": [
+    "In analytical databases and data warehouses where reads dominate \u2014 denormalized star schemas are often preferred for query speed.",
+    "When the join cost at query time outweighs the benefit of consistency \u2014 very high traffic systems sometimes tolerate controlled redundancy."
+  ],
+  "common_mistakes": [
+    "Over-normalizing to the point where a simple query requires joining 8 tables. Normalization is a tool, not a goal.",
+    "Applying 2NF and 3NF rules mechanically without understanding what anomaly each one is actually preventing."
+  ],
+  "notes": [
+    "Most real-world database design targets 3NF. BCNF and higher normal forms exist but are rarely needed in practice.",
+    "Data warehouses deliberately denormalize for performance. The star schema you'll see in dimensional modeling is intentionally a 2NF structure, not 3NF."
+  ],
+  "ds_usage": "Normalization shapes what your raw source tables look like when you pull from a production database. Understanding it helps you write correct joins and understand why certain columns live in separate tables. In analytics engineering (dbt, data modeling), you're often doing the opposite \u2014 denormalizing normalized source data into analytical models.",
+  "related_concepts": [
+    "relational-model",
+    "sql-basics",
+    "etl-pipelines",
+    "star-and-snowflake-schema"
+  ],
+  "visualizations": [
+    "normalization-before-after"
+  ]
+}

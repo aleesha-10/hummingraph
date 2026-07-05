@@ -1,0 +1,63 @@
+{
+  "id": "adaboost",
+  "title": "AdaBoost",
+  "section": "advanced-ml",
+  "difficulty": "advanced",
+  "color": "purple",
+  "tagline": "Each new model in the chain pays extra attention to whatever the last one got wrong.",
+  "what_it_is": "AdaBoost (Adaptive Boosting) builds a sequence of weak learners — usually shallow decision trees called stumps — where each new learner is trained to focus more on the examples the previous learners misclassified. The final prediction is a weighted vote of all learners, with more accurate learners given more say.",
+  "key_points": [
+    "Trains weak learners sequentially, not in parallel like bagging.",
+    "Misclassified points get higher weight before the next learner is trained — the model 'adapts' to its own mistakes.",
+    "Each learner's vote is weighted by how accurate it was — better learners matter more in the final decision.",
+    "Base learner is typically a decision stump (a tree with just one split).",
+    "Sensitive to noisy data and outliers because it keeps upweighting hard-to-classify points."
+  ],
+  "why_it_exists": "A single weak learner (like a one-split decision stump) barely beats random guessing on its own. AdaBoost exists to prove — and exploit — the idea that a sequence of weak learners, each nudged to fix the last one's blind spots, can be combined into a strong overall classifier.",
+  "intuition": "Picture a study group preparing for an exam. After each practice test, the group specifically re-studies the questions everyone got wrong, then takes another test. Over several rounds, the group's collective knowledge covers what any one student would have missed. AdaBoost does this with data points instead of exam questions — it keeps reweighting the 'hard' examples so the next learner pays them more attention.",
+  "steps": [
+    {
+      "step": 1,
+      "title": "Initialize equal weights",
+      "description": "Every training example starts with the same weight/importance."
+    },
+    {
+      "step": 2,
+      "title": "Train a weak learner",
+      "description": "Fit a simple model (e.g. a decision stump) on the weighted data."
+    },
+    {
+      "step": 3,
+      "title": "Score and reweight",
+      "description": "Increase the weight of misclassified points so the next learner focuses on them; decrease weight of correctly classified points."
+    },
+    {
+      "step": 4,
+      "title": "Repeat",
+      "description": "Train the next weak learner on the updated weights, repeating for a set number of rounds."
+    },
+    {
+      "step": 5,
+      "title": "Combine with weighted vote",
+      "description": "Final prediction is a weighted vote across all learners, where more accurate learners get more influence."
+    }
+  ],
+  "when_to_use": [
+    "Use on relatively clean datasets where you want a strong classifier built from very simple base learners.",
+    "Use when you want a boosting model that's simpler and faster to reason about than Gradient Boosting."
+  ],
+  "when_not_to_use": [
+    "Do not use on data with significant label noise or many outliers — AdaBoost will keep upweighting them and can overfit badly.",
+    "Do not expect it to outperform modern gradient boosting libraries (XGBoost, LightGBM) on large tabular datasets."
+  ],
+  "common_mistakes": [
+    "Using deep trees as the base learner instead of shallow stumps — defeats the purpose and increases overfitting risk.",
+    "Not realizing outliers get disproportionate weight over successive rounds, distorting the final model."
+  ],
+  "ds_usage": "Largely superseded in practice by Gradient Boosting and XGBoost, but still taught as the conceptual foundation of boosting and occasionally used for face detection-style problems with simple, fast base learners.",
+  "related_concepts": [
+    "ensemble-methods",
+    "gradient-boosting",
+    "decision-trees"
+  ]
+}

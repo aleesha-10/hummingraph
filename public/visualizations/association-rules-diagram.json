@@ -1,0 +1,74 @@
+{
+  "data": [
+    {
+      "type": "table",
+      "domain": { "x": [0, 0.35] },
+      "header": {
+        "values": ["<b>TXN</b>", "<b>Items</b>"],
+        "fill": { "color": "#f1f5f9" },
+        "font": { "color": "#475569", "size": 12 },
+        "height": 30
+      },
+      "cells": {
+        "values": [
+          ["T1", "T2", "T3", "T4", "T5", "T6"],
+          ["Bread, Butter, Jam", "Bread, Jam", "Milk, Bread, Butter", "Butter, Jam", "Bread, Butter, Jam", "Milk, Jam"]
+        ],
+        "fill": { "color": "#ffffff" },
+        "font": { "color": "#374151", "size": 11 },
+        "align": ["center", "left"],
+        "height": 26
+      }
+    },
+    {
+      "type": "table",
+      "domain": { "x": [0.38, 1.0] },
+      "header": {
+        "values": ["<b>Rule</b>", "<b>Support</b>", "<b>Confidence</b>", "<b>Lift</b>", "<b>Verdict</b>"],
+        "fill": { "color": "#f1f5f9" },
+        "font": { "color": "#475569", "size": 12 },
+        "height": 30
+      },
+      "cells": {
+        "values": [
+          ["Bread → Jam", "Bread → Milk", "Butter+Jam → Bread"],
+          ["0.50", "0.17", "0.33"],
+          ["0.75", "0.25", "0.67"],
+          ["1.50 ↑", "0.83 ↓", "1.33 ↑"],
+          ["Strong pattern", "Not useful", "Decent pattern"]
+        ],
+        "fill": {
+          "color": [
+            ["#f0fdf4", "#f8fafc", "#fff7ed"],
+            ["#f0fdf4", "#f8fafc", "#fff7ed"],
+            ["#f0fdf4", "#f8fafc", "#fff7ed"],
+            ["#bbf7d0", "#e2e8f0", "#fed7aa"],
+            ["#bbf7d0", "#f1f5f9", "#fed7aa"]
+          ]
+        },
+        "font": {
+          "color": [
+            ["#14532d", "#64748b", "#9a3412"],
+            ["#14532d", "#64748b", "#9a3412"],
+            ["#14532d", "#64748b", "#9a3412"],
+            ["#14532d", "#94a3b8", "#b45309"],
+            ["#14532d", "#94a3b8", "#b45309"]
+          ],
+          "size": 11
+        },
+        "align": "center",
+        "height": 30
+      }
+    }
+  ],
+  "layout": {
+    "height": 300,
+    "margin": { "l": 10, "r": 10, "t": 40, "b": 40 },
+    "paper_bgcolor": "#fdf8f5",
+    "annotations": [
+      { "x": 0.175, "y": 1.1, "xref": "paper", "yref": "paper", "text": "<b>Transactions</b>", "showarrow": false, "font": { "size": 12, "color": "#374151" } },
+      { "x": 0.69, "y": 1.1, "xref": "paper", "yref": "paper", "text": "<b>Discovered Rules</b>", "showarrow": false, "font": { "size": 12, "color": "#374151" } },
+      { "x": 0.5, "y": -0.1, "xref": "paper", "yref": "paper", "text": "Lift > 1 = co-occur more than chance. Lift < 1 = negatively correlated. Always check lift, not just confidence.", "showarrow": false, "font": { "size": 11, "color": "#94a3b8" } }
+    ]
+  }
+}

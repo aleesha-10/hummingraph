@@ -1,0 +1,37 @@
+{
+  "id": "stream-vs-batch-processing",
+  "title": "Stream vs Batch Processing",
+  "section": "big-data",
+  "difficulty": "beginner",
+  "color": "yellow",
+  "tagline": "Process data as it arrives, one event at a time — or wait and process it all together, later.",
+  "what_it_is": "Batch processing handles data in large, scheduled chunks — e.g. processing a full day's transactions overnight. Stream processing handles data continuously, as individual events arrive, producing results in near real time.",
+  "key_points": [
+    "Batch processing runs on a schedule (hourly, daily) over accumulated data — simpler to build and debug.",
+    "Stream processing runs continuously on data as it arrives, event by event or in small micro-batches.",
+    "Batch is well-suited for large-scale historical analysis where some delay is acceptable.",
+    "Streaming is required when decisions need to be made in seconds or milliseconds — fraud alerts, live dashboards.",
+    "Many modern systems use a hybrid ('Lambda' or 'Kappa' architecture) combining both batch accuracy and stream speed."
+  ],
+  "why_it_exists": "Some business decisions can wait until tomorrow's report; others — like blocking a fraudulent transaction — cannot wait even a few minutes. The distinction between batch and stream processing exists because these two categories of problems have fundamentally different latency requirements and need fundamentally different tools.",
+  "intuition": "Batch processing is like doing all your laundry once a week — efficient, but you might be out of clean socks for a few days. Stream processing is like washing each item the moment it gets dirty — always ready, but requires constant, ongoing effort rather than one big efficient session.",
+  "when_to_use": [
+    "Use batch processing for large-scale historical reporting, ETL jobs, and analyses where near-real-time results aren't required.",
+    "Use stream processing when decisions or alerts need to happen within seconds — fraud detection, live monitoring, real-time recommendations."
+  ],
+  "when_not_to_use": [
+    "Do not build a full streaming pipeline for a report that's only ever checked once a day — batch processing is simpler and cheaper.",
+    "Do not rely purely on batch processing for time-critical decisions like fraud detection, where delay has real cost."
+  ],
+  "common_mistakes": [
+    "Building an unnecessarily complex streaming system for a problem that batch processing would solve just as well.",
+    "Underestimating the engineering complexity of stream processing — handling out-of-order events, late data, and exactly-once processing is genuinely hard.",
+    "Assuming streaming is strictly 'better' than batch — it trades simplicity and cost for lower latency, not a universal upgrade."
+  ],
+  "ds_usage": "The choice between batch and streaming shapes the entire data architecture — from nightly ETL jobs feeding a data warehouse (batch) to Kafka-and-Spark-Streaming pipelines feeding live dashboards and fraud models (stream).",
+  "related_concepts": [
+    "apache-kafka",
+    "real-time-data-pipelines",
+    "apache-spark-intro"
+  ]
+}

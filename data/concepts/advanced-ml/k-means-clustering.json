@@ -1,0 +1,66 @@
+{
+  "id": "k-means-clustering",
+  "title": "K-Means Clustering",
+  "section": "advanced-ml",
+  "difficulty": "beginner",
+  "color": "green",
+  "tagline": "Group your data into k neat clusters — you just have to tell it how many to look for.",
+  "what_it_is": "K-Means is an unsupervised algorithm that groups data into k clusters by repeatedly assigning each point to its nearest cluster center (centroid) and then recalculating the centroids, until the assignments stop changing. It's the most common starting point for clustering.",
+  "key_points": [
+    "Unsupervised — there are no labels, the algorithm finds structure on its own.",
+    "You must choose k (the number of clusters) in advance.",
+    "Alternates between assigning points to the nearest centroid and recomputing centroids until stable.",
+    "Sensitive to the initial placement of centroids — bad luck can lead to poor clusters, hence multiple random restarts are common.",
+    "Assumes clusters are roughly spherical and similar in size — struggles with irregular cluster shapes."
+  ],
+  "why_it_exists": "Real-world data often has natural groupings that aren't labeled — customer segments, document topics, image color palettes. K-Means exists to discover this hidden group structure automatically, using only the geometry of the data itself.",
+  "intuition": "Imagine dropping k magnets randomly onto a table scattered with iron filings. Each filing sticks to its nearest magnet. Then you move each magnet to the center of the filings now stuck to it, and let the filings re-stick to whichever magnet is now closest. Repeat this a few times and the magnets settle into the natural centers of the filing clusters.",
+  "steps": [
+    {
+      "step": 1,
+      "title": "Choose k and initialize centroids",
+      "description": "Pick the number of clusters k and randomly place k centroids in the data space."
+    },
+    {
+      "step": 2,
+      "title": "Assign points",
+      "description": "Assign every data point to its nearest centroid, forming k clusters."
+    },
+    {
+      "step": 3,
+      "title": "Recompute centroids",
+      "description": "Move each centroid to the mean position of all points currently assigned to it."
+    },
+    {
+      "step": 4,
+      "title": "Repeat until convergence",
+      "description": "Repeat assignment and recomputation until cluster assignments stop changing or a max iteration limit is reached."
+    }
+  ],
+  "when_to_use": [
+    "Use for customer segmentation, market basket grouping, or image color compression.",
+    "Use when clusters are expected to be roughly round and similarly sized.",
+    "Use as a fast first pass on large datasets before trying slower, more flexible clustering methods."
+  ],
+  "when_not_to_use": [
+    "Do not use when clusters have irregular, elongated, or nested shapes — try DBSCAN or hierarchical clustering instead.",
+    "Do not use without scaling your features first — K-Means uses distance, so unscaled features dominate the result.",
+    "Do not treat the chosen k as obviously correct without validating it (e.g. elbow method, silhouette score)."
+  ],
+  "common_mistakes": [
+    "Picking k arbitrarily without using the elbow method or silhouette score to justify it.",
+    "Running K-Means once and trusting the result, without multiple random initializations (k-means++ helps with this).",
+    "Applying K-Means directly to categorical data without appropriate encoding or a different distance metric."
+  ],
+  "ds_usage": "Widely used for customer/user segmentation, anomaly detection preprocessing, image compression, and as a quick way to discover structure in unlabeled data before deeper analysis.",
+  "visual": {
+    "type": "scatter plot",
+    "description": "2D scatter plot showing points colored by assigned cluster, with centroid markers, and an animation-style progression of centroids moving across iterations."
+  },
+  "related_concepts": [
+    "hierarchical-clustering",
+    "dbscan",
+    "clustering-evaluation-silhouette-score",
+    "curse-of-dimensionality"
+  ]
+}

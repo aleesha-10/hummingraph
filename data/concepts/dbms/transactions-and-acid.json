@@ -1,0 +1,34 @@
+{
+  "id": "transactions-and-acid",
+  "title": "Transactions and ACID",
+  "section": "dbms",
+  "difficulty": "intermediate",
+  "color": "gray",
+  "tagline": "How databases make sure your data doesn't end up in a half-written, broken state.",
+  "what_it_is": "A transaction is a group of database operations that are treated as a single unit — they all succeed together or all fail together. ACID is the set of four properties that define what a reliable transaction looks like: Atomicity, Consistency, Isolation, and Durability.",
+  "key_points": [
+    "Atomicity: all operations in a transaction succeed, or none of them do. No partial updates.",
+    "Consistency: a transaction can only bring the database from one valid state to another. Constraints and rules are never broken mid-transaction.",
+    "Isolation: concurrent transactions don't see each other's intermediate states. Each runs as if it's the only one going.",
+    "Durability: once a transaction commits, it stays committed — even if the server crashes a second later.",
+    "ROLLBACK undoes all changes from the current transaction. COMMIT makes them permanent."
+  ],
+  "why_it_exists": "Without transactions, two things can go wrong. First, partial failures: you debit someone's account but crash before crediting the recipient. Second, concurrent access: two users read the same inventory count at the same time, both decrement it, and you end up overselling. Transactions prevent both.",
+  "intuition": "The classic example is a bank transfer. You're moving $100 from Account A to Account B. That's two operations: subtract from A, add to B. Without a transaction, if the system crashes after the subtraction but before the addition, the $100 vanishes. With a transaction, either both operations complete or neither does. The money can't just disappear.\n\nIsolation is the other half. If two transfers are happening at the same time, they shouldn't interfere with each other's reads. Isolation levels control exactly how much they're allowed to see of each other.",
+  "when_to_use": [
+    "Any time multiple writes need to happen together — if one fails, they all should fail.",
+    "When concurrent access to the same data is possible and correctness matters.",
+    "Anytime you're doing financial, inventory, or booking operations."
+  ],
+  "common_mistakes": [
+    "Keeping a transaction open too long. Long-running transactions lock rows and block other queries. Do the work fast, commit, move on.",
+    "Swallowing exceptions and letting code continue after a failed operation inside a transaction — now the commit succeeds with partial data."
+  ],
+  "notes": [
+    "Isolation has levels: READ UNCOMMITTED, READ COMMITTED, REPEATABLE READ, SERIALIZABLE. Higher isolation means more correctness but more locking and lower throughput. Most databases default to READ COMMITTED.",
+    "NoSQL databases often sacrifice ACID (especially isolation) for scalability. This is a deliberate tradeoff, not an oversight.",
+    "Phantom reads, dirty reads, and non-repeatable reads are specific anomalies that different isolation levels prevent — each is worth understanding separately."
+  ],
+  "ds_usage": "If you're running data pipelines that write to a database, understanding transactions means you can make your pipeline restartable — if something fails halfway, you roll back and try again without leaving half-loaded garbage. Also relevant in data engineering when loading into OLTP systems.",
+  "related_concepts": ["sql-basics", "indexes", "relational-model"]
+}

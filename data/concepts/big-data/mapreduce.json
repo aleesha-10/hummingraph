@@ -1,0 +1,59 @@
+{
+  "id": "mapreduce",
+  "title": "MapReduce",
+  "section": "big-data",
+  "difficulty": "intermediate",
+  "color": "blue",
+  "tagline": "Break the job into 'map' and 'reduce' steps, and let the cluster run them in parallel.",
+  "what_it_is": "MapReduce is a programming model for processing large datasets in parallel across a cluster, structured around two steps: 'Map,' which processes and transforms each piece of data independently, and 'Reduce,' which aggregates the mapped results into a final output.",
+  "key_points": [
+    "Map step: applies a function to every piece of input data independently and in parallel, producing key-value pairs.",
+    "Shuffle step: groups all values with the same key together across the cluster, preparing them for reduction.",
+    "Reduce step: aggregates all values for each key into a final result (e.g. sum, count, average).",
+    "Designed so each step can run on a different machine, processing its slice of data without needing to see the whole dataset.",
+    "Largely replaced by Apache Spark in modern pipelines because Spark keeps data in memory and is much faster for iterative jobs."
+  ],
+  "why_it_exists": "Writing custom distributed code to coordinate many machines, handle failures, and combine results is extremely hard to get right. MapReduce exists to give developers a simple, standardized two-step pattern (map, then reduce) so they can write distributed jobs without manually handling cluster coordination themselves.",
+  "intuition": "To count how many times each word appears across a warehouse full of books, hand each worker a stack of books (Map: each worker tallies words in their own stack independently). Then, have workers combine their tallies by word — everyone with 'the' tallies hands their numbers to one person to sum (Reduce: aggregate by key). No worker ever needs to see the whole warehouse at once.",
+  "steps": [
+    {
+      "step": 1,
+      "title": "Split input",
+      "description": "The large dataset is split into chunks distributed across the cluster."
+    },
+    {
+      "step": 2,
+      "title": "Map",
+      "description": "Each chunk is processed independently and in parallel, producing intermediate key-value pairs."
+    },
+    {
+      "step": 3,
+      "title": "Shuffle and sort",
+      "description": "All values sharing the same key are grouped together across the cluster, regardless of which machine produced them."
+    },
+    {
+      "step": 4,
+      "title": "Reduce",
+      "description": "Each group of values for a key is aggregated into a final output value, e.g. a total count or sum."
+    }
+  ],
+  "when_to_use": [
+    "Understand MapReduce as the conceptual foundation for distributed batch processing, even if you use Spark in practice.",
+    "Use the actual MapReduce framework only in legacy Hadoop environments where Spark isn't available."
+  ],
+  "when_not_to_use": [
+    "Do not choose raw MapReduce for new projects — Spark performs the same kind of processing significantly faster by keeping data in memory.",
+    "Do not use MapReduce for iterative algorithms (like many machine learning training loops) — its disk-based model between steps makes repeated passes slow."
+  ],
+  "common_mistakes": [
+    "Underestimating how much slower MapReduce is compared to Spark for jobs that need multiple passes over the same data.",
+    "Writing overly complex chains of MapReduce jobs when a single Spark job could express the same logic much more simply."
+  ],
+  "ds_usage": "Rarely written directly anymore in new pipelines, but understanding it is essential context for why Spark exists and how distributed batch processing conceptually works under the hood.",
+  "related_concepts": [
+    "hadoop-ecosystem",
+    "hdfs",
+    "apache-spark-intro",
+    "spark-transformations-actions"
+  ]
+}

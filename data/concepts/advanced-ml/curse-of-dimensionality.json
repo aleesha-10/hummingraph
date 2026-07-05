@@ -1,0 +1,39 @@
+{
+  "id": "curse-of-dimensionality",
+  "title": "Curse of Dimensionality",
+  "section": "advanced-ml",
+  "difficulty": "intermediate",
+  "color": "yellow",
+  "tagline": "The more features you add, the emptier and stranger your data's space becomes.",
+  "what_it_is": "The curse of dimensionality describes how adding more features causes data to become increasingly sparse in the feature space, making distances between points less meaningful and models harder to train reliably without exponentially more data.",
+  "key_points": [
+    "As dimensions increase, the 'volume' of the feature space grows exponentially, and data points become sparse within it.",
+    "Distance-based algorithms (KNN, K-Means, DBSCAN) suffer because in high dimensions, all points start looking roughly equally far apart.",
+    "Models need exponentially more data to maintain the same density of coverage as dimensions increase.",
+    "Dimensionality reduction (PCA) and feature selection are the standard fixes.",
+    "Not just a math curiosity — it directly causes overfitting and unreliable distance calculations in real models."
+  ],
+  "why_it_exists": "It's not something anyone built — it's a mathematical property of high-dimensional geometry that data scientists have to actively work around. It matters as a named concept because it explains why 'just add more features' often backfires rather than helps.",
+  "intuition": "Imagine finding a friend's house on a single street (1D) — easy, there are only so many houses to check. Now imagine finding them somewhere in an entire 3D city grid of buildings, floors, and rooms — the search space has exploded, and 'nearby' becomes a much weaker signal. Keep adding dimensions like this, and eventually every point looks almost equally far from every other point, and 'closeness' stops being useful information.",
+  "when_to_use": [
+    "Recognize this concept whenever a distance-based model (KNN, K-Means) performs unexpectedly poorly on high-dimensional data.",
+    "Apply dimensionality reduction (PCA) or feature selection when feature count is large relative to sample size."
+  ],
+  "when_not_to_use": [
+    "This isn't a technique to apply — it's a phenomenon to be aware of. There's no 'don't use' case, only situations to watch out for."
+  ],
+  "common_mistakes": [
+    "Adding many features to a distance-based model assuming more information always helps.",
+    "Not reducing dimensionality before using KNN or K-Means on a wide dataset, leading to meaningless distance calculations.",
+    "Interpreting poor model performance as a labeling or algorithm problem when it's actually a dimensionality problem."
+  ],
+  "notes": [
+    "The rule of thumb 'you need exponentially more data as dimensions grow' is why feature selection matters as much as feature engineering."
+  ],
+  "ds_usage": "A key reason PCA, feature selection, and regularization are standard steps before applying distance-based or otherwise dimension-sensitive algorithms to high-dimensional data like genomics, text embeddings, or sensor data.",
+  "related_concepts": [
+    "principal-component-analysis",
+    "k-means-clustering",
+    "dbscan"
+  ]
+}

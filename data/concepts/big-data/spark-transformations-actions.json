@@ -1,0 +1,37 @@
+{
+  "id": "spark-transformations-actions",
+  "title": "Spark Transformations, Actions & Lazy Evaluation",
+  "section": "big-data",
+  "difficulty": "intermediate",
+  "color": "blue",
+  "tagline": "Spark doesn't actually do anything until you ask for a result — and that's the whole point.",
+  "what_it_is": "In Spark, transformations (like filter or map) describe operations to be applied but don't execute immediately — they build up a plan. Actions (like count or collect) are what trigger Spark to actually execute that plan and return a result. This is called lazy evaluation.",
+  "key_points": [
+    "Transformations are lazy — calling .filter() or .select() just adds a step to the execution plan, nothing runs yet.",
+    "Actions trigger execution — calling .count(), .collect(), or .show() forces Spark to actually run the accumulated plan.",
+    "Lazy evaluation lets Spark's optimizer see the whole chain of operations before running anything, so it can plan the most efficient execution.",
+    "Chains of transformations followed by one action are the standard Spark coding pattern.",
+    "Caching (.cache() or .persist()) tells Spark to keep a result in memory so repeated actions on it don't trigger full recomputation."
+  ],
+  "why_it_exists": "If Spark executed every single line immediately, it would miss opportunities to combine and reorder operations for efficiency — like filtering data before an expensive join instead of after. Lazy evaluation exists so Spark can see the entire chain of requested transformations first, then decide the smartest possible way to actually execute all of them together.",
+  "intuition": "Giving someone a full grocery list and route before they leave the house lets them plan the most efficient path through the store. Giving them one instruction at a time as they walk — 'now go get milk,' 'now go get eggs' — forces backtracking and wasted steps. Spark's laziness is like waiting for your full list before planning the most efficient shopping route.",
+  "when_to_use": [
+    "Understand this pattern to write efficient Spark code — chain transformations, then trigger execution with a single well-placed action.",
+    "Use caching when a DataFrame will be reused by multiple downstream actions, to avoid redundant recomputation."
+  ],
+  "when_not_to_use": [
+    "Do not call actions repeatedly and unnecessarily in a loop — each call re-triggers computation of everything upstream unless cached.",
+    "Do not cache everything indiscriminately — caching large DataFrames unnecessarily can exhaust cluster memory."
+  ],
+  "common_mistakes": [
+    "Being surprised that a transformation 'didn't do anything' — it won't, until an action is called.",
+    "Calling .collect() on a very large DataFrame, which pulls all the distributed data back to a single driver machine and can crash it.",
+    "Not caching a DataFrame reused across multiple actions, causing Spark to needlessly redo the same work each time."
+  ],
+  "ds_usage": "Understanding this distinction is essential to debugging Spark performance issues and writing efficient pipelines — most beginner Spark mistakes trace back to a misunderstanding of when computation actually happens.",
+  "related_concepts": [
+    "spark-dataframes",
+    "spark-rdd",
+    "apache-spark-intro"
+  ]
+}

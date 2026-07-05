@@ -9,6 +9,8 @@ export default function Navbar() {
       <style>{`
         .nav-logo { opacity: 1; transition: opacity 0.2s ease; }
         .nav-logo:hover { opacity: 0.65; }
+        .nav-link { transition: opacity 0.2s ease; }
+        .nav-link:hover { opacity: 0.65; }
       `}</style>
       <nav style={{
         position: 'sticky',
@@ -26,26 +28,58 @@ export default function Navbar() {
           height: '56px',
           display: 'flex',
           alignItems: 'center',
+          justifyContent: 'space-between',
         }}>
-          <Link href="/" style={{ textDecoration: 'none' }} className="nav-logo">
-            <span style={{
-              fontFamily: 'var(--font-nunito), sans-serif',
-              fontWeight: 800,
-              fontSize: '1.25rem',
-              color: '#5D5C61',
-              letterSpacing: '-0.01em',
-            }}>
-              Hummingraph
-            </span>
-          </Link>
-          <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }} className="nav-logo">
-            <Image 
-              src="/logo2.svg" 
-              alt="Hummingraph logo" 
-              width={32} 
-              height={32}
-            />
-          </Link>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <Link href="/" style={{ textDecoration: 'none' }} className="nav-logo">
+              <span style={{
+                fontFamily: 'var(--font-nunito), sans-serif',
+                fontWeight: 800,
+                fontSize: '1.25rem',
+                color: '#5D5C61',
+                letterSpacing: '-0.01em',
+              }}>
+                Hummingraph
+              </span>
+            </Link>
+            <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', marginLeft: '8px' }} className="nav-logo">
+              <Image
+                src="/logo2.svg"
+                alt="Hummingraph logo"
+                width={32}
+                height={32}
+              />
+            </Link>
+          </div>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+            <Link
+              href="/concept-map"
+              className="nav-link"
+              style={{
+                textDecoration: 'none',
+                fontFamily: 'var(--font-mulish), sans-serif',
+                fontSize: '0.9rem',
+                fontWeight: 600,
+                color: '#5D5C61',
+              }}
+            >
+              Concept Map
+            </Link>
+            <Link
+              href="/compare"
+              className="nav-link"
+              style={{
+                textDecoration: 'none',
+                fontFamily: 'var(--font-mulish), sans-serif',
+                fontSize: '0.9rem',
+                fontWeight: 600,
+                color: '#5D5C61',
+              }}
+            >
+              Compare
+            </Link>
+          </div>
         </div>
       </nav>
     </>

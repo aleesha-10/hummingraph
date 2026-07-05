@@ -1,0 +1,86 @@
+{
+  "id": "association-rules",
+  "title": "Association Rules",
+  "section": "data-mining",
+  "difficulty": "intermediate",
+  "color": "yellow",
+  "tagline": "People who buy X also tend to buy Y. Finding those patterns automatically.",
+  "what_it_is": "Association rule mining finds co-occurrence patterns in transactional data. Given a set of transactions, it identifies which items frequently appear together and produces rules like 'if a customer buys bread and butter, they also tend to buy jam.' The classic algorithm is Apriori.",
+  "key_points": [
+    "Support: how often an itemset appears in the dataset. Support({bread, jam}) = fraction of transactions containing both.",
+    "Confidence: given X was bought, how often is Y also bought. Confidence(bread \u2192 jam) = support({bread, jam}) / support({bread}).",
+    "Lift: how much more likely Y is given X, compared to Y's baseline rate. Lift > 1 means X and Y co-occur more than by chance.",
+    "A rule with high confidence but low lift might just reflect that Y is extremely common \u2014 not a useful pattern.",
+    "The Apriori algorithm prunes the search space by noting that if an itemset is rare, all its supersets will also be rare."
+  ],
+  "why_it_exists": "You can't manually check every possible combination of products in a store with thousands of items. Association rule mining automates the search for non-obvious co-occurrence patterns across millions of transactions. It turns raw transaction logs into actionable patterns.",
+  "intuition": "The beer and diapers story is the famous one \u2014 supermarket analysis supposedly found that men buying diapers on Friday evenings also tended to buy beer, so the store moved them closer together. True or not, it captures the idea: you're looking for combinations that show up together more often than you'd expect by chance.\n\nLift is the key number. If 60% of all customers buy milk anyway, finding that 62% of customers who bought cereal also bought milk isn't interesting \u2014 the lift is barely above 1. But if 80% of customers who bought espresso also bought a specific flavored syrup, and that syrup is normally in only 10% of baskets, that lift of 8 is a real pattern worth acting on.\n\n{{viz:association-rules-diagram}}",
+  "formulas": [
+    {
+      "label": "Support",
+      "expression": "\\text{Support}(X \\Rightarrow Y) = \\frac{|X \\cup Y|}{|\\text{Transactions}|}",
+      "breakdown": [
+        {
+          "symbol": "|X \\cup Y|",
+          "means": "Number of transactions containing both X and Y"
+        },
+        {
+          "symbol": "|\\text{Transactions}|",
+          "means": "Total number of transactions"
+        }
+      ]
+    },
+    {
+      "label": "Confidence",
+      "expression": "\\text{Confidence}(X \\Rightarrow Y) = \\frac{\\text{Support}(X \\cup Y)}{\\text{Support}(X)}",
+      "breakdown": [
+        {
+          "symbol": "\\text{Support}(X \\cup Y)",
+          "means": "Fraction of transactions with both X and Y"
+        },
+        {
+          "symbol": "\\text{Support}(X)",
+          "means": "Fraction of transactions with X"
+        }
+      ]
+    },
+    {
+      "label": "Lift",
+      "expression": "\\text{Lift}(X \\Rightarrow Y) = \\frac{\\text{Confidence}(X \\Rightarrow Y)}{\\text{Support}(Y)}",
+      "breakdown": [
+        {
+          "symbol": "\\text{Confidence}(X \\Rightarrow Y)",
+          "means": "How often Y appears given X"
+        },
+        {
+          "symbol": "\\text{Support}(Y)",
+          "means": "How often Y appears in general \u2014 the baseline"
+        }
+      ]
+    }
+  ],
+  "when_to_use": [
+    "Market basket analysis \u2014 finding what products to bundle, cross-sell, or place near each other.",
+    "Recommendation systems \u2014 'users who did X also did Y'.",
+    "Medical research \u2014 finding which symptoms or treatments co-occur.",
+    "Web analytics \u2014 which pages are viewed together in the same session."
+  ],
+  "common_mistakes": [
+    "Looking only at confidence and ignoring lift. High confidence on a very common item is meaningless.",
+    "Setting minimum support too low \u2014 you end up with millions of rules including a lot of noise.",
+    "Treating correlation as causation. Bread and jam appearing together doesn't mean buying bread causes someone to buy jam."
+  ],
+  "notes": [
+    "Apriori can be slow on large datasets because of multiple passes over the data. FP-Growth is a faster alternative that avoids candidate generation.",
+    "Association rules are symmetric in discovery but asymmetric in interpretation. The rule bread \u2192 jam is different from jam \u2192 bread even if support is the same."
+  ],
+  "ds_usage": "Used in e-commerce for product recommendations and store layout decisions. Also shows up in fraud detection (which transaction patterns appear together) and in clinical data mining (which diagnoses or medications co-occur).",
+  "related_concepts": [
+    "anomaly-detection",
+    "clustering-overview",
+    "text-mining"
+  ],
+  "visualizations": [
+    "association-rules-diagram"
+  ]
+}

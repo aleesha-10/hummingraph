@@ -1,0 +1,38 @@
+{
+  "id": "nosql-databases",
+  "title": "NoSQL Databases",
+  "section": "big-data",
+  "difficulty": "intermediate",
+  "color": "green",
+  "tagline": "Not every dataset fits neatly into rows and columns — or needs to scale the same way.",
+  "what_it_is": "NoSQL databases are a broad category of non-relational databases built to handle large-scale, flexible, or rapidly changing data that doesn't fit well into traditional relational tables, typically trading some consistency guarantees for horizontal scalability and flexible schemas.",
+  "key_points": [
+    "Not one technology — an umbrella term covering several different data models: document, key-value, column-family, and graph.",
+    "Document stores (e.g. MongoDB) store flexible, JSON-like records — good for semi-structured data.",
+    "Key-value stores (e.g. Redis, DynamoDB) offer extremely fast lookups by a single key — good for caching and simple lookups.",
+    "Column-family stores (e.g. Cassandra) are built for very high write throughput and horizontal scale — good for time-series or logging data.",
+    "Graph databases (e.g. Neo4j) are built for data with complex relationships — good for social networks and recommendation graphs."
+  ],
+  "why_it_exists": "Traditional relational databases require a fixed schema and can struggle to scale horizontally across many machines while maintaining strict consistency. NoSQL databases exist to relax some of those constraints — flexible schemas, eventual rather than strict consistency — in exchange for the ability to scale out easily and handle rapidly evolving or unstructured data.",
+  "intuition": "A relational database is like a strict, pre-printed form — every entry must fit exactly into the same predefined fields. A document-based NoSQL database is like a flexible notebook where each entry can have a different structure depending on what it's describing — faster to adapt, but you lose the strict guarantees that come with a rigid, pre-defined form.",
+  "when_to_use": [
+    "Use NoSQL when your data's structure varies significantly between records or changes frequently over time.",
+    "Use it when you need to scale writes horizontally across many machines more easily than a traditional relational database allows.",
+    "Choose the specific type (document, key-value, column, graph) based on your actual access pattern, not just popularity."
+  ],
+  "when_not_to_use": [
+    "Do not use NoSQL when you need strong transactional guarantees (ACID) across multiple related records, like financial transactions — relational databases are usually the safer choice.",
+    "Do not choose NoSQL just because it sounds more 'big data' — many workloads are still best served by a relational database."
+  ],
+  "common_mistakes": [
+    "Picking a NoSQL database without understanding its consistency model, leading to unexpected stale-read issues in production.",
+    "Denormalizing data heavily for NoSQL performance and then struggling to keep duplicated data consistent across records.",
+    "Choosing the wrong NoSQL type (e.g. a key-value store for data that really needs complex relational-style queries)."
+  ],
+  "ds_usage": "Common as the storage layer for high-velocity event data, user session data, product catalogs, and recommendation graphs — often used alongside a relational database or data warehouse rather than fully replacing it.",
+  "related_concepts": [
+    "cap-theorem",
+    "data-partitioning-sharding",
+    "data-replication-fault-tolerance"
+  ]
+}

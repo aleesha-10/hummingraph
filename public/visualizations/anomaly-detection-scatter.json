@@ -1,0 +1,42 @@
+{
+  "data": [
+    {
+      "type": "scatter",
+      "mode": "markers",
+      "name": "Normal",
+      "x": [1.1, 1.4, 1.8, 2.0, 2.3, 2.6, 2.9, 1.2, 1.7, 2.1, 2.5, 1.5, 2.2, 1.9, 2.4, 1.3, 2.0, 1.6, 2.3, 1.8],
+      "y": [2.0, 2.3, 2.1, 2.5, 2.2, 2.4, 2.1, 2.6, 1.9, 2.8, 2.0, 2.4, 1.8, 2.3, 2.6, 2.1, 2.2, 2.5, 1.9, 2.7],
+      "marker": { "color": "#60a5fa", "size": 10, "opacity": 0.75, "line": { "color": "white", "width": 1 } }
+    },
+    {
+      "type": "scatter",
+      "mode": "markers",
+      "name": "Point anomaly",
+      "x": [5.8, 0.2, 4.9],
+      "y": [5.5, 0.3, 0.2],
+      "marker": { "color": "#ef4444", "size": 15, "symbol": "diamond", "line": { "color": "#7f1d1d", "width": 2 } }
+    },
+    {
+      "type": "scatter",
+      "mode": "markers",
+      "name": "Collective anomaly",
+      "x": [3.2, 3.5, 3.8, 3.4, 3.7, 3.3],
+      "y": [4.5, 4.7, 4.4, 4.8, 4.6, 4.9],
+      "marker": { "color": "#f97316", "size": 12, "symbol": "square", "line": { "color": "white", "width": 1 } }
+    }
+  ],
+  "layout": {
+    "title": { "text": "Point anomalies (red ◆) vs collective anomaly (orange ■) vs normal data (blue)", "font": { "size": 12, "color": "#374151" } },
+    "height": 340,
+    "margin": { "l": 50, "r": 20, "t": 70, "b": 70 },
+    "paper_bgcolor": "#fdf8f5",
+    "plot_bgcolor": "#fdf8f5",
+    "xaxis": { "title": "Feature X", "showgrid": true, "gridcolor": "#f1f5f9", "zeroline": false },
+    "yaxis": { "title": "Feature Y", "showgrid": true, "gridcolor": "#f1f5f9", "zeroline": false },
+    "legend": { "orientation": "h", "y": -0.22 },
+    "annotations": [
+      { "x": 5.8, "y": 5.5, "text": "Isolated outlier", "showarrow": true, "arrowhead": 2, "ax": -60, "ay": -30, "font": { "color": "#dc2626", "size": 10 } },
+      { "x": 3.5, "y": 4.7, "text": "Normal individually,<br>anomalous as a group", "showarrow": true, "arrowhead": 2, "ax": 60, "ay": -40, "font": { "color": "#c2410c", "size": 10 } }
+    ]
+  }
+}

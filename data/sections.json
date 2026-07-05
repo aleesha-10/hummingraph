@@ -60,7 +60,7 @@
       "description": "Where Models Get Smarter",
       "summary": "This section covers the techniques that power real production systems — ensemble methods, boosting, clustering, dimensionality reduction, and time series. These are the tools you reach for when a single model isn't enough or when the problem doesn't fit neatly into supervised learning.",
       "color": "purple",
-      "conceptCount": 0,
+      "conceptCount": 18,
       "order": 5
     },
     {
@@ -69,7 +69,7 @@
       "description": "Storage and Queries",
       "summary": "Before data can be analysed, it has to be stored somewhere. This section covers how databases work — the relational model, SQL, normalization, transactions, and indexing. The concepts here are foundational for structured data at any scale.",
       "color": "gray",
-      "conceptCount": 0,
+      "conceptCount": 6,
       "order": 6
     },
     {
@@ -78,7 +78,7 @@
       "description": " The Architecture Behind Answers",
       "summary": "A data warehouse is what you build when you need to ask analytical questions across large volumes of historical data. This section covers ETL pipelines, star and snowflake schemas, OLAP systems, and the architectural decisions behind systems designed for querying. It's where the data lives when it's not just about storing it, but about making it usable for analysis.",
       "color": "gray",
-      "conceptCount": 0,
+      "conceptCount": 4,
       "order": 7
     },
     {
@@ -87,7 +87,7 @@
       "description": "Uncovering Obscure Patterns",
       "summary": "Data mining is the process of discovering patterns in large datasets that weren't explicitly looked for. This section covers association rules, anomaly detection, clustering, and text mining — the techniques used when the question isn't fully formed yet and the data itself has to suggest the answer",
       "color": "yellow",
-      "conceptCount": 0,
+      "conceptCount": 4,
       "order": 8
     },
     {
@@ -96,7 +96,7 @@
       "description": "Data Fights Back",
       "summary": "Some datasets are too large, too fast, or too varied for a single machine to handle. This section covers what makes data 'big', how distributed computing systems like Spark work, streaming data pipelines, and the architectural patterns used when scale becomes the primary constraint.",
       "color": "yellow",
-      "conceptCount": 0,
+      "conceptCount": 17,
       "order": 9
     }
   ]

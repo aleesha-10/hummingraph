@@ -1,0 +1,37 @@
+{
+  "id": "real-time-data-pipelines",
+  "title": "Real-Time Data Pipelines",
+  "section": "big-data",
+  "difficulty": "intermediate",
+  "color": "purple",
+  "tagline": "The end-to-end path data takes from the moment it's generated to the moment it's acted on.",
+  "what_it_is": "A real-time data pipeline is the full chain of systems that captures data as it's generated, moves it (often via a tool like Kafka), processes it (often via a stream processing engine like Spark Structured Streaming), and delivers results to a dashboard, alert system, or downstream application — all within seconds.",
+  "key_points": [
+    "Typically follows a pattern: source event → ingestion (Kafka) → stream processing (Spark Streaming/Flink) → sink (dashboard, database, alert system).",
+    "Latency (time from event to result) is the key metric that defines whether a pipeline is 'real-time' enough for its use case.",
+    "Must handle out-of-order and late-arriving data gracefully — network delays mean events don't always arrive in the order they happened.",
+    "Fault tolerance and exactly-once processing guarantees are critical — losing or duplicating events can silently corrupt downstream decisions.",
+    "Monitoring pipeline health (consumer lag, processing delays) is an ongoing operational responsibility, unlike a batch job that just runs and finishes."
+  ],
+  "why_it_exists": "Individually, streaming tools like Kafka and Spark Streaming only solve one piece of the puzzle. Real-time pipelines exist as the end-to-end architecture pattern connecting ingestion, processing, and delivery into one coherent, continuously running system that turns raw events into timely action.",
+  "intuition": "Think of an air traffic control system: radar signals (events) stream in continuously, get processed instantly to calculate positions and potential collisions, and get displayed on a controller's screen within seconds — not compiled into a report reviewed the next morning. The pipeline is the entire chain from raw radar signal to the controller's live screen.",
+  "when_to_use": [
+    "Use real-time pipelines when a business decision or user experience genuinely depends on data being seconds old, not hours old.",
+    "Use them for live dashboards, fraud detection, real-time recommendations, or operational alerting."
+  ],
+  "when_not_to_use": [
+    "Do not build a full real-time pipeline when a nightly batch job would satisfy the actual business need — it adds significant operational complexity and cost.",
+    "Do not treat 'real-time' as a marketing requirement rather than an actual latency need dictated by the use case."
+  ],
+  "common_mistakes": [
+    "Not planning for late or out-of-order events, leading to subtly incorrect real-time aggregations.",
+    "Underestimating the ongoing operational burden — real-time pipelines need 24/7 monitoring, unlike a batch job that runs and finishes.",
+    "Skipping exactly-once processing guarantees, leading to double-counted events during failures and retries."
+  ],
+  "ds_usage": "The architecture behind fraud detection systems, live operational dashboards, real-time personalization/recommendation engines, and IoT sensor monitoring — anywhere a delayed answer is a wrong answer.",
+  "related_concepts": [
+    "apache-kafka",
+    "stream-vs-batch-processing",
+    "apache-spark-intro"
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "id": "random-forest",
+  "title": "Random Forest",
+  "section": "advanced-ml",
+  "difficulty": "intermediate",
+  "color": "purple",
+  "tagline": "A forest of imperfect decision trees that together make surprisingly few mistakes.",
+  "what_it_is": "Random Forest builds many decision trees, each trained on a random sample of the data and a random subset of features, then averages their predictions (regression) or takes a majority vote (classification). This randomness makes each tree different, so their combined errors cancel out.",
+  "key_points": [
+    "It's bagging applied specifically to decision trees, plus random feature selection at each split.",
+    "Each tree sees a bootstrapped (random-with-replacement) sample of the training data.",
+    "Each split only considers a random subset of features — this decorrelates the trees.",
+    "Final prediction = majority vote (classification) or average (regression) across all trees.",
+    "Much less prone to overfitting than a single deep decision tree."
+  ],
+  "why_it_exists": "A single decision tree grown deep enough will overfit — it memorizes the training data. Random Forest was built to keep the trees' flexibility while cancelling out their individual overfitting through averaging many decorrelated trees.",
+  "intuition": "One decision tree is like one overconfident intern making a call based on limited experience. A random forest is 500 interns, each shown a different random slice of the company's history and a different random subset of the available reports, each making their own call independently. Vote them together and the group answer is far more reliable than any one intern's guess.",
+  "steps": [
+    {
+      "step": 1,
+      "title": "Bootstrap sampling",
+      "description": "For each tree, randomly sample the training data with replacement to create a slightly different dataset."
+    },
+    {
+      "step": 2,
+      "title": "Random feature subset",
+      "description": "At every split in every tree, only consider a random subset of features rather than all of them."
+    },
+    {
+      "step": 3,
+      "title": "Grow trees independently",
+      "description": "Grow each tree fully (or to a max depth) without pruning — individual trees are allowed to overfit."
+    },
+    {
+      "step": 4,
+      "title": "Aggregate predictions",
+      "description": "Combine all trees' outputs by majority vote (classification) or averaging (regression)."
+    }
+  ],
+  "when_to_use": [
+    "Use as a strong, low-effort baseline for tabular classification or regression problems.",
+    "Use when you need feature importance estimates without much manual work.",
+    "Use when you want a model that's robust to outliers and doesn't need feature scaling."
+  ],
+  "when_not_to_use": [
+    "Do not use when you need a fully interpretable, single decision path (use a single decision tree instead).",
+    "Do not expect it to extrapolate well on data far outside the training range — trees can only predict within seen value ranges.",
+    "Do not use for very high-dimensional sparse data like raw text — linear models or boosting often do better there."
+  ],
+  "common_mistakes": [
+    "Setting n_estimators (number of trees) very high assuming it always helps — returns diminish and training slows down.",
+    "Not tuning max_depth or min_samples_leaf, leading to needlessly slow, memory-heavy trees.",
+    "Treating feature importance from Random Forest as causal — it only reflects predictive usefulness, not cause and effect."
+  ],
+  "ds_usage": "One of the most common baseline models for structured/tabular data — used for churn prediction, credit scoring, fraud detection, and as a quick feature-importance check before building anything fancier.",
+  "related_concepts": [
+    "ensemble-methods",
+    "decision-trees",
+    "gradient-boosting",
+    "bias-variance-tradeoff"
+  ]
+}

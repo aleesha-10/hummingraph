@@ -1,0 +1,74 @@
+{
+  "id": "sql-basics",
+  "title": "SQL Basics",
+  "section": "dbms",
+  "difficulty": "beginner",
+  "color": "blue",
+  "tagline": "The language you use to ask a database a question.",
+  "what_it_is": "SQL (Structured Query Language) is how you interact with a relational database. You write queries that describe what data you want, and the database figures out how to get it. The four core operations are SELECT, INSERT, UPDATE, and DELETE.",
+  "key_points": [
+    "SELECT retrieves data. FROM tells it which table. WHERE filters rows. ORDER BY sorts. LIMIT caps the result.",
+    "JOIN combines rows from two tables based on a matching column. INNER JOIN returns only matches. LEFT JOIN keeps all rows from the left table.",
+    "GROUP BY collapses many rows into groups. Aggregate functions like COUNT, SUM, AVG, MAX, MIN work on those groups.",
+    "HAVING filters after grouping. WHERE filters before. This is a common point of confusion.",
+    "Subqueries let you nest one SELECT inside another \u2014 use them when one query needs the result of another."
+  ],
+  "why_it_exists": "You need a standard way to talk to a database regardless of which system it's running on. SQL was designed to be readable, close to English, and declarative \u2014 you say what you want, not how to fetch it.",
+  "intuition": "You have a table of orders. You want to know which customers spent more than $500 in the last 30 days. In plain English: look at the orders table, filter to last 30 days, group by customer, add up their totals, and only keep the ones over $500. SQL is almost that sentence:\n\nSELECT customer_id, SUM(amount) AS total\nFROM orders\nWHERE order_date >= NOW() - INTERVAL 30 DAY\nGROUP BY customer_id\nHAVING total > 500\n\nThat's it. The structure mirrors the thought process.\n\n{{viz:sql-execution-order}}",
+  "steps": [
+    {
+      "step": 1,
+      "title": "FROM",
+      "description": "Database picks the table (or joins) to work with first."
+    },
+    {
+      "step": 2,
+      "title": "WHERE",
+      "description": "Rows that don't match the condition are filtered out."
+    },
+    {
+      "step": 3,
+      "title": "GROUP BY",
+      "description": "Remaining rows are collapsed into groups."
+    },
+    {
+      "step": 4,
+      "title": "HAVING",
+      "description": "Groups that don't match the condition are filtered out."
+    },
+    {
+      "step": 5,
+      "title": "SELECT",
+      "description": "The columns and expressions in SELECT are computed and returned."
+    },
+    {
+      "step": 6,
+      "title": "ORDER BY / LIMIT",
+      "description": "Results are sorted and capped if specified."
+    }
+  ],
+  "when_to_use": [
+    "Any time you need to retrieve, filter, or aggregate data from a relational database.",
+    "When you want to combine data from multiple tables in a single result.",
+    "As a first step in data analysis \u2014 pull the right data before loading it into Python or R."
+  ],
+  "common_mistakes": [
+    "Filtering on an aggregated column with WHERE instead of HAVING. WHERE runs before GROUP BY, so it can't see aggregate results.",
+    "Writing SELECT * in production queries. It fetches every column including ones you don't need, slows things down, and breaks if columns are added or removed.",
+    "Forgetting that JOIN without a WHERE or ON condition produces a cartesian product \u2014 every row paired with every other row."
+  ],
+  "notes": [
+    "SQL execution order and writing order are different. You write SELECT first but it runs near last. Knowing the actual execution order explains why certain filters have to go in HAVING and not WHERE.",
+    "NULL doesn't equal NULL in SQL. Filtering WHERE column = NULL returns nothing. You need WHERE column IS NULL."
+  ],
+  "ds_usage": "SQL is the most common way analysts and data scientists pull data from production databases or data warehouses. Tools like dbt, Pandas, and Spark all have SQL interfaces. Knowing SQL well means you can explore data directly without waiting for someone else to extract it for you.",
+  "related_concepts": [
+    "relational-model",
+    "joins",
+    "normalization",
+    "indexes"
+  ],
+  "visualizations": [
+    "sql-execution-order"
+  ]
+}
