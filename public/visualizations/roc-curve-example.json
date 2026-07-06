@@ -1,0 +1,28 @@
+{
+  "data": [
+    {
+      "x": [0, 0.2, 0.4, 0.6, 0.8, 1],
+      "y": [0, 0.7, 0.85, 0.92, 0.97, 1],
+      "type": "scatter",
+      "mode": "lines+markers",
+      "name": "Model AUC = 0.92",
+      "line": { "color": "#d4756b", "width": 3 }
+    },
+    {
+      "x": [0, 1],
+      "y": [0, 1],
+      "type": "scatter",
+      "mode": "lines",
+      "name": "Random (AUC=0.5)",
+      "line": { "color": "gray", "width": 2, "dash": "dash" }
+    }
+  ],
+  "layout": {
+    "title": "ROC Curve – Model separates classes well",
+    "xaxis": { "title": "False Positive Rate (1 - Specificity)", "range": [0, 1] },
+    "yaxis": { "title": "True Positive Rate (Recall)", "range": [0, 1] },
+    "showlegend": true,
+    "width": 600,
+    "height": 450
+  }
+}

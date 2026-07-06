@@ -1,0 +1,45 @@
+{
+  "id": "star-and-snowflake-schema",
+  "title": "Star and Snowflake Schema",
+  "section": "data-warehousing",
+  "difficulty": "intermediate",
+  "color": "gray",
+  "tagline": "How you lay out tables in a warehouse so analysts can actually query them.",
+  "what_it_is": "Star and snowflake schemas are ways of organizing tables in a data warehouse for analytical queries. Both have a central fact table surrounded by dimension tables. The difference is whether dimension tables are normalized (snowflake) or denormalized (star).",
+  "key_points": [
+    "A fact table stores measurable events \u2014 sales, clicks, transactions. It's usually long (many rows) and narrow (mostly foreign keys plus numeric measures).",
+    "Dimension tables store descriptive context \u2014 who, what, where, when. Customer, product, store, date.",
+    "Star schema: fact table in the center, flat dimension tables around it. Simple, fast to query, some redundancy in dimensions.",
+    "Snowflake schema: dimensions are normalized, split into sub-dimension tables. Less redundancy but more joins.",
+    "The date dimension is almost always its own table and is one of the most important \u2014 it lets you slice by day, week, month, quarter, fiscal year without doing date math in every query."
+  ],
+  "why_it_exists": "Normalized relational schemas (3NF) are great for transactions but painful for analytics. A simple business question like 'total sales by product category per quarter' might need 10 joins on a normalized schema. Star schema deliberately denormalizes so that most analytical queries need only one or two joins \u2014 fast, readable, easy.",
+  "intuition": "Imagine a spreadsheet where each row is a sale. The row has: sale amount, date, which customer, which product, which store. That's your fact table. But 'customer' is just an ID \u2014 the actual customer details (name, city, segment) live in a customer dimension table. 'Product' ID links to product name, category, supplier.\n\nStar schema: customer dimension has all customer info in one flat table. Category is just a column in the product table.\n\nSnowflake schema: product dimension links to a separate category table, which links to a department table. More normalized, more joins.\n\n{{viz:star-snowflake-schema}}",
+  "example": {
+    "text": "Star schema: fact_sales(sale_id, date_id, customer_id, product_id, amount). dim_customer(customer_id, name, city, segment). dim_product(product_id, name, category, brand). dim_date(date_id, date, month, quarter, year).\n\nSnowflake variant: dim_product now only has (product_id, name, category_id). A separate dim_category(category_id, category_name, department_id) table. Another dim_department(department_id, department_name) table.",
+    "interpretation": "Star is simpler and faster to query. Snowflake is cleaner and avoids repeating 'Electronics' across every row in the product table. In practice most warehouses use star or a light hybrid."
+  },
+  "when_to_use": [
+    "Star schema when query simplicity and speed matter most \u2014 typical BI and dashboarding use cases.",
+    "Snowflake schema when storage matters more than query speed, or when dimension tables are very large with high cardinality.",
+    "Both when building an analytical layer on top of a normalized operational database."
+  ],
+  "common_mistakes": [
+    "Putting too many measures in dimension tables or too much context in the fact table. Keep facts in fact tables, descriptions in dimensions.",
+    "Not creating a proper date dimension and instead storing dates as raw timestamps in the fact table \u2014 this makes time-based slicing in BI tools much harder.",
+    "Confusing the warehouse schema with the application schema. Normalization rules for OLTP don't directly apply here."
+  ],
+  "notes": [
+    "Slowly Changing Dimensions (SCDs) are an important extension \u2014 how do you handle a customer who moves cities? Type 1 overwrites, Type 2 adds a new row with a version, Type 3 adds a 'previous' column. Each is a deliberate design choice.",
+    "Modern warehouses (BigQuery, Snowflake, Redshift) are columnar, which makes wide denormalized tables fast to query. This further tips the balance toward star schema in cloud environments."
+  ],
+  "ds_usage": "When you pull data from a warehouse for analysis, you're almost certainly working with a star or snowflake schema. Knowing the structure helps you write correct queries, understand why certain columns live in certain tables, and build models in tools like dbt.",
+  "related_concepts": [
+    "etl-pipelines",
+    "olap-vs-oltp",
+    "normalization"
+  ],
+  "visualizations": [
+    "star-snowflake-schema"
+  ]
+}

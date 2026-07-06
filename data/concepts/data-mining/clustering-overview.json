@@ -1,0 +1,74 @@
+{
+  "id": "clustering-overview",
+  "title": "Clustering",
+  "section": "data-mining",
+  "difficulty": "intermediate",
+  "color": "yellow",
+  "tagline": "Grouping similar things together when nobody told you what the groups were.",
+  "what_it_is": "Clustering is an unsupervised technique that groups data points so that points in the same group are more similar to each other than to points in other groups. Unlike classification, there are no predefined labels \u2014 the algorithm discovers the structure on its own. K-means, DBSCAN, and hierarchical clustering are the most common methods.",
+  "key_points": [
+    "Unsupervised: you don't provide labels. The algorithm finds groups based on similarity in the feature space.",
+    "K-means: partition into k clusters by minimizing within-cluster distance. Requires you to specify k upfront.",
+    "DBSCAN: density-based. Finds clusters of arbitrary shape and automatically marks outliers as noise. Doesn't need k upfront.",
+    "Hierarchical clustering: builds a tree of nested clusters (dendrogram). You decide where to cut the tree to get your groups.",
+    "Choosing the number of clusters is one of the hardest parts. The elbow method and silhouette score help \u2014 but they're not definitive."
+  ],
+  "why_it_exists": "Sometimes you don't know what the groups are \u2014 you just suspect the data has structure. Customer segmentation is the classic case. You have behavioral data for millions of customers and you want to find natural groups that behave similarly, without pre-defining what those groups look like. Clustering lets the data suggest the answer.",
+  "intuition": "You have a bag of mixed coins from different countries and you have to sort them without knowing the countries in advance. You'd naturally group them by size, weight, and color. Coins that look similar end up in the same pile. K-means does exactly this \u2014 it groups data points so that the distance between points in a pile is small and the distance between piles is large. The 'features' are whatever attributes you give it, and 'similar' means close in that feature space.\n\n{{viz:clustering-scatter-plot}}",
+  "steps": [
+    {
+      "step": 1,
+      "title": "Choose k",
+      "description": "Decide how many clusters you want. Use the elbow method or silhouette score to guide the choice."
+    },
+    {
+      "step": 2,
+      "title": "Initialize centroids",
+      "description": "Pick k random points from the dataset as starting cluster centers."
+    },
+    {
+      "step": 3,
+      "title": "Assign points",
+      "description": "Each data point is assigned to the nearest centroid."
+    },
+    {
+      "step": 4,
+      "title": "Update centroids",
+      "description": "Recalculate each centroid as the mean of all points assigned to it."
+    },
+    {
+      "step": 5,
+      "title": "Repeat",
+      "description": "Repeat steps 3 and 4 until assignments stop changing or a maximum number of iterations is reached."
+    }
+  ],
+  "when_to_use": [
+    "Customer segmentation \u2014 find natural groups with similar purchasing or behavioral patterns.",
+    "Document grouping \u2014 cluster news articles or support tickets by topic.",
+    "Image compression \u2014 K-means can reduce colors by replacing each pixel with its cluster centroid.",
+    "Anomaly detection \u2014 points that don't fit any cluster (in DBSCAN) are flagged as outliers."
+  ],
+  "when_not_to_use": [
+    "When clusters are not actually present in the data. Clustering will always produce groups even if the data is uniformly distributed.",
+    "K-means doesn't handle non-spherical cluster shapes well. DBSCAN handles arbitrary shapes."
+  ],
+  "common_mistakes": [
+    "Not scaling features before clustering. K-means uses Euclidean distance, so a feature measured in thousands will dominate over one measured in single digits.",
+    "Treating the number of clusters as a definitive answer. The elbow method gives you a hint, not a ground truth.",
+    "Evaluating clustering quality by eye on 2D plots after PCA reduction. The clusters in original feature space may not look clean in 2D."
+  ],
+  "notes": [
+    "Cluster labels are arbitrary \u2014 cluster 1 and cluster 2 are just labels. What matters is which points are grouped together, not the number assigned to the group.",
+    "K-means results are sensitive to initialization. Running with multiple random starts (k-means++) helps avoid bad local minima.",
+    "Gaussian Mixture Models (GMM) are a probabilistic extension of K-means \u2014 instead of hard assignment, each point has a probability of belonging to each cluster."
+  ],
+  "ds_usage": "Clustering is used in customer segmentation, recommendation systems (finding users with similar taste), document organization, image segmentation, and bioinformatics (grouping genes by expression pattern). It also appears as a preprocessing step \u2014 run clustering first, then build a model per cluster.",
+  "related_concepts": [
+    "anomaly-detection",
+    "association-rules",
+    "text-mining"
+  ],
+  "visualizations": [
+    "clustering-scatter-plot"
+  ]
+}

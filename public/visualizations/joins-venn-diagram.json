@@ -1,0 +1,60 @@
+{
+  "data": [
+    {
+      "type": "scatter",
+      "mode": "markers+text",
+      "x": [-1.5, 0, 1.5, -1.5, 0, 1.5, -1.5, 0, 1.5, -1.5, 0, 1.5],
+      "y": [3, 3, 3, 2, 2, 2, 1, 1, 1, 0, 0, 0],
+      "text": [
+        "Left only", "MATCH", "Right only",
+        "Left only", "MATCH", "Right only",
+        "Left only", "MATCH", "Right only",
+        "Left only", "MATCH", "Right only"
+      ],
+      "textposition": "middle center",
+      "textfont": { "size": 10 },
+      "marker": {
+        "size": 80,
+        "symbol": "circle",
+        "color": [
+          "#94a3b8", "#f97316", "#94a3b8",
+          "#86efac", "#86efac", "#d1d5db",
+          "#a5f3fc", "#a5f3fc", "#a5f3fc",
+          "#d1d5db", "#c4b5fd", "#c4b5fd"
+        ],
+        "opacity": 0.85,
+        "line": { "color": "white", "width": 2 }
+      },
+      "hoverinfo": "skip",
+      "showlegend": false
+    },
+    {
+      "type": "scatter",
+      "mode": "text",
+      "x": [-3.2, -3.2, -3.2, -3.2],
+      "y": [3, 2, 1, 0],
+      "text": ["<b>INNER JOIN</b>", "<b>LEFT JOIN</b>", "<b>FULL OUTER</b>", "<b>RIGHT JOIN</b>"],
+      "textposition": "middle right",
+      "textfont": { "size": 13, "color": ["#c2410c", "#15803d", "#0e7490", "#4c1d95"] },
+      "hoverinfo": "skip",
+      "showlegend": false
+    }
+  ],
+  "layout": {
+    "height": 340,
+    "margin": { "l": 20, "r": 20, "t": 50, "b": 60 },
+    "paper_bgcolor": "#fdf8f5",
+    "plot_bgcolor": "#fdf8f5",
+    "xaxis": { "visible": false, "range": [-4.5, 3] },
+    "yaxis": { "visible": false, "range": [-0.8, 3.8] },
+    "title": { "text": "What each JOIN type includes from each side", "font": { "size": 13, "color": "#374151" } },
+    "annotations": [
+      { "x": -1.5, "y": -0.80, "xref": "x", "yref": "y", "text": "Left table only", "showarrow": false, "font": { "size": 10, "color": "#64748b" } },
+      { "x": 0, "y": -0.80, "xref": "x", "yref": "y", "text": "Matched rows", "showarrow": false, "font": { "size": 10, "color": "#64748b" } },
+      { "x": 1.5, "y": -0.80, "xref": "x", "yref": "y", "text": "Right table only", "showarrow": false, "font": { "size": 10, "color": "#64748b" } },
+      { "x": -0.75, "y": 3, "xref": "x", "yref": "y", "text": "✓", "showarrow": false, "font": { "size": 16, "color": "#7c2d12" } },
+      { "x": -0.75, "y": 2, "xref": "x", "yref": "y", "text": "✓", "showarrow": false, "font": { "size": 16, "color": "#14532d" } },
+      { "x": 0.75, "y": 2, "xref": "x", "yref": "y", "text": "NULL", "showarrow": false, "font": { "size": 10, "color": "#94a3b8" } }
+    ]
+  }
+}

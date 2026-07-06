@@ -1,0 +1,67 @@
+{
+  "id": "support-vector-machines",
+  "title": "Support Vector Machines (SVM)",
+  "section": "advanced-ml",
+  "difficulty": "intermediate",
+  "color": "purple",
+  "tagline": "Draw the widest possible street between classes, not just any line that separates them.",
+  "what_it_is": "A Support Vector Machine finds the decision boundary (hyperplane) that separates classes with the maximum possible margin — the widest gap between the closest points of each class. Those closest points are called support vectors because they alone determine where the boundary sits.",
+  "key_points": [
+    "SVM maximizes the margin between classes, not just any line that happens to separate them.",
+    "Only the closest points to the boundary — the support vectors — determine its position; the rest of the data doesn't matter.",
+    "The kernel trick lets SVM draw non-linear boundaries by implicitly projecting data into higher dimensions.",
+    "The C parameter controls the trade-off between a wider margin and fewer misclassifications on training data.",
+    "Works well on small-to-medium datasets with a clear margin of separation, and in high-dimensional spaces."
+  ],
+  "why_it_exists": "Many lines can separate two classes perfectly on training data, but not all of them generalize equally well to new data. SVM exists to pick the one boundary that is maximally 'safe' — as far as possible from both classes — which tends to generalize better than an arbitrary separating line.",
+  "intuition": "Imagine drawing a road between two neighborhoods that never touches a house on either side. You could draw a narrow, winding road that barely squeezes through, or the widest possible straight road with the most breathing room on both sides. SVM always chooses the widest road — new houses built later are less likely to end up on the wrong side of it.\n\n{{viz:svm-margin}}",
+  "formulas": [
+    {
+      "label": "Margin Maximization Objective",
+      "expression": "\\min_{w,b} \\frac{1}{2}\\|w\\|^2 \\quad \\text{s.t. } y_i(w \\cdot x_i + b) \\geq 1",
+      "breakdown": [
+        {
+          "symbol": "w, b",
+          "means": "The weight vector and bias defining the separating hyperplane"
+        },
+        {
+          "symbol": "\\|w\\|^2",
+          "means": "Minimizing this maximizes the margin width"
+        },
+        {
+          "symbol": "y_i(w \\cdot x_i + b) \\geq 1",
+          "means": "Every point must be correctly classified and outside the margin"
+        }
+      ]
+    }
+  ],
+  "when_to_use": [
+    "Use on small-to-medium datasets, especially with more features than samples (e.g. text classification, genomics).",
+    "Use when classes are separable with a clear margin, or nearly so.",
+    "Use the kernel trick (RBF kernel) when the boundary between classes is clearly non-linear."
+  ],
+  "when_not_to_use": [
+    "Do not use on very large datasets — training time scales poorly with number of samples.",
+    "Do not use without scaling your features first — SVM is sensitive to feature magnitude.",
+    "Do not expect easy interpretability compared to logistic regression or decision trees."
+  ],
+  "common_mistakes": [
+    "Forgetting to scale/normalize features before training, which distorts the margin calculation.",
+    "Using a non-linear kernel by default without checking if a simple linear kernel would already work — adds unnecessary complexity.",
+    "Not tuning C and gamma — leaving them at defaults often gives poor results on real data."
+  ],
+  "ds_usage": "Common in text classification (spam detection, sentiment analysis with TF-IDF features), bioinformatics, and image classification tasks with a moderate number of samples, though largely replaced by gradient boosting and neural networks for very large datasets.",
+  "visual": {
+    "type": "diagram",
+    "description": "2D scatter of two classes with a separating line and margin boundaries on either side, support vector points highlighted."
+  },
+  "related_concepts": [
+    "kernel-trick",
+    "logistic-regression",
+    "feature-scaling"
+  ],
+  "visualizations": [
+    "svm-margin"
+  ],
+  "visual_alt": "Scatter plot of two classes with the SVM decision boundary drawn as a solid line, dashed margin lines on either side, and the support vector points circled in black."
+}

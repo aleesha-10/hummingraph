@@ -1,0 +1,63 @@
+{
+  "id": "etl-pipelines",
+  "title": "ETL Pipelines",
+  "section": "data-warehousing",
+  "difficulty": "beginner",
+  "color": "gray",
+  "tagline": "Extract the data, clean it up, load it somewhere useful.",
+  "what_it_is": "ETL stands for Extract, Transform, Load. It's the process of pulling data from source systems, reshaping it into the format your warehouse needs, and loading it into the destination. It's the pipeline that keeps your analytical database current.",
+  "key_points": [
+    "Extract: connect to the source (database, API, file) and pull the raw data.",
+    "Transform: clean, filter, join, aggregate, and reformat the data. This is usually the most complex step.",
+    "Load: write the transformed data into the target system, usually a data warehouse.",
+    "ELT (Extract, Load, Transform) is the modern variant \u2014 load raw data first, then transform inside the warehouse using SQL. Used heavily with cloud warehouses like BigQuery and Snowflake.",
+    "Incremental loads only process new or changed data. Full loads replace everything. Incremental is faster but harder to build correctly."
+  ],
+  "why_it_exists": "Your production database is designed for speed on individual transactions, not for running analytical queries across millions of rows. ETL moves data from where it's generated to where it can be analyzed without slowing down production systems or tangling analytical workloads with live traffic.",
+  "intuition": "Your app's database is like a restaurant kitchen \u2014 it's optimized for speed, high volume, and constant change. You wouldn't invite a researcher in there to run long queries during the dinner rush. Instead, at the end of the day you copy everything relevant into a separate room where they can analyze at leisure. That copying process is ETL. The separate room is your data warehouse.\n\n{{viz:etl-pipeline-flow}}",
+  "steps": [
+    {
+      "step": 1,
+      "title": "Extract",
+      "description": "Connect to source systems (Postgres, Salesforce, S3, APIs). Pull raw data as-is \u2014 no changes yet. Track what was already extracted to avoid duplicates on the next run."
+    },
+    {
+      "step": 2,
+      "title": "Transform",
+      "description": "Apply business logic: clean nulls, standardize formats, join tables, aggregate, deduplicate, rename columns. This is where data quality lives or dies."
+    },
+    {
+      "step": 3,
+      "title": "Load",
+      "description": "Write the clean data into the warehouse. Decide between append-only, upsert (update if exists, insert if not), or full replace depending on the use case."
+    },
+    {
+      "step": 4,
+      "title": "Schedule and monitor",
+      "description": "ETL usually runs on a schedule (hourly, daily). You need alerting when it fails and logging to debug what went wrong."
+    }
+  ],
+  "when_to_use": [
+    "When you need to consolidate data from multiple source systems into one place for analysis.",
+    "When your analytical queries are too slow or disruptive to run against production databases.",
+    "When business logic needs to be applied consistently across all downstream reports and models."
+  ],
+  "common_mistakes": [
+    "Doing too much transformation in the extract step. Keep extract dumb \u2014 just get the data. Transform separately so failures are easier to isolate.",
+    "Not handling schema changes in the source. A new column or renamed field in the source will silently break your pipeline if you don't account for it.",
+    "Building full loads when incremental loads would work. Full loads on large tables waste time and compute."
+  ],
+  "notes": [
+    "ELT has largely replaced ETL in cloud-native stacks because compute inside warehouses (BigQuery, Snowflake, Redshift) is cheap and SQL is familiar. Tools like dbt handle the transform step inside the warehouse.",
+    "Idempotency is a key property for ETL jobs \u2014 running the pipeline twice should produce the same result as running it once. This makes retries safe."
+  ],
+  "ds_usage": "Every analysis you do on a data warehouse assumes ETL already ran correctly. In practice, broken ETL pipelines are one of the top sources of wrong analytical results. Data scientists who understand ETL can debug data quality issues instead of just blaming the data.",
+  "related_concepts": [
+    "star-and-snowflake-schema",
+    "olap-vs-oltp",
+    "normalization"
+  ],
+  "visualizations": [
+    "etl-pipeline-flow"
+  ]
+}

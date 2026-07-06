@@ -1,0 +1,34 @@
+{
+  "data": [
+    {
+      "type": "bar",
+      "orientation": "h",
+      "x": [1, 1, 1, 1, 1],
+      "y": ["5. Vectorize (TF-IDF)", "4. Stem / Lemmatize", "3. Remove stop words", "2. Tokenize", "1. Raw text"],
+      "text": [
+        "refund: 0.71 · processed: 0.54 · day: 0.38  →  feed into model",
+        "processed → process · days → day · running → run",
+        "Drop 'the', 'not', 'after', 'was' — no signal, appear everywhere",
+        "['Refund', 'not', 'processed', 'after', '14', 'days']",
+        "\"Refund not processed after 14 days\""
+      ],
+      "textposition": "inside",
+      "insidetextanchor": "start",
+      "marker": { "color": ["#E8B84B", "#a78bfa", "#f472b6", "#F5A673", "#94a3b8"] },
+      "hoverinfo": "text",
+      "showlegend": false
+    }
+  ],
+  "layout": {
+    "title": { "text": "Text Mining Pipeline — from raw sentence to numerical vector", "font": { "size": 13, "color": "#374151" } },
+    "height": 300,
+    "margin": { "l": 175, "r": 20, "t": 60, "b": 70 },
+    "paper_bgcolor": "#fdf8f5",
+    "plot_bgcolor": "#fdf8f5",
+    "xaxis": { "visible": false },
+    "yaxis": { "tickfont": { "size": 11, "color": "#374151" }, "showgrid": false },
+    "annotations": [
+      { "x": 0.5, "y": -0.22, "xref": "paper", "yref": "paper", "text": "TF-IDF score = how often a word appears in this doc × how rare it is across all docs. Common words score near zero.", "showarrow": false, "font": { "size": 11, "color": "#94a3b8" } }
+    ]
+  }
+}

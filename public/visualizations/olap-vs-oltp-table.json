@@ -1,0 +1,33 @@
+{
+  "data": [
+    {
+      "type": "table",
+      "header": {
+        "values": ["", "<b>OLTP</b>", "<b>OLAP</b>"],
+        "fill": { "color": ["#f1f5f9", "#fed7aa", "#a5f3fc"] },
+        "font": { "color": ["#475569", "#7c2d12", "#164e63"], "size": 13 },
+        "align": ["left", "center", "center"],
+        "height": 36
+      },
+      "cells": {
+        "values": [
+          ["Purpose", "Query shape", "Schema", "Storage format", "Write pattern", "Users", "Examples"],
+          ["Day-to-day operations", "Touches a few rows at a time", "Normalized — 3NF", "Row-oriented", "Constant live writes", "App users, services", "PostgreSQL, MySQL, Oracle"],
+          ["Historical analysis", "Scans millions of rows", "Denormalized — star schema", "Columnar", "Batch loads (hourly/daily)", "Analysts, data scientists", "Snowflake, BigQuery, Redshift"]
+        ],
+        "fill": { "color": ["#f8fafc", "#fff7ed", "#f0fdfa"] },
+        "font": { "color": ["#374151", "#9a3412", "#134e4a"], "size": 12 },
+        "align": ["left", "center", "center"],
+        "height": 30
+      }
+    }
+  ],
+  "layout": {
+    "height": 340,
+    "margin": { "l": 10, "r": 10, "t": 20, "b": 30 },
+    "paper_bgcolor": "#fdf8f5",
+    "annotations": [
+      { "x": 0.5, "y": -0.08, "xref": "paper", "yref": "paper", "text": "Running heavy OLAP queries on an OLTP database slows down live operations — keep them separate.", "showarrow": false, "font": { "size": 11, "color": "#94a3b8" } }
+    ]
+  }
+}

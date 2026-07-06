@@ -2,8 +2,12 @@
 import 'katex/dist/katex.min.css'
 import type { Metadata } from "next";
 import { Nunito, Mulish } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/react';
 import "./globals.css";
 import Navbar from '@/components/Navbar';
+import ChatWidget from '@/components/ChatWidget';
+import ServiceWorkerRegister from '@/components/ServiceWorkerRegister';
+import { getAllConcepts } from '@/lib/concepts';
 
 const nunito = Nunito({
   subsets: ["latin"],
@@ -20,6 +24,16 @@ const mulish = Mulish({
 export const metadata: Metadata = {
   title: "Hummingraph",
   description: "A structured reference for data science concepts",
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Hummingraph",
+  },
+};
+
+export const viewport = {
+  themeColor: "#4A90D9",
 };
 
 export default function RootLayout({
@@ -27,6 +41,15 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Lightweight fields only — this list is sent to the client for the
+  // navbar search bar, so we don't want to ship every field of every concept.
+  const searchableConcepts = getAllConcepts().map((c) => ({
+    id: c.id,
+    title: c.title,
+    section: c.section,
+    tagline: c.tagline,
+  }));
+
   return (
     <html
       lang="en"
@@ -40,8 +63,11 @@ export default function RootLayout({
           fontFamily: 'var(--font-mulish), sans-serif'
         }}
       >
-        <Navbar />
+        <Navbar concepts={searchableConcepts} />
         {children}
+        <ChatWidget />
+        <ServiceWorkerRegister />
+        <Analytics />
       </body>
     </html>
   );

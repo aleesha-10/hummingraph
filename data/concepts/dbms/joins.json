@@ -1,0 +1,45 @@
+{
+  "id": "joins",
+  "title": "Joins",
+  "section": "dbms",
+  "difficulty": "beginner",
+  "color": "blue",
+  "tagline": "How you stitch two tables together based on a shared column.",
+  "what_it_is": "A JOIN combines rows from two tables by matching values in a specified column. The type of join determines what happens when a row in one table has no match in the other. INNER, LEFT, RIGHT, and FULL OUTER are the four core types.",
+  "key_points": [
+    "INNER JOIN returns only rows where there's a match in both tables. Non-matching rows from either side are dropped.",
+    "LEFT JOIN returns all rows from the left table. If there's no match in the right table, the right-side columns come back as NULL.",
+    "RIGHT JOIN is the mirror of LEFT JOIN \u2014 all rows from the right, NULLs for unmatched left rows. Rarely used since you can just flip the table order and use LEFT.",
+    "FULL OUTER JOIN returns all rows from both tables, with NULLs wherever there's no match on either side.",
+    "A CROSS JOIN returns every combination of rows \u2014 no matching column needed. Use only when you actually need all combinations."
+  ],
+  "why_it_exists": "Data is split across tables to avoid repetition. Joins are how you bring it back together at query time without having to store it redundantly.",
+  "intuition": "You have a table of customers and a table of orders. Not every customer has placed an order. If you want to see all customers and their orders, use a LEFT JOIN on customers. Customers with no orders still show up, but the order columns are NULL. If you want only customers who've actually ordered, use INNER JOIN and the non-buyers disappear from the result.\n\nThe mental model: LEFT JOIN is 'give me everything on the left, attach whatever matches from the right'. INNER JOIN is 'only give me the rows where both sides agreed to show up'.\n\n{{viz:joins-venn-diagram}}",
+  "example": {
+    "text": "Customers table: (1, Alice), (2, Bob), (3, Carol). Orders table: (order 101, customer 1), (order 102, customer 1), (order 103, customer 2).\n\nINNER JOIN result: Alice + order 101, Alice + order 102, Bob + order 103. Carol is excluded.\nLEFT JOIN result: Alice + order 101, Alice + order 102, Bob + order 103, Carol + NULL.",
+    "interpretation": "Carol shows up in LEFT JOIN because she's on the left (customers) side, even though she has no orders. INNER JOIN drops her entirely."
+  },
+  "when_to_use": [
+    "INNER JOIN when you only care about rows that exist in both tables.",
+    "LEFT JOIN when you want to keep all records from your main table and attach related data where it exists.",
+    "FULL OUTER JOIN when you need to find rows that don't have a match on either side, like a reconciliation report."
+  ],
+  "common_mistakes": [
+    "Using INNER JOIN when you actually need a LEFT JOIN \u2014 this silently drops rows with no match, and you might not notice the missing data.",
+    "Joining on a column that has duplicates on both sides, which produces a row explosion. If customer_id appears 3 times in orders and 2 times in some other table, the join produces 6 rows.",
+    "Joining on NULLs. NULL doesn't equal NULL, so rows with NULL in the join column never match."
+  ],
+  "notes": [
+    "Self-joins are a thing \u2014 joining a table to itself. Useful for hierarchical data, like an employees table where each row has a manager_id that points to another row in the same table.",
+    "JOIN order can affect performance significantly. Query optimizers usually handle this, but in large joins it's worth thinking about which table is smaller and putting it on the right."
+  ],
+  "ds_usage": "Joins are one of the most used operations in any SQL-based analysis. Getting join types wrong is one of the most common sources of incorrect results in data pipelines \u2014 a silent INNER JOIN dropping rows can skew your entire analysis without any error message.",
+  "related_concepts": [
+    "relational-model",
+    "sql-basics",
+    "normalization"
+  ],
+  "visualizations": [
+    "joins-venn-diagram"
+  ]
+}

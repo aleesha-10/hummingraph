@@ -1,0 +1,65 @@
+{
+  "id": "dbscan",
+  "title": "DBSCAN",
+  "section": "advanced-ml",
+  "difficulty": "advanced",
+  "color": "green",
+  "tagline": "Finds clusters of any shape by following dense neighborhoods — and knows when a point is just noise.",
+  "what_it_is": "DBSCAN (Density-Based Spatial Clustering of Applications with Noise) groups points that are closely packed together into clusters and marks points that sit alone in low-density regions as noise/outliers. Unlike K-Means, it doesn't need a predefined number of clusters and can find clusters of any shape.",
+  "key_points": [
+    "Groups points based on density — areas with many nearby points form clusters, sparse areas don't.",
+    "Automatically identifies outliers as 'noise' rather than forcing every point into a cluster.",
+    "Doesn't require specifying the number of clusters in advance, only two parameters: eps (neighborhood radius) and min_samples.",
+    "Can find non-spherical, irregularly shaped clusters that K-Means would fail on.",
+    "Struggles when clusters have very different densities — one eps value can't fit all of them."
+  ],
+  "why_it_exists": "K-Means assumes clusters are round and roughly equal in size, and forces every point into some cluster even if it's really an outlier. DBSCAN exists to handle real-world data where clusters can be irregularly shaped and where some points genuinely don't belong to any group — like fraud transactions or sensor glitches.",
+  "intuition": "Imagine a crowded city map at night viewed from above, lit by streetlights. Dense clusters of light are neighborhoods (clusters); a single lit house out in the countryside, far from any neighborhood, is noise — not its own tiny 'neighborhood' of one. DBSCAN traces out these dense neighborhoods and correctly leaves the lone house unassigned rather than forcing it into the nearest town.\n\n{{viz:dbscan-moons}}",
+  "steps": [
+    {
+      "step": 1,
+      "title": "Pick eps and min_samples",
+      "description": "eps defines the radius of a neighborhood; min_samples defines how many points must be within that radius to count as 'dense.'"
+    },
+    {
+      "step": 2,
+      "title": "Classify each point",
+      "description": "A point with at least min_samples neighbors within eps is a 'core point.' Points near a core point but without enough neighbors themselves are 'border points.' Everything else is 'noise.'"
+    },
+    {
+      "step": 3,
+      "title": "Expand clusters",
+      "description": "Starting from a core point, grow the cluster by including all reachable core and border points connected through dense regions."
+    },
+    {
+      "step": 4,
+      "title": "Label remaining points as noise",
+      "description": "Any point not reachable from a core point is marked as an outlier, not forced into a cluster."
+    }
+  ],
+  "when_to_use": [
+    "Use when clusters have irregular, non-spherical shapes.",
+    "Use when your data legitimately contains outliers that shouldn't be forced into a cluster — e.g. anomaly detection.",
+    "Use when you don't know the number of clusters in advance."
+  ],
+  "when_not_to_use": [
+    "Do not use when clusters have very different densities — a single eps value won't work well for all of them.",
+    "Do not use on very high-dimensional data without dimensionality reduction first — distance becomes less meaningful (curse of dimensionality).",
+    "Do not expect it to work well without carefully tuning eps and min_samples — results are very sensitive to these."
+  ],
+  "common_mistakes": [
+    "Picking eps arbitrarily instead of using a k-distance plot to inform the choice.",
+    "Applying DBSCAN to unscaled features, distorting what 'nearby' even means.",
+    "Assuming every point must belong to a cluster — DBSCAN's noise label is a deliberate and often useful feature, not a bug."
+  ],
+  "ds_usage": "Used for anomaly/fraud detection, geographic/spatial clustering (e.g. grouping GPS coordinates into hotspots), and any scenario where irregular cluster shapes or noise are expected in the data.",
+  "related_concepts": [
+    "k-means-clustering",
+    "hierarchical-clustering",
+    "curse-of-dimensionality"
+  ],
+  "visualizations": [
+    "dbscan-moons"
+  ],
+  "visual_alt": "Scatter plot of two interleaving crescent-shaped clusters correctly separated by DBSCAN, with scattered outlier points shown as open gray circles labeled noise rather than forced into a cluster."
+}

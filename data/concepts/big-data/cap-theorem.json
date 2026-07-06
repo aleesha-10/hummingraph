@@ -1,0 +1,38 @@
+{
+  "id": "cap-theorem",
+  "title": "CAP Theorem",
+  "section": "big-data",
+  "difficulty": "advanced",
+  "color": "yellow",
+  "tagline": "In a distributed system, you can't have perfect consistency, availability, and network reliability all at once.",
+  "what_it_is": "The CAP theorem states that a distributed data system can only guarantee two out of three properties at the same time: Consistency (every read gets the latest write), Availability (every request gets a response, even if not the latest data), and Partition Tolerance (the system keeps working despite network failures between nodes).",
+  "key_points": [
+    "Consistency: every node sees the same, most up-to-date data at the same time.",
+    "Availability: every request receives a response, even if some nodes can't be reached.",
+    "Partition Tolerance: the system continues operating even when network communication between nodes breaks down.",
+    "In practice, network partitions will happen, so real systems must choose between prioritizing Consistency (CP) or Availability (AP) when a partition occurs.",
+    "This theorem is why different databases make fundamentally different trade-offs by design, not by accident."
+  ],
+  "why_it_exists": "Distributed systems run across multiple machines connected by an unreliable network — messages can be delayed or lost. CAP theorem exists as a proven, formal way of explaining why no distributed system can simultaneously guarantee perfectly up-to-date data everywhere and instant responses everywhere, once network problems happen — it names the fundamental trade-off engineers must consciously choose.",
+  "intuition": "Imagine two bank branches in different cities that must stay in sync. If the phone line between them goes down (a network partition), each branch has two choices: stop processing withdrawals until the line is restored (choosing Consistency over Availability), or keep processing withdrawals independently and risk the two branches' balances disagreeing until the line is fixed (choosing Availability over Consistency). CAP theorem says you must pick one when the line is down — you can't have both.",
+  "when_to_use": [
+    "Use CAP theorem as a framework when choosing a distributed database — decide whether your application needs strict consistency or high availability more, during network issues.",
+    "Choose CP systems (e.g. traditional relational databases, some configurations of MongoDB) when correctness matters more than uptime — banking, inventory.",
+    "Choose AP systems (e.g. Cassandra, DynamoDB) when uptime matters more than instant consistency — social media feeds, shopping carts."
+  ],
+  "when_not_to_use": [
+    "Do not treat CAP theorem as a reason to avoid distributed systems altogether — nearly all large-scale systems must make this trade-off; the theorem just makes the choice explicit.",
+    "Do not assume a system labeled 'CP' or 'AP' behaves that way in every single scenario — the trade-off specifically applies during a network partition."
+  ],
+  "common_mistakes": [
+    "Assuming a system can be fully consistent and fully available at all times — that's only possible without partitions, which real networks don't guarantee.",
+    "Choosing a database based on marketing claims rather than understanding which side of the CAP trade-off actually fits the application's needs.",
+    "Forgetting that most real systems offer a spectrum (eventual consistency, tunable consistency) rather than a strict binary choice."
+  ],
+  "ds_usage": "A foundational concept for choosing and reasoning about databases in any data platform architecture — explains why a social media feed can tolerate slightly stale data (AP) while a payment ledger cannot (CP).",
+  "related_concepts": [
+    "nosql-databases",
+    "data-replication-fault-tolerance",
+    "distributed-computing-basics"
+  ]
+}

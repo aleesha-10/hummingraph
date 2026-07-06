@@ -3,11 +3,13 @@
 // Used by InlineText to swap {{viz:id}} placeholders with live charts.
 
 import { useEffect, useState } from "react";
-import Plot from "react-plotly.js";
+import dynamic from "next/dynamic";
+const Plot = dynamic(() => import("react-plotly.js"), { ssr: false });
 
 interface PlotlyJson {
   data: Plotly.Data[];
   layout?: Partial<Plotly.Layout>;
+  frames?: Plotly.Frame[];
 }
 
 interface VisualizationBlockProps {
@@ -44,22 +46,23 @@ export default function VisualizationBlock({ id }: VisualizationBlockProps) {
     );
   }
 
-  return (
-    <div className="viz-block">
-      <Plot
-        data={plotJson.data}
-        layout={{
-          autosize: true,
-          margin: { t: 40, r: 20, b: 40, l: 50 },
-          font: { family: "inherit" },
-          ...plotJson.layout,
-        }}
-        config={{
-          responsive: true,
-          displayModeBar: false, // hide the Plotly toolbar for cleaner look
-        }}
-        style={{ width: "100%", height: "100%" }}
-      />
-    </div>
-  );
+return (
+  <div className="viz-block">
+    <Plot
+      data={plotJson.data}
+      layout={{
+        autosize: true,
+        margin: { t: 40, r: 20, b: 40, l: 50 },
+        font: { family: "inherit" },
+        ...plotJson.layout,
+      }}
+      frames={plotJson.frames ?? []}
+      config={{
+        responsive: true,
+        displayModeBar: false,
+      }}
+      style={{ width: "100%", height: "100%" }}
+    />
+  </div>
+);
 }

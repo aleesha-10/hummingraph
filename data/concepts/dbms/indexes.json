@@ -1,0 +1,47 @@
+{
+  "id": "indexes",
+  "title": "Indexes",
+  "section": "dbms",
+  "difficulty": "intermediate",
+  "color": "gray",
+  "tagline": "The thing that makes queries fast without changing any data.",
+  "what_it_is": "An index is a separate data structure the database maintains alongside a table that makes lookups on specific columns much faster. Instead of scanning every row, the database uses the index to jump directly to the relevant rows. The tradeoff is that indexes slow down writes and take up storage.",
+  "key_points": [
+    "A full table scan reads every row. An index scan jumps to the relevant rows. The difference is enormous on large tables.",
+    "B-tree indexes are the default in most databases. They support equality and range queries efficiently.",
+    "Hash indexes only support equality lookups. They're faster for exact matches but can't do WHERE age > 30.",
+    "Composite indexes cover multiple columns. Column order inside the index matters \u2014 the index on (city, age) doesn't help a query filtering only on age.",
+    "Every write (INSERT, UPDATE, DELETE) has to update all indexes on that table. Too many indexes slow down writes."
+  ],
+  "why_it_exists": "A table with 100 million rows and no index means every query reads all 100 million rows to find the ones you want. That's fine for small tables. For large ones it takes minutes. An index turns that into milliseconds.",
+  "intuition": "Think of a book's index at the back. If you want to find every page that mentions 'normalization', you don't read every page \u2014 you go to the index, find 'normalization', and it tells you exactly which pages to go to. A database index works the same way. The database builds and maintains this lookup structure so it doesn't have to read the whole table every time you query.\n\n{{viz:indexes-scan-comparison}}",
+  "when_to_use": [
+    "On columns that appear frequently in WHERE clauses.",
+    "On foreign key columns \u2014 most databases don't index these automatically but joins on them are very common.",
+    "On columns used in ORDER BY when you need sorted results on large tables."
+  ],
+  "when_not_to_use": [
+    "On columns with very low cardinality (like a boolean or a status column with 3 values) \u2014 the index doesn't help much when almost every value is the same.",
+    "On tables that are written to very frequently and rarely read \u2014 the write overhead isn't worth it.",
+    "On small tables where a full scan is already fast."
+  ],
+  "common_mistakes": [
+    "Adding an index on every column by default. More indexes means slower writes \u2014 you're paying a cost on every INSERT and UPDATE.",
+    "Creating a composite index but putting the columns in the wrong order. An index on (last_name, first_name) helps queries filtering on last_name, but not queries filtering only on first_name.",
+    "Assuming indexes are being used. Use EXPLAIN (or EXPLAIN ANALYZE) to verify the query planner is actually using your index."
+  ],
+  "notes": [
+    "Primary key columns are automatically indexed in every SQL database.",
+    "Indexes can go stale in terms of selectivity if data distribution changes. Running ANALYZE (or equivalent) updates the statistics the query planner uses to decide whether to use an index.",
+    "Partial indexes index only a subset of rows \u2014 useful when most queries filter on a specific condition, like WHERE status = 'active'."
+  ],
+  "ds_usage": "When pulling large datasets from a production database, slow queries are almost always a missing or misused index. Understanding indexes helps you write queries that the database can execute efficiently and helps you have informed conversations with database admins about performance.",
+  "related_concepts": [
+    "sql-basics",
+    "transactions-and-acid",
+    "relational-model"
+  ],
+  "visualizations": [
+    "indexes-scan-comparison"
+  ]
+}

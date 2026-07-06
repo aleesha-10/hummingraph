@@ -1,0 +1,37 @@
+{
+  "id": "what-is-big-data",
+  "title": "What is Big Data (The 5 Vs)",
+  "section": "big-data",
+  "difficulty": "beginner",
+  "color": "blue",
+  "tagline": "Not just 'a lot of data' — data too big, fast, or messy for one machine to handle alone.",
+  "what_it_is": "Big Data refers to datasets so large, fast-moving, or varied that traditional single-machine tools and databases can't store, process, or analyze them efficiently. It's usually described through the 'Vs': Volume, Velocity, Variety, Veracity, and Value.",
+  "key_points": [
+    "Volume: the sheer size of data, often too large to fit or process on one machine.",
+    "Velocity: the speed at which new data is generated and needs to be processed.",
+    "Variety: data comes in many forms — structured tables, text, images, logs, sensor streams.",
+    "Veracity: the trustworthiness and quality of the data — big data is often messy and inconsistent.",
+    "Value: ultimately, all this data is only worth collecting if it can be turned into useful insight or action."
+  ],
+  "why_it_exists": "As the internet, mobile devices, and sensors exploded, the volume and speed of generated data outgrew what a single server or traditional relational database could realistically store and process. The term 'Big Data' — and the tools built around it — exist to name and solve this specific scaling problem.",
+  "intuition": "A single librarian can easily organize a small-town library by hand. Now imagine every book published worldwide arriving every second, in every language, some torn or mislabeled — one librarian, one desk, and one filing cabinet can no longer keep up. Big Data tools are the equivalent of building an entire distributed team of librarians, warehouses, and automated sorting systems to handle that scale.",
+  "when_to_use": [
+    "Recognize a problem as 'Big Data' when a single machine can't store or process the dataset in a reasonable time.",
+    "Reach for distributed tools (Spark, Hadoop) when Volume, Velocity, or Variety exceed what traditional databases and pandas/Excel can realistically handle."
+  ],
+  "when_not_to_use": [
+    "Do not reach for distributed big data tools when your dataset comfortably fits in memory on one machine — the added complexity isn't worth it.",
+    "Do not assume 'big data' automatically means 'better insights' — Veracity and Value matter more than raw Volume."
+  ],
+  "common_mistakes": [
+    "Jumping straight to Spark or Hadoop for datasets that would run fine with pandas on a laptop.",
+    "Focusing only on Volume and ignoring Veracity — huge amounts of low-quality data produce unreliable conclusions.",
+    "Treating 'Big Data' as a single technology instead of a category of problems with many different possible tools."
+  ],
+  "ds_usage": "Sets the context for every other concept in this section — whether a company needs Hadoop, Spark, Kafka, or a NoSQL database depends entirely on which of the 5 Vs is actually the bottleneck for their specific data.",
+  "related_concepts": [
+    "distributed-computing-basics",
+    "apache-spark-intro",
+    "cluster-computing-scalability"
+  ]
+}

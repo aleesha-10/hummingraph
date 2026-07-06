@@ -1,0 +1,75 @@
+{
+  "data": [
+    {
+      "type": "table",
+      "domain": { "x": [0, 0.44], "y": [0, 1] },
+      "header": {
+        "values": ["<b>order_id</b>", "<b>customer</b>", "<b>email</b>", "<b>product</b>"],
+        "fill": { "color": "#fecaca" },
+        "font": { "color": "#991b1b", "size": 11 },
+        "align": "center",
+        "height": 30
+      },
+      "cells": {
+        "values": [
+          [1, 2, 3, 4],
+          ["Alice", "Alice", "Bob", "Alice"],
+          ["alice@x.com", "alice@x.com", "bob@y.com", "alice@x.com"],
+          ["Notebook", "Pen", "Notebook", "Notebook"]
+        ],
+        "fill": {
+          "color": [
+            ["#fff7f7", "#fff7f7", "#fff7f7", "#fff7f7"],
+            ["#fff7f7", "#fecaca", "#fff7f7", "#fecaca"],
+            ["#fff7f7", "#fecaca", "#fff7f7", "#fecaca"],
+            ["#fff7f7", "#fff7f7", "#fff7f7", "#fecaca"]
+          ]
+        },
+        "font": {
+          "color": [
+            ["#374151", "#374151", "#374151", "#374151"],
+            ["#374151", "#dc2626", "#374151", "#dc2626"],
+            ["#374151", "#dc2626", "#374151", "#dc2626"],
+            ["#374151", "#374151", "#374151", "#dc2626"]
+          ],
+          "size": 11
+        },
+        "align": "center",
+        "height": 28
+      }
+    },
+    {
+      "type": "table",
+      "domain": { "x": [0.56, 1.0], "y": [0, 1] },
+      "header": {
+        "values": ["<b>Customers</b>", "<b>Orders</b>", "<b>Products</b>"],
+        "fill": { "color": ["#4ade80", "#89CFF0", "#a78bfa"] },
+        "font": { "color": "white", "size": 11 },
+        "align": "center",
+        "height": 30
+      },
+      "cells": {
+        "values": [
+          [" customer_id", "name", "email (once)"],
+          [" order_id", "customer_id", " product_id"],
+          [" product_id", "name", "price"]
+        ],
+        "fill": { "color": ["#f0fdf4", "#eef6ff", "#f5f3ff"] },
+        "font": { "color": ["#14532d", "#1e40af", "#4c1d95"], "size": 11 },
+        "align": "left",
+        "height": 28
+      }
+    }
+  ],
+  "layout": {
+    "height": 300,
+    "margin": { "l": 10, "r": 10, "t": 55, "b": 45 },
+    "paper_bgcolor": "#fdf8f5",
+    "annotations": [
+      { "x": 0.02, "y": 1.15, "xref": "paper", "yref": "paper", "text": "<b>Before — one flat table</b>", "showarrow": false, "font": { "size": 12, "color": "#dc2626" } },
+      { "x": 0.85, "y": 1.15, "xref": "paper", "yref": "paper", "text": "<b>After — three clean tables</b>", "showarrow": false, "font": { "size": 12, "color": "#16a34a" } },
+      { "x": 0.02, "y": -0.1, "xref": "paper", "yref": "paper", "text": "Red = repeated data. Change Alice's email, fix 3 rows.", "showarrow": false, "font": { "size": 12, "color": "#ef4444" } },
+      { "x": 0.98, "y": -0.1, "xref": "paper", "yref": "paper", "text": "Email stored once. One update fixes everything.", "showarrow": false, "font": { "size": 12, "color": "#16a34a" } }
+    ]
+  }
+}

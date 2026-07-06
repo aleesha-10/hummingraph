@@ -1,0 +1,38 @@
+{
+  "id": "hdfs",
+  "title": "HDFS (Hadoop Distributed File System)",
+  "section": "big-data",
+  "difficulty": "intermediate",
+  "color": "blue",
+  "tagline": "A file system built assuming your hardware will fail — and designed not to care when it does.",
+  "what_it_is": "HDFS is a distributed file system that splits large files into fixed-size blocks and spreads them across many machines in a cluster, storing multiple copies (replicas) of each block so the system survives individual machine failures without losing data.",
+  "key_points": [
+    "Large files are split into blocks (commonly 128MB or 256MB) and distributed across many DataNodes.",
+    "Each block is replicated (typically 3 copies by default) across different machines for fault tolerance.",
+    "A NameNode keeps track of where every block lives — the 'map' of the whole file system.",
+    "Optimized for large, sequential reads of big files, not for fast random access or frequent small updates.",
+    "If a machine holding a block fails, HDFS automatically re-replicates that block from another copy."
+  ],
+  "why_it_exists": "Storing a massive file on one machine means that machine's failure destroys the file, and its disk speed caps how fast you can read it. HDFS exists to split storage across many machines so no single hardware failure causes data loss, and so many machines can read different parts of a file in parallel.",
+  "intuition": "Imagine photocopying every page of an important book and mailing different copies of each page to three different friends in three different cities. If one friend's copy gets lost in a fire, you can still reconstruct the whole book from the other two. HDFS does exactly this with data blocks, automatically, across machines in a cluster.",
+  "when_to_use": [
+    "Use HDFS (or HDFS-compatible storage like S3) for storing very large datasets that need to survive individual hardware failures.",
+    "Use it when your workload involves reading large files sequentially — e.g. batch analytics jobs."
+  ],
+  "when_not_to_use": [
+    "Do not use HDFS for workloads needing fast random access to small pieces of data — it's optimized for large sequential reads, not that pattern.",
+    "Do not use it for frequently updated, small files — HDFS is built for write-once, read-many big files."
+  ],
+  "common_mistakes": [
+    "Storing millions of tiny files in HDFS, which overwhelms the NameNode's memory (it tracks metadata for every block).",
+    "Treating HDFS like a normal file system for frequent small updates — it's not built for that access pattern.",
+    "Forgetting that replication triples (by default) the actual storage footprint of the data."
+  ],
+  "ds_usage": "The storage backbone underneath many big data pipelines — raw and processed datasets are commonly stored in HDFS or an HDFS-compatible cloud store (Amazon S3, Google Cloud Storage) before being read by Spark for processing.",
+  "related_concepts": [
+    "hadoop-ecosystem",
+    "mapreduce",
+    "data-partitioning-sharding",
+    "data-replication-fault-tolerance"
+  ]
+}

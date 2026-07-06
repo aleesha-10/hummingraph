@@ -1,0 +1,66 @@
+{
+  "id": "text-mining",
+  "title": "Text Mining",
+  "section": "data-mining",
+  "difficulty": "intermediate",
+  "color": "yellow",
+  "tagline": "Turning unstructured text into numbers you can actually analyze.",
+  "what_it_is": "Text mining is the process of extracting useful information from unstructured text. It covers converting raw text into structured representations, finding patterns, classifying documents, and pulling out entities or topics. It sits at the intersection of data mining and natural language processing.",
+  "key_points": [
+    "Tokenization splits text into individual words or phrases. It's the first step in almost every text pipeline.",
+    "Stop word removal drops common words (the, is, and) that add length but not meaning.",
+    "TF-IDF (Term Frequency-Inverse Document Frequency) measures how important a word is to a document relative to a corpus. Common words across all documents get low scores.",
+    "Bag of Words represents a document as a vector of word counts. Order is lost, but the approach is simple and often effective.",
+    "Topic modeling (LDA) discovers latent themes across a collection of documents without predefined labels."
+  ],
+  "why_it_exists": "Most data in the world is text \u2014 emails, reviews, support tickets, social media, news, medical notes. Structured databases capture a small fraction of organizational knowledge. Text mining is how you make the rest analyzable.",
+  "intuition": "You have 100,000 customer support tickets. You want to know what people are complaining about most without reading all 100,000. Text mining lets you: convert each ticket into a numerical representation, find which words appear unusually often, and cluster the tickets by similarity. You end up with groups like 'payment issues', 'delivery delays', 'product defects' without ever manually labeling a single ticket.\n\nTF-IDF is the core idea. 'The' appears in every ticket \u2014 it tells you nothing. 'refund' appears in 15% of tickets and almost nowhere else \u2014 it's a signal. TF-IDF weights words by how unique they are to a document relative to the whole collection.\n\n{{viz:text-mining-pipeline}}",
+  "formulas": [
+    {
+      "label": "TF-IDF",
+      "expression": "\\text{TF-IDF}(t, d) = \\text{TF}(t, d) \\times \\log\\left(\\frac{N}{\\text{DF}(t)}\\right)",
+      "breakdown": [
+        {
+          "symbol": "\\text{TF}(t, d)",
+          "means": "How often term t appears in document d"
+        },
+        {
+          "symbol": "N",
+          "means": "Total number of documents in the corpus"
+        },
+        {
+          "symbol": "\\text{DF}(t)",
+          "means": "Number of documents that contain term t"
+        },
+        {
+          "symbol": "\\log(N / \\text{DF}(t))",
+          "means": "Inverse document frequency \u2014 high when the term is rare across documents"
+        }
+      ]
+    }
+  ],
+  "when_to_use": [
+    "Sentiment analysis on reviews, social media, or survey responses.",
+    "Document classification \u2014 routing support tickets to the right team, spam detection.",
+    "Topic discovery \u2014 understanding what themes appear in a large corpus without reading everything.",
+    "Named entity recognition \u2014 extracting names, companies, locations, dates from unstructured text."
+  ],
+  "common_mistakes": [
+    "Applying text mining to very short text (like single-word labels) where there's not enough signal for most methods.",
+    "Not handling language-specific preprocessing. Stop word lists, stemming rules, and tokenization rules differ by language.",
+    "Treating word counts as a complete representation and ignoring word order. Bag of Words misses negation ('not good' vs 'good') and other context."
+  ],
+  "notes": [
+    "Stemming reduces words to their root (running \u2192 run, better \u2192 better). Lemmatization does the same but more accurately (better \u2192 good). Lemmatization is slower but produces more meaningful tokens.",
+    "Modern large language model embeddings (like from BERT or sentence transformers) have largely replaced TF-IDF for complex tasks. But TF-IDF is still widely used for search, keyword extraction, and simpler classification tasks where interpretability matters."
+  ],
+  "ds_usage": "Text mining is everywhere in practice \u2014 customer feedback analysis, content moderation, search, document retrieval, and chatbot intent classification all involve it. Even if you're using a pretrained model, understanding the preprocessing steps (tokenization, normalization, vectorization) helps you debug and improve results.",
+  "related_concepts": [
+    "clustering-overview",
+    "association-rules",
+    "anomaly-detection"
+  ],
+  "visualizations": [
+    "text-mining-pipeline"
+  ]
+}

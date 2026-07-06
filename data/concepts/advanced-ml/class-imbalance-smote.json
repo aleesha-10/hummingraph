@@ -1,0 +1,61 @@
+{
+  "id": "class-imbalance-smote",
+  "title": "Class Imbalance & SMOTE",
+  "section": "advanced-ml",
+  "difficulty": "intermediate",
+  "color": "yellow",
+  "tagline": "When 99% of your data is one class, your model can cheat by never predicting the other one.",
+  "what_it_is": "Class imbalance happens when one class vastly outnumbers another in your dataset (e.g. 1% fraud, 99% legitimate transactions). SMOTE (Synthetic Minority Over-sampling Technique) is a common fix that generates new, synthetic examples of the minority class rather than simply duplicating existing ones.",
+  "key_points": [
+    "A model trained on imbalanced data can get high accuracy just by always predicting the majority class — accuracy becomes misleading.",
+    "SMOTE creates new synthetic minority-class examples by interpolating between existing minority points and their nearest neighbors.",
+    "Alternative fixes: undersampling the majority class, class weighting, or choosing better metrics (precision/recall/F1) over accuracy.",
+    "Resampling should only be applied to the training set — never to validation or test data, or you leak information and inflate scores.",
+    "SMOTE can create unrealistic synthetic points if the minority class is very sparse or noisy."
+  ],
+  "why_it_exists": "Many high-stakes real-world problems are naturally imbalanced — fraud, disease diagnosis, equipment failure. Models trained naively on this data learn to ignore the rare, important class entirely because it barely affects the loss function. SMOTE and related techniques exist to force the model to actually pay attention to the minority class.",
+  "intuition": "Imagine training a security guard on 999 photos of empty hallways and 1 photo of an intruder. The guard could technically be '99.9% accurate' by simply never flagging anything as a threat — while missing the one thing that actually matters. SMOTE is like generating many realistic, slightly varied photos of intruders so the guard actually learns what one looks like.",
+  "steps": [
+    {
+      "step": 1,
+      "title": "Identify the minority class",
+      "description": "Confirm the dataset is imbalanced and decide which class needs boosting."
+    },
+    {
+      "step": 2,
+      "title": "Find nearest neighbors",
+      "description": "For each minority-class point, find its k nearest minority-class neighbors."
+    },
+    {
+      "step": 3,
+      "title": "Interpolate new points",
+      "description": "Create synthetic points along the line between a point and one of its neighbors, effectively 'filling in' the minority class region."
+    },
+    {
+      "step": 4,
+      "title": "Retrain on the balanced set",
+      "description": "Train the model on the original data plus the synthetic minority examples."
+    }
+  ],
+  "when_to_use": [
+    "Use when your target class distribution is heavily skewed (e.g. fraud detection, rare disease diagnosis).",
+    "Use alongside precision, recall, and F1 score instead of relying on accuracy alone.",
+    "Use class weighting as a lighter-weight alternative when generating synthetic data feels risky."
+  ],
+  "when_not_to_use": [
+    "Do not apply SMOTE to your validation or test set — only ever resample the training data.",
+    "Do not use SMOTE blindly on very high-dimensional or very noisy minority-class data — synthetic points can end up unrealistic.",
+    "Do not assume oversampling always beats undersampling or class weighting — test multiple approaches."
+  ],
+  "common_mistakes": [
+    "Resampling before splitting into train/test, leaking synthetic-derived information into the test set.",
+    "Reporting accuracy as the success metric on an imbalanced problem instead of precision/recall/F1 or PR-AUC.",
+    "Over-relying on SMOTE without also trying simpler fixes like class weighting or threshold adjustment."
+  ],
+  "ds_usage": "Standard practice in fraud detection, churn prediction, medical diagnosis, and any classification task where the class you care most about is rare — used together with precision/recall-focused evaluation rather than raw accuracy.",
+  "related_concepts": [
+    "confusion-matrix",
+    "precision-recall",
+    "roc-auc"
+  ]
+}

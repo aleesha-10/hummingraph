@@ -1,0 +1,38 @@
+{
+  "id": "apache-kafka",
+  "title": "Apache Kafka",
+  "section": "big-data",
+  "difficulty": "intermediate",
+  "color": "purple",
+  "tagline": "A durable, high-throughput pipe for streaming data between systems in real time.",
+  "what_it_is": "Apache Kafka is a distributed event streaming platform that lets systems publish and subscribe to continuous streams of data (like clicks, transactions, or sensor readings) in real time, reliably and at very high throughput.",
+  "key_points": [
+    "Producers publish messages (events) to named categories called topics; consumers subscribe to topics to read them.",
+    "Topics are split into partitions across the Kafka cluster, allowing high-throughput parallel reads and writes.",
+    "Messages are durably stored on disk for a configurable retention period, not just passed through in memory.",
+    "Decouples producers from consumers — a producer doesn't need to know who's reading the data, or when.",
+    "Forms the backbone of many real-time data pipelines feeding analytics, monitoring, or machine learning systems."
+  ],
+  "why_it_exists": "Before Kafka, connecting many data-producing systems to many data-consuming systems meant building fragile, tightly-coupled point-to-point pipelines. Kafka exists to act as a central, durable, high-throughput hub — producers write to it once, and any number of consumers can read from it independently, at their own pace.",
+  "intuition": "Think of Kafka as a massive, always-running conveyor belt at a factory. Different machines (producers) place items onto the belt continuously. Different workstations (consumers) pick items off the belt whenever they're ready, at their own pace, without needing to coordinate directly with whichever machine placed the item there.",
+  "when_to_use": [
+    "Use Kafka when you need to reliably move high-volume, real-time event data between multiple systems.",
+    "Use it to decouple data producers from data consumers, letting each scale and evolve independently.",
+    "Use it as the backbone for real-time analytics, monitoring, or feeding streaming machine learning models."
+  ],
+  "when_not_to_use": [
+    "Do not use Kafka for simple, low-volume, one-off data transfers — a message queue or direct API call may be simpler.",
+    "Do not use it as a traditional database for complex queries — it's built for streaming events, not ad-hoc querying."
+  ],
+  "common_mistakes": [
+    "Choosing too few partitions for a topic, limiting how much consumer parallelism is actually possible.",
+    "Treating Kafka as long-term storage without setting appropriate retention policies.",
+    "Not planning for consumer lag — if consumers fall behind producers, data can back up or be lost depending on retention settings."
+  ],
+  "ds_usage": "Commonly sits at the center of real-time data pipelines feeding streaming dashboards, fraud detection systems, and online machine learning models that need to react to events as they happen rather than in nightly batches.",
+  "related_concepts": [
+    "stream-vs-batch-processing",
+    "real-time-data-pipelines",
+    "data-partitioning-sharding"
+  ]
+}

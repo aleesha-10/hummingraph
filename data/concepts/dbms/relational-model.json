@@ -1,0 +1,41 @@
+{
+  "id": "relational-model",
+  "title": "The Relational Model",
+  "section": "dbms",
+  "difficulty": "beginner",
+  "color": "gray",
+  "tagline": "Data lives in tables. Tables connect through keys. That's the whole idea.",
+  "what_it_is": "The relational model organizes data into tables, where each table has rows (records) and columns (attributes). Tables relate to each other through shared keys. It's the foundation of every SQL database you'll ever use.",
+  "key_points": [
+    "A table (relation) is a set of rows with the same columns. No duplicates, no ordering guaranteed.",
+    "A primary key uniquely identifies each row in a table. No two rows can have the same primary key.",
+    "A foreign key is a column in one table that references the primary key of another \u2014 that's how tables connect.",
+    "Relationships between tables can be one-to-one, one-to-many, or many-to-many.",
+    "Many-to-many relationships are resolved with a junction table (also called a bridge or linking table)."
+  ],
+  "why_it_exists": "Before relational databases, data was stored in hierarchical or network structures that were rigid and hard to query. The relational model gave us a clean, flexible way to store data once and query it in any direction without restructuring the whole thing.",
+  "intuition": "Think of a school. Students are in one table. Courses are in another. If you stored every course a student takes inside the student row itself, you'd repeat course details for every student and updating a course name would mean changing hundreds of rows. Instead, you keep students and courses separate, and use an enrollment table in the middle that just says 'student 42 is enrolled in course 7'. Now you can change a course name once and it reflects everywhere.\n\n{{viz:relational-model-er-diagram}}",
+  "when_to_use": [
+    "When your data has clear, consistent structure and relationships between entities.",
+    "When you need to avoid storing the same information in multiple places.",
+    "When you need to query data from multiple angles without changing how it's stored."
+  ],
+  "common_mistakes": [
+    "Storing repeated data in a single column, like a comma-separated list of tags. That's the relational model fighting back.",
+    "Using a surrogate primary key (like an auto-increment ID) but forgetting to also enforce uniqueness on the natural key.",
+    "Treating foreign keys as optional. If they're not enforced, referential integrity breaks and you end up with orphan rows pointing to nothing."
+  ],
+  "notes": [
+    "The relational model is mathematical in origin \u2014 Edgar Codd defined it in 1970 using set theory. The word 'relation' is the math term for table.",
+    "NULL in relational databases is a special marker meaning 'unknown' or 'missing'. It behaves differently from zero or empty string and causes a lot of subtle bugs when people forget that."
+  ],
+  "ds_usage": "Every time you pull data from a SQL database for analysis, you're working with the relational model. Understanding keys and relationships is what lets you write correct JOIN queries without accidentally duplicating or losing rows.",
+  "related_concepts": [
+    "sql-basics",
+    "normalization",
+    "joins"
+  ],
+  "visualizations": [
+    "relational-model-er-diagram"
+  ]
+}

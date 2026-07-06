@@ -1,0 +1,38 @@
+{
+  "id": "hyperparameter-tuning",
+  "title": "Hyperparameter Tuning",
+  "section": "advanced-ml",
+  "difficulty": "intermediate",
+  "color": "blue",
+  "tagline": "The dials a model can't learn on its own — you have to search for the right settings.",
+  "what_it_is": "Hyperparameters are settings chosen before training (like tree depth, learning rate, or number of clusters) rather than learned from the data itself. Hyperparameter tuning is the systematic process of searching for the combination of these settings that gives the best model performance.",
+  "key_points": [
+    "Hyperparameters are set before training; regular parameters (like model weights) are learned during training.",
+    "Grid search tries every combination in a predefined set — thorough but slow as the number of hyperparameters grows.",
+    "Random search samples combinations randomly — often finds good results faster than grid search in high dimensions.",
+    "Bayesian optimization uses past results to intelligently choose the next combination to try — more efficient than both.",
+    "Tuning must always be done using cross-validation, never by peeking at the test set."
+  ],
+  "why_it_exists": "The same algorithm can perform very differently depending on its settings — a decision tree with max_depth=3 barely learns anything, while max_depth=50 memorizes the training data. Hyperparameter tuning exists because there's no formula that hands you the right settings in advance; they have to be searched for empirically.",
+  "intuition": "Think of baking the same cake recipe at different oven temperatures and times. The ingredients (data) and technique (algorithm) are fixed, but temperature and time (hyperparameters) drastically change the outcome. You can't calculate the perfect combination in advance — you have to run a series of test bakes and see which one comes out best.",
+  "when_to_use": [
+    "Use grid search when you have very few hyperparameters and a small, well-defined range for each.",
+    "Use random search or Bayesian optimization when tuning several hyperparameters at once — they scale much better.",
+    "Always tune using cross-validation performance, never final test set performance."
+  ],
+  "when_not_to_use": [
+    "Do not tune hyperparameters using the test set — this leaks information and gives an overly optimistic performance estimate.",
+    "Do not exhaustively grid search dozens of hyperparameters at once — the combinations explode; use random or Bayesian search instead."
+  ],
+  "common_mistakes": [
+    "Tuning on the test set instead of a validation set or cross-validation folds, silently overfitting to the test data.",
+    "Ignoring the computational cost of grid search when the number of hyperparameter combinations grows exponentially.",
+    "Treating default hyperparameters as 'good enough' for a final production model without any tuning at all."
+  ],
+  "ds_usage": "A standard step in every serious modeling pipeline — done via tools like GridSearchCV, RandomizedSearchCV, or Optuna, typically wrapped around cross-validation to reliably estimate which settings generalize best.",
+  "related_concepts": [
+    "cross-validation",
+    "gradient-boosting",
+    "random-forest"
+  ]
+}

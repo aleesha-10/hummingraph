@@ -1,0 +1,58 @@
+{
+  "id": "clustering-evaluation-silhouette-score",
+  "title": "Clustering Evaluation & Silhouette Score",
+  "section": "advanced-ml",
+  "difficulty": "intermediate",
+  "color": "green",
+  "tagline": "There are no labels to check against, so how do you know if your clusters are actually good?",
+  "what_it_is": "Since clustering is unsupervised, there's no ground truth to compute accuracy against. The silhouette score measures how similar each point is to its own cluster compared to the next closest cluster, giving a single number between -1 and 1 that reflects how well-separated and cohesive the clusters are.",
+  "key_points": [
+    "Clustering has no labels, so traditional accuracy/precision metrics don't apply — evaluation needs different tools.",
+    "Silhouette score ranges from -1 (badly clustered) to +1 (well-separated, tight clusters); near 0 means overlapping clusters.",
+    "Computed per point, then averaged across all points for an overall score.",
+    "The 'elbow method' is a separate technique used specifically to help choose k in K-Means, by plotting within-cluster variance against k.",
+    "A high silhouette score doesn't guarantee the clusters are meaningful in a business sense — always sanity-check with domain knowledge."
+  ],
+  "why_it_exists": "Without labels, it's tempting to just eyeball a 2D plot and declare clusters 'good,' which doesn't scale past two or three dimensions and is unreliable. Silhouette score and related metrics exist to give clustering a quantitative, repeatable way to compare different choices of k or different algorithms.",
+  "intuition": "For any point, ask two questions: 'How close am I to the other points in my own cluster?' and 'How close am I to the points in the nearest other cluster?' A good cluster member is much closer to their own group than to any other group — that gap is what the silhouette score captures, averaged across every point.",
+  "formulas": [
+    {
+      "label": "Silhouette Score for one point",
+      "expression": "s(i) = \\frac{b(i) - a(i)}{\\max(a(i), b(i))}",
+      "breakdown": [
+        {
+          "symbol": "a(i)",
+          "means": "Average distance from point i to other points in its own cluster"
+        },
+        {
+          "symbol": "b(i)",
+          "means": "Average distance from point i to points in the nearest neighboring cluster"
+        },
+        {
+          "symbol": "s(i)",
+          "means": "Silhouette value for point i, ranging from -1 to 1"
+        }
+      ]
+    }
+  ],
+  "when_to_use": [
+    "Use to compare different values of k and pick the one with the highest average silhouette score.",
+    "Use alongside the elbow method for a more complete picture when choosing k in K-Means.",
+    "Use to spot individual poorly-clustered points by examining low or negative silhouette values."
+  ],
+  "when_not_to_use": [
+    "Do not use silhouette score as the sole justification for a clustering choice — it can favor round, well-separated clusters even when the true structure is different (e.g. DBSCAN-style irregular clusters).",
+    "Do not compare silhouette scores across datasets with different scales without normalizing features first."
+  ],
+  "common_mistakes": [
+    "Picking k purely by maximizing silhouette score without checking if the resulting clusters make business sense.",
+    "Forgetting that silhouette score is expensive to compute on very large datasets (pairwise distances).",
+    "Confusing the elbow method's 'elbow point' selection with the silhouette score's numeric comparison — they're complementary, not identical."
+  ],
+  "ds_usage": "Standard step after any K-Means or hierarchical clustering run — used to justify the chosen number of clusters and to catch cases where clusters are poorly separated before presenting results.",
+  "related_concepts": [
+    "k-means-clustering",
+    "hierarchical-clustering",
+    "dbscan"
+  ]
+}

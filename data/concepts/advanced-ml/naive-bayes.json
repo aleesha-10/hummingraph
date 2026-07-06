@@ -1,0 +1,57 @@
+{
+  "id": "naive-bayes",
+  "title": "Naive Bayes",
+  "section": "advanced-ml",
+  "difficulty": "beginner",
+  "color": "purple",
+  "tagline": "A fast, surprisingly effective classifier built on one bold, 'naive' assumption.",
+  "what_it_is": "Naive Bayes is a probabilistic classifier based on Bayes' Theorem that assumes every feature is independent of every other feature given the class — an assumption that's almost never fully true in reality, hence 'naive.' Despite this, it works remarkably well, especially for text classification.",
+  "key_points": [
+    "Built on Bayes' Theorem: it calculates the probability of each class given the observed features, and picks the most likely one.",
+    "Assumes features are conditionally independent given the class — this simplification is what makes it 'naive' and also what makes it fast.",
+    "Works well even when the independence assumption is technically false, especially with high-dimensional data like text.",
+    "Common variants: Multinomial (word counts), Bernoulli (word presence/absence), Gaussian (continuous features).",
+    "Extremely fast to train and predict, and works well with relatively little training data."
+  ],
+  "why_it_exists": "Computing the true joint probability of many correlated features given a class is often computationally intractable. Naive Bayes exists as a pragmatic shortcut: assume independence, multiply individual feature probabilities together, and accept the approximation — in practice this trade-off pays off far more often than the 'naive' name suggests.",
+  "intuition": "To guess if an email is spam, Naive Bayes doesn't try to understand the whole sentence structure. It just asks: 'Given this is spam, how likely is the word free to appear? How likely is win? How likely is click here?' It multiplies those individual likelihoods together, ignoring that these words often appear together for a reason — and yet the shortcut works well enough to flag spam reliably.",
+  "formulas": [
+    {
+      "label": "Bayes' Theorem for Classification",
+      "expression": "P(y|x_1,...,x_n) \\propto P(y)\\prod_{i=1}^{n}P(x_i|y)",
+      "breakdown": [
+        {
+          "symbol": "P(y)",
+          "means": "Prior probability of the class before seeing any features"
+        },
+        {
+          "symbol": "P(x_i|y)",
+          "means": "Probability of feature i occurring given the class — assumed independent across features"
+        },
+        {
+          "symbol": "P(y|x_1,...,x_n)",
+          "means": "Posterior probability of the class given all observed features"
+        }
+      ]
+    }
+  ],
+  "when_to_use": [
+    "Use for text classification tasks like spam filtering and sentiment analysis, where it's a fast, strong baseline.",
+    "Use when you need a quick, low-resource model and have limited training data.",
+    "Use as a sanity-check baseline before trying more complex models."
+  ],
+  "when_not_to_use": [
+    "Do not use when features are strongly correlated and that correlation carries real signal — the independence assumption will hurt accuracy.",
+    "Do not expect well-calibrated probability outputs — Naive Bayes probabilities are often overconfident."
+  ],
+  "common_mistakes": [
+    "Forgetting to apply Laplace smoothing, which causes zero probabilities when a word never appeared in training data for a class.",
+    "Using Gaussian Naive Bayes on features that clearly aren't normally distributed without checking the assumption.",
+    "Treating its output probabilities as trustworthy confidence scores without calibration."
+  ],
+  "ds_usage": "A long-standing baseline for spam detection, sentiment analysis, and document classification — valued for being fast to train, easy to update online, and surprisingly competitive despite its simplicity.",
+  "related_concepts": [
+    "logistic-regression",
+    "confusion-matrix"
+  ]
+}

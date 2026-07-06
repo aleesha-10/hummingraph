@@ -1,0 +1,39 @@
+{
+  "id": "xgboost-lightgbm-catboost",
+  "title": "XGBoost, LightGBM & CatBoost",
+  "section": "advanced-ml",
+  "difficulty": "advanced",
+  "color": "purple",
+  "tagline": "The three production-grade gradient boosting libraries that actually win competitions.",
+  "what_it_is": "XGBoost, LightGBM, and CatBoost are optimized, industrial-strength implementations of gradient boosting. They add engineering improvements — regularization, faster tree-building, smarter handling of missing values and categorical features — on top of the core gradient boosting idea, making them fast enough and accurate enough for real production systems.",
+  "key_points": [
+    "All three implement gradient boosting on decision trees — the differences are in speed, memory, and default handling of tricky data.",
+    "XGBoost added built-in L1/L2 regularization and efficient handling of missing values, becoming the early competition standard.",
+    "LightGBM grows trees leaf-wise instead of level-wise, making it much faster on large datasets.",
+    "CatBoost handles categorical features natively without manual encoding, and reduces a bias called 'prediction shift.'",
+    "All three support early stopping, feature importance, and GPU acceleration."
+  ],
+  "why_it_exists": "Vanilla gradient boosting is powerful but slow and memory-hungry on real-world, large, messy datasets with missing values and categorical columns. These libraries exist to make gradient boosting practical at production scale — faster training, better defaults, and less manual preprocessing.",
+  "intuition": "If gradient boosting is the recipe, these libraries are three different professional kitchens that all cook the same dish — but one is optimized for speed (LightGBM), one is the reliable industry-standard kitchen everyone learned on (XGBoost), and one is built to handle a messier pantry of ingredients without extra prep work (CatBoost's native categorical handling).",
+  "when_to_use": [
+    "Use XGBoost as a safe, well-documented default for tabular problems, especially in interviews and competitions.",
+    "Use LightGBM when you have a very large dataset and training speed matters.",
+    "Use CatBoost when your data has many categorical columns and you want to skip manual encoding."
+  ],
+  "when_not_to_use": [
+    "Do not reach for these on small datasets (a few hundred rows) — simpler models often generalize just as well with less tuning risk.",
+    "Do not use them on raw unstructured data (images, audio, free text) without prior feature extraction.",
+    "Do not skip hyperparameter tuning and expect defaults to be optimal — these models are sensitive to settings like max_depth and learning_rate."
+  ],
+  "common_mistakes": [
+    "Blindly picking XGBoost out of habit even when LightGBM would train faster on a huge dataset.",
+    "One-hot encoding categorical variables before feeding them into CatBoost — defeats its main advantage.",
+    "Not monitoring validation loss with early stopping, leading to overfit models that look great on training data only."
+  ],
+  "ds_usage": "The default choice for tabular ML in industry and competitions — used for fraud detection, pricing models, recommendation ranking, and churn prediction wherever data comes as structured rows and columns.",
+  "related_concepts": [
+    "gradient-boosting",
+    "ensemble-methods",
+    "hyperparameter-tuning"
+  ]
+}

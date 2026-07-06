@@ -1,0 +1,39 @@
+{
+  "id": "data-replication-fault-tolerance",
+  "title": "Data Replication & Fault Tolerance",
+  "section": "big-data",
+  "difficulty": "intermediate",
+  "color": "green",
+  "tagline": "Machines fail constantly at scale — the system has to expect that and survive it anyway.",
+  "what_it_is": "Data replication means keeping multiple copies of the same data on different machines, so that if one machine fails, the data is still available from another copy. Fault tolerance is the broader ability of a distributed system to keep working correctly even when individual components fail.",
+  "key_points": [
+    "At scale, hardware failure isn't a rare edge case — with thousands of machines, something is failing essentially all the time.",
+    "Replication trades extra storage cost for resilience — losing one copy doesn't mean losing the data.",
+    "Replication factor (e.g. 3x in HDFS) determines how many copies exist and how much failure the system can tolerate.",
+    "Replicas can be synchronous (all copies updated before confirming a write, safer but slower) or asynchronous (faster, but risk brief inconsistency).",
+    "Fault tolerance also includes automatic detection of failed nodes and automatic recovery/rebalancing of lost data."
+  ],
+  "why_it_exists": "A single server failing once in a while is manageable. A cluster of thousands of servers will have failures happening continuously as a statistical certainty. Replication and fault tolerance exist because distributed systems must be designed from the ground up to expect and gracefully survive constant partial failure, rather than treating it as a rare exception.",
+  "intuition": "A small local shop with one register can survive that register briefly breaking by just apologizing to customers for a few minutes. A massive 24/7 operation running thousands of registers simultaneously cannot treat 'a register might break' as a rare surprise — it must be built assuming registers are always breaking somewhere, with backups and rerouting already planned in.",
+  "when_to_use": [
+    "Use replication for any data you cannot afford to lose if a single machine fails.",
+    "Choose synchronous replication when strong consistency matters more than write speed (e.g. financial records).",
+    "Choose asynchronous replication when write speed matters more and brief inconsistency is acceptable (e.g. activity logs)."
+  ],
+  "when_not_to_use": [
+    "Do not over-replicate data that's easily reproducible or non-critical — it wastes storage and cost for little benefit.",
+    "Do not assume replication alone guarantees zero downtime — proper failure detection and automatic failover logic are also required."
+  ],
+  "common_mistakes": [
+    "Assuming a replication factor of 2 is enough — losing even one of two copies leaves zero redundancy until it's repaired.",
+    "Not accounting for the storage cost multiplier that replication introduces when planning cluster capacity.",
+    "Confusing replication (redundant copies for fault tolerance) with backups (point-in-time copies for recovering from mistakes or corruption) — they solve different problems."
+  ],
+  "ds_usage": "Underpins the reliability of every major big data storage system — HDFS, Cassandra, Kafka, and cloud object stores all use replication to guarantee that data survives individual machine or even entire data-center failures.",
+  "related_concepts": [
+    "hdfs",
+    "cap-theorem",
+    "nosql-databases",
+    "distributed-computing-basics"
+  ]
+}

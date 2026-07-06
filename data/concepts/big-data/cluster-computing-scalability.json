@@ -1,0 +1,36 @@
+{
+  "id": "cluster-computing-scalability",
+  "title": "Scalability: Horizontal vs Vertical",
+  "section": "big-data",
+  "difficulty": "beginner",
+  "color": "blue",
+  "tagline": "Grow by buying one bigger machine, or grow by buying more ordinary ones.",
+  "what_it_is": "Scalability describes how a system handles growing amounts of data or traffic. Vertical scaling (scaling up) means adding more power — CPU, RAM — to a single machine. Horizontal scaling (scaling out) means adding more machines that share the workload.",
+  "key_points": [
+    "Vertical scaling = a bigger, more powerful single machine. Simple, but has a hard physical and cost ceiling.",
+    "Horizontal scaling = more machines working together. Virtually unlimited growth, but adds coordination complexity.",
+    "Big data systems (Hadoop, Spark, NoSQL databases) are built around horizontal scaling by default.",
+    "Horizontal scaling generally offers better fault tolerance — losing one of many machines is less catastrophic than losing the only machine.",
+    "Cost-effectiveness often favors horizontal scaling at large scale — many commodity machines are cheaper than one supercomputer."
+  ],
+  "why_it_exists": "As data volume outgrew what even the most powerful single server could hold or process, the industry needed a strategy for growth that wasn't capped by how large a single machine could physically get. Horizontal scaling exists to make growth a matter of 'add more machines' rather than 'build an impossibly powerful one.'",
+  "intuition": "Vertical scaling is hiring one increasingly superhuman worker who can eventually run faster and lift more — until human limits are reached. Horizontal scaling is hiring more regular workers and dividing the job between them — you can, in principle, keep hiring indefinitely, as long as you can coordinate the team.",
+  "when_to_use": [
+    "Use vertical scaling for simpler systems or smaller workloads where added machine coordination isn't worth the complexity.",
+    "Use horizontal scaling when data or traffic is expected to keep growing well beyond what one machine could ever handle."
+  ],
+  "when_not_to_use": [
+    "Do not default to horizontal scaling for small, stable workloads — the operational overhead of managing a cluster isn't justified.",
+    "Do not rely purely on vertical scaling for systems expecting rapid, large growth — you will eventually hit a hardware and cost ceiling."
+  ],
+  "common_mistakes": [
+    "Assuming horizontal scaling is always cheaper — cluster coordination, networking, and operational overhead have real costs too.",
+    "Not designing an application to be 'horizontally scalable' from the start, making it painful to move from one server to many later."
+  ],
+  "ds_usage": "Directly shapes infrastructure decisions — whether a data pipeline runs on a single beefy machine with pandas, or a distributed cluster with Spark, depends on which scaling strategy actually fits the data's growth trajectory.",
+  "related_concepts": [
+    "distributed-computing-basics",
+    "apache-spark-intro",
+    "data-partitioning-sharding"
+  ]
+}

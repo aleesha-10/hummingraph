@@ -1,0 +1,47 @@
+{
+  "id": "ensemble-methods",
+  "title": "Ensemble Methods (Bagging vs Boosting)",
+  "section": "advanced-ml",
+  "difficulty": "intermediate",
+  "color": "purple",
+  "tagline": "Why trust one model when you can average the opinions of a hundred?",
+  "what_it_is": "An ensemble combines predictions from multiple models to get a result that is usually better than any single model. Bagging trains many models in parallel on random subsets of data and averages them to reduce variance. Boosting trains models sequentially, where each new model focuses on fixing the previous one's mistakes, reducing bias.",
+  "key_points": [
+    "Ensemble = combining multiple models to get a stronger, more stable prediction.",
+    "Bagging (Bootstrap Aggregating) trains models in parallel on random samples — reduces variance, fights overfitting.",
+    "Boosting trains models sequentially, each correcting the last — reduces bias, fights underfitting.",
+    "Random Forest is bagging with trees. AdaBoost and Gradient Boosting are boosting.",
+    "More diverse the individual models, the more the ensemble gains from combining them."
+  ],
+  "why_it_exists": "A single model — especially a decision tree — is prone to either high variance (overfitting) or high bias (underfitting). Ensembles were built on a simple statistical truth: averaging many imperfect, semi-independent guesses cancels out individual errors and produces a more reliable answer than any one guess alone.",
+  "intuition": "Ask one doctor for a diagnosis and you get one opinion, possibly wrong. Ask 100 doctors, each with slightly different training and experience, and take the majority vote — the group is right more often than any individual, especially if their mistakes aren't all the same mistake. Bagging is like asking 100 independent doctors. Boosting is like asking doctors one at a time, where each new doctor is specifically asked to focus on the cases the previous doctors got wrong.",
+  "when_to_use": [
+    "Use bagging (e.g. Random Forest) when your base model overfits and you need to reduce variance.",
+    "Use boosting (e.g. XGBoost) when your base model underfits and you need to reduce bias, and you have time to tune carefully.",
+    "Use ensembles generally when squeezing out extra accuracy matters more than interpretability."
+  ],
+  "when_not_to_use": [
+    "Do not reach for ensembles when you need a simple, explainable model for stakeholders or regulators.",
+    "Do not use boosting on very noisy data without care — it can end up fitting the noise.",
+    "Do not use heavy ensembles in latency-sensitive production systems without checking inference cost."
+  ],
+  "common_mistakes": [
+    "Treating bagging and boosting as interchangeable — they solve opposite problems (variance vs bias).",
+    "Assuming more models in the ensemble always means better results — gains flatten and compute cost keeps rising.",
+    "Ignoring that boosting is more sensitive to noisy labels and outliers than bagging."
+  ],
+  "notes": [
+    "Stacking is a third ensemble family: train a 'meta-model' to learn how to best combine the outputs of several different base models."
+  ],
+  "ds_usage": "Random Forest and Gradient Boosting variants (XGBoost, LightGBM, CatBoost) are the default go-to for tabular data competitions and production models because they consistently outperform single models with reasonable tuning effort.",
+  "visual": {
+    "type": "diagram",
+    "description": "Side-by-side diagram: bagging shows parallel trees trained on random samples voting together; boosting shows a sequential chain of trees, each fixing errors of the one before."
+  },
+  "related_concepts": [
+    "random-forest",
+    "gradient-boosting",
+    "adaboost",
+    "bias-variance-tradeoff"
+  ]
+}

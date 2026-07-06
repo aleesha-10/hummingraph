@@ -1,0 +1,47 @@
+{
+  "id": "anomaly-detection",
+  "title": "Anomaly Detection",
+  "section": "data-mining",
+  "difficulty": "intermediate",
+  "color": "yellow",
+  "tagline": "Finding the data points that don't belong \u2014 before they become a problem.",
+  "what_it_is": "Anomaly detection is the task of identifying data points, events, or patterns that deviate significantly from expected behavior. The 'expected' behavior is either learned from historical data or defined by rules. Anomalies might be errors, fraud, failures, or genuinely rare events worth investigating.",
+  "key_points": [
+    "Point anomalies: a single data point is anomalous relative to the rest. A transaction of $50,000 in an account that normally sees $200 transactions.",
+    "Contextual anomalies: a data point is anomalous in context but not globally. 30\u00b0C is normal in July in Pakistan, anomalous in January.",
+    "Collective anomalies: a sequence of individually normal points is anomalous together. A series of small transactions designed to stay below a fraud threshold.",
+    "Statistical methods flag points outside a threshold (e.g. more than 3 standard deviations from the mean). Simple and fast, but assumes a distribution.",
+    "Isolation Forest and Local Outlier Factor (LOF) are popular ML-based methods that don't assume a distribution."
+  ],
+  "why_it_exists": "Most monitoring, fraud detection, and quality control problems can be framed as: 'does this look like what we'd normally expect?' You can't write rules for every possible failure mode. Anomaly detection learns what normal looks like and flags deviations \u2014 which is the more scalable approach.",
+  "intuition": "You work at a bank. A customer who normally makes 3-5 transactions a day, all under $500, all in Lahore, suddenly makes 12 transactions in one hour, across three countries, for amounts over $2,000 each. No single transaction is necessarily fraudulent on its own. But the combination is wildly different from that customer's normal behavior. Anomaly detection catches exactly this\n\n{{viz:anomaly-detection-scatter}} \u2014 not by knowing what fraud looks like, but by knowing what normal looks like for that person and flagging deviations.",
+  "when_to_use": [
+    "Fraud detection in financial transactions.",
+    "Infrastructure monitoring \u2014 CPU usage spiking outside normal bounds.",
+    "Quality control in manufacturing \u2014 detecting faulty products from sensor readings.",
+    "Medical monitoring \u2014 detecting abnormal patient vitals.",
+    "Any situation where 'wrong' is hard to define but 'normal' can be learned from history."
+  ],
+  "when_not_to_use": [
+    "When anomalies are actually common. If 30% of your data is 'anomalous', the method has no baseline to learn from.",
+    "When the cost of false positives is very high and the method isn't tunable enough to control them."
+  ],
+  "common_mistakes": [
+    "Using global statistics (mean, std) on data with multiple normal behaviors. If you have two customer segments with different spending patterns, flagging based on one global mean will generate lots of false positives from the high-spending segment.",
+    "Not separating training data from evaluation. If the anomalies you're trying to detect are in your training data, the model learns them as normal.",
+    "Treating every flagged anomaly as a real problem without investigation. Anomaly detection generates candidates \u2014 a human or downstream system still needs to act on them."
+  ],
+  "notes": [
+    "Labeled data for anomalies is rare because anomalies are, by definition, rare. This is why unsupervised methods (Isolation Forest, LOF, autoencoders) dominate \u2014 you rarely have enough labeled examples of each fraud type to train a classifier.",
+    "Concept drift is a real problem here. What's 'normal' changes over time. A model trained on pre-pandemic spending patterns would flag a lot of post-pandemic behavior as anomalous."
+  ],
+  "ds_usage": "Anomaly detection is everywhere in production ML systems. Fraud detection pipelines, network intrusion detection, predictive maintenance (flagging equipment before it fails), and A/B test guardrail metrics all rely on some form of it. It's often implemented as a real-time scoring system rather than a batch job.",
+  "related_concepts": [
+    "association-rules",
+    "clustering-overview",
+    "text-mining"
+  ],
+  "visualizations": [
+    "anomaly-detection-scatter"
+  ]
+}

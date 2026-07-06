@@ -1,0 +1,40 @@
+{
+  "id": "olap-vs-oltp",
+  "title": "OLAP vs OLTP",
+  "section": "data-warehousing",
+  "difficulty": "beginner",
+  "color": "gray",
+  "tagline": "Two completely different jobs, two completely different database designs.",
+  "what_it_is": "OLTP (Online Transaction Processing) systems handle the day-to-day operations of a business \u2014 individual inserts, updates, and deletes in real time. OLAP (Online Analytical Processing) systems are built for querying large volumes of historical data to support analysis and reporting. They're designed differently because they're used differently.",
+  "key_points": [
+    "OLTP: optimized for fast, small, frequent reads and writes. Normalized schema. Think: your app's production database.",
+    "OLAP: optimized for large, complex, read-heavy analytical queries across many rows. Denormalized schema. Think: your data warehouse.",
+    "OLTP queries touch a few rows at a time. OLAP queries often scan millions.",
+    "OLTP databases are row-oriented \u2014 the whole row is stored together. OLAP databases are often columnar \u2014 each column stored separately, making aggregations fast.",
+    "Running heavy OLAP queries on an OLTP database is a bad idea \u2014 it slows down live operations and locks tables."
+  ],
+  "why_it_exists": "The workloads are fundamentally different in shape. A customer placing an order touches maybe 5 rows across 3 tables. A finance team asking 'what was our revenue by region last quarter?' might scan 50 million rows. The same database can't be optimally designed for both at the same time.",
+  "intuition": "OLTP is the cash register. Every transaction is small, fast, and happens constantly. The register needs to be quick and always available. OLAP is the end-of-day report. It runs once, scans everything, and produces a summary. You don't want your end-of-day report locking up the register while customers are in line.\n\nSo you run them separately. The register (OLTP) takes orders all day. At night, data gets copied to a separate system (data warehouse) where the OLAP queries run freely without bothering anyone.\n\n{{viz:olap-vs-oltp-table}}",
+  "when_to_use": [
+    "OLTP when you're building an application that reads and writes individual records in real time.",
+    "OLAP when you're building reporting, dashboards, or analytical models over large historical datasets.",
+    "Both when your system needs real-time operations and historical analysis \u2014 run them separately and sync data between them."
+  ],
+  "common_mistakes": [
+    "Running analytical queries directly on the production OLTP database. This is fine when the database is small. It becomes a serious problem as it grows.",
+    "Assuming OLAP systems can handle real-time writes. Most are optimized for batch loads, not constant individual inserts."
+  ],
+  "notes": [
+    "HTAP (Hybrid Transactional/Analytical Processing) is an emerging category that tries to do both at once. Systems like Google Spanner and TiDB sit here. For most organizations it's still cleaner to keep them separate.",
+    "Columnar storage is the key technology behind modern OLAP speed. Aggregating over one column (e.g. sum of sales) only reads that column, not entire rows."
+  ],
+  "ds_usage": "Every data warehouse you work in is an OLAP system. Understanding why it's separate from the production database explains why data can be a few hours stale, why the schema looks different from the application schema, and why batch loads exist.",
+  "related_concepts": [
+    "etl-pipelines",
+    "star-and-snowflake-schema",
+    "normalization"
+  ],
+  "visualizations": [
+    "olap-vs-oltp-table"
+  ]
+}

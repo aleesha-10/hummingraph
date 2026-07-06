@@ -1,0 +1,50 @@
+name: Flag non-pastpapers changes
+
+# Runs on every PR and leaves a comment if it touches anything outside
+# pastpapers/. Doesn't block the PR (branch protection + your review does
+# that) — this just makes it obvious at a glance whether a PR is a simple
+# "just papers" submission or needs a closer code review.
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  check-scope:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check changed files
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const files = await github.paginate(
+              github.rest.pulls.listFiles,
+              {
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: context.issue.number,
+              }
+            );
+
+            const outsidePastpapers = files
+              .map(f => f.filename)
+              .filter(name => !name.startsWith('pastpapers/'));
+
+            if (outsidePastpapers.length > 0) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body:
+                  "⚠️ **This PR touches files outside `pastpapers/`:**\n\n" +
+                  outsidePastpapers.map(f => `- \`${f}\``).join("\n") +
+                  "\n\nIf you're only submitting past papers, you may want to check your upload didn't include anything extra. This PR will get a closer look before merging."
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: "✅ This PR only touches `pastpapers/` — looks like a straightforward papers submission."
+              });
+            }

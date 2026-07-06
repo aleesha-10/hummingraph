@@ -4,13 +4,13 @@
 
 Hummingraph is a concept navigation platform for Data Science. Every topic is explained through meaning, purpose, and data interpretation. No coding. No assignments. No 3-hour videos where you have to skip to the one concept that you actually need.
 
-Live site: not yet deployed
+Live site: _add your Vercel URL here once deployed_
 
 ---
 
 ## The problem it solves
 
-You're revising before an interview, an exam or simply encounter a crelevant concept while reading something. You need to know what MSE actually *means* — not how to code it, not a 45-minute lecture. You just need:
+You're revising before an interview, an exam, or you simply encounter a relevant concept while reading something. You need to know what MSE actually *means* — not how to code it, not a 45-minute lecture. You just need:
 
 - What is it?
 - Why does it exist?
@@ -43,8 +43,6 @@ Every concept follows the same structure, with each block colour-coded by meanin
 
 ### Concept card difficulty colors
 
-Concept cards on section pages are coloured by difficulty level:
-
 | Difficulty | Color |
 |---|---|
 | Beginner | Peach / orange `#ffccaa` |
@@ -55,18 +53,36 @@ Concept cards on section pages are coloured by difficulty level:
 
 ## Sections
 
-| Section | What's inside (subject to change )|
-|---|---|
-| 🧭 Introduction to Data Science | What DS is, the workflow, tools, roles — the front door |
-| 📊 Data Analysis & Visualization | EDA, chart types, visual encoding, pattern spotting |
-| 📐 Statistics | Probability, distributions, hypothesis testing, measures |
-| 🔬 Advanced Statistics | Bayesian thinking, experimental design, statistical power |
-| 🧠 Machine Learning | How models learn, core algorithms, evaluation, tradeoffs |
-| ⚡ Advanced ML | Ensembles, boosting, clustering, dimensionality reduction |
-| 🗄️ DBMS | Relational model, SQL, normalization, transactions, indexing |
-| 🏭 Data Warehousing | ETL, star/snowflake schema, OLAP, analytical systems |
-| 🔍 Data Mining | Association rules, anomaly detection, text mining |
-| 🌊 Big Data | Distributed computing, Spark, streaming pipelines |
+| Section | id | What's inside |
+|---|---|---|
+| 🧭 Introduction to Data Science | `intro` | What DS is, the workflow, tools, roles — the front door |
+| 📊 Data Analysis & Visualization | `dav` | EDA, chart types, visual encoding, pattern spotting |
+| 📐 Statistics | `statistics` | Probability, distributions, hypothesis testing, measures |
+| 🔬 Advanced Statistics | `advanced-statistics` | Bayesian thinking, experimental design, statistical power |
+| 🧠 Machine Learning | `machine-learning` | How models learn, core algorithms, evaluation, tradeoffs |
+| ⚡ Advanced ML | `advanced-ml` | Ensembles, boosting, clustering, dimensionality reduction |
+| 🗄️ DBMS | `dbms` | Relational model, SQL, normalization, transactions, indexing |
+| 🏭 Data Warehousing | `data-warehousing` | ETL, star/snowflake schema, OLAP, analytical systems |
+| 🔍 Data Mining | `data-mining` | Association rules, anomaly detection, text mining |
+| 🌊 Big Data | `big-data` | Distributed computing, Spark, streaming pipelines |
+
+To hide an incomplete section from the homepage until it's ready, set `hidden: true` on it in `data/sections.json`. It stays reachable by direct URL, it just won't show a card.
+
+---
+
+## Features
+
+Beyond the core concept pages:
+
+- **Search (⌘K)** — instant fuzzy search across every concept from the navbar, jump straight to a result
+- **Concept Map** (`/concept-map`) — radial graph of every concept, grouped by section, with cross-links from each concept's `related_concepts`
+- **Compare Mode** (`/compare`) — pick any two concepts and see them side by side
+- **Chatbot** — floating assistant that retrieves matching concepts from your own content and answers from them directly (no LLM cost — see `app/api/ask/route.ts`)
+- **Feedback widget** — 👍/👎 per concept (via Vercel Analytics) plus a pre-filled "suggest an edit" link that opens a GitHub issue on this repo
+- **Cheat sheet PDF export** — auto-generates a printable one-pager per section from each concept's `key_points` (`lib/cheatsheet.ts`)
+- **Data visualizations** — select concepts (mostly in Advanced ML) embed real Plotly charts via `{{viz:id}}` placeholders, rendered from `public/visualizations/*.json`
+- **PWA support** — installable to a phone's home screen (manifest + service worker, zero extra config needed)
+- **Past Papers** — dropdown in the navbar linking to community-contributed past paper repositories, split by university
 
 ---
 
@@ -77,12 +93,12 @@ Every concept is a single JSON file. The React component reads it and renders ea
 ### Adding a concept
 
 1. Create a `.json` file in `data/concepts/<section>/` following `concept_schema.json`
-2. Update `conceptCount` in `sections.json`
+2. Update `conceptCount` in `data/sections.json`
 3. Done — the page generates automatically
 
 ### Adding a visualization
 
-1. Create a Plotly JSON in `public/visualizations/<id>.json`
+1. Create a Plotly JSON (a figure's `{data, layout}` object) in `public/visualizations/<id>.json`
 2. Drop `{{viz:id}}` anywhere in your concept text
 3. The chart renders inline automatically
 
@@ -92,11 +108,15 @@ Every concept is a single JSON file. The React component reads it and renders ea
 
 | Layer | Choice |
 |-------|--------|
-| Framework | Next.js 14 (App Router) |
+| Framework | Next.js (App Router) |
 | Styling | Tailwind CSS |
-| Content | JSON files (loaded at build time) |
+| Content | JSON files (loaded from disk at request/build time) |
 | Formulas | KaTeX |
 | Visualizations | Plotly.js via react-plotly.js |
+| Search | Fuse.js |
+| Concept map | d3-force |
+| Cheat sheet export | jsPDF |
+| Analytics / feedback | Vercel Analytics |
 | Deployment | Vercel |
 
 ---
@@ -112,6 +132,30 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000)
 
+No environment variables are required to run this locally or in production — the chatbot is retrieval-only (no external API calls, no API key needed).
+
+---
+
+## Deploying to Vercel
+
+1. Push this repo to GitHub (if not already there)
+2. Go to [vercel.com/new](https://vercel.com/new) and import the repo
+3. Framework preset should auto-detect as Next.js — no build config changes needed
+4. Deploy. No environment variables needed for the current feature set.
+5. Once live, come back and update the "Live site" link at the top of this README
+
+**After deploying:**
+- Vercel Analytics data (including the 👍/👎 feedback events) becomes visible in your Vercel project dashboard under the Analytics tab — you may need to enable Analytics for the project first (Project → Analytics → Enable)
+- Test "Add to Home Screen" on an actual phone — desktop Chrome and iOS Safari handle the install prompt differently, so it's worth checking both
+
+---
+
+## Contributing
+
+- **Past papers**: create a `pastpapers/<university>/` folder and open a PR — no code changes needed
+- **Concept feedback**: use the 👍/👎 and "suggest an edit" link on any concept page, or open an issue directly with the `content-feedback` label
+- **New concepts**: see "Adding a concept" above
+
 ---
 
 ## Project structure
@@ -120,28 +164,43 @@ Open [http://localhost:3000](http://localhost:3000)
 hummingraph/
 ├── app/
 │   ├── page.tsx                  # Homepage — section cards
+│   ├── layout.tsx                # Root layout — navbar, chat widget, PWA setup
+│   ├── compare/
+│   │   └── page.tsx              # Compare Mode
+│   ├── concept-map/
+│   │   └── page.tsx              # Concept Map
+│   ├── api/
+│   │   └── ask/route.ts          # Chatbot retrieval endpoint (no LLM cost)
 │   ├── [section]/
 │   │   ├── page.tsx              # Section page — concept list
 │   │   └── [concept]/
 │   │       └── page.tsx          # Individual concept page
 ├── components/
 │   ├── Navbar.tsx
+│   ├── SearchBar.tsx
 │   ├── SectionCard.tsx
 │   ├── ConceptCard.tsx
 │   ├── ConceptPage.tsx           # Renders all concept blocks
+│   ├── CompareMode.tsx
+│   ├── ConceptMap.tsx
+│   ├── ChatWidget.tsx
+│   ├── FeedbackWidget.tsx
+│   ├── ServiceWorkerRegister.tsx
 │   ├── InlineText.tsx            # Parses {{viz:id}} placeholders
 │   └── VisualizationBlock.tsx    # Fetches and renders Plotly charts
 ├── public/
 │   ├── visualizations/           # Plotly chart JSON files
+│   ├── manifest.json             # PWA manifest
+│   ├── sw.js                     # Service worker
+│   ├── icon-*.png                # PWA icons
 │   └── logo2.svg
 ├── lib/
 │   ├── concepts.ts               # Data fetching helpers
+│   ├── searchIndex.ts            # Fuse.js search/retrieval (search bar + chatbot)
+│   ├── cheatsheet.ts             # PDF cheat sheet generator
 │   └── colors.ts                 # Color tokens for all blocks
 ├── types/
 │   └── concept.ts
-└── sections.json                 # Master section index
+└── data/
+    └── sections.json             # Master section index
 ```
-<img width="1784" height="890" alt="image" src="https://github.com/user-attachments/assets/d904e65a-38fb-4310-8edc-17ac4e9b7274" />
-
-
-_Built by [@aleesha-10](https://github.com/aleesha-10)  because no one should have to watch a 45-minute video to remember what MAE means.

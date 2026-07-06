@@ -1,0 +1,69 @@
+{
+  "id": "principal-component-analysis",
+  "title": "Principal Component Analysis (PCA)",
+  "section": "advanced-ml",
+  "difficulty": "intermediate",
+  "color": "purple",
+  "tagline": "Squeeze dozens of correlated features into a handful of ones that capture almost all the story.",
+  "what_it_is": "PCA is a dimensionality reduction technique that transforms a dataset with many, possibly correlated features into a smaller set of new, uncorrelated features called principal components, ordered by how much variance (information) they capture from the original data.",
+  "key_points": [
+    "Reduces the number of features while preserving as much of the original variance (information) as possible.",
+    "New components are linear combinations of the original features, and are uncorrelated with each other.",
+    "Ordered by importance — the first principal component captures the most variance, the second captures the next most, and so on.",
+    "Requires features to be scaled first, since PCA is sensitive to the magnitude of each feature.",
+    "The components themselves usually lose direct real-world interpretability."
+  ],
+  "why_it_exists": "Datasets with dozens or hundreds of features are slow to train on, prone to overfitting, and hard to visualize. Many of those features are also correlated and carry redundant information. PCA exists to compress that redundancy into fewer, information-dense dimensions without throwing away much of the signal.",
+  "intuition": "Imagine photographing a 3D object with a single camera. From most angles, you lose some information — but there's one angle that captures the most 'shape' of the object in a single 2D photo. PCA finds that best angle (and the next-best perpendicular angle, and so on) mathematically, for data instead of physical objects.\n\n{{viz:pca-projection}}",
+  "steps": [
+    {
+      "step": 1,
+      "title": "Standardize the data",
+      "description": "Scale all features to have mean 0 and unit variance so no feature dominates due to scale alone."
+    },
+    {
+      "step": 2,
+      "title": "Compute the covariance matrix",
+      "description": "Measure how every pair of features varies together."
+    },
+    {
+      "step": 3,
+      "title": "Find eigenvectors and eigenvalues",
+      "description": "Eigenvectors of the covariance matrix become the new principal component directions; eigenvalues tell you how much variance each captures."
+    },
+    {
+      "step": 4,
+      "title": "Project the data",
+      "description": "Transform the original data onto the top-k principal components, keeping the ones that capture the most variance."
+    }
+  ],
+  "when_to_use": [
+    "Use before modeling when you have many correlated features and want to reduce dimensionality and training time.",
+    "Use for visualizing high-dimensional data by projecting down to 2 or 3 components.",
+    "Use to reduce noise in data before clustering or distance-based algorithms."
+  ],
+  "when_not_to_use": [
+    "Do not use when interpretability of individual features is required — principal components are combinations, not the original features.",
+    "Do not use on data that hasn't been scaled — results will be skewed by whichever feature has the largest raw magnitude.",
+    "Do not use it as a blind first step for every project — check first whether feature reduction is actually needed."
+  ],
+  "common_mistakes": [
+    "Applying PCA before scaling features, letting large-magnitude features dominate the principal components.",
+    "Assuming components are directly interpretable as real-world variables — they rarely are.",
+    "Reducing to too few components and losing meaningful signal, without checking the explained variance ratio."
+  ],
+  "ds_usage": "Used for visualization of high-dimensional data, noise reduction, speeding up downstream models, and as a preprocessing step before clustering when the raw feature count is very high.",
+  "visual": {
+    "type": "scatter plot",
+    "description": "Original high-dimensional data projected onto its first two principal components, shown as a 2D scatter with an arrow indicating the direction of maximum variance."
+  },
+  "related_concepts": [
+    "t-sne",
+    "curse-of-dimensionality",
+    "feature-scaling"
+  ],
+  "visualizations": [
+    "pca-projection"
+  ],
+  "visual_alt": "Side-by-side scatter plots: left shows the original correlated 2D data with the first and second principal component directions drawn as arrows from the mean; right shows the same data rotated so its spread concentrates along the first principal component axis."
+}

@@ -1,0 +1,40 @@
+{
+  "id": "t-sne",
+  "title": "t-SNE",
+  "section": "advanced-ml",
+  "difficulty": "advanced",
+  "color": "purple",
+  "tagline": "A dimensionality reduction technique built purely to make high-dimensional data visually intuitive.",
+  "what_it_is": "t-SNE (t-distributed Stochastic Neighbor Embedding) is a technique that reduces high-dimensional data down to 2 or 3 dimensions for visualization, specifically preserving how close points are to their neighbors rather than the global structure of the data.",
+  "key_points": [
+    "Built specifically for visualization, not general-purpose dimensionality reduction for modeling.",
+    "Focuses on preserving local neighborhood structure — points that were close in high-dimensional space stay close in the 2D/3D plot.",
+    "Does not preserve global distances well — the distance between distant clusters in a t-SNE plot is not meaningful.",
+    "Has a key hyperparameter called perplexity, which roughly controls how many neighbors it balances local vs global structure against.",
+    "Results can vary between runs and are highly sensitive to perplexity — always visualize with multiple settings."
+  ],
+  "why_it_exists": "PCA preserves overall variance but can fail to reveal cluster structure that only shows up in local neighborhoods, especially for non-linear data. t-SNE exists specifically to make clusters and neighborhood relationships in high-dimensional data — like word embeddings or image features — visually obvious in a 2D plot.",
+  "intuition": "Imagine trying to lay out a crumpled 3D friendship map flat on a table, where you only care about keeping close friends near each other — you're allowed to totally distort how far apart different friend groups end up from one another. t-SNE does exactly this: it obsesses over preserving 'who's near whom' locally and doesn't care about preserving the big-picture distances between separate groups.",
+  "when_to_use": [
+    "Use to visually explore whether high-dimensional data (e.g. embeddings) has natural cluster structure.",
+    "Use for qualitative exploration and communication, like visualizing how a neural network separates classes internally."
+  ],
+  "when_not_to_use": [
+    "Do not use t-SNE output as input features for another model — it's designed for visualization, not for preserving usable structure downstream.",
+    "Do not interpret cluster sizes or distances between clusters in a t-SNE plot as meaningful — only local neighborhoods are preserved.",
+    "Do not run it once and trust the result — always try a few different perplexity values and random seeds."
+  ],
+  "common_mistakes": [
+    "Reading too much into the distance between two separate clusters in a t-SNE plot — that distance carries no real meaning.",
+    "Using a single perplexity value and assuming the resulting plot is 'the' true structure of the data.",
+    "Running t-SNE directly on very high-dimensional raw data without a faster initial reduction step (e.g. PCA first) — it can be slow."
+  ],
+  "ds_usage": "Common for visualizing high-dimensional embeddings (word2vec, image features) in 2D to visually inspect cluster separation before or after modeling.",
+  "notes": [
+    "UMAP is a newer, often faster alternative to t-SNE that tends to better preserve some global structure while still excelling at local neighborhoods."
+  ],
+  "related_concepts": [
+    "principal-component-analysis",
+    "curse-of-dimensionality"
+  ]
+}

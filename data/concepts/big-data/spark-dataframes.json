@@ -1,0 +1,38 @@
+{
+  "id": "spark-dataframes",
+  "title": "Spark DataFrames",
+  "section": "big-data",
+  "difficulty": "intermediate",
+  "color": "blue",
+  "tagline": "RDDs with a schema, SQL-like syntax, and a smart optimizer doing the heavy lifting for you.",
+  "what_it_is": "A Spark DataFrame is a distributed collection of data organized into named columns, similar to a table in a database or a pandas DataFrame, but spread across a cluster. It's built on top of RDDs but benefits from Spark's Catalyst optimizer, which automatically plans the most efficient way to execute your operations.",
+  "key_points": [
+    "Organized into named, typed columns — much easier to work with than raw RDDs for structured data.",
+    "Supports SQL queries directly, as well as a fluent method-chaining API similar to pandas.",
+    "The Catalyst optimizer analyzes your chain of operations and rewrites it into a more efficient execution plan automatically.",
+    "Still built on RDDs underneath, so it retains the same fault tolerance guarantees.",
+    "The default, recommended API for most Spark data processing work today."
+  ],
+  "why_it_exists": "RDDs give full control but require developers to manually optimize how operations run — a burden most users shouldn't have to carry for standard structured data tasks. DataFrames exist to let Spark's own optimizer figure out the most efficient execution plan automatically, the same way a SQL database's query planner does.",
+  "intuition": "Working with raw RDDs is like giving a construction crew a pile of bricks and detailed step-by-step instructions for every single placement. Working with DataFrames is like handing an experienced architect a blueprint of what you want built — they figure out the most efficient construction order themselves, often faster than you could have planned it manually.",
+  "when_to_use": [
+    "Use DataFrames as the default choice for structured data processing in Spark.",
+    "Use Spark SQL syntax directly on DataFrames when your team is more comfortable with SQL than the programmatic API.",
+    "Use them for ETL pipelines, aggregations, joins, and most day-to-day big data transformations."
+  ],
+  "when_not_to_use": [
+    "Do not use DataFrames for highly unstructured or custom low-level operations where RDDs' flexibility is genuinely needed.",
+    "Do not expect DataFrame performance benefits without understanding lazy evaluation — actions still trigger the actual computation."
+  ],
+  "common_mistakes": [
+    "Calling actions (like .collect()) too early or too often, forcing repeated computation instead of letting Spark optimize the full chain.",
+    "Not caching a DataFrame that's reused multiple times, causing Spark to recompute it from scratch each time.",
+    "Ignoring partition sizing, leading to a few overloaded partitions that slow down the whole job (data skew)."
+  ],
+  "ds_usage": "The primary interface data scientists and engineers use to clean, transform, join, and aggregate large datasets in Spark before feeding results into analytics dashboards or machine learning pipelines.",
+  "related_concepts": [
+    "spark-rdd",
+    "spark-transformations-actions",
+    "apache-spark-intro"
+  ]
+}
