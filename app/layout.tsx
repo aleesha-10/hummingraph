@@ -25,13 +25,15 @@ export const metadata: Metadata = {
   title: "Hummingraph",
   description: "A structured reference for data science concepts",
   manifest: "/manifest.json",
+  icons: {
+    icon: "/icon2.svg",
+  },
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
     title: "Hummingraph",
   },
 };
-
 export const viewport = {
   themeColor: "#4A90D9",
 };
