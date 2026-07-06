@@ -141,7 +141,7 @@ export default function Navbar({ concepts = [] }: { concepts?: SearchableConcept
                     FAST ↗
                   </a>
                   <a
-                    href="https://github.com/aleesha-10/hummingraph"
+                    href="https://github.com/aleesha-10/hummingraph/tree/main/PASTPAPERS"
                     target="_blank" rel="noopener noreferrer"
                     style={{ display: 'block', padding: '10px 16px', textDecoration: 'none', fontFamily: 'var(--font-mulish), sans-serif', fontSize: '0.88rem', fontWeight: 600, color: NAV_TEXT }}
                   >
@@ -203,7 +203,7 @@ export default function Navbar({ concepts = [] }: { concepts?: SearchableConcept
               FAST ↗
             </a>
             <a
-              href="https://github.com/aleesha-10/hummingraph"
+              href="https://github.com/aleesha-10/hummingraph/tree/main/PASTPAPERS"
               target="_blank" rel="noopener noreferrer"
               className="nav-link" style={linkStyle}
             >

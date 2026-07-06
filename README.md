@@ -1,4 +1,4 @@
-# 🐦 Hummingraph
+# public/logo2.svg Hummingraph
 
 > **A Hummingbird's map for Data Science**
 
