@@ -3,6 +3,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 type Source = { id: string; title: string; section: string; href: string };
 type Message = { role: "user" | "assistant"; text: string; sources?: Source[] };
@@ -14,6 +15,7 @@ const ACCENT = "#4A90D9";
 
 export default function ChatWidget() {
   const [open, setOpen] = useState(false);
+  const [showBubble, setShowBubble] = useState(true);
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<Message[]>([
     { role: "assistant", text: 'Ask me anything — try "MAE vs RMSE" or "when should I not use k-means".' },
@@ -24,6 +26,11 @@ export default function ChatWidget() {
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight });
   }, [messages, loading]);
+
+  function handleToggle() {
+    setOpen((v) => !v);
+    setShowBubble(false); // dismiss the speech bubble once they've engaged
+  }
 
   async function handleSend() {
     const question = input.trim();
@@ -52,7 +59,20 @@ export default function ChatWidget() {
   }
 
   return (
-    <div className="fixed bottom-5 right-5 z-50">
+    <div className="fixed bottom-6 right-6 z-50">
+      <style>{`
+        @keyframes bubbleFloat {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-4px); }
+        }
+        .chat-bubble {
+          animation: bubbleFloat 3s ease-in-out infinite;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .chat-bubble { animation: none; }
+        }
+      `}</style>
+
       {open && (
         <div
           className="mb-3 flex h-[28rem] w-80 flex-col rounded-2xl border shadow-xl"
@@ -120,13 +140,45 @@ export default function ChatWidget() {
         </div>
       )}
 
+      {/* Speech bubble — dismissed the first time the person opens the chat */}
+      {!open && showBubble && (
+        <div
+          className="chat-bubble absolute bottom-[88px] right-0 whitespace-nowrap rounded-2xl border px-4 py-2 text-sm shadow-md"
+          style={{ borderColor: BORDER, backgroundColor: "#fff", color: INK }}
+        >
+          Chirp at me!
+          <button
+            onClick={() => setShowBubble(false)}
+            aria-label="Dismiss"
+            className="ml-2 text-xs"
+            style={{ color: MUTED }}
+          >
+            ✕
+          </button>
+          {/* little speech-bubble tail pointing down at the button */}
+          <div
+            style={{
+              position: "absolute",
+              bottom: "-6px",
+              right: "24px",
+              width: "12px",
+              height: "12px",
+              backgroundColor: "#fff",
+              borderRight: `1px solid ${BORDER}`,
+              borderBottom: `1px solid ${BORDER}`,
+              transform: "rotate(45deg)",
+            }}
+          />
+        </div>
+      )}
+
       <button
-        onClick={() => setOpen((v) => !v)}
-        className="flex h-12 w-12 items-center justify-center rounded-full text-white shadow-lg"
+        onClick={handleToggle}
+        className="flex h-16 w-16 items-center justify-center rounded-full shadow-lg"
         style={{ backgroundColor: ACCENT }}
         aria-label="Toggle chat"
       >
-        🐦
+        <Image src="/logo2.svg" alt="" width={38} height={38} />
       </button>
     </div>
   );

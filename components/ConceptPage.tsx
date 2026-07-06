@@ -6,6 +6,7 @@ import Link from 'next/link'
 import DifficultyBadge from '@/components/ui/DifficultyBadge'
 import Formula from '@/components/ui/Formula'
 import InlineText from './InlineText'
+import FeedbackWidget from './FeedbackWidget'
 
 export default function ConceptPage({ concept }: { concept: Concept }) {
   // colorMap still used for related concept pills (matches the card color)
@@ -208,6 +209,8 @@ export default function ConceptPage({ concept }: { concept: Concept }) {
           <p style={textStyle}>{concept.ds_usage}</p>
         </Section>
       )}
+
+      <FeedbackWidget concept={concept} />
 
       {/* Related concepts */}
       {concept.related_concepts && concept.related_concepts.length > 0 && (

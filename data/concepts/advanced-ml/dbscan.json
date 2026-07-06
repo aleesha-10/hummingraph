@@ -14,7 +14,7 @@
     "Struggles when clusters have very different densities — one eps value can't fit all of them."
   ],
   "why_it_exists": "K-Means assumes clusters are round and roughly equal in size, and forces every point into some cluster even if it's really an outlier. DBSCAN exists to handle real-world data where clusters can be irregularly shaped and where some points genuinely don't belong to any group — like fraud transactions or sensor glitches.",
-  "intuition": "Imagine a crowded city map at night viewed from above, lit by streetlights. Dense clusters of light are neighborhoods (clusters); a single lit house out in the countryside, far from any neighborhood, is noise — not its own tiny 'neighborhood' of one. DBSCAN traces out these dense neighborhoods and correctly leaves the lone house unassigned rather than forcing it into the nearest town.",
+  "intuition": "Imagine a crowded city map at night viewed from above, lit by streetlights. Dense clusters of light are neighborhoods (clusters); a single lit house out in the countryside, far from any neighborhood, is noise — not its own tiny 'neighborhood' of one. DBSCAN traces out these dense neighborhoods and correctly leaves the lone house unassigned rather than forcing it into the nearest town.\n\n{{viz:dbscan-moons}}",
   "steps": [
     {
       "step": 1,
@@ -57,5 +57,9 @@
     "k-means-clustering",
     "hierarchical-clustering",
     "curse-of-dimensionality"
-  ]
+  ],
+  "visualizations": [
+    "dbscan-moons"
+  ],
+  "visual_alt": "Scatter plot of two interleaving crescent-shaped clusters correctly separated by DBSCAN, with scattered outlier points shown as open gray circles labeled noise rather than forced into a cluster."
 }

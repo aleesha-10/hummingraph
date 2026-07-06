@@ -30,8 +30,9 @@ export type SearchDoc = ReturnType<typeof toSearchDoc>;
 
 const FUSE_OPTIONS: Fuse.IFuseOptions<SearchDoc> = {
   includeScore: true,
-  threshold: 0.35, // lower = stricter matching
+  threshold: 0.3, // lower = stricter matching
   ignoreLocation: true,
+  minMatchCharLength: 3, // stops very short strings ("hi", "ok") from fuzzy-matching unrelated concepts
   keys: [
     { name: "title", weight: 0.4 },
     { name: "tagline", weight: 0.25 },

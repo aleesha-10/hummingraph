@@ -14,7 +14,7 @@
     "Computationally expensive on large datasets compared to K-Means."
   ],
   "why_it_exists": "K-Means forces you to commit to a fixed number of clusters upfront, which is often unknown. Hierarchical clustering exists to reveal the full nested structure of the data at every possible granularity, letting you decide how many clusters make sense after seeing the whole picture.",
-  "intuition": "Think of building a family tree from a room full of strangers. You start by pairing up the two most similar people, then treat that pair as one unit and find the next closest match — repeating until everyone is one giant family. The dendrogram is that family tree; cutting it at different heights gives you different numbers of 'family groups.'",
+  "intuition": "Think of building a family tree from a room full of strangers. You start by pairing up the two most similar people, then treat that pair as one unit and find the next closest match — repeating until everyone is one giant family. The dendrogram is that family tree; cutting it at different heights gives you different numbers of 'family groups.'\n\n{{viz:hierarchical-dendrogram}}",
   "steps": [
     {
       "step": 1,
@@ -60,5 +60,9 @@
     "k-means-clustering",
     "dbscan",
     "clustering-evaluation-silhouette-score"
-  ]
+  ],
+  "visualizations": [
+    "hierarchical-dendrogram"
+  ],
+  "visual_alt": "Dendrogram showing twelve points merging pairwise from the bottom up into larger clusters, with merge height on the y-axis showing how different two groups were when they joined."
 }

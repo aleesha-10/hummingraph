@@ -35,6 +35,9 @@ function formatComparison(a: Concept, b: Concept): string {
   ].join("\n");
 }
 
+const GREETING_PATTERN = /^(hi|hey|hello|yo|sup|hola|good\s?morning|good\s?evening|good\s?afternoon)[\s!.,]*$/i;
+const THANKS_PATTERN = /^(thanks|thank\s?you|thx|ty|cool|nice|great|ok|okay)[\s!.,]*$/i;
+
 export async function POST(req: NextRequest) {
   const { question } = await req.json();
 
@@ -42,9 +45,33 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Missing question" }, { status: 400 });
   }
 
+  const trimmed = question.trim();
+
+  if (GREETING_PATTERN.test(trimmed)) {
+    return NextResponse.json({
+      answer:
+        "Hey! Ask me about any Data Science concept — e.g. \"MAE vs RMSE\", \"when to use k-means\", or just a topic name like \"gradient boosting\".",
+      sources: [],
+    });
+  }
+
+  if (THANKS_PATTERN.test(trimmed)) {
+    return NextResponse.json({
+      answer: "Anytime — ask away whenever you're stuck on a concept.",
+      sources: [],
+    });
+  }
+
+  if (trimmed.length < 3) {
+    return NextResponse.json({
+      answer: "Could you say a bit more? Try naming a concept, like \"decision trees\" or \"PCA\".",
+      sources: [],
+    });
+  }
+
   const allConcepts = getAllConcepts(); // sync, matches your lib/concepts.ts
   buildSearchIndex(allConcepts);
-  const matches = searchConcepts(question, 2);
+  const matches = searchConcepts(trimmed, 2);
 
   if (matches.length === 0) {
     return NextResponse.json({

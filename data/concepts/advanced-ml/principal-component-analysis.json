@@ -14,7 +14,7 @@
     "The components themselves usually lose direct real-world interpretability."
   ],
   "why_it_exists": "Datasets with dozens or hundreds of features are slow to train on, prone to overfitting, and hard to visualize. Many of those features are also correlated and carry redundant information. PCA exists to compress that redundancy into fewer, information-dense dimensions without throwing away much of the signal.",
-  "intuition": "Imagine photographing a 3D object with a single camera. From most angles, you lose some information — but there's one angle that captures the most 'shape' of the object in a single 2D photo. PCA finds that best angle (and the next-best perpendicular angle, and so on) mathematically, for data instead of physical objects.",
+  "intuition": "Imagine photographing a 3D object with a single camera. From most angles, you lose some information — but there's one angle that captures the most 'shape' of the object in a single 2D photo. PCA finds that best angle (and the next-best perpendicular angle, and so on) mathematically, for data instead of physical objects.\n\n{{viz:pca-projection}}",
   "steps": [
     {
       "step": 1,
@@ -61,5 +61,9 @@
     "t-sne",
     "curse-of-dimensionality",
     "feature-scaling"
-  ]
+  ],
+  "visualizations": [
+    "pca-projection"
+  ],
+  "visual_alt": "Side-by-side scatter plots: left shows the original correlated 2D data with the first and second principal component directions drawn as arrows from the mean; right shows the same data rotated so its spread concentrates along the first principal component axis."
 }

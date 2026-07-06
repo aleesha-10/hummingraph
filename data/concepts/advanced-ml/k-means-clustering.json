@@ -14,7 +14,7 @@
     "Assumes clusters are roughly spherical and similar in size — struggles with irregular cluster shapes."
   ],
   "why_it_exists": "Real-world data often has natural groupings that aren't labeled — customer segments, document topics, image color palettes. K-Means exists to discover this hidden group structure automatically, using only the geometry of the data itself.",
-  "intuition": "Imagine dropping k magnets randomly onto a table scattered with iron filings. Each filing sticks to its nearest magnet. Then you move each magnet to the center of the filings now stuck to it, and let the filings re-stick to whichever magnet is now closest. Repeat this a few times and the magnets settle into the natural centers of the filing clusters.",
+  "intuition": "Imagine dropping k magnets randomly onto a table scattered with iron filings. Each filing sticks to its nearest magnet. Then you move each magnet to the center of the filings now stuck to it, and let the filings re-stick to whichever magnet is now closest. Repeat this a few times and the magnets settle into the natural centers of the filing clusters.\n\n{{viz:kmeans-clusters}}",
   "steps": [
     {
       "step": 1,
@@ -62,5 +62,9 @@
     "dbscan",
     "clustering-evaluation-silhouette-score",
     "curse-of-dimensionality"
-  ]
+  ],
+  "visualizations": [
+    "kmeans-clusters"
+  ],
+  "visual_alt": "Scatter plot of three blob-shaped clusters, each point colored by assigned cluster, with black X markers showing the final centroid position for each cluster."
 }
