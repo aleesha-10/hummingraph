@@ -1,6 +1,4 @@
-# <img src="./public/logo2.svg" alt="Hummingraph logo" width="120">
-
-# Hummingraph
+# Hummingraph <img src="./public/logo2.svg" alt="Hummingraph logo" width="120">
 
 > **A Hummingbird's map for Data Science**
 
