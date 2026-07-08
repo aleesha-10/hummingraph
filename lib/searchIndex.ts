@@ -5,7 +5,7 @@
 //
 // Install: npm install fuse.js
 
-import Fuse from "fuse.js";
+import Fuse, { type IFuseOptions } from "fuse.js";
 import type { Concept } from "@/types/concept";
 
 // Flatten the fields worth searching into one weighted document per concept.
@@ -28,7 +28,7 @@ function toSearchDoc(concept: Concept) {
 
 export type SearchDoc = ReturnType<typeof toSearchDoc>;
 
-const FUSE_OPTIONS: Fuse.IFuseOptions<SearchDoc> = {
+const FUSE_OPTIONS: IFuseOptions<SearchDoc> = {
   includeScore: true,
   threshold: 0.3, // lower = stricter matching
   ignoreLocation: true,
