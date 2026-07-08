@@ -8,6 +8,7 @@
 import { getConcept, getAllSections, getConceptsBySection } from '@/lib/concepts'
 import ConceptPage from '@/components/ConceptPage'
 import { notFound } from 'next/navigation'
+import type { Metadata } from 'next'
 
 export async function generateStaticParams() {
   const sections = getAllSections()
@@ -19,6 +20,31 @@ export async function generateStaticParams() {
     }
   }
   return params
+}
+
+// Dynamic per-concept metadata — gives each concept page its own browser tab
+// title (was previously just the generic "Hummingraph" on every page) and
+// explicitly sets the icon, since nested metadata doesn't reliably inherit
+// the root layout's icon in practice.
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ section: string; concept: string }>
+}): Promise<Metadata> {
+  const { section, concept } = await params
+  const conceptData = getConcept(section, concept)
+
+  if (!conceptData) {
+    return { title: 'Concept not found — Hummingraph' }
+  }
+
+  return {
+    title: `${conceptData.title} — Hummingraph`,
+    description: conceptData.tagline,
+    icons: {
+      icon: '/logo2.svg',
+    },
+  }
 }
 
 export default async function ConceptRoute({ params }: { params: Promise<{ section: string; concept: string }> }) {

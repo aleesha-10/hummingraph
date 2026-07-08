@@ -5,6 +5,9 @@ import { getAllConcepts } from "@/lib/concepts";
 export const metadata = {
   title: "Compare Concepts — Hummingraph",
   description: "Put any two data science concepts side by side.",
+  icons: {
+  icon: "/logo2.svg",
+}
 };
 
 export default function ComparePage() {

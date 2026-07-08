@@ -46,23 +46,39 @@ export default function VisualizationBlock({ id }: VisualizationBlockProps) {
     );
   }
 
-return (
-  <div className="viz-block">
-    <Plot
-      data={plotJson.data}
-      layout={{
-        autosize: true,
-        margin: { t: 40, r: 20, b: 40, l: 50 },
-        font: { family: "inherit" },
-        ...plotJson.layout,
+  // Dual-subplot figures (like the 2D+3D kernel trick chart) need more
+  // vertical room than a single panel. Without an explicit height here, the
+  // plot has nothing real to size itself against, so it renders taller than
+  // its container and visually spills into whatever content comes next on
+  // the page instead of reserving its own space in the normal document flow.
+  const hasScene = Object.keys(plotJson.layout ?? {}).some((k) => k.startsWith("scene"));
+
+  return (
+    <div
+      className="viz-block"
+      style={{
+        position: "relative",
+        width: "100%",
+        height: hasScene ? "520px" : "420px",
+        overflow: "hidden", // safety net: nothing can visually spill past this box
       }}
-      frames={plotJson.frames ?? []}
-      config={{
-        responsive: true,
-        displayModeBar: false,
-      }}
-      style={{ width: "100%", height: "100%" }}
-    />
-  </div>
-);
+    >
+      <Plot
+        data={plotJson.data}
+        layout={{
+          autosize: true,
+          margin: { t: 40, r: 20, b: 40, l: 50 },
+          font: { family: "inherit" },
+          ...plotJson.layout,
+        }}
+        frames={plotJson.frames ?? []}
+        config={{
+          responsive: true,
+          displayModeBar: false,
+        }}
+        useResizeHandler
+        style={{ width: "100%", height: "100%" }}
+      />
+    </div>
+  );
 }

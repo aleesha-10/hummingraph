@@ -21,19 +21,41 @@ const mulish = Mulish({
   display: "swap",
 });
 
+// Update this once you have your real Vercel URL — it's what turns relative
+// paths below into full URLs for social preview cards.
+const SITE_URL = "https://hummingraph.vercel.app";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "Hummingraph",
   description: "A structured reference for data science concepts",
   manifest: "/manifest.json",
   icons: {
-    icon: "/icon2.svg",
+    icon: "/logo2.svg",
   },
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
     title: "Hummingraph",
   },
+  openGraph: {
+    title: "Hummingraph — A Hummingbird's map for Data Science",
+    description:
+      "One concept, one clean page, in 2 minutes. No 3-hour videos, no scattered notes.",
+    url: SITE_URL,
+    siteName: "Hummingraph",
+    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Hummingraph — A Hummingbird's map for Data Science",
+    description:
+      "One concept, one clean page, in 2 minutes. No 3-hour videos, no scattered notes.",
+    images: ["/og-image.png"],
+  },
 };
+
 export const viewport = {
   themeColor: "#4A90D9",
 };

@@ -5,6 +5,9 @@ import { getAllConcepts, getAllSections } from "@/lib/concepts";
 export const metadata = {
   title: "Concept Map — Hummingraph",
   description: "Explore how every data science concept connects.",
+  icons: {
+    icon: "/logo2.svg",
+  },
 };
 
 export default function ConceptMapPage() {

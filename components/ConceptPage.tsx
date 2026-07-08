@@ -6,7 +6,6 @@ import { colorMap, conceptPageBlocks } from '@/lib/colors'
 import Link from 'next/link'
 import DifficultyBadge from '@/components/ui/DifficultyBadge'
 import Formula from '@/components/ui/Formula'
-import InlineText from './InlineText'
 import FeedbackWidget from './FeedbackWidget'
 
 export default function ConceptPage({ concept }: { concept: Concept }) {
