@@ -4,7 +4,7 @@ You don't need to know how to code, use git, or install anything. Pick whichever
 
 ## Option 1: Google Form (quickest, no account needed)
 
-**[Submit via Google Form →](PASTE_YOUR_GOOGLE_FORM_LINK_HERE)**
+**[Submit via Google Form →](https://forms.gle/AXXHReuKv9voDzXC9)**
 
 Upload your paper directly, no GitHub account required. It'll be added to the repo by a maintainer shortly after.
 

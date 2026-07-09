@@ -136,25 +136,10 @@ No environment variables are required to run this locally or in production — t
 
 ---
 
-## Deploying to Vercel
-
-1. Push this repo to GitHub (if not already there)
-2. Go to [vercel.com/new](https://vercel.com/new) and import the repo
-3. Framework preset should auto-detect as Next.js — no build config changes needed
-4. Deploy. No environment variables needed for the current feature set.
-5. Once live, come back and update the "Live site" link at the top of this README
-
-**After deploying:**
-- Vercel Analytics data (including the 👍/👎 feedback events) becomes visible in your Vercel project dashboard under the Analytics tab — you may need to enable Analytics for the project first (Project → Analytics → Enable)
-- Test "Add to Home Screen" on an actual phone — desktop Chrome and iOS Safari handle the install prompt differently, so it's worth checking both
-
----
-
 ## Contributing
 
-- **Past papers**: create a `pastpapers/<university>/` folder and open a PR — no code changes needed
-- **Concept feedback**: use the 👍/👎 and "suggest an edit" link on any concept page, or open an issue directly with the `content-feedback` label
-- **New concepts**: see "Adding a concept" above
+google forms link https://forms.gle/AXXHReuKv9voDzXC9 
+or upload directly to the past papers repository 
 
 ---
 
