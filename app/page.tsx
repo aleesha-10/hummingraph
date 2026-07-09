@@ -69,21 +69,34 @@ function Flock({ birds, side }: { birds: typeof LEFT_FLOCK; side: 'left' | 'righ
   )
 }
 
+// Mobile/scrolling flock — restricted to only verified-safe logo files.
+// blush is the original, hand-checked file; coral/seafoam/periwinkle/sand/
+// plum/teal are exact copies of its path data with only the fill color
+// swapped, so they're guaranteed structurally identical. The self-made
+// butter/lavender/mint/peach/sky variants are excluded here until each is
+// individually checked — one of them is rendering as a broken solid shape
+// instead of a bird, and it's faster to just avoid the whole unverified set
+// than hunt for which one it is.
 const FLOCK_LOGOS = [
-  '/logo_blush.svg', '/logo_mint.svg', '/logo_lavender.svg', '/logo_peach.svg',
-  '/logo_sky.svg', '/logo_teal.svg', '/logo_coral.svg', '/logo_periwinkle.svg',
-  '/logo_sand.svg', '/logo_butter.svg',
+  '/logo_blush.svg',
+  '/logo_coral.svg',
+  '/logo_periwinkle.svg',
+  '/logo_sand.svg',
+  '/logo_teal.svg',
 ]
 
-const SCROLLING_FLOCK_COUNT = 24
+// Smaller, fewer, and further off-screen than before — mobile has very
+// little margin to work with (unlike desktop's generous gutters), so birds
+// need to mostly bleed off the edge rather than sit fully on-screen.
+const SCROLLING_FLOCK_COUNT = 14
 const SCROLLING_FLOCK = Array.from({ length: SCROLLING_FLOCK_COUNT }, (_, i) => {
   const t = i / (SCROLLING_FLOCK_COUNT - 1)
   return {
     top: Math.round(t * 100),
     side: (i % 2 === 0 ? 'left' : 'right') as 'left' | 'right',
-    size: 48 + Math.round(22 * Math.abs(Math.sin(i * 1.7))),
-    rotate: Math.round(Math.sin(i * 2.3) * 18),
-    opacity: 0.45 + 0.15 * Math.abs(Math.cos(i * 1.3)),
+    size: 18 + Math.round(8 * Math.abs(Math.sin(i * 1.7))), // 18–26px, was 48–70px
+    rotate: Math.round(Math.sin(i * 2.3) * 14),
+    opacity: 0.22 + 0.1 * Math.abs(Math.cos(i * 1.3)), // 0.22–0.32, was 0.45–0.6
     flip: i % 3 === 0,
     logo: FLOCK_LOGOS[i % FLOCK_LOGOS.length],
   }
@@ -100,8 +113,11 @@ function ScrollingFlock() {
           style={{
             position: 'absolute',
             top: `${b.top}%`,
-            left: b.side === 'left' ? '4px' : undefined,
-            right: b.side === 'right' ? '4px' : undefined,
+            // Negative offset so most of the bird bleeds off-screen — this
+            // is what lets it sit near the edge without ever overlapping a
+            // card, regardless of how narrow the phone is.
+            left: b.side === 'left' ? '-10px' : undefined,
+            right: b.side === 'right' ? '-10px' : undefined,
             width: `${b.size}px`,
             height: `${b.size}px`,
             opacity: b.opacity,
@@ -118,18 +134,33 @@ export default function HomePage() {
   const sections = getVisibleSections()
 
   return (
-    <div style={{ position: 'relative' }}>
+    <div style={{ position: 'relative', overflowX: 'hidden' }}>
       <style>{`
         .sections-grid {
           display: grid;
           grid-template-columns: repeat(2, 1fr);
           gap: 16px;
         }
+
+        /* Padding lives here (a real CSS class) instead of as an inline
+           style on <main>, specifically so this media query can actually
+           override it — inline styles always beat stylesheet rules
+           regardless of specificity, so the old approach silently never
+           reduced padding on mobile at all. */
+        .home-main {
+          max-width: 1000px;
+          margin: 0 auto;
+          padding: 80px 24px;
+          position: relative;
+          z-index: 1;
+          box-sizing: border-box;
+        }
+
         @media (max-width: 768px) {
           .sections-grid {
             grid-template-columns: 1fr;
           }
-          main {
+          .home-main {
             padding: 48px 16px;
           }
         }
@@ -162,6 +193,7 @@ export default function HomePage() {
             bottom: 0;
             pointer-events: none;
             z-index: 0;
+            overflow: hidden;
           }
         }
       `}</style>
@@ -170,14 +202,17 @@ export default function HomePage() {
       <Flock birds={RIGHT_FLOCK} side="right" />
       <ScrollingFlock />
 
-      <main style={{ maxWidth: '1000px', margin: '0 auto', padding: '80px 24px', position: 'relative', zIndex: 1 }}>
+      <main className="home-main">
 
-        {/* Hero — flex column keeps logo, title, tagline locked to center */}
+        {/* Hero — flex column keeps logo, title, tagline locked to center,
+            width:100% + explicit textAlign guarantees it regardless of
+            what's happening around it */}
         <div style={{
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           textAlign: 'center',
+          width: '100%',
           marginBottom: '56px',
         }}>
           <div style={{ marginBottom: '24px', height: '96px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
