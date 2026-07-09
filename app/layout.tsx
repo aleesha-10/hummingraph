@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   description: "A structured reference for data science concepts",
   manifest: "/manifest.json",
   icons: {
-    icon: "/logo2.svg",
+    icon: "/icon2.svg",
   },
   appleWebApp: {
     capable: true,
@@ -57,6 +57,8 @@ export const metadata: Metadata = {
 };
 
 export const viewport = {
+  width: "device-width",
+  initialScale: 1,
   themeColor: "#4A90D9",
 };
 

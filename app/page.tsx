@@ -196,6 +196,14 @@ export default function HomePage() {
             overflow: hidden;
           }
         }
+        /* Fully removed on actual phone-sized screens — even bled off-screen,
+           there's just not enough margin on a narrow phone to keep these from
+           reading as clutter next to the cards. */
+        @media (max-width: 768px) {
+          .scrolling-decor {
+            display: none !important;
+          }
+        }
       `}</style>
 
       <Flock birds={LEFT_FLOCK} side="left" />
