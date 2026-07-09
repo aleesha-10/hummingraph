@@ -4,7 +4,7 @@
 
 Hummingraph is a concept navigation platform for Data Science. Every topic is explained through meaning, purpose, and data interpretation. No coding. No assignments. No 3-hour videos where you have to skip to the one concept that you actually need.
 
-Live site: _add your Vercel URL here once deployed_
+Live site: https://hummingraph.vercel.app/
 
 ---
 
