@@ -6,6 +6,9 @@ Hummingraph is a concept navigation platform for Data Science. Every topic is ex
 
 Live site: https://hummingraph.vercel.app/
 
+<img width="950" height="474" alt="image" src="https://github.com/user-attachments/assets/cc914b08-eb81-4555-b9a1-451bc24bf78c" />
+
+
 ---
 
 ## The problem it solves
